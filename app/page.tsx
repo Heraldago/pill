@@ -454,16 +454,16 @@ export default function Home() {
           ref={card1Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-10 will-change-transform origin-center"
         >
-          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#E4DCD0] bg-[#F5EFE6] overflow-hidden flex flex-col justify-between items-center shadow-[0_20px_50px_rgba(10,25,47,0.12)]">
+          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#ECE7E1] bg-white overflow-hidden flex flex-col justify-between items-center shadow-[0_20px_50px_rgba(10,25,47,0.15)]">
             {/* Header interno alla pillola: Navbar a 4 voci (visibile solo da tablet/iPad in su) */}
             <header className="w-full pt-6 sm:pt-8 md:pt-10 flex justify-center items-center z-10 min-h-[50px]">
-              <nav className="hidden md:flex items-center gap-1 bg-white/90 backdrop-blur-md border border-[#E5DDD0] p-1.5 rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.03)] text-xs sm:text-sm">
+              <nav className="hidden md:flex items-center gap-1 bg-[#F7F4EE]/90 backdrop-blur-md border border-[#EAE4DC] p-1.5 rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.03)] text-xs sm:text-sm">
                 <button
                   onClick={() => scrollToSection("home")}
                   className={`px-4 py-1.5 rounded-full font-medium transition-colors cursor-pointer ${
                     activeSectionIndex === 0
                       ? "bg-[#0096C7] text-white shadow-xs"
-                      : "text-neutral-600 hover:text-neutral-900"
+                      : "text-[#7A6B5D] hover:text-[#24180F]"
                   }`}
                 >
                   Home
@@ -473,7 +473,7 @@ export default function Home() {
                   className={`px-3.5 sm:px-4 py-1.5 rounded-full font-medium transition-colors cursor-pointer ${
                     activeSectionIndex >= 1 && activeSectionIndex <= 3
                       ? "bg-[#0096C7] text-white shadow-xs"
-                      : "text-neutral-600 hover:text-neutral-900"
+                      : "text-[#7A6B5D] hover:text-[#24180F]"
                   }`}
                 >
                   Work & Archive
@@ -483,7 +483,7 @@ export default function Home() {
                   className={`px-3.5 sm:px-4 py-1.5 rounded-full font-medium transition-colors cursor-pointer ${
                     activeSectionIndex === 4
                       ? "bg-[#0096C7] text-white shadow-xs"
-                      : "text-neutral-600 hover:text-neutral-900"
+                      : "text-[#7A6B5D] hover:text-[#24180F]"
                   }`}
                 >
                   About
@@ -493,7 +493,7 @@ export default function Home() {
                   className={`px-3.5 sm:px-4 py-1.5 rounded-full font-medium transition-colors cursor-pointer ${
                     activeSectionIndex === 6
                       ? "bg-[#0096C7] text-white shadow-xs"
-                      : "text-neutral-600 hover:text-neutral-900"
+                      : "text-[#7A6B5D] hover:text-[#24180F]"
                   }`}
                 >
                   Contact
@@ -527,7 +527,7 @@ export default function Home() {
           ref={card2Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-20 will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#E4DCD0] bg-[#F5EFE6] overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.12)]">
+          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#ECE7E1] bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.15)]">
             {/* Contenitore interattivo del Toggle (Bouncy Bubble Physics) */}
             <div
               role="switch"
@@ -552,7 +552,7 @@ export default function Home() {
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
               className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0096C7]/50 ${
                 case1Toggle === "off"
-                  ? "bg-[#E5DDD0] border-[6px] md:border-[8px] border-[#D7CEBF] hover:border-[#C4B9A7] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.03)]"
+                  ? "bg-[#F5EFE6] border-[6px] md:border-[8px] border-[#E8E0D5] hover:border-[#D9CFBF] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.02)]"
                   : "bg-[#0096C7] border-[7px] md:border-[10px] border-[#0077B6] hover:border-[#023E8A] shadow-[0_25px_60px_rgba(0,180,216,0.35)]"
               }`}
             >
@@ -626,7 +626,7 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case1Toggle === "off"
-                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#D7CEBF] active:scale-[0.98]"
+                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#E8E0D5] active:scale-[0.98]"
                       : "bg-white border-[6px] md:border-[8px] border-white shadow-[0_16px_45px_rgba(0,0,0,0.24)] hover:scale-[1.015] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3),_0_0_0_4px_rgba(255,255,255,0.45)] active:scale-[0.98]"
                   }`}
                 >
@@ -659,7 +659,7 @@ export default function Home() {
           ref={card3Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[25] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#E4DCD0] bg-[#F5EFE6] overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.12)]">
+          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#ECE7E1] bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.15)]">
             <div
               role="switch"
               aria-checked={case2Toggle === "on"}
@@ -683,7 +683,7 @@ export default function Home() {
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
               className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0096C7]/50 ${
                 case2Toggle === "off"
-                  ? "bg-[#E5DDD0] border-[6px] md:border-[8px] border-[#D7CEBF] hover:border-[#C4B9A7] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.03)]"
+                  ? "bg-[#F5EFE6] border-[6px] md:border-[8px] border-[#E8E0D5] hover:border-[#D9CFBF] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.02)]"
                   : "bg-[#0096C7] border-[7px] md:border-[10px] border-[#0077B6] hover:border-[#023E8A] shadow-[0_25px_60px_rgba(0,180,216,0.35)]"
               }`}
             >
@@ -753,7 +753,7 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case2Toggle === "off"
-                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#D7CEBF] active:scale-[0.98]"
+                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#E8E0D5] active:scale-[0.98]"
                       : "bg-white border-[6px] md:border-[8px] border-white shadow-[0_16px_45px_rgba(0,0,0,0.24)] hover:scale-[1.015] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3),_0_0_0_4px_rgba(255,255,255,0.45)] active:scale-[0.98]"
                   }`}
                 >
@@ -785,7 +785,7 @@ export default function Home() {
           ref={card4Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[30] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#E4DCD0] bg-[#F5EFE6] overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.12)]">
+          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#ECE7E1] bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.15)]">
             <div
               role="switch"
               aria-checked={case3Toggle === "on"}
@@ -809,7 +809,7 @@ export default function Home() {
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
               className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0096C7]/50 ${
                 case3Toggle === "off"
-                  ? "bg-[#E5DDD0] border-[6px] md:border-[8px] border-[#D7CEBF] hover:border-[#C4B9A7] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.03)]"
+                  ? "bg-[#F5EFE6] border-[6px] md:border-[8px] border-[#E8E0D5] hover:border-[#D9CFBF] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.02)]"
                   : "bg-[#0096C7] border-[7px] md:border-[10px] border-[#0077B6] hover:border-[#023E8A] shadow-[0_25px_60px_rgba(0,180,216,0.35)]"
               }`}
             >
@@ -879,7 +879,7 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case3Toggle === "off"
-                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#D7CEBF] active:scale-[0.98]"
+                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#E8E0D5] active:scale-[0.98]"
                       : "bg-white border-[6px] md:border-[8px] border-white shadow-[0_16px_45px_rgba(0,0,0,0.24)] hover:scale-[1.015] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3),_0_0_0_4px_rgba(255,255,255,0.45)] active:scale-[0.98]"
                   }`}
                 >
@@ -910,7 +910,7 @@ export default function Home() {
           ref={card5Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[35] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#E4DCD0] bg-[#F5EFE6] overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.12)]">
+          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#ECE7E1] bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.15)]">
             <div
               role="switch"
               aria-checked={case4Toggle === "on"}
@@ -934,7 +934,7 @@ export default function Home() {
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
               className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0096C7]/50 ${
                 case4Toggle === "off"
-                  ? "bg-[#E5DDD0] border-[6px] md:border-[8px] border-[#D7CEBF] hover:border-[#C4B9A7] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.03)]"
+                  ? "bg-[#F5EFE6] border-[6px] md:border-[8px] border-[#E8E0D5] hover:border-[#D9CFBF] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.02)]"
                   : "bg-[#0096C7] border-[7px] md:border-[10px] border-[#0077B6] hover:border-[#023E8A] shadow-[0_25px_60px_rgba(0,180,216,0.35)]"
               }`}
             >
@@ -1018,7 +1018,7 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
                     case4Toggle === "off"
-                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#D7CEBF] active:scale-[0.98]"
+                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#E8E0D5] active:scale-[0.98]"
                       : "bg-white border-[6px] md:border-[8px] border-white shadow-[0_16px_45px_rgba(0,0,0,0.24)] hover:scale-[1.015] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3),_0_0_0_4px_rgba(255,255,255,0.45)] active:scale-[0.98]"
                   }`}
                 >
@@ -1049,7 +1049,7 @@ export default function Home() {
           ref={card6Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[40] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#E4DCD0] bg-[#F5EFE6] overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.12)]">
+          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#ECE7E1] bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.15)]">
             <div
               role="switch"
               aria-checked={case5Toggle === "on"}
@@ -1073,7 +1073,7 @@ export default function Home() {
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
               className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0096C7]/50 ${
                 case5Toggle === "off"
-                  ? "bg-[#E5DDD0] border-[6px] md:border-[8px] border-[#D7CEBF] hover:border-[#C4B9A7] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.03)]"
+                  ? "bg-[#F5EFE6] border-[6px] md:border-[8px] border-[#E8E0D5] hover:border-[#D9CFBF] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.02)]"
                   : "bg-[#0096C7] border-[7px] md:border-[10px] border-[#0077B6] hover:border-[#023E8A] shadow-[0_25px_60px_rgba(0,180,216,0.35)]"
               }`}
             >
@@ -1209,7 +1209,7 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
                     case5Toggle === "off"
-                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#D7CEBF] active:scale-[0.98]"
+                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#E8E0D5] active:scale-[0.98]"
                       : "bg-white border-[6px] md:border-[8px] border-white shadow-[0_16px_45px_rgba(0,0,0,0.24)] hover:scale-[1.015] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3),_0_0_0_4px_rgba(255,255,255,0.45)] active:scale-[0.98]"
                   }`}
                 >
@@ -1264,7 +1264,7 @@ export default function Home() {
           ref={card7Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[45] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#E4DCD0] bg-[#F5EFE6] overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.12)]">
+          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#ECE7E1] bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.15)]">
             <div
               role="switch"
               aria-checked={case6Toggle === "on"}
@@ -1288,7 +1288,7 @@ export default function Home() {
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
               className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0096C7]/50 ${
                 case6Toggle === "off"
-                  ? "bg-[#E5DDD0] border-[6px] md:border-[8px] border-[#D7CEBF] hover:border-[#C4B9A7] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.03)]"
+                  ? "bg-[#F5EFE6] border-[6px] md:border-[8px] border-[#E8E0D5] hover:border-[#D9CFBF] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.02)]"
                   : "bg-[#0096C7] border-[7px] md:border-[10px] border-[#0077B6] hover:border-[#023E8A] shadow-[0_25px_60px_rgba(0,180,216,0.35)]"
               }`}
             >
@@ -1450,14 +1450,14 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-3 sm:p-5 md:p-6 transition-all duration-300 ease-out cursor-pointer ${
                     case6Toggle === "off"
-                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#D7CEBF] active:scale-[0.98]"
+                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#E8E0D5] active:scale-[0.98]"
                       : "bg-white border-[6px] md:border-[8px] border-white shadow-[0_16px_45px_rgba(0,0,0,0.24)] hover:scale-[1.015] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3),_0_0_0_4px_rgba(255,255,255,0.45)] active:scale-[0.98]"
                   }`}
                 >
                   {case6Toggle === "off" ? (
                     /* Copertina Knob quando SPENTO: Visual Contatto Elegante e Muted */
                     <div className="relative w-full h-full flex flex-col items-center justify-center text-center p-4 pointer-events-none select-none opacity-80 group-hover:opacity-100 transition-opacity">
-                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#E5DDD0] text-[#24180F] flex items-center justify-center text-xl sm:text-2xl shadow-xs border border-[#D7CEBF] mb-2">
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#F5EFE6] text-[#24180F] flex items-center justify-center text-xl sm:text-2xl shadow-xs border border-[#E8E0D5] mb-2">
                         ✉
                       </div>
                       <span className="text-sm sm:text-lg font-bold text-[#24180F]">
