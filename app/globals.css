@@ -20,7 +20,7 @@ body::-webkit-scrollbar {
 }
 
 body {
-  background-color: #0a192f;
+  background-color: #091b2e;
   color: var(--foreground);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   margin: 0;
