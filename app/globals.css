@@ -1,26 +1,194 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
 :root {
-  --background: #ffffff;
+  --background: #F4F3F8;
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Nascondi la barra di scorrimento nativa del browser (stile Juan Angustia) */
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE e Edge */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+  width: 0;
+  height: 0;
 }
 
 body {
-  background: var(--background);
+  background-color: #0a192f;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
+
+/* ==========================================================================
+   GIANT FULL-PAGE PHYSICAL TOGGLE SWITCH (Squash & Stretch Bouncy Physics)
+   ========================================================================== */
+
+.giant-toggle-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 1000px;
+  overflow: hidden;
+  container-type: inline-size;
+  --toggle-pad: clamp(10px, 2vw, 24px);
+}
+
+.giant-toggle-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 30;
+  opacity: 0;
+  cursor: pointer;
+  border-radius: inherit;
+  margin: 0;
+}
+
+.giant-toggle-track {
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  background-color: #b0b7c3;
+  box-shadow: inset 0 8px 24px rgba(0, 0, 0, 0.22);
+  transition: background-color 0.4s ease;
+}
+
+.giant-toggle-container.blue .giant-toggle-checkbox:checked + .giant-toggle-track {
+  background-color: #3384fb;
+}
+
+.giant-toggle-container.green .giant-toggle-checkbox:checked + .giant-toggle-track {
+  background-color: #4ccf59;
+}
+
+.giant-toggle-container.dark .giant-toggle-checkbox:checked + .giant-toggle-track {
+  background-color: #3d382e;
+}
+
+.giant-toggle-thumb {
+  position: absolute;
+  top: var(--toggle-pad);
+  bottom: var(--toggle-pad);
+  left: var(--toggle-pad);
+  height: calc(100% - 2 * var(--toggle-pad));
+  aspect-ratio: 1 / 1;
+  border-radius: 1000px;
+  transform-origin: center center;
+  background-color: #ffffff;
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.24),
+    0 6px 14px rgba(0, 0, 0, 0.14),
+    inset 0 -8px 16px rgba(0, 0, 0, 0.12),
+    inset 0 4px 8px rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  will-change: transform, border-radius;
+  --travel-dist: calc(100cqw - 100% - 2 * var(--toggle-pad));
+}
+
+/* Initial static positions (before first toggle) */
+.giant-toggle-checkbox:not(:checked) + .giant-toggle-track > .giant-toggle-thumb {
+  transform: translateX(0) scale(1, 1);
+}
+
+.giant-toggle-checkbox:checked + .giant-toggle-track > .giant-toggle-thumb {
+  transform: translateX(var(--travel-dist)) scale(1, 1);
+}
+
+/* Animations triggered only after user clicks once (.toggled-once) */
+.giant-toggle-checkbox.toggled-once:not(:checked) + .giant-toggle-track > .giant-toggle-thumb {
+  animation-name: giant-grow-out, giant-bounce-out;
+  animation-duration: 0.22s, 0.28s;
+  animation-timing-function: cubic-bezier(0.75, 0, 1, 1), cubic-bezier(0, 0, 0.3, 1.45);
+  animation-delay: 0s, 0.22s;
+  animation-fill-mode: forwards;
+}
+
+.giant-toggle-checkbox.toggled-once:checked + .giant-toggle-track > .giant-toggle-thumb {
+  animation-name: giant-grow-in, giant-bounce-in;
+  animation-duration: 0.22s, 0.28s;
+  animation-timing-function: cubic-bezier(0.75, 0, 1, 1), cubic-bezier(0, 0, 0.3, 1.45);
+  animation-delay: 0s, 0.22s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes giant-grow-in {
+  0% {
+    border-radius: 1000px;
+    transform: translateX(0) scale(1, 1);
+  }
+  100% {
+    border-radius: 950px / 720px;
+    transform: translateX(calc(var(--travel-dist) * 0.38)) scale(1.42, 0.72);
+  }
+}
+
+@keyframes giant-bounce-in {
+  0% {
+    border-radius: 950px / 720px;
+    transform: translateX(calc(var(--travel-dist) * 0.38)) scale(1.42, 0.72);
+  }
+  100% {
+    border-radius: 1000px;
+    transform: translateX(var(--travel-dist)) scale(1, 1);
+  }
+}
+
+@keyframes giant-grow-out {
+  0% {
+    border-radius: 1000px;
+    transform: translateX(var(--travel-dist)) scale(1, 1);
+  }
+  100% {
+    border-radius: 950px / 720px;
+    transform: translateX(calc(var(--travel-dist) * 0.62)) scale(1.42, 0.72);
+  }
+}
+
+@keyframes giant-bounce-out {
+  0% {
+    border-radius: 950px / 720px;
+    transform: translateX(calc(var(--travel-dist) * 0.62)) scale(1.42, 0.72);
+  }
+  100% {
+    border-radius: 1000px;
+    transform: translateX(0) scale(1, 1);
+  }
+}
+
+.bubble-knob-in {
+  animation-name: giant-grow-in, giant-bounce-in;
+  animation-duration: 0.24s, 0.32s;
+  animation-timing-function: cubic-bezier(0.75, 0, 1, 1), cubic-bezier(0, 0, 0.3, 1.45);
+  animation-delay: 0s, 0.24s;
+  animation-fill-mode: forwards;
+  will-change: transform, border-radius;
+}
+
+.bubble-knob-out {
+  animation-name: giant-grow-out, giant-bounce-out;
+  animation-duration: 0.24s, 0.32s;
+  animation-timing-function: cubic-bezier(0.75, 0, 1, 1), cubic-bezier(0, 0, 0.3, 1.45);
+  animation-delay: 0s, 0.24s;
+  animation-fill-mode: forwards;
+  will-change: transform, border-radius;
+}
+
+
