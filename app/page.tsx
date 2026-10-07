@@ -335,23 +335,23 @@ export default function Home() {
       <div className="fixed top-4 right-4 md:hidden z-50">
         <button
           onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-          className="w-10 h-10 rounded-full flex flex-col items-center justify-center gap-[4.5px] bg-white/85 backdrop-blur-md border border-[#E5E9F0] shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:bg-white active:scale-95 transition-all cursor-pointer group focus:outline-none"
+          className="w-10 h-10 rounded-full flex flex-col items-center justify-center gap-[4.5px] bg-white/15 backdrop-blur-xl border border-white/30 shadow-[0_4px_16px_rgba(0,0,0,0.2),_inset_0_1px_1px_rgba(255,255,255,0.4)] hover:bg-white/25 active:scale-95 transition-all cursor-pointer group focus:outline-none"
           aria-label={isMobileMenuOpen ? "Chiudi menu" : "Apri menu"}
           aria-expanded={isMobileMenuOpen}
         >
           {/* Tre linee a forma di pillola (rounded-full) */}
           <span
-            className={`h-[2.5px] w-4.5 rounded-full bg-neutral-800 transition-all duration-300 origin-center ${
+            className={`h-[2.5px] w-4.5 rounded-full bg-white transition-all duration-300 origin-center ${
               isMobileMenuOpen ? "rotate-45 translate-y-[7px]" : ""
             }`}
           />
           <span
-            className={`h-[2.5px] w-4.5 rounded-full bg-neutral-800 transition-all duration-300 ${
+            className={`h-[2.5px] w-4.5 rounded-full bg-white transition-all duration-300 ${
               isMobileMenuOpen ? "opacity-0 scale-x-0" : ""
             }`}
           />
           <span
-            className={`h-[2.5px] w-4.5 rounded-full bg-neutral-800 transition-all duration-300 origin-center ${
+            className={`h-[2.5px] w-4.5 rounded-full bg-white transition-all duration-300 origin-center ${
               isMobileMenuOpen ? "-rotate-45 -translate-y-[7px]" : ""
             }`}
           />
@@ -360,7 +360,7 @@ export default function Home() {
         {/* Dropdown del menu mobile */}
         <div
           data-lenis-prevent
-          className={`absolute top-12 right-0 w-44 sm:w-48 p-1.5 rounded-2xl bg-white/95 backdrop-blur-xl border border-[#E5E9F0] shadow-[0_15px_35px_rgba(0,0,0,0.12)] flex flex-col gap-1 z-50 transition-all duration-200 origin-top-right ${
+          className={`absolute top-12 right-0 w-44 sm:w-48 p-1.5 rounded-2xl bg-slate-900/85 backdrop-blur-2xl border border-white/25 shadow-[0_15px_35px_rgba(0,0,0,0.4),_inset_0_1px_1px_rgba(255,255,255,0.2)] flex flex-col gap-1 z-50 transition-all duration-200 origin-top-right ${
             isMobileMenuOpen
               ? "opacity-100 scale-100 pointer-events-auto"
               : "opacity-0 scale-95 pointer-events-none"
@@ -371,7 +371,7 @@ export default function Home() {
               scrollToSection("home");
               setIsMobileMenuOpen(false);
             }}
-            className="w-full text-left px-3.5 py-2 rounded-xl bg-[#0096C7] text-white font-medium text-xs sm:text-sm shadow-xs transition-colors cursor-pointer"
+            className="w-full text-left px-3.5 py-2 rounded-xl bg-white text-slate-900 font-semibold text-xs sm:text-sm shadow-xs transition-colors cursor-pointer"
           >
             Home
           </button>
@@ -380,7 +380,7 @@ export default function Home() {
               scrollToSection("work");
               setIsMobileMenuOpen(false);
             }}
-            className="w-full text-left px-3.5 py-2 rounded-xl text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 font-medium text-xs sm:text-sm transition-colors cursor-pointer"
+            className="w-full text-left px-3.5 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm transition-colors cursor-pointer"
           >
             Work & Archive
           </button>
@@ -389,7 +389,7 @@ export default function Home() {
               scrollToSection("about");
               setIsMobileMenuOpen(false);
             }}
-            className="w-full text-left px-3.5 py-2 rounded-xl text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 font-medium text-xs sm:text-sm transition-colors cursor-pointer"
+            className="w-full text-left px-3.5 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm transition-colors cursor-pointer"
           >
             About
           </button>
@@ -398,7 +398,7 @@ export default function Home() {
               scrollToSection("contact");
               setIsMobileMenuOpen(false);
             }}
-            className="w-full text-left px-3.5 py-2 rounded-xl text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 font-medium text-xs sm:text-sm transition-colors cursor-pointer"
+            className="w-full text-left px-3.5 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm transition-colors cursor-pointer"
           >
             Contact
           </button>
@@ -408,7 +408,7 @@ export default function Home() {
       {/* Backdrop per chiudere il menu toccando fuori */}
       <div
         onClick={() => setIsMobileMenuOpen(false)}
-        className={`fixed inset-0 z-[48] bg-black/15 backdrop-blur-[1px] md:hidden transition-opacity duration-200 ${
+        className={`fixed inset-0 z-[48] bg-black/30 backdrop-blur-[2px] md:hidden transition-opacity duration-200 ${
           isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       />
@@ -418,13 +418,13 @@ export default function Home() {
         aria-label="Navigazione sezioni"
         className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex flex-col items-center"
       >
-        <div className="bg-white/80 backdrop-blur-xl border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.08),0_1px_3px_rgba(0,0,0,0.04)] px-1.5 py-2.5 rounded-full flex flex-col items-center gap-2">
+        <div className="bg-white/15 backdrop-blur-2xl border border-white/25 shadow-[0_8px_32px_rgba(0,0,0,0.3),_inset_0_1px_1px_rgba(255,255,255,0.3)] px-1.5 py-2.5 rounded-full flex flex-col items-center gap-2">
           {SECTIONS.map((section, idx) => {
             const isActive = activeSectionIndex === idx;
             return (
               <div key={section.id} className="relative group flex items-center">
                 {/* Tooltip minimale e umano all'hover: solo il nome della sezione, niente separatori o font mono */}
-                <div className="pointer-events-none absolute right-full top-1/2 -translate-y-1/2 mr-3 opacity-0 group-hover:opacity-100 translate-x-1 group-hover:translate-x-0 transition-all duration-200 ease-out whitespace-nowrap bg-neutral-900/90 text-white backdrop-blur-md px-3 py-1 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.2)] border border-neutral-700/60 text-xs font-medium tracking-normal select-none">
+                <div className="pointer-events-none absolute right-full top-1/2 -translate-y-1/2 mr-3 opacity-0 group-hover:opacity-100 translate-x-1 group-hover:translate-x-0 transition-all duration-200 ease-out whitespace-nowrap bg-slate-900/90 text-white backdrop-blur-md px-3 py-1 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.3)] border border-white/20 text-xs font-medium tracking-normal select-none">
                   {section.label}
                 </div>
 
@@ -433,10 +433,10 @@ export default function Home() {
                   onClick={() => navigateToSection(idx)}
                   aria-label={`Vai alla sezione ${section.label}`}
                   aria-current={isActive ? "step" : undefined}
-                  className={`rounded-full transition-all duration-300 ease-[cubic-bezier(0.2,0,0,1)] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0096C7] ${
+                  className={`rounded-full transition-all duration-300 ease-[cubic-bezier(0.2,0,0,1)] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 ${
                     isActive
-                      ? "w-2 h-6 bg-[#0096C7] shadow-[0_2px_8px_rgba(0,150,199,0.45)]"
-                      : "w-2 h-2 bg-stone-300 hover:bg-stone-400 hover:h-3"
+                      ? "w-2 h-6 bg-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.8)]"
+                      : "w-2 h-2 bg-white/40 hover:bg-white/70 hover:h-3"
                   }`}
                 />
               </div>
@@ -454,16 +454,16 @@ export default function Home() {
           ref={card1Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-10 will-change-transform origin-center"
         >
-          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#ECE7E1] bg-white overflow-hidden flex flex-col justify-between items-center shadow-[0_20px_50px_rgba(10,25,47,0.15)]">
+          <section className="relative w-full h-full rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden flex flex-col justify-between items-center shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
             {/* Header interno alla pillola: Navbar a 4 voci (visibile solo da tablet/iPad in su) */}
             <header className="w-full pt-6 sm:pt-8 md:pt-10 flex justify-center items-center z-10 min-h-[50px]">
-              <nav className="hidden md:flex items-center gap-1 bg-[#F7F4EE]/90 backdrop-blur-md border border-[#EAE4DC] p-1.5 rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.03)] text-xs sm:text-sm">
+              <nav className="hidden md:flex items-center gap-1 bg-white/15 backdrop-blur-xl border border-white/25 p-1.5 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.15),_inset_0_1px_1px_rgba(255,255,255,0.3)] text-xs sm:text-sm">
                 <button
                   onClick={() => scrollToSection("home")}
                   className={`px-4 py-1.5 rounded-full font-medium transition-colors cursor-pointer ${
                     activeSectionIndex === 0
-                      ? "bg-[#0096C7] text-white shadow-xs"
-                      : "text-[#7A6B5D] hover:text-[#24180F]"
+                      ? "bg-white text-slate-900 font-semibold shadow-xs"
+                      : "text-white/80 hover:text-white"
                   }`}
                 >
                   Home
@@ -472,8 +472,8 @@ export default function Home() {
                   onClick={() => scrollToSection("work")}
                   className={`px-3.5 sm:px-4 py-1.5 rounded-full font-medium transition-colors cursor-pointer ${
                     activeSectionIndex >= 1 && activeSectionIndex <= 3
-                      ? "bg-[#0096C7] text-white shadow-xs"
-                      : "text-[#7A6B5D] hover:text-[#24180F]"
+                      ? "bg-white text-slate-900 font-semibold shadow-xs"
+                      : "text-white/80 hover:text-white"
                   }`}
                 >
                   Work & Archive
@@ -482,8 +482,8 @@ export default function Home() {
                   onClick={() => scrollToSection("about")}
                   className={`px-3.5 sm:px-4 py-1.5 rounded-full font-medium transition-colors cursor-pointer ${
                     activeSectionIndex === 4
-                      ? "bg-[#0096C7] text-white shadow-xs"
-                      : "text-[#7A6B5D] hover:text-[#24180F]"
+                      ? "bg-white text-slate-900 font-semibold shadow-xs"
+                      : "text-white/80 hover:text-white"
                   }`}
                 >
                   About
@@ -492,8 +492,8 @@ export default function Home() {
                   onClick={() => scrollToSection("contact")}
                   className={`px-3.5 sm:px-4 py-1.5 rounded-full font-medium transition-colors cursor-pointer ${
                     activeSectionIndex === 6
-                      ? "bg-[#0096C7] text-white shadow-xs"
-                      : "text-[#7A6B5D] hover:text-[#24180F]"
+                      ? "bg-white text-slate-900 font-semibold shadow-xs"
+                      : "text-white/80 hover:text-white"
                   }`}
                 >
                   Contact
@@ -504,14 +504,14 @@ export default function Home() {
             {/* Contenuto centrale: Tipografia allineata a sinistra posizionata centralmente */}
             <div className="w-full flex-1 flex flex-col justify-center items-center px-10 sm:px-16 md:px-24 lg:px-36 max-w-5xl">
               <div className="w-full text-left space-y-3 sm:space-y-4">
-                <p className="text-base sm:text-lg md:text-xl font-normal text-[#7A6B5D] tracking-tight">
+                <p className="text-base sm:text-lg md:text-xl font-normal text-cyan-200/90 tracking-tight">
                   Hi, I&apos;m Herald :)
                 </p>
-                <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.2rem] font-medium tracking-[-0.025em] text-[#24180F] leading-[1.16] sm:leading-[1.12]">
-                  I <span className="text-[#0096C7] font-medium">design</span> digital
+                <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.2rem] font-medium tracking-[-0.025em] text-white leading-[1.16] sm:leading-[1.12] drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
+                  I <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 via-sky-300 to-cyan-400 font-semibold drop-shadow-[0_0_20px_rgba(0,212,255,0.4)]">design</span> digital
                   products that{" "}
-                  <span className="italic font-serif font-normal">help</span> and{" "}
-                  <span className="italic font-serif font-normal">simplify</span>{" "}
+                  <span className="italic font-serif font-normal text-white">help</span> and{" "}
+                  <span className="italic font-serif font-normal text-white">simplify</span>{" "}
                   people&apos;s lives
                 </h1>
               </div>
@@ -527,7 +527,7 @@ export default function Home() {
           ref={card2Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-20 will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#ECE7E1] bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.15)]">
+          <section className="relative w-full h-full rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
             {/* Contenitore interattivo del Toggle (Bouncy Bubble Physics) */}
             <div
               role="switch"
@@ -550,15 +550,15 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0096C7]/50 ${
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-cyan-300/50 ${
                 case1Toggle === "off"
-                  ? "bg-[#F5EFE6] border-[6px] md:border-[8px] border-[#E8E0D5] hover:border-[#D9CFBF] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.02)]"
-                  : "bg-[#0096C7] border-[7px] md:border-[10px] border-[#0077B6] hover:border-[#023E8A] shadow-[0_25px_60px_rgba(0,180,216,0.35)]"
+                  ? "bg-black/25 border border-white/15 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_2px_rgba(255,255,255,0.15)] hover:border-white/30"
+                  : "bg-cyan-500/25 border border-cyan-300/40 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,180,216,0.35),_inset_0_1px_2px_rgba(255,255,255,0.5)] hover:border-cyan-200/60"
               }`}
             >
-              {/* Sfondo dinamico con sfumatura sottile in stato attivo */}
+              {/* Sfondo dinamico con sfumatura sottile in Liquid Glass */}
               <div
-                className={`absolute inset-0 rounded-[1000px] pointer-events-none transition-opacity duration-500 bg-gradient-to-r from-[#00B4D8] via-[#0096C7] to-[#0077B6] ${
+                className={`absolute inset-0 rounded-[1000px] pointer-events-none transition-opacity duration-500 bg-gradient-to-r from-cyan-400/35 via-[#00B4D8]/30 to-[#0077B6]/25 backdrop-blur-2xl ${
                   case1Toggle === "on" ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -572,15 +572,15 @@ export default function Home() {
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight">
+                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                     Ungdomskort
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-cyan-100 font-normal leading-snug mt-1.5 sm:mt-2.5 max-w-xl">
+                  <p className="text-xs sm:text-base md:text-xl text-cyan-100 font-normal leading-snug mt-1.5 sm:mt-2.5 max-w-xl drop-shadow-[0_1px_6px_rgba(0,0,0,0.2)]">
                     Denmark&apos;s youth transit pass platform redesign.
                   </p>
                 </div>
 
-                {/* Pulsante primario bianco con testo mare sardo su fondo attivo */}
+                {/* Pulsante primario in frosted glass bianco */}
                 <div className="pt-1 sm:pt-2">
                   <a
                     href="https://www.heraldago.com/ungdomskort"
@@ -589,7 +589,7 @@ export default function Home() {
                     onClick={(e) => {
                       e.stopPropagation(); // Evita che il click sul pulsante richiuda il toggle
                     }}
-                    className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-white hover:bg-cyan-50 active:scale-95 text-[#0077B6] text-xs sm:text-sm font-semibold shadow-[0_4px_14px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.22)] transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-white/90 hover:bg-white active:scale-95 text-slate-900 text-xs sm:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25),_inset_0_1px_1px_rgba(255,255,255,0.8)] backdrop-blur-md transition-all cursor-pointer"
                   >
                     <span>See more</span>
                     <span className="text-xs font-bold">↗</span>
@@ -597,7 +597,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Solo il Titolo Puro */}
+              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Titolo inciso nel vetro */}
               <div
                 className={`absolute right-[3%] top-0 w-[48%] h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case1Toggle === "off"
@@ -606,13 +606,13 @@ export default function Home() {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#24180F] group-hover:text-[#18100A] transition-colors">
+                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
                     Ungdomskort
                   </h3>
                 </div>
               </div>
 
-              {/* 3. IL KNOB / THUMB DEL TOGGLE (Animazione BUBBLE + Hover State Dedicato) */}
+              {/* 3. IL KNOB / THUMB DEL TOGGLE (Animazione BUBBLE + Ceramic Puck) */}
               <div
                 className={`absolute top-[6%] h-[88%] left-[2%] sm:left-[2.5%] w-[47%] rounded-[1000px] overflow-visible ${
                   !hasToggledOnce1
@@ -626,8 +626,8 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case1Toggle === "off"
-                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#E8E0D5] active:scale-[0.98]"
-                      : "bg-white border-[6px] md:border-[8px] border-white shadow-[0_16px_45px_rgba(0,0,0,0.24)] hover:scale-[1.015] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3),_0_0_0_4px_rgba(255,255,255,0.45)] active:scale-[0.98]"
+                      ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
+                      : "bg-white/95 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_0_30px_rgba(0,212,255,0.35),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
                   {/* Schermo del Device dentro il Knob (opaco quando spento, brillante all'hover e su ON) */}
@@ -659,7 +659,7 @@ export default function Home() {
           ref={card3Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[25] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#ECE7E1] bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.15)]">
+          <section className="relative w-full h-full rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
             <div
               role="switch"
               aria-checked={case2Toggle === "on"}
@@ -681,15 +681,15 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0096C7]/50 ${
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-cyan-300/50 ${
                 case2Toggle === "off"
-                  ? "bg-[#F5EFE6] border-[6px] md:border-[8px] border-[#E8E0D5] hover:border-[#D9CFBF] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.02)]"
-                  : "bg-[#0096C7] border-[7px] md:border-[10px] border-[#0077B6] hover:border-[#023E8A] shadow-[0_25px_60px_rgba(0,180,216,0.35)]"
+                  ? "bg-black/25 border border-white/15 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_2px_rgba(255,255,255,0.15)] hover:border-white/30"
+                  : "bg-cyan-500/25 border border-cyan-300/40 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,180,216,0.35),_inset_0_1px_2px_rgba(255,255,255,0.5)] hover:border-cyan-200/60"
               }`}
             >
-              {/* Sfondo dinamico azzurro mare sardo / piscina in stato attivo */}
+              {/* Sfondo dinamico azzurro mare sardo in Liquid Glass */}
               <div
-                className={`absolute inset-0 rounded-[1000px] pointer-events-none transition-opacity duration-500 bg-gradient-to-r from-[#00B4D8] via-[#0096C7] to-[#0077B6] ${
+                className={`absolute inset-0 rounded-[1000px] pointer-events-none transition-opacity duration-500 bg-gradient-to-r from-cyan-400/35 via-[#00B4D8]/30 to-[#0077B6]/25 backdrop-blur-2xl ${
                   case2Toggle === "on" ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -703,10 +703,10 @@ export default function Home() {
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight">
+                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                     X-Bit
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-cyan-100 font-normal leading-snug mt-1.5 sm:mt-2.5 max-w-xl">
+                  <p className="text-xs sm:text-base md:text-xl text-cyan-100 font-normal leading-snug mt-1.5 sm:mt-2.5 max-w-xl drop-shadow-[0_1px_6px_rgba(0,0,0,0.2)]">
                     Museum exploration and interactive audio guide.
                   </p>
                 </div>
@@ -717,7 +717,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-white hover:bg-cyan-50 active:scale-95 text-[#0077B6] text-xs sm:text-sm font-semibold shadow-[0_4px_14px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.22)] transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-white/90 hover:bg-white active:scale-95 text-slate-900 text-xs sm:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25),_inset_0_1px_1px_rgba(255,255,255,0.8)] backdrop-blur-md transition-all cursor-pointer"
                   >
                     <span>See more</span>
                     <span className="text-xs font-bold">↗</span>
@@ -725,7 +725,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Solo il Titolo Puro */}
+              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Titolo inciso nel vetro */}
               <div
                 className={`absolute right-[3%] top-0 w-[48%] h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case2Toggle === "off"
@@ -734,7 +734,7 @@ export default function Home() {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#24180F] group-hover:text-[#18100A] transition-colors">
+                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
                     X-Bit
                   </h3>
                 </div>
@@ -753,8 +753,8 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case2Toggle === "off"
-                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#E8E0D5] active:scale-[0.98]"
-                      : "bg-white border-[6px] md:border-[8px] border-white shadow-[0_16px_45px_rgba(0,0,0,0.24)] hover:scale-[1.015] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3),_0_0_0_4px_rgba(255,255,255,0.45)] active:scale-[0.98]"
+                      ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
+                      : "bg-white/95 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_0_30px_rgba(0,212,255,0.35),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
                   <div
@@ -785,7 +785,7 @@ export default function Home() {
           ref={card4Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[30] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#ECE7E1] bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.15)]">
+          <section className="relative w-full h-full rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
             <div
               role="switch"
               aria-checked={case3Toggle === "on"}
@@ -807,15 +807,15 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0096C7]/50 ${
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-cyan-300/50 ${
                 case3Toggle === "off"
-                  ? "bg-[#F5EFE6] border-[6px] md:border-[8px] border-[#E8E0D5] hover:border-[#D9CFBF] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.02)]"
-                  : "bg-[#0096C7] border-[7px] md:border-[10px] border-[#0077B6] hover:border-[#023E8A] shadow-[0_25px_60px_rgba(0,180,216,0.35)]"
+                  ? "bg-black/25 border border-white/15 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_2px_rgba(255,255,255,0.15)] hover:border-white/30"
+                  : "bg-cyan-500/25 border border-cyan-300/40 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,180,216,0.35),_inset_0_1px_2px_rgba(255,255,255,0.5)] hover:border-cyan-200/60"
               }`}
             >
-              {/* Sfondo dinamico azzurro mare sardo / piscina in stato attivo */}
+              {/* Sfondo dinamico azzurro mare sardo in Liquid Glass */}
               <div
-                className={`absolute inset-0 rounded-[1000px] pointer-events-none transition-opacity duration-500 bg-gradient-to-r from-[#00B4D8] via-[#0096C7] to-[#0077B6] ${
+                className={`absolute inset-0 rounded-[1000px] pointer-events-none transition-opacity duration-500 bg-gradient-to-r from-cyan-400/35 via-[#00B4D8]/30 to-[#0077B6]/25 backdrop-blur-2xl ${
                   case3Toggle === "on" ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -829,10 +829,10 @@ export default function Home() {
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight">
+                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                     I Pupi Siciliani
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-cyan-100 font-normal leading-snug mt-1.5 sm:mt-2.5 max-w-xl">
+                  <p className="text-xs sm:text-base md:text-xl text-cyan-100 font-normal leading-snug mt-1.5 sm:mt-2.5 max-w-xl drop-shadow-[0_1px_6px_rgba(0,0,0,0.2)]">
                     Wine retail platform with +187% YoY profit.
                   </p>
                 </div>
@@ -843,7 +843,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-white hover:bg-cyan-50 active:scale-95 text-[#0077B6] text-xs sm:text-sm font-semibold shadow-[0_4px_14px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.22)] transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-white/90 hover:bg-white active:scale-95 text-slate-900 text-xs sm:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25),_inset_0_1px_1px_rgba(255,255,255,0.8)] backdrop-blur-md transition-all cursor-pointer"
                   >
                     <span>See more</span>
                     <span className="text-xs font-bold">↗</span>
@@ -851,7 +851,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Solo il Titolo Puro */}
+              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Titolo inciso nel vetro */}
               <div
                 className={`absolute right-[3%] top-0 w-[48%] h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case3Toggle === "off"
@@ -860,7 +860,7 @@ export default function Home() {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#24180F] group-hover:text-[#18100A] transition-colors">
+                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
                     I Pupi Siciliani
                   </h3>
                 </div>
@@ -879,8 +879,8 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case3Toggle === "off"
-                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#E8E0D5] active:scale-[0.98]"
-                      : "bg-white border-[6px] md:border-[8px] border-white shadow-[0_16px_45px_rgba(0,0,0,0.24)] hover:scale-[1.015] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3),_0_0_0_4px_rgba(255,255,255,0.45)] active:scale-[0.98]"
+                      ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
+                      : "bg-white/95 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_0_30px_rgba(0,212,255,0.35),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
                   <div
@@ -910,7 +910,7 @@ export default function Home() {
           ref={card5Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[35] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#ECE7E1] bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.15)]">
+          <section className="relative w-full h-full rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
             <div
               role="switch"
               aria-checked={case4Toggle === "on"}
@@ -932,15 +932,15 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0096C7]/50 ${
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-cyan-300/50 ${
                 case4Toggle === "off"
-                  ? "bg-[#F5EFE6] border-[6px] md:border-[8px] border-[#E8E0D5] hover:border-[#D9CFBF] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.02)]"
-                  : "bg-[#0096C7] border-[7px] md:border-[10px] border-[#0077B6] hover:border-[#023E8A] shadow-[0_25px_60px_rgba(0,180,216,0.35)]"
+                  ? "bg-black/25 border border-white/15 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_2px_rgba(255,255,255,0.15)] hover:border-white/30"
+                  : "bg-cyan-500/25 border border-cyan-300/40 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,180,216,0.35),_inset_0_1px_2px_rgba(255,255,255,0.5)] hover:border-cyan-200/60"
               }`}
             >
-              {/* Sfondo dinamico azzurro mare sardo / piscina in stato attivo */}
+              {/* Sfondo dinamico azzurro mare sardo in Liquid Glass */}
               <div
-                className={`absolute inset-0 rounded-[1000px] pointer-events-none transition-opacity duration-500 bg-gradient-to-r from-[#00B4D8] via-[#0096C7] to-[#0077B6] ${
+                className={`absolute inset-0 rounded-[1000px] pointer-events-none transition-opacity duration-500 bg-gradient-to-r from-cyan-400/35 via-[#00B4D8]/30 to-[#0077B6]/25 backdrop-blur-2xl ${
                   case4Toggle === "on" ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -954,15 +954,15 @@ export default function Home() {
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight">
+                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                     Herald Ago
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-cyan-100 font-normal leading-snug mt-1 sm:mt-2 max-w-xl">
+                  <p className="text-xs sm:text-base md:text-xl text-cyan-100 font-normal leading-snug mt-1 sm:mt-2 max-w-xl drop-shadow-[0_1px_6px_rgba(0,0,0,0.2)]">
                     Product Designer based in Barcelona
                   </p>
                 </div>
 
-                <p className="text-xs sm:text-sm md:text-base text-cyan-50 leading-relaxed max-w-lg font-normal">
+                <p className="text-xs sm:text-sm md:text-base text-white/90 leading-relaxed max-w-lg font-normal drop-shadow-[0_1px_4px_rgba(0,0,0,0.25)]">
                   I design digital products that simplify everyday life. MSc in IT - Web Communication Design from the University of Southern Denmark.
                 </p>
 
@@ -973,7 +973,7 @@ export default function Home() {
                     target="_blank"
                     download
                     onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white hover:bg-cyan-50 active:scale-95 text-[#0077B6] text-[11px] sm:text-xs md:text-sm font-semibold shadow-[0_4px_14px_rgba(0,0,0,0.15)] transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white/90 hover:bg-white active:scale-95 text-slate-900 text-[11px] sm:text-xs md:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25),_inset_0_1px_1px_rgba(255,255,255,0.8)] backdrop-blur-md transition-all cursor-pointer"
                   >
                     <span>Download Resume PDF</span>
                     <span className="text-xs font-bold">↗</span>
@@ -983,14 +983,14 @@ export default function Home() {
                       e.stopPropagation();
                       navigateToSection(6);
                     }}
-                    className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/20 hover:bg-white/30 active:scale-95 text-white text-[11px] sm:text-xs md:text-sm font-medium border border-white/30 transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/15 hover:bg-white/25 active:scale-95 text-white text-[11px] sm:text-xs md:text-sm font-medium border border-white/30 backdrop-blur-md transition-all cursor-pointer"
                   >
                     <span>Contact me</span>
                   </button>
                 </div>
               </div>
 
-              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Titolo Pulito e Minimale */}
+              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Titolo inciso nel vetro */}
               <div
                 className={`absolute right-[3%] top-0 w-[48%] h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case4Toggle === "off"
@@ -999,13 +999,13 @@ export default function Home() {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#24180F] group-hover:text-[#18100A] transition-colors">
+                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
                     About Me
                   </h3>
                 </div>
               </div>
 
-              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Ritratto Reale Zoom-out) */}
+              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Ceramic Puck con Ritratto Reale) */}
               <div
                 className={`absolute top-[6%] h-[88%] left-[2%] sm:left-[2.5%] w-[47%] rounded-[1000px] overflow-visible ${
                   !hasToggledOnce4
@@ -1018,8 +1018,8 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
                     case4Toggle === "off"
-                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#E8E0D5] active:scale-[0.98]"
-                      : "bg-white border-[6px] md:border-[8px] border-white shadow-[0_16px_45px_rgba(0,0,0,0.24)] hover:scale-[1.015] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3),_0_0_0_4px_rgba(255,255,255,0.45)] active:scale-[0.98]"
+                      ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
+                      : "bg-white/95 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_0_30px_rgba(0,212,255,0.35),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
                   <div
@@ -1049,7 +1049,7 @@ export default function Home() {
           ref={card6Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[40] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#ECE7E1] bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.15)]">
+          <section className="relative w-full h-full rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
             <div
               role="switch"
               aria-checked={case5Toggle === "on"}
@@ -1071,15 +1071,15 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0096C7]/50 ${
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-cyan-300/50 ${
                 case5Toggle === "off"
-                  ? "bg-[#F5EFE6] border-[6px] md:border-[8px] border-[#E8E0D5] hover:border-[#D9CFBF] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.02)]"
-                  : "bg-[#0096C7] border-[7px] md:border-[10px] border-[#0077B6] hover:border-[#023E8A] shadow-[0_25px_60px_rgba(0,180,216,0.35)]"
+                  ? "bg-black/25 border border-white/15 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_2px_rgba(255,255,255,0.15)] hover:border-white/30"
+                  : "bg-cyan-500/25 border border-cyan-300/40 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,180,216,0.35),_inset_0_1px_2px_rgba(255,255,255,0.5)] hover:border-cyan-200/60"
               }`}
             >
-              {/* Sfondo dinamico azzurro mare sardo / piscina in stato attivo */}
+              {/* Sfondo dinamico azzurro mare sardo in Liquid Glass */}
               <div
-                className={`absolute inset-0 rounded-[1000px] pointer-events-none transition-opacity duration-500 bg-gradient-to-r from-[#00B4D8] via-[#0096C7] to-[#0077B6] ${
+                className={`absolute inset-0 rounded-[1000px] pointer-events-none transition-opacity duration-500 bg-gradient-to-r from-cyan-400/35 via-[#00B4D8]/30 to-[#0077B6]/25 backdrop-blur-2xl ${
                   case5Toggle === "on" ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -1093,7 +1093,7 @@ export default function Home() {
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-bold text-white tracking-tight leading-tight">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-bold text-white tracking-tight leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                     Kind Words
                   </h2>
                 </div>
@@ -1105,13 +1105,13 @@ export default function Home() {
                     setActiveRecPhoto("antonio");
                   }}
                   onMouseEnter={() => setActiveRecPhoto("antonio")}
-                  className={`p-2.5 sm:p-3 md:p-3.5 rounded-2xl transition-all duration-300 backdrop-blur-xs text-white cursor-pointer ${
+                  className={`p-2.5 sm:p-3 md:p-3.5 rounded-2xl transition-all duration-300 backdrop-blur-md text-white cursor-pointer ${
                     activeRecPhoto === "antonio"
-                      ? "bg-white/20 border-2 border-white/50 shadow-[0_8px_24px_rgba(0,0,0,0.12)] scale-[1.01]"
-                      : "bg-white/10 border border-white/20 hover:bg-white/15"
+                      ? "bg-white/20 border-2 border-white/50 shadow-[0_8px_24px_rgba(0,0,0,0.25)] scale-[1.01]"
+                      : "bg-white/10 border border-white/20 hover:bg-white/15 hover:border-white/30"
                   }`}
                 >
-                  <p className="text-xs sm:text-[13px] md:text-sm leading-relaxed font-normal">
+                  <p className="text-xs sm:text-[13px] md:text-sm leading-relaxed font-normal text-white/95">
                     &ldquo;Herald has rare proactivity and deep study. The dedication he brings to preparing every detail and the immediate trust he inspires in people will take him very far.&rdquo;
                   </p>
                   <div className="flex items-center gap-2 mt-1.5 sm:mt-2">
@@ -1127,7 +1127,7 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="text-[11px] sm:text-xs font-semibold text-white">Antonio</p>
-                      <p className="text-[9px] sm:text-[10px] text-cyan-100">Founder, I Pupi Siciliani</p>
+                      <p className="text-[9px] sm:text-[10px] text-cyan-200">Founder, I Pupi Siciliani</p>
                     </div>
                   </div>
                 </div>
@@ -1139,13 +1139,13 @@ export default function Home() {
                     setActiveRecPhoto("sebastian");
                   }}
                   onMouseEnter={() => setActiveRecPhoto("sebastian")}
-                  className={`p-2.5 sm:p-3 md:p-3.5 rounded-2xl transition-all duration-300 backdrop-blur-xs text-white cursor-pointer ${
+                  className={`p-2.5 sm:p-3 md:p-3.5 rounded-2xl transition-all duration-300 backdrop-blur-md text-white cursor-pointer ${
                     activeRecPhoto === "sebastian"
-                      ? "bg-white/20 border-2 border-white/50 shadow-[0_8px_24px_rgba(0,0,0,0.12)] scale-[1.01]"
-                      : "bg-white/10 border border-white/20 hover:bg-white/15"
+                      ? "bg-white/20 border-2 border-white/50 shadow-[0_8px_24px_rgba(0,0,0,0.25)] scale-[1.01]"
+                      : "bg-white/10 border border-white/20 hover:bg-white/15 hover:border-white/30"
                   }`}
                 >
-                  <p className="text-xs sm:text-[13px] md:text-sm leading-relaxed font-normal">
+                  <p className="text-xs sm:text-[13px] md:text-sm leading-relaxed font-normal text-white/95">
                     &ldquo;Herald excelled at cross-stakeholder collaboration, guiding the entire creation process from start to finish with great precision and genuine passion.&rdquo;
                   </p>
                   <div className="flex items-center gap-2 mt-1.5 sm:mt-2">
@@ -1161,7 +1161,7 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="text-[11px] sm:text-xs font-semibold text-white">Sebastian</p>
-                      <p className="text-[9px] sm:text-[10px] text-cyan-100">CEO, næmt.nu</p>
+                      <p className="text-[9px] sm:text-[10px] text-cyan-200">CEO, næmt.nu</p>
                     </div>
                   </div>
                 </div>
@@ -1173,7 +1173,7 @@ export default function Home() {
                       e.stopPropagation();
                       navigateToSection(6);
                     }}
-                    className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white hover:bg-cyan-50 active:scale-95 text-[#0077B6] text-xs sm:text-sm font-semibold shadow-[0_4px_14px_rgba(0,0,0,0.15)] transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white/90 hover:bg-white active:scale-95 text-slate-900 text-xs sm:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25),_inset_0_1px_1px_rgba(255,255,255,0.8)] backdrop-blur-md transition-all cursor-pointer"
                   >
                     <span>Next: Contact</span>
                     <span className="text-xs font-bold">↗</span>
@@ -1181,7 +1181,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Titolo Pulito e Minimale */}
+              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Titolo inciso nel vetro */}
               <div
                 className={`absolute right-[3%] top-0 w-[48%] h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case5Toggle === "off"
@@ -1190,13 +1190,13 @@ export default function Home() {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#24180F] group-hover:text-[#18100A] transition-colors">
+                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
                     Recommendations
                   </h3>
                 </div>
               </div>
 
-              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Foto Reali con Crossfade Pulito, senza badge) */}
+              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Ceramic Puck con Foto Reali) */}
               <div
                 className={`absolute top-[6%] h-[88%] left-[2%] sm:left-[2.5%] w-[47%] rounded-[1000px] overflow-visible ${
                   !hasToggledOnce5
@@ -1209,8 +1209,8 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
                     case5Toggle === "off"
-                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#E8E0D5] active:scale-[0.98]"
-                      : "bg-white border-[6px] md:border-[8px] border-white shadow-[0_16px_45px_rgba(0,0,0,0.24)] hover:scale-[1.015] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3),_0_0_0_4px_rgba(255,255,255,0.45)] active:scale-[0.98]"
+                      ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
+                      : "bg-white/95 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_0_30px_rgba(0,212,255,0.35),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
                   <div
@@ -1264,7 +1264,7 @@ export default function Home() {
           ref={card7Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[45] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border-x-[10px] border-y-0 border-[#ECE7E1] bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_20px_50px_rgba(10,25,47,0.15)]">
+          <section className="relative w-full h-full rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
             <div
               role="switch"
               aria-checked={case6Toggle === "on"}
@@ -1286,15 +1286,15 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0096C7]/50 ${
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-cyan-300/50 ${
                 case6Toggle === "off"
-                  ? "bg-[#F5EFE6] border-[6px] md:border-[8px] border-[#E8E0D5] hover:border-[#D9CFBF] shadow-[inset_0_3px_12px_rgba(40,28,16,0.06),_0_8px_24px_rgba(40,28,16,0.02)]"
-                  : "bg-[#0096C7] border-[7px] md:border-[10px] border-[#0077B6] hover:border-[#023E8A] shadow-[0_25px_60px_rgba(0,180,216,0.35)]"
+                  ? "bg-black/25 border border-white/15 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_2px_rgba(255,255,255,0.15)] hover:border-white/30"
+                  : "bg-cyan-500/25 border border-cyan-300/40 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,180,216,0.35),_inset_0_1px_2px_rgba(255,255,255,0.5)] hover:border-cyan-200/60"
               }`}
             >
-              {/* Sfondo dinamico azzurro mare sardo / piscina in stato attivo */}
+              {/* Sfondo dinamico azzurro mare sardo in Liquid Glass */}
               <div
-                className={`absolute inset-0 rounded-[1000px] pointer-events-none transition-opacity duration-500 bg-gradient-to-r from-[#00B4D8] via-[#0096C7] to-[#0077B6] ${
+                className={`absolute inset-0 rounded-[1000px] pointer-events-none transition-opacity duration-500 bg-gradient-to-r from-cyan-400/35 via-[#00B4D8]/30 to-[#0077B6]/25 backdrop-blur-2xl ${
                   case6Toggle === "on" ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -1308,10 +1308,10 @@ export default function Home() {
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight">
+                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                     Let&apos;s Connect
                   </h2>
-                  <p className="text-xs sm:text-sm md:text-base text-cyan-100 font-normal leading-snug mt-1">
+                  <p className="text-xs sm:text-sm md:text-base text-cyan-100 font-normal leading-snug mt-1 drop-shadow-[0_1px_6px_rgba(0,0,0,0.2)]">
                     Open for product design opportunities.
                   </p>
                 </div>
@@ -1324,7 +1324,7 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={handleCopyEmail}
-                    className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-full bg-white hover:bg-cyan-50 text-[#0077B6] text-xs font-semibold shadow-xs transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-full bg-white/90 hover:bg-white text-slate-900 text-xs font-semibold shadow-[0_4px_14px_rgba(0,0,0,0.2)] backdrop-blur-md transition-all cursor-pointer"
                   >
                     <span>heraldago1@gmail.com</span>
                     <span className="text-[10px] bg-cyan-100 text-[#0077B6] px-1.5 py-0.5 rounded-full font-medium">
@@ -1335,7 +1335,7 @@ export default function Home() {
                     href="https://www.linkedin.com/in/heraldago/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 px-3 sm:px-4 py-1.5 rounded-full bg-white/20 hover:bg-white/30 text-white text-xs font-medium border border-white/30 transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1 px-3 sm:px-4 py-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white text-xs font-medium border border-white/30 backdrop-blur-md transition-all cursor-pointer"
                   >
                     <span>LinkedIn</span>
                     <span className="text-[10px]">↗</span>
@@ -1344,7 +1344,7 @@ export default function Home() {
                     href="/cv-herald-ago.pdf"
                     target="_blank"
                     download
-                    className="inline-flex items-center gap-1 px-3 sm:px-4 py-1.5 rounded-full bg-white/20 hover:bg-white/30 text-white text-xs font-medium border border-white/30 transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1 px-3 sm:px-4 py-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white text-xs font-medium border border-white/30 backdrop-blur-md transition-all cursor-pointer"
                   >
                     <span>Resume PDF</span>
                     <span className="text-[10px]">↗</span>
@@ -1357,8 +1357,8 @@ export default function Home() {
                   className="w-full pt-1 select-text"
                 >
                   {contactSubmitted ? (
-                    <div className="p-3.5 sm:p-4 rounded-2xl bg-white/15 border border-white/25 backdrop-blur-xs text-center space-y-1.5">
-                      <div className="w-8 h-8 rounded-full bg-emerald-400 text-slate-900 flex items-center justify-center mx-auto text-sm font-bold">
+                    <div className="p-3.5 sm:p-4 rounded-2xl bg-white/15 border border-white/30 backdrop-blur-md text-center space-y-1.5">
+                      <div className="w-8 h-8 rounded-full bg-cyan-400 text-slate-900 flex items-center justify-center mx-auto text-sm font-bold shadow-[0_0_12px_rgba(34,211,238,0.6)]">
                         ✓
                       </div>
                       <h3 className="text-sm sm:text-base font-bold text-white">
@@ -1375,7 +1375,7 @@ export default function Home() {
                           setContactEmail("");
                           setContactMessage("");
                         }}
-                        className="px-3.5 py-1 rounded-full bg-white text-[#0077B6] text-xs font-semibold hover:bg-cyan-50 transition-colors cursor-pointer"
+                        className="px-3.5 py-1 rounded-full bg-white/90 text-slate-900 text-xs font-semibold hover:bg-white transition-colors cursor-pointer"
                       >
                         Send another
                       </button>
@@ -1389,7 +1389,7 @@ export default function Home() {
                           value={contactName}
                           onChange={(e) => setContactName(e.target.value)}
                           placeholder="Your name"
-                          className="w-full px-3.5 py-1.5 sm:py-2 rounded-xl bg-white/15 border border-white/25 text-xs sm:text-sm text-white placeholder:text-cyan-100/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/20 transition-all"
+                          className="w-full px-3.5 py-1.5 sm:py-2 rounded-xl bg-white/10 border border-white/25 text-xs sm:text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-300/50 focus:border-cyan-200 focus:bg-white/20 transition-all backdrop-blur-sm"
                         />
                         <input
                           type="email"
@@ -1397,7 +1397,7 @@ export default function Home() {
                           value={contactEmail}
                           onChange={(e) => setContactEmail(e.target.value)}
                           placeholder="Your email"
-                          className="w-full px-3.5 py-1.5 sm:py-2 rounded-xl bg-white/15 border border-white/25 text-xs sm:text-sm text-white placeholder:text-cyan-100/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/20 transition-all"
+                          className="w-full px-3.5 py-1.5 sm:py-2 rounded-xl bg-white/10 border border-white/25 text-xs sm:text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-300/50 focus:border-cyan-200 focus:bg-white/20 transition-all backdrop-blur-sm"
                         />
                       </div>
                       <div>
@@ -1407,12 +1407,12 @@ export default function Home() {
                           value={contactMessage}
                           onChange={(e) => setContactMessage(e.target.value)}
                           placeholder="Your message or project idea..."
-                          className="w-full px-3.5 py-1.5 sm:py-2 rounded-xl bg-white/15 border border-white/25 text-xs sm:text-sm text-white placeholder:text-cyan-100/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/20 resize-none transition-all"
+                          className="w-full px-3.5 py-1.5 sm:py-2 rounded-xl bg-white/10 border border-white/25 text-xs sm:text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-300/50 focus:border-cyan-200 focus:bg-white/20 resize-none transition-all backdrop-blur-sm"
                         />
                       </div>
                       <button
                         type="submit"
-                        className="w-full sm:w-auto px-5 py-1.5 sm:py-2 rounded-full bg-white hover:bg-cyan-50 active:scale-98 text-[#0077B6] font-bold text-xs sm:text-sm shadow-md transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                        className="w-full sm:w-auto px-5 py-1.5 sm:py-2 rounded-full bg-white/90 hover:bg-white active:scale-95 text-slate-900 font-bold text-xs sm:text-sm shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer flex items-center justify-center gap-1.5"
                       >
                         <span>Send Message</span>
                         <span className="text-xs font-bold">↗</span>
@@ -1422,7 +1422,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Titolo Pulito e Minimale */}
+              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Titolo inciso nel vetro */}
               <div
                 className={`absolute right-[3%] top-0 w-[48%] h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case6Toggle === "off"
@@ -1431,13 +1431,13 @@ export default function Home() {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#24180F] group-hover:text-[#18100A] transition-colors">
+                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
                     Contact
                   </h3>
                 </div>
               </div>
 
-              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Handle Tattile Reattivo al Click) */}
+              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Ceramic Puck Tattile) */}
               <div
                 className={`absolute top-[6%] h-[88%] left-[2%] sm:left-[2.5%] w-[47%] rounded-[1000px] overflow-visible ${
                   !hasToggledOnce6
@@ -1450,33 +1450,33 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-3 sm:p-5 md:p-6 transition-all duration-300 ease-out cursor-pointer ${
                     case6Toggle === "off"
-                      ? "bg-white border-[6px] md:border-[8px] border-white shadow-[0_12px_32px_rgba(40,28,16,0.12),_0_2px_6px_rgba(40,28,16,0.06)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(40,28,16,0.20),_0_4px_12px_rgba(40,28,16,0.08)] hover:border-[#E8E0D5] active:scale-[0.98]"
-                      : "bg-white border-[6px] md:border-[8px] border-white shadow-[0_16px_45px_rgba(0,0,0,0.24)] hover:scale-[1.015] hover:shadow-[0_24px_60px_rgba(0,0,0,0.3),_0_0_0_4px_rgba(255,255,255,0.45)] active:scale-[0.98]"
+                      ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
+                      : "bg-white/95 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_0_30px_rgba(0,212,255,0.35),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
                   {case6Toggle === "off" ? (
                     /* Copertina Knob quando SPENTO: Visual Contatto Elegante e Muted */
-                    <div className="relative w-full h-full flex flex-col items-center justify-center text-center p-4 pointer-events-none select-none opacity-80 group-hover:opacity-100 transition-opacity">
-                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#F5EFE6] text-[#24180F] flex items-center justify-center text-xl sm:text-2xl shadow-xs border border-[#E8E0D5] mb-2">
+                    <div className="relative w-full h-full flex flex-col items-center justify-center text-center p-4 pointer-events-none select-none opacity-85 group-hover:opacity-100 transition-opacity">
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-slate-900/10 text-slate-800 flex items-center justify-center text-xl sm:text-2xl shadow-inner border border-slate-900/15 mb-2 backdrop-blur-sm">
                         ✉
                       </div>
-                      <span className="text-sm sm:text-lg font-bold text-[#24180F]">
+                      <span className="text-sm sm:text-lg font-bold text-slate-900 tracking-tight">
                         heraldago1@gmail.com
                       </span>
-                      <span className="text-[11px] sm:text-xs text-[#7A6B5D] font-normal mt-0.5">
+                      <span className="text-[11px] sm:text-xs text-slate-600 font-normal mt-0.5">
                         Barcelona, Spain
                       </span>
                     </div>
                   ) : (
                     /* Handle Tattile del Knob quando ATTIVO: 100% cliccabile per spegnere */
                     <div className="relative w-full h-full flex flex-col items-center justify-center text-center p-4 pointer-events-none select-none">
-                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-cyan-50 text-[#0077B6] flex items-center justify-center text-xl sm:text-2xl shadow-xs border border-cyan-100 mb-2">
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-cyan-500/15 text-cyan-600 flex items-center justify-center text-xl sm:text-2xl shadow-inner border border-cyan-500/25 mb-2 backdrop-blur-sm">
                         ✉
                       </div>
-                      <span className="text-sm sm:text-lg font-bold text-[#24180F]">
+                      <span className="text-sm sm:text-lg font-bold text-slate-900 tracking-tight">
                         heraldago1@gmail.com
                       </span>
-                      <span className="text-[11px] sm:text-xs text-[#7A6B5D] font-normal mt-0.5">
+                      <span className="text-[11px] sm:text-xs text-slate-600 font-normal mt-0.5">
                         Barcelona, Spain
                       </span>
                     </div>
