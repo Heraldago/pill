@@ -485,9 +485,9 @@ export default function Home() {
         {/* --- CARD 1: HERO PILLOLA (z-10, scala indietro con lo scroll) --- */}
         <div
           ref={card1Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-10 will-change-transform origin-center"
+          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-4 lg:p-6 z-10 will-change-transform origin-center"
         >
-          <section className="relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden flex flex-col justify-between items-center shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
+          <section className="relative w-full max-w-[1550px] h-full md:h-auto md:max-h-[calc(100dvh-36px)] md:aspect-[1.82/1] rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden flex flex-col justify-between items-center shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
             {/* Header interno alla pillola: Navbar a 4 voci (visibile solo da tablet/iPad in su) */}
             <header className="w-full pt-6 sm:pt-8 md:pt-10 flex justify-center items-center z-10 min-h-[50px]">
               <nav className="hidden md:flex items-center gap-1 bg-white/15 backdrop-blur-xl border border-white/25 p-1.5 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.15),_inset_0_1px_1px_rgba(255,255,255,0.3)] text-xs sm:text-sm">
@@ -558,9 +558,9 @@ export default function Home() {
         {/* --- CARD 2: INTERACTIVE CASE STUDY TOGGLE PILL (CASE 01: UNGDOMSKORT) --- */}
         <div
           ref={card2Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-20 will-change-transform"
+          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-4 lg:p-6 z-20 will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`relative w-full max-w-[1550px] h-full md:h-auto md:max-h-[calc(100dvh-36px)] md:aspect-[1.82/1] rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[24px] lg:border-[30px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case1Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             {/* Contenitore interattivo del Toggle (Bouncy Bubble Physics: Orizzontale su Desktop, Verticale su Mobile) */}
@@ -586,8 +586,12 @@ export default function Home() {
                   setCase1Toggle((prev) => (prev === "off" ? "on" : "off"));
                 }
               }}
-              style={{ "--travel-dist": "48cqw", "--travel-dist-y": "104%" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
+              style={{
+                "--travel-dist": "calc(100cqw - 100cqh)",
+                "--travel-dist-y": "104%",
+                "--knob-pad": "clamp(10px, 1.6cqh, 22px)",
+              } as React.CSSProperties}
+              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case1Toggle === "off"
                   ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
@@ -595,7 +599,7 @@ export default function Home() {
             >
               {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3%] md:w-[48%] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-12 space-y-2 sm:space-y-4 md:space-y-5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-0 md:w-[calc(100cqw-100cqh+var(--knob-pad))] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-14 space-y-2 sm:space-y-4 md:space-y-5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case1Toggle === "on"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
@@ -629,7 +633,7 @@ export default function Home() {
 
               {/* 2. STATO SPENTO (OFF): In basso su Mobile, a Destra su Desktop */}
               <div
-                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-[3%] md:left-auto md:w-[48%] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-0 md:left-auto md:w-[calc(100cqw-100cqh+var(--knob-pad))] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case1Toggle === "off"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-75 translate-y-8 md:translate-y-0 md:translate-x-12 pointer-events-none"
@@ -642,9 +646,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. IL KNOB / THUMB DEL TOGGLE: Scorrimento Y su mobile, X su desktop */}
+              {/* 3. IL KNOB / THUMB DEL TOGGLE: Perfettamente rotondo ed equidistante */}
               <div
-                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[6%] md:h-[88%] md:left-[2%] md:sm:left-[2.5%] md:w-[47%] rounded-[22px] sm:rounded-[36px] md:rounded-[1000px] overflow-visible ${
+                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[var(--knob-pad)] md:bottom-[var(--knob-pad)] md:left-[var(--knob-pad)] md:h-[calc(100%-2*var(--knob-pad))] md:w-auto md:aspect-square rounded-[22px] sm:rounded-[36px] md:rounded-full overflow-visible ${
                   !hasToggledOnce1
                     ? "translate-y-0 md:translate-x-0"
                     : case1Toggle === "on"
@@ -654,7 +658,7 @@ export default function Home() {
               >
                 {/* Guscio interattivo interno con stato hover dedicato specificamente per l'area del knob */}
                 <div
-                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
+                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-full overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case1Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
                       : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
@@ -697,9 +701,9 @@ export default function Home() {
         {/* --- CARD 3: REAL CASE STUDY 02 TOGGLE PILL (X-BIT) --- */}
         <div
           ref={card3Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[25] will-change-transform"
+          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-4 lg:p-6 z-[25] will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`relative w-full max-w-[1550px] h-full md:h-auto md:max-h-[calc(100dvh-36px)] md:aspect-[1.82/1] rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[24px] lg:border-[30px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case2Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             <div
@@ -724,8 +728,12 @@ export default function Home() {
                   setCase2Toggle((prev) => (prev === "off" ? "on" : "off"));
                 }
               }}
-              style={{ "--travel-dist": "48cqw", "--travel-dist-y": "104%" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
+              style={{
+                "--travel-dist": "calc(100cqw - 100cqh)",
+                "--travel-dist-y": "104%",
+                "--knob-pad": "clamp(10px, 1.6cqh, 22px)",
+              } as React.CSSProperties}
+              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case2Toggle === "off"
                   ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
@@ -733,7 +741,7 @@ export default function Home() {
             >
               {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3%] md:w-[48%] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-12 space-y-2 sm:space-y-4 md:space-y-5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-0 md:w-[calc(100cqw-100cqh+var(--knob-pad))] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-14 space-y-2 sm:space-y-4 md:space-y-5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case2Toggle === "on"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
@@ -764,7 +772,7 @@ export default function Home() {
 
               {/* 2. STATO SPENTO (OFF): In basso su Mobile, a Destra su Desktop */}
               <div
-                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-[3%] md:left-auto md:w-[48%] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-0 md:left-auto md:w-[calc(100cqw-100cqh+var(--knob-pad))] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case2Toggle === "off"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-75 translate-y-8 md:translate-y-0 md:translate-x-12 pointer-events-none"
@@ -777,9 +785,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. IL KNOB DEL TOGGLE: Scorrimento Y su mobile, X su desktop */}
+              {/* 3. IL KNOB DEL TOGGLE: Perfettamente rotondo ed equidistante */}
               <div
-                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[6%] md:h-[88%] md:left-[2%] md:sm:left-[2.5%] md:w-[47%] rounded-[22px] sm:rounded-[36px] md:rounded-[1000px] overflow-visible ${
+                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[var(--knob-pad)] md:bottom-[var(--knob-pad)] md:left-[var(--knob-pad)] md:h-[calc(100%-2*var(--knob-pad))] md:w-auto md:aspect-square rounded-[22px] sm:rounded-[36px] md:rounded-full overflow-visible ${
                   !hasToggledOnce2
                     ? "translate-y-0 md:translate-x-0"
                     : case2Toggle === "on"
@@ -788,7 +796,7 @@ export default function Home() {
                 } flex items-center justify-center select-none`}
               >
                 <div
-                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
+                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-full overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case2Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
                       : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
@@ -829,9 +837,9 @@ export default function Home() {
         {/* --- CARD 4: REAL CASE STUDY 03 TOGGLE PILL (I PUPI SICILIANI) --- */}
         <div
           ref={card4Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[30] will-change-transform"
+          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-4 lg:p-6 z-[30] will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`relative w-full max-w-[1550px] h-full md:h-auto md:max-h-[calc(100dvh-36px)] md:aspect-[1.82/1] rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[24px] lg:border-[30px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case3Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             <div
@@ -856,8 +864,12 @@ export default function Home() {
                   setCase3Toggle((prev) => (prev === "off" ? "on" : "off"));
                 }
               }}
-              style={{ "--travel-dist": "48cqw", "--travel-dist-y": "104%" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
+              style={{
+                "--travel-dist": "calc(100cqw - 100cqh)",
+                "--travel-dist-y": "104%",
+                "--knob-pad": "clamp(10px, 1.6cqh, 22px)",
+              } as React.CSSProperties}
+              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case3Toggle === "off"
                   ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
@@ -865,7 +877,7 @@ export default function Home() {
             >
               {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3%] md:w-[48%] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-12 space-y-2 sm:space-y-4 md:space-y-5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-0 md:w-[calc(100cqw-100cqh+var(--knob-pad))] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-14 space-y-2 sm:space-y-4 md:space-y-5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case3Toggle === "on"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
@@ -896,7 +908,7 @@ export default function Home() {
 
               {/* 2. STATO SPENTO (OFF): In basso su Mobile, a Destra su Desktop */}
               <div
-                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-[3%] md:left-auto md:w-[48%] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-0 md:left-auto md:w-[calc(100cqw-100cqh+var(--knob-pad))] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case3Toggle === "off"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-75 translate-y-8 md:translate-y-0 md:translate-x-12 pointer-events-none"
@@ -909,9 +921,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. IL KNOB DEL TOGGLE: Scorrimento Y su mobile, X su desktop */}
+              {/* 3. IL KNOB DEL TOGGLE: Perfettamente rotondo ed equidistante */}
               <div
-                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[6%] md:h-[88%] md:left-[2%] md:sm:left-[2.5%] md:w-[47%] rounded-[22px] sm:rounded-[36px] md:rounded-[1000px] overflow-visible ${
+                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[var(--knob-pad)] md:bottom-[var(--knob-pad)] md:left-[var(--knob-pad)] md:h-[calc(100%-2*var(--knob-pad))] md:w-auto md:aspect-square rounded-[22px] sm:rounded-[36px] md:rounded-full overflow-visible ${
                   !hasToggledOnce3
                     ? "translate-y-0 md:translate-x-0"
                     : case3Toggle === "on"
@@ -920,7 +932,7 @@ export default function Home() {
                 } flex items-center justify-center select-none`}
               >
                 <div
-                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
+                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-full overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case3Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
                       : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
@@ -960,9 +972,9 @@ export default function Home() {
         {/* --- CARD 5: ABOUT ME INTERACTIVE TOGGLE PILL --- */}
         <div
           ref={card5Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[35] will-change-transform"
+          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-4 lg:p-6 z-[35] will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`relative w-full max-w-[1550px] h-full md:h-auto md:max-h-[calc(100dvh-36px)] md:aspect-[1.82/1] rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[24px] lg:border-[30px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case4Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             <div
@@ -987,8 +999,12 @@ export default function Home() {
                   setCase4Toggle((prev) => (prev === "off" ? "on" : "off"));
                 }
               }}
-              style={{ "--travel-dist": "48cqw", "--travel-dist-y": "104%" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
+              style={{
+                "--travel-dist": "calc(100cqw - 100cqh)",
+                "--travel-dist-y": "104%",
+                "--knob-pad": "clamp(10px, 1.6cqh, 22px)",
+              } as React.CSSProperties}
+              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case4Toggle === "off"
                   ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
@@ -996,7 +1012,7 @@ export default function Home() {
             >
               {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3%] md:w-[48%] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-12 space-y-2 sm:space-y-3.5 md:space-y-4 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-0 md:w-[calc(100cqw-100cqh+var(--knob-pad))] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-12 space-y-2 sm:space-y-3.5 md:space-y-4 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case4Toggle === "on"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
@@ -1045,7 +1061,7 @@ export default function Home() {
 
               {/* 2. STATO SPENTO (OFF): In basso su Mobile, a Destra su Desktop */}
               <div
-                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-[3%] md:left-auto md:w-[48%] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-0 md:left-auto md:w-[calc(100cqw-100cqh+var(--knob-pad))] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case4Toggle === "off"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-75 translate-y-8 md:translate-y-0 md:translate-x-12 pointer-events-none"
@@ -1058,9 +1074,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. IL KNOB DEL TOGGLE: Scorrimento Y su mobile, X su desktop */}
+              {/* 3. IL KNOB DEL TOGGLE: Perfettamente rotondo ed equidistante */}
               <div
-                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[6%] md:h-[88%] md:left-[2%] md:sm:left-[2.5%] md:w-[47%] rounded-[22px] sm:rounded-[36px] md:rounded-[1000px] overflow-visible ${
+                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[var(--knob-pad)] md:bottom-[var(--knob-pad)] md:left-[var(--knob-pad)] md:h-[calc(100%-2*var(--knob-pad))] md:w-auto md:aspect-square rounded-[22px] sm:rounded-[36px] md:rounded-full overflow-visible ${
                   !hasToggledOnce4
                     ? "translate-y-0 md:translate-x-0"
                     : case4Toggle === "on"
@@ -1069,7 +1085,7 @@ export default function Home() {
                 } flex items-center justify-center select-none`}
               >
                 <div
-                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-[1000px] overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
+                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-full overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
                     case4Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
                       : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
@@ -1085,7 +1101,7 @@ export default function Home() {
                     />
                   )}
                   <div
-                    className={`relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out rounded-[1000px] overflow-hidden ${
+                    className={`relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out rounded-[20px] sm:rounded-[32px] md:rounded-full overflow-hidden ${
                       case4Toggle === "off"
                         ? "opacity-70 group-hover:opacity-95 contrast-[0.95] group-hover:contrast-100"
                         : "opacity-100 brightness-100"
@@ -1109,9 +1125,9 @@ export default function Home() {
         {/* --- CARD 6: RECOMMENDATIONS INTERACTIVE TOGGLE PILL --- */}
         <div
           ref={card6Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[40] will-change-transform"
+          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-4 lg:p-6 z-[40] will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`relative w-full max-w-[1550px] h-full md:h-auto md:max-h-[calc(100dvh-36px)] md:aspect-[1.82/1] rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[24px] lg:border-[30px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case5Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             <div
@@ -1136,8 +1152,12 @@ export default function Home() {
                   setCase5Toggle((prev) => (prev === "off" ? "on" : "off"));
                 }
               }}
-              style={{ "--travel-dist": "48cqw", "--travel-dist-y": "104%" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
+              style={{
+                "--travel-dist": "calc(100cqw - 100cqh)",
+                "--travel-dist-y": "104%",
+                "--knob-pad": "clamp(10px, 1.6cqh, 22px)",
+              } as React.CSSProperties}
+              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case5Toggle === "off"
                   ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
@@ -1145,7 +1165,7 @@ export default function Home() {
             >
               {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3.5%] md:w-[43%] md:sm:w-[44%] md:lg:w-[45%] md:h-full flex flex-col justify-center px-5 sm:px-7 md:pl-8 md:lg:pl-10 md:pr-2 space-y-2 sm:space-y-2.5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-0 md:w-[calc(100cqw-100cqh+var(--knob-pad))] md:h-full flex flex-col justify-center px-5 sm:px-7 md:px-8 lg:px-10 space-y-2 sm:space-y-2.5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case5Toggle === "on"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
@@ -1242,7 +1262,7 @@ export default function Home() {
 
               {/* 2. STATO SPENTO (OFF): In basso su Mobile, a Destra su Desktop */}
               <div
-                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-[3%] md:left-auto md:w-[48%] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-0 md:left-auto md:w-[calc(100cqw-100cqh+var(--knob-pad))] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case5Toggle === "off"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-75 translate-y-8 md:translate-y-0 md:translate-x-12 pointer-events-none"
@@ -1255,9 +1275,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. IL KNOB DEL TOGGLE: Scorrimento Y su mobile, X su desktop */}
+              {/* 3. IL KNOB DEL TOGGLE: Perfettamente rotondo ed equidistante */}
               <div
-                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[6%] md:h-[88%] md:left-[2%] md:sm:left-[2.5%] md:w-[47%] rounded-[22px] sm:rounded-[36px] md:rounded-[1000px] overflow-visible ${
+                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[var(--knob-pad)] md:bottom-[var(--knob-pad)] md:left-[var(--knob-pad)] md:h-[calc(100%-2*var(--knob-pad))] md:w-auto md:aspect-square rounded-[22px] sm:rounded-[36px] md:rounded-full overflow-visible ${
                   !hasToggledOnce5
                     ? "translate-y-0 md:translate-x-0"
                     : case5Toggle === "on"
@@ -1266,7 +1286,7 @@ export default function Home() {
                 } flex items-center justify-center select-none`}
               >
                 <div
-                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-[1000px] overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
+                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-full overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
                     case5Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
                       : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
@@ -1282,7 +1302,7 @@ export default function Home() {
                     />
                   )}
                   <div
-                    className={`relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out rounded-[1000px] overflow-hidden ${
+                    className={`relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out rounded-[20px] sm:rounded-[32px] md:rounded-full overflow-hidden ${
                       case5Toggle === "off"
                         ? "opacity-70 group-hover:opacity-95 contrast-[0.95] group-hover:contrast-100"
                         : "opacity-100 brightness-100"
@@ -1330,9 +1350,9 @@ export default function Home() {
         {/* --- CARD 7: CONTACT INTERACTIVE TOGGLE PILL --- */}
         <div
           ref={card7Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[45] will-change-transform"
+          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-4 lg:p-6 z-[45] will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`relative w-full max-w-[1550px] h-full md:h-auto md:max-h-[calc(100dvh-36px)] md:aspect-[1.82/1] rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[24px] lg:border-[30px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case6Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             <div
@@ -1357,8 +1377,12 @@ export default function Home() {
                   setCase6Toggle((prev) => (prev === "off" ? "on" : "off"));
                 }
               }}
-              style={{ "--travel-dist": "48cqw", "--travel-dist-y": "104%" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
+              style={{
+                "--travel-dist": "calc(100cqw - 100cqh)",
+                "--travel-dist-y": "104%",
+                "--knob-pad": "clamp(10px, 1.6cqh, 22px)",
+              } as React.CSSProperties}
+              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case6Toggle === "off"
                   ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
@@ -1366,7 +1390,7 @@ export default function Home() {
             >
               {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3%] md:w-[48%] md:h-full flex flex-col justify-center px-5 sm:px-7 md:px-10 lg:px-12 space-y-2 sm:space-y-3 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-0 md:w-[calc(100cqw-100cqh+var(--knob-pad))] md:h-full flex flex-col justify-center px-5 sm:px-7 md:px-10 lg:px-12 space-y-2 sm:space-y-3 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case6Toggle === "on"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
@@ -1483,7 +1507,7 @@ export default function Home() {
 
               {/* 2. STATO SPENTO (OFF): In basso su Mobile, a Destra su Desktop */}
               <div
-                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-[3%] md:left-auto md:w-[48%] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-0 md:left-auto md:w-[calc(100cqw-100cqh+var(--knob-pad))] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case6Toggle === "off"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-75 translate-y-8 md:translate-y-0 md:translate-x-12 pointer-events-none"
@@ -1496,9 +1520,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. IL KNOB DEL TOGGLE: Scorrimento Y su mobile, X su desktop */}
+              {/* 3. IL KNOB DEL TOGGLE: Perfettamente rotondo ed equidistante */}
               <div
-                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[6%] md:h-[88%] md:left-[2%] md:sm:left-[2.5%] md:w-[47%] rounded-[22px] sm:rounded-[36px] md:rounded-[1000px] overflow-visible ${
+                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[var(--knob-pad)] md:bottom-[var(--knob-pad)] md:left-[var(--knob-pad)] md:h-[calc(100%-2*var(--knob-pad))] md:w-auto md:aspect-square rounded-[22px] sm:rounded-[36px] md:rounded-full overflow-visible ${
                   !hasToggledOnce6
                     ? "translate-y-0 md:translate-x-0"
                     : case6Toggle === "on"
@@ -1507,7 +1531,7 @@ export default function Home() {
                 } flex items-center justify-center select-none`}
               >
                 <div
-                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-[1000px] overflow-hidden flex items-center justify-center p-3 sm:p-5 md:p-6 transition-all duration-300 ease-out cursor-pointer ${
+                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-full overflow-hidden flex items-center justify-center p-3 sm:p-5 md:p-6 transition-all duration-300 ease-out cursor-pointer ${
                     case6Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
                       : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"

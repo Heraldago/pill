@@ -131,44 +131,36 @@ body {
 
 @keyframes giant-grow-in {
   0% {
-    border-radius: 1000px;
     transform: translateX(0) scale(1, 1);
   }
   100% {
-    border-radius: 950px / 720px;
-    transform: translateX(calc(var(--travel-dist) * 0.38)) scale(1.42, 0.72);
+    transform: translateX(calc(var(--travel-dist) * 0.38)) scale(1.24, 0.86);
   }
 }
 
 @keyframes giant-bounce-in {
   0% {
-    border-radius: 950px / 720px;
-    transform: translateX(calc(var(--travel-dist) * 0.38)) scale(1.42, 0.72);
+    transform: translateX(calc(var(--travel-dist) * 0.38)) scale(1.24, 0.86);
   }
   100% {
-    border-radius: 1000px;
     transform: translateX(var(--travel-dist)) scale(1, 1);
   }
 }
 
 @keyframes giant-grow-out {
   0% {
-    border-radius: 1000px;
     transform: translateX(var(--travel-dist)) scale(1, 1);
   }
   100% {
-    border-radius: 950px / 720px;
-    transform: translateX(calc(var(--travel-dist) * 0.62)) scale(1.42, 0.72);
+    transform: translateX(calc(var(--travel-dist) * 0.62)) scale(1.24, 0.86);
   }
 }
 
 @keyframes giant-bounce-out {
   0% {
-    border-radius: 950px / 720px;
-    transform: translateX(calc(var(--travel-dist) * 0.62)) scale(1.42, 0.72);
+    transform: translateX(calc(var(--travel-dist) * 0.62)) scale(1.24, 0.86);
   }
   100% {
-    border-radius: 1000px;
     transform: translateX(0) scale(1, 1);
   }
 }
