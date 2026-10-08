@@ -60,6 +60,11 @@ export default function Home() {
   const [mobileToggled3, setMobileToggled3] = useState(false);
   const [mobileCaseAbout, setMobileCaseAbout] = useState<"off" | "on">("off");
   const [mobileToggledAbout, setMobileToggledAbout] = useState(false);
+  const [mobileCaseRec, setMobileCaseRec] = useState<"off" | "on">("off");
+  const [mobileToggledRec, setMobileToggledRec] = useState(false);
+  const [mobileActiveRec, setMobileActiveRec] = useState<"antonio" | "sebastian">("antonio");
+  const [mobileCaseContact, setMobileCaseContact] = useState<"off" | "on">("off");
+  const [mobileToggledContact, setMobileToggledContact] = useState(false);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -367,24 +372,25 @@ export default function Home() {
       />
 
       {/* Logo fisso in alto a sinistra: 16px (top-4 left-4) su mobile, 24px (md:top-6 md:left-6) su schermi più grandi */}
-      <div className="fixed top-4 left-4 md:top-6 md:left-6 z-50">
+      <div className="fixed top-[max(1rem,env(safe-area-inset-top))] left-4 md:top-6 md:left-6 z-50">
         <button
           onClick={() => scrollToSection("home")}
           className="block group focus:outline-none cursor-pointer"
         >
           <Image
-            src="/logo.png"
-            alt="HN Logo"
+            src="/logo.svg"
+            alt="Herald Ago Logo"
             width={48}
             height={48}
             priority
+            unoptimized
             className="w-10 h-10 md:w-11 md:h-11 rounded-full shadow-xs group-hover:scale-105 transition-transform duration-200"
           />
         </button>
       </div>
 
       {/* Burger Menu a specchio col logo: 16px (top-4 right-4) su mobile, nascosto da tablet in su */}
-      <div className="fixed top-4 right-4 md:hidden z-50">
+      <div className="fixed top-[max(1rem,env(safe-area-inset-top))] right-4 md:hidden z-50">
         <button
           onClick={() => setIsMobileMenuOpen((prev) => !prev)}
           className="w-10 h-10 rounded-full flex flex-col items-center justify-center gap-[4.5px] bg-white/15 backdrop-blur-xl border border-white/30 shadow-[0_4px_16px_rgba(0,0,0,0.2),_inset_0_1px_1px_rgba(255,255,255,0.4)] hover:bg-white/25 active:scale-95 transition-all cursor-pointer group focus:outline-none"
@@ -1113,7 +1119,7 @@ export default function Home() {
                         : "opacity-100 brightness-100"
                     }`}
                   >
-                    <div className="relative w-[76%] h-[76%] flex items-center justify-center">
+                    <div className="relative w-[87%] h-[87%] flex items-center justify-center">
                       <Image
                         src="/profile.png"
                         alt="Herald Ago"
@@ -1638,19 +1644,19 @@ export default function Home() {
           MOBILE VIEW: FIGMA DRAFT ARCHITECTURE (block md:hidden)
           3 Stacked Hero Glass Capsules + Horizontal Interactive Pill Switches
          ========================================================================= */}
-      <div className="block md:hidden relative w-full z-10 px-3 sm:px-4 pt-14 pb-24 flex flex-col gap-3 sm:gap-4">
+      <div className="block md:hidden relative w-full z-10 px-3 sm:px-4 pt-[max(3.5rem,calc(env(safe-area-inset-top)+1.5rem))] pb-[max(6rem,calc(env(safe-area-inset-bottom)+3rem))] flex flex-col gap-3 sm:gap-4">
         {/* --- 1. HERO: 3 STACKED TRANSLUCENT GLASS CAPSULES (FIGMA) --- */}
         <section id="mobile-home" className="w-full flex flex-col items-center">
-          <div className="w-full flex flex-col items-center select-none gap-2.5 sm:gap-3">
+          <div className="w-full flex flex-col items-center select-none gap-0">
             {/* Capsule 1: Saluto */}
-            <div className="w-full h-[221px] px-6 rounded-full bg-white/[0.12] border-2 border-white shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-30">
+            <div className="w-full h-[221px] px-6 rounded-full bg-white/[0.12] border-0 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-30">
               <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 Hi, I&apos;m Herald :)
               </h1>
             </div>
 
             {/* Capsule 2: Missione */}
-            <div className="w-full h-[221px] px-6 rounded-full bg-white/[0.12] border-2 border-white shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-20">
+            <div className="w-full h-[221px] px-6 rounded-full bg-white/[0.12] border-0 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-20">
               <p className="text-2xl sm:text-3xl font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 I <span className="font-extrabold text-[#38bdf8] drop-shadow-[0_0_16px_rgba(56,189,248,0.7)]">design</span> digital
                 <br />
@@ -1659,7 +1665,7 @@ export default function Home() {
             </div>
 
             {/* Capsule 3: Scopo */}
-            <div className="w-full h-[221px] px-6 rounded-full bg-white/[0.12] border-2 border-white shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-10">
+            <div className="w-full h-[221px] px-6 rounded-full bg-white/[0.12] border-0 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-10">
               <p className="text-2xl sm:text-3xl font-medium tracking-tight text-white/95 leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 that <span className="italic font-serif text-white">help</span> and{" "}
                 <span className="italic font-serif text-white">simplify</span>
@@ -2125,7 +2131,7 @@ export default function Home() {
                       />
                     )}
                     <div className="relative z-10 w-full h-full rounded-full overflow-hidden flex items-center justify-center">
-                      <div className="relative w-[76%] h-[76%] flex items-center justify-center">
+                      <div className="relative w-[87%] h-[87%] flex items-center justify-center">
                         <Image
                           src="/profile.png"
                           alt="Herald Ago"
@@ -2143,123 +2149,300 @@ export default function Home() {
           </div>
         </section>
 
-        {/* --- 4. KIND WORDS (RECOMMENDATIONS): HORIZONTAL PILLS --- */}
-        <section className="w-full flex flex-col gap-3 sm:gap-4">
-          {/* Testimonial Antonio */}
+        {/* --- 4. KIND WORDS (RECOMMENDATIONS): HORIZONTAL PILL SWITCH --- */}
+        <section id="mobile-recommendations" className="w-full flex justify-center">
           <div className="w-full flex justify-center">
-            <div className="relative w-full min-h-[140px] rounded-full border-[10px] sm:border-[12px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-4 sm:p-5 flex items-center justify-between overflow-hidden">
-              <div className="pl-3 pr-4 flex-1 space-y-1 text-left">
-                <p className="text-[11px] text-slate-800 leading-snug italic font-normal line-clamp-3">
-                  &ldquo;Herald has rare proactivity and deep study. The immediate trust he inspires will take him very far.&rdquo;
-                </p>
-                <div>
-                  <p className="text-xs font-bold text-slate-900">Antonio</p>
-                  <p className="text-[10px] text-slate-500">Founder, I Pupi Siciliani</p>
-                </div>
-              </div>
-              <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-slate-900/15 shadow-sm flex-shrink-0">
-                <Image src="/antonio-avatar.jpg" alt="Antonio" fill unoptimized sizes="64px" className="object-cover" />
-              </div>
-            </div>
-          </div>
+            <div
+              role="switch"
+              aria-checked={mobileCaseRec === "on"}
+              aria-label={mobileCaseRec === "off" ? "Attiva testimonianze Kind Words" : "Torna a copertina Kind Words"}
+              onClick={() => {
+                setMobileToggledRec(true);
+                setMobileCaseRec((prev) => (prev === "off" ? "on" : "off"));
+              }}
+              style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
+              className={`group relative w-full h-[221px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+                mobileCaseRec === "off" ? "bg-transparent" : "bg-white"
+              }`}
+            >
+              {/* Pista interna del Toggle (Glass ad OFF, Bianca ad ON) */}
+              <div
+                className={`relative w-full h-full rounded-full [container-type:inline-size] overflow-hidden transition-all duration-500 ${
+                  mobileCaseRec === "off"
+                    ? "bg-black/20 backdrop-blur-xl shadow-[inset_0_4px_24px_rgba(0,10,30,0.45),inset_0_1.5px_2px_rgba(255,255,255,0.3)]"
+                    : "bg-white shadow-none"
+                }`}
+              >
+                {/* 1. STATO ATTIVO (ON): Testimonianze a sinistra */}
+                <div
+                  className={`absolute top-0 left-[6%] w-[44%] h-full flex flex-col justify-center space-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                    mobileCaseRec === "on"
+                      ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
+                      : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
+                  }`}
+                >
+                  <div className="flex items-center gap-1.5 pb-0.5" onClick={(e) => e.stopPropagation()}>
+                    <button
+                      type="button"
+                      onClick={() => setMobileActiveRec("antonio")}
+                      className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all cursor-pointer ${
+                        mobileActiveRec === "antonio"
+                          ? "bg-slate-900 text-white shadow-xs"
+                          : "bg-slate-900/10 text-slate-700 hover:bg-slate-900/15"
+                      }`}
+                    >
+                      Antonio
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setMobileActiveRec("sebastian")}
+                      className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all cursor-pointer ${
+                        mobileActiveRec === "sebastian"
+                          ? "bg-slate-900 text-white shadow-xs"
+                          : "bg-slate-900/10 text-slate-700 hover:bg-slate-900/15"
+                      }`}
+                    >
+                      Sebastian
+                    </button>
+                  </div>
 
-          {/* Testimonial Sebastian */}
-          <div className="w-full flex justify-center">
-            <div className="relative w-full min-h-[140px] rounded-full border-[10px] sm:border-[12px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-4 sm:p-5 flex items-center justify-between overflow-hidden">
-              <div className="pl-3 pr-4 flex-1 space-y-1 text-left">
-                <p className="text-[11px] text-slate-800 leading-snug italic font-normal line-clamp-3">
-                  &ldquo;Herald excelled at cross-stakeholder collaboration, guiding the process with great precision and genuine passion.&rdquo;
-                </p>
-                <div>
-                  <p className="text-xs font-bold text-slate-900">Sebastian</p>
-                  <p className="text-[10px] text-slate-500">CEO, næmt.nu</p>
+                  {mobileActiveRec === "antonio" ? (
+                    <div className="space-y-1">
+                      <p className="text-[11px] text-slate-800 italic line-clamp-3 leading-snug">
+                        &ldquo;Herald has rare proactivity and deep study. The trust he inspires will take him very far.&rdquo;
+                      </p>
+                      <p className="text-[10px] font-bold text-slate-900">
+                        Antonio · <span className="font-normal text-slate-500 text-[9px]">Founder, I Pupi Siciliani</span>
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-1">
+                      <p className="text-[11px] text-slate-800 italic line-clamp-3 leading-snug">
+                        &ldquo;Herald excelled at cross-stakeholder collaboration, guiding the process with precision.&rdquo;
+                      </p>
+                      <p className="text-[10px] font-bold text-slate-900">
+                        Sebastian · <span className="font-normal text-slate-500 text-[9px]">CEO, næmt.nu</span>
+                      </p>
+                    </div>
+                  )}
                 </div>
-              </div>
-              <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-slate-900/15 shadow-sm flex-shrink-0">
-                <Image src="/sebastian-avatar.jpg" alt="Sebastian" fill unoptimized sizes="64px" className="object-cover" />
+
+                {/* 2. STATO SPENTO (OFF): Cover con titolo a destra */}
+                <div
+                  className={`absolute top-0 right-[4%] w-[46%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                    mobileCaseRec === "off"
+                      ? "opacity-100 scale-100 translate-x-0"
+                      : "opacity-0 scale-75 translate-x-12"
+                  }`}
+                >
+                  <div className="text-center px-1">
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] leading-tight">
+                      Kind<br />Words
+                    </h3>
+                    <p className="text-[10px] sm:text-xs text-white/80 font-medium mt-1 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
+                      Recommendations
+                    </p>
+                  </div>
+                </div>
+
+                {/* 3. IL KNOB DEL TOGGLE: Foto Founder con VantaKnobWaves */}
+                <div
+                  className={`absolute top-[6%] left-[2.5%] w-[46%] h-[88%] rounded-full overflow-visible ${
+                    !mobileToggledRec
+                      ? "translate-x-0"
+                      : mobileCaseRec === "on"
+                      ? "bubble-knob-h-in"
+                      : "bubble-knob-h-out"
+                  } flex items-center justify-center select-none`}
+                >
+                  <div
+                    className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-1.5 transition-all duration-300 ease-out cursor-pointer ${
+                      mobileCaseRec === "off"
+                        ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),0_2px_6px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
+                        : "bg-[#0b2847] border-[4px] sm:border-[6px] border-white shadow-[0_20px_50px_rgba(0,18,36,0.45)] active:scale-[0.98]"
+                    }`}
+                  >
+                    {mobileCaseRec === "on" && (
+                      <VantaKnobWaves
+                        color={0x0b2847}
+                        shininess={30.0}
+                        waveHeight={20.0}
+                        waveSpeed={0.75}
+                        zoom={0.65}
+                      />
+                    )}
+                    <div className="relative z-10 w-full h-full rounded-full overflow-hidden flex items-center justify-center">
+                      <div
+                        className={`absolute inset-0 transition-opacity duration-500 ease-out rounded-full overflow-hidden ${
+                          mobileActiveRec === "antonio" ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
+                        }`}
+                      >
+                        <Image
+                          src="/antonio-founder.jpg"
+                          alt="Antonio"
+                          fill
+                          unoptimized
+                          sizes="160px"
+                          className="object-cover object-[center_32%]"
+                        />
+                      </div>
+                      <div
+                        className={`absolute inset-0 transition-opacity duration-500 ease-out rounded-full overflow-hidden ${
+                          mobileActiveRec === "sebastian" ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
+                        }`}
+                      >
+                        <Image
+                          src="/herald-sebastian-team.jpg"
+                          alt="Sebastian"
+                          fill
+                          unoptimized
+                          sizes="160px"
+                          className="object-cover object-[52%_48%]"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* --- 5. CONTACT: LET'S CONNECT PILL --- */}
+        {/* --- 5. CONTACT: HORIZONTAL PILL SWITCH --- */}
         <section id="mobile-contact" className="w-full flex justify-center">
           <div className="w-full flex justify-center">
-            <div className="relative w-full rounded-[48px] sm:rounded-full border-[10px] sm:border-[12px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-6 sm:p-8 flex flex-col items-center justify-center text-center overflow-hidden">
-              <div className="w-full space-y-3.5">
-                <div className="space-y-0.5">
-                  <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Let&apos;s Connect</h2>
-                  <p className="text-xs text-slate-600">Open for product design opportunities.</p>
-                </div>
-
-                {/* Quick action buttons */}
-                <div className="flex flex-wrap items-center justify-center gap-1.5">
-                  <button
-                    type="button"
-                    onClick={handleCopyEmail}
-                    className="px-3.5 py-1.5 rounded-full bg-slate-900 text-white text-[11px] font-semibold active:scale-95 transition-all shadow-xs cursor-pointer"
-                  >
-                    {copiedEmail ? "Copied!" : "heraldago1@gmail.com"}
-                  </button>
-                  <a
-                    href="https://www.linkedin.com/in/heraldago/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-3.5 py-1.5 rounded-full bg-slate-900/10 text-slate-900 text-[11px] font-semibold border border-slate-900/15 active:scale-95 transition-all cursor-pointer"
-                  >
-                    LinkedIn
-                  </a>
-                  <a
-                    href="/cv-herald-ago.pdf"
-                    target="_blank"
-                    download
-                    className="px-3.5 py-1.5 rounded-full bg-slate-900/10 text-slate-900 text-[11px] font-semibold border border-slate-900/15 active:scale-95 transition-all cursor-pointer"
-                  >
-                    Resume PDF
-                  </a>
-                </div>
-
-                {/* Contact form */}
-                {contactSubmitted ? (
-                  <div className="p-4 rounded-3xl bg-slate-900/[0.05] border border-slate-900/15 text-center space-y-1">
-                    <div className="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center mx-auto text-xs font-bold">✓</div>
-                    <h3 className="text-sm font-bold text-slate-900">Message sent!</h3>
-                    <p className="text-xs text-slate-700">Thank you for reaching out. I will reply soon.</p>
+            <div
+              role="switch"
+              aria-checked={mobileCaseContact === "on"}
+              aria-label={mobileCaseContact === "off" ? "Attiva canali di contatto" : "Torna a copertina Contact"}
+              onClick={() => {
+                setMobileToggledContact(true);
+                setMobileCaseContact((prev) => (prev === "off" ? "on" : "off"));
+              }}
+              style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
+              className={`group relative w-full h-[221px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+                mobileCaseContact === "off" ? "bg-transparent" : "bg-white"
+              }`}
+            >
+              {/* Pista interna del Toggle (Glass ad OFF, Bianca ad ON) */}
+              <div
+                className={`relative w-full h-full rounded-full [container-type:inline-size] overflow-hidden transition-all duration-500 ${
+                  mobileCaseContact === "off"
+                    ? "bg-black/20 backdrop-blur-xl shadow-[inset_0_4px_24px_rgba(0,10,30,0.45),inset_0_1.5px_2px_rgba(255,255,255,0.3)]"
+                    : "bg-white shadow-none"
+                }`}
+              >
+                {/* 1. STATO ATTIVO (ON): Opzioni e canali a sinistra */}
+                <div
+                  className={`absolute top-0 left-[6%] w-[44%] h-full flex flex-col justify-center space-y-2 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                    mobileCaseContact === "on"
+                      ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
+                      : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
+                  }`}
+                >
+                  <div>
+                    <h3 className="text-base font-extrabold text-slate-900 tracking-tight leading-tight">
+                      Let&apos;s Connect
+                    </h3>
+                    <p className="text-[10px] text-slate-600 line-clamp-2 leading-snug mt-0.5">
+                      Open for product design opportunities.
+                    </p>
                   </div>
-                ) : (
-                  <form onSubmit={handleContactSubmit} className="space-y-2 pt-1 w-full max-w-[280px] mx-auto">
-                    <input
-                      type="text"
-                      required
-                      value={contactName}
-                      onChange={(e) => setContactName(e.target.value)}
-                      placeholder="Your name"
-                      className="w-full px-3.5 py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30"
-                    />
-                    <input
-                      type="email"
-                      required
-                      value={contactEmail}
-                      onChange={(e) => setContactEmail(e.target.value)}
-                      placeholder="Your email"
-                      className="w-full px-3.5 py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30"
-                    />
-                    <textarea
-                      required
-                      rows={2}
-                      value={contactMessage}
-                      onChange={(e) => setContactMessage(e.target.value)}
-                      placeholder="Your message..."
-                      className="w-full px-3.5 py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30 resize-none"
-                    />
+
+                  <div className="flex flex-col gap-1.5 pt-0.5" onClick={(e) => e.stopPropagation()}>
                     <button
-                      type="submit"
-                      className="w-full py-2.5 rounded-full bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-md transition-all cursor-pointer active:scale-95"
+                      type="button"
+                      onClick={handleCopyEmail}
+                      className="w-full py-1.5 px-2.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[10px] font-semibold transition-all shadow-xs text-center cursor-pointer"
                     >
-                      Send Message
+                      {copiedEmail ? "Copied!" : "heraldago1@gmail.com"}
                     </button>
-                  </form>
-                )}
+
+                    <div className="flex items-center gap-1.5">
+                      <a
+                        href="https://www.linkedin.com/in/heraldago/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 py-1 px-2 rounded-full bg-slate-900/10 text-slate-900 text-[10px] font-semibold border border-slate-900/15 text-center active:scale-95 transition-all"
+                      >
+                        LinkedIn ↗
+                      </a>
+                      <a
+                        href="/cv-herald-ago.pdf"
+                        target="_blank"
+                        download
+                        className="flex-1 py-1 px-2 rounded-full bg-slate-900/10 text-slate-900 text-[10px] font-semibold border border-slate-900/15 text-center active:scale-95 transition-all"
+                      >
+                        Resume ↗
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. STATO SPENTO (OFF): Cover con titolo a destra */}
+                <div
+                  className={`absolute top-0 right-[4%] w-[46%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                    mobileCaseContact === "off"
+                      ? "opacity-100 scale-100 translate-x-0"
+                      : "opacity-0 scale-75 translate-x-12"
+                  }`}
+                >
+                  <div className="text-center px-1">
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] leading-tight">
+                      Let&apos;s<br />Connect
+                    </h3>
+                    <p className="text-[10px] sm:text-xs text-white/80 font-medium mt-1 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
+                      Say Hello
+                    </p>
+                  </div>
+                </div>
+
+                {/* 3. IL KNOB DEL TOGGLE: Icona Mail con VantaKnobWaves */}
+                <div
+                  className={`absolute top-[6%] left-[2.5%] w-[46%] h-[88%] rounded-full overflow-visible ${
+                    !mobileToggledContact
+                      ? "translate-x-0"
+                      : mobileCaseContact === "on"
+                      ? "bubble-knob-h-in"
+                      : "bubble-knob-h-out"
+                  } flex items-center justify-center select-none`}
+                >
+                  <div
+                    className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-3 transition-all duration-300 ease-out cursor-pointer ${
+                      mobileCaseContact === "off"
+                        ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),0_2px_6px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
+                        : "bg-[#0b2847] border-[4px] sm:border-[6px] border-white shadow-[0_20px_50px_rgba(0,18,36,0.45)] active:scale-[0.98]"
+                    }`}
+                  >
+                    {mobileCaseContact === "on" && (
+                      <VantaKnobWaves
+                        color={0x0b2847}
+                        shininess={30.0}
+                        waveHeight={20.0}
+                        waveSpeed={0.75}
+                        zoom={0.65}
+                      />
+                    )}
+                    <div className="relative z-10 w-full h-full flex items-center justify-center pointer-events-none">
+                      <svg
+                        className={`w-12 h-12 sm:w-14 sm:h-14 transition-all duration-300 ${
+                          mobileCaseContact === "off"
+                            ? "text-slate-900 drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
+                            : "text-white drop-shadow-[0_6px_20px_rgba(255,255,255,0.6)]"
+                        }`}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <rect width="20" height="16" x="2" y="4" rx="3" />
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
