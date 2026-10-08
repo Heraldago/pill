@@ -485,9 +485,9 @@ export default function Home() {
         {/* --- CARD 1: HERO PILLOLA (z-10, scala indietro con lo scroll) --- */}
         <div
           ref={card1Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-10 will-change-transform origin-center"
+          className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-10 will-change-transform origin-center"
         >
-          <section className="relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden flex flex-col justify-between items-center shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
+          <section className="capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden flex flex-col justify-between items-center shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
             {/* Header interno alla pillola: Navbar a 4 voci (visibile solo da tablet/iPad in su) */}
             <header className="w-full pt-6 sm:pt-8 md:pt-10 flex justify-center items-center z-10 min-h-[50px]">
               <nav className="hidden md:flex items-center gap-1 bg-white/15 backdrop-blur-xl border border-white/25 p-1.5 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.15),_inset_0_1px_1px_rgba(255,255,255,0.3)] text-xs sm:text-sm">
@@ -558,9 +558,9 @@ export default function Home() {
         {/* --- CARD 2: INTERACTIVE CASE STUDY TOGGLE PILL (CASE 01: UNGDOMSKORT) --- */}
         <div
           ref={card2Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-20 will-change-transform"
+          className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-20 will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case1Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             {/* Contenitore interattivo del Toggle (Bouncy Bubble Physics: Orizzontale su Desktop, Verticale su Mobile) */}
@@ -700,9 +700,9 @@ export default function Home() {
         {/* --- CARD 3: REAL CASE STUDY 02 TOGGLE PILL (X-BIT) --- */}
         <div
           ref={card3Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[25] will-change-transform"
+          className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[25] will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case2Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             <div
@@ -832,9 +832,9 @@ export default function Home() {
         {/* --- CARD 4: REAL CASE STUDY 03 TOGGLE PILL (I PUPI SICILIANI) --- */}
         <div
           ref={card4Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[30] will-change-transform"
+          className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[30] will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case3Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             <div
@@ -963,9 +963,9 @@ export default function Home() {
         {/* --- CARD 5: ABOUT ME INTERACTIVE TOGGLE PILL --- */}
         <div
           ref={card5Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[35] will-change-transform"
+          className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[35] will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case4Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             <div
@@ -1112,9 +1112,9 @@ export default function Home() {
         {/* --- CARD 6: RECOMMENDATIONS INTERACTIVE TOGGLE PILL --- */}
         <div
           ref={card6Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[40] will-change-transform"
+          className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[40] will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case5Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             <div
@@ -1333,9 +1333,9 @@ export default function Home() {
         {/* --- CARD 7: CONTACT INTERACTIVE TOGGLE PILL --- */}
         <div
           ref={card7Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[45] will-change-transform"
+          className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[45] will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case6Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             <div
