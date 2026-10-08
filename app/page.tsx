@@ -506,7 +506,7 @@ export default function Home() {
           ref={card1Ref}
           className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-10 will-change-transform origin-center"
         >
-          <section className="capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden flex flex-col justify-between items-center shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
+          <section className="capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border border-white/30 bg-white/[0.12] overflow-hidden flex flex-col justify-between items-center shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
             {/* Header interno alla pillola: Navbar a 4 voci (visibile solo da tablet/iPad in su) */}
             <header className="w-full pt-6 sm:pt-8 md:pt-10 flex justify-center items-center z-10 min-h-[50px]">
               <nav className="hidden md:flex items-center gap-1 bg-white/15 backdrop-blur-xl border border-white/25 p-1.5 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.15),_inset_0_1px_1px_rgba(255,255,255,0.3)] text-xs sm:text-sm">
@@ -1641,21 +1641,21 @@ export default function Home() {
         <section id="mobile-home" className="w-full flex flex-col items-center pt-2">
           <div className="w-full flex flex-col items-center select-none">
             {/* Capsule 1: Saluto */}
-            <div className="w-full h-[221px] px-6 rounded-full bg-white/20 backdrop-blur-2xl border-[1.5px] border-white/50 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-30">
+            <div className="w-full h-[221px] px-6 rounded-full bg-white/[0.12] border-[1.5px] border-white/40 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.45)] flex items-center justify-center text-center relative z-30">
               <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 Hi, I&apos;m Herald :)
               </h1>
             </div>
 
             {/* Capsule 2: Missione */}
-            <div className="w-full h-[221px] px-6 rounded-full bg-white/20 backdrop-blur-2xl border-[1.5px] border-white/50 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center -mt-16 sm:-mt-20 relative z-20">
+            <div className="w-full h-[221px] px-6 rounded-full bg-white/[0.12] border-[1.5px] border-white/40 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.45)] flex items-center justify-center text-center -mt-16 sm:-mt-20 relative z-20">
               <p className="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 I <span className="font-extrabold text-[#38bdf8] drop-shadow-[0_0_16px_rgba(56,189,248,0.7)]">design</span> digital products
               </p>
             </div>
 
             {/* Capsule 3: Scopo */}
-            <div className="w-full h-[221px] px-6 rounded-full bg-white/20 backdrop-blur-2xl border-[1.5px] border-white/50 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center -mt-16 sm:-mt-20 relative z-10">
+            <div className="w-full h-[221px] px-6 rounded-full bg-white/[0.12] border-[1.5px] border-white/40 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.45)] flex items-center justify-center text-center -mt-16 sm:-mt-20 relative z-10">
               <p className="text-2xl sm:text-3xl font-medium tracking-tight text-white/95 leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 that <span className="italic font-serif text-white">help</span> and{" "}
                 <span className="italic font-serif text-white">simplify</span> people&apos;s lives.
