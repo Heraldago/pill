@@ -77,6 +77,31 @@ export default function Home() {
     setContactSubmitted(true);
   };
 
+  // Supporto swipe touch su mobile per attivare/disattivare il toggle
+  const touchStartYRef = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartYRef.current = e.touches[0].clientY;
+  };
+
+  const createTouchEndHandler = (
+    setter: React.Dispatch<React.SetStateAction<"off" | "on">>,
+    setOnce: React.Dispatch<React.SetStateAction<boolean>>
+  ) => (e: React.TouchEvent) => {
+    if (touchStartYRef.current === null) return;
+    const deltaY = e.changedTouches[0].clientY - touchStartYRef.current;
+    touchStartYRef.current = null;
+    if (deltaY > 35) {
+      // Swipe verso il basso -> Accendi (ON)
+      setOnce(true);
+      setter("on");
+    } else if (deltaY < -35) {
+      // Swipe verso l'alto -> Spegni (OFF)
+      setOnce(true);
+      setter("off");
+    }
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -460,9 +485,9 @@ export default function Home() {
         {/* --- CARD 1: HERO PILLOLA (z-10, scala indietro con lo scroll) --- */}
         <div
           ref={card1Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-10 will-change-transform origin-center"
+          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-10 will-change-transform origin-center"
         >
-          <section className="relative w-full h-full rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden flex flex-col justify-between items-center shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
+          <section className="relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden flex flex-col justify-between items-center shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
             {/* Header interno alla pillola: Navbar a 4 voci (visibile solo da tablet/iPad in su) */}
             <header className="w-full pt-6 sm:pt-8 md:pt-10 flex justify-center items-center z-10 min-h-[50px]">
               <nav className="hidden md:flex items-center gap-1 bg-white/15 backdrop-blur-xl border border-white/25 p-1.5 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.15),_inset_0_1px_1px_rgba(255,255,255,0.3)] text-xs sm:text-sm">
@@ -533,12 +558,12 @@ export default function Home() {
         {/* --- CARD 2: INTERACTIVE CASE STUDY TOGGLE PILL (CASE 01: UNGDOMSKORT) --- */}
         <div
           ref={card2Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-20 will-change-transform"
+          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-20 will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[1000px] border-[12px] sm:border-[20px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case1Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
-            {/* Contenitore interattivo del Toggle (Bouncy Bubble Physics) */}
+            {/* Contenitore interattivo del Toggle (Bouncy Bubble Physics: Orizzontale su Desktop, Verticale su Mobile) */}
             <div
               role="switch"
               aria-checked={case1Toggle === "on"}
@@ -548,6 +573,8 @@ export default function Home() {
                   ? "Attiva dettagli del case study Ungdomskort"
                   : "Torna alla copertina del case study Ungdomskort"
               }
+              onTouchStart={handleTouchStart}
+              onTouchEnd={createTouchEndHandler(setCase1Toggle, setHasToggledOnce1)}
               onClick={() => {
                 setHasToggledOnce1(true);
                 setCase1Toggle((prev) => (prev === "off" ? "on" : "off"));
@@ -559,32 +586,32 @@ export default function Home() {
                   setCase1Toggle((prev) => (prev === "off" ? "on" : "off"));
                 }
               }}
-              style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
+              style={{ "--travel-dist": "48cqw", "--travel-dist-y": "104%" } as React.CSSProperties}
+              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case1Toggle === "off"
                   ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
               }`}
             >
-              {/* 1. STATO ATTIVO (ON) - LATO SINISTRO: Dettagli sintetici e minimalisti */}
+              {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute left-[3%] sm:left-[4%] top-0 w-[48%] h-full flex flex-col justify-center px-4 sm:px-6 md:px-10 lg:px-12 space-y-3 sm:space-y-5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3%] md:w-[48%] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-12 space-y-2 sm:space-y-4 md:space-y-5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case1Toggle === "on"
-                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
-                    : "opacity-0 scale-95 -translate-x-12 pointer-events-none"
+                    ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
+                    : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
                 }`}
               >
                 <div>
                   <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
                     Ungdomskort
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-normal leading-snug mt-1.5 sm:mt-2.5 max-w-xl">
+                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-normal leading-snug mt-1 sm:mt-2.5 max-w-xl">
                     Denmark&apos;s youth transit pass platform redesign.
                   </p>
                 </div>
 
                 {/* Pulsante primario scuro a contrasto su pista bianca */}
-                <div className="pt-1 sm:pt-2">
+                <div className="pt-0.5 sm:pt-2">
                   <a
                     href="https://www.heraldago.com/ungdomskort"
                     target="_blank"
@@ -600,12 +627,12 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Titolo inciso nel vetro */}
+              {/* 2. STATO SPENTO (OFF): In basso su Mobile, a Destra su Desktop */}
               <div
-                className={`absolute right-[3%] top-0 w-[48%] h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-[3%] md:left-auto md:w-[48%] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case1Toggle === "off"
-                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
-                    : "opacity-0 scale-75 translate-x-12 pointer-events-none"
+                    ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
+                    : "opacity-0 scale-75 translate-y-8 md:translate-y-0 md:translate-x-12 pointer-events-none"
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
@@ -615,11 +642,11 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. IL KNOB / THUMB DEL TOGGLE (Animazione BUBBLE + Inversione Tattile) */}
+              {/* 3. IL KNOB / THUMB DEL TOGGLE: Scorrimento Y su mobile, X su desktop */}
               <div
-                className={`absolute top-[6%] h-[88%] left-[2%] sm:left-[2.5%] w-[47%] rounded-[1000px] overflow-visible ${
+                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[6%] md:h-[88%] md:left-[2%] md:sm:left-[2.5%] md:w-[47%] rounded-[22px] sm:rounded-[36px] md:rounded-[1000px] overflow-visible ${
                   !hasToggledOnce1
-                    ? "translate-x-0"
+                    ? "translate-y-0 md:translate-x-0"
                     : case1Toggle === "on"
                     ? "bubble-knob-in"
                     : "bubble-knob-out"
@@ -627,7 +654,7 @@ export default function Home() {
               >
                 {/* Guscio interattivo interno con stato hover dedicato specificamente per l'area del knob */}
                 <div
-                  className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
+                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case1Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
                       : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
@@ -670,9 +697,9 @@ export default function Home() {
         {/* --- CARD 3: REAL CASE STUDY 02 TOGGLE PILL (X-BIT) --- */}
         <div
           ref={card3Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[25] will-change-transform"
+          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[25] will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[1000px] border-[12px] sm:border-[20px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case2Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             <div
@@ -684,6 +711,8 @@ export default function Home() {
                   ? "Attiva dettagli del case study X-Bit"
                   : "Torna alla copertina del case study X-Bit"
               }
+              onTouchStart={handleTouchStart}
+              onTouchEnd={createTouchEndHandler(setCase2Toggle, setHasToggledOnce2)}
               onClick={() => {
                 setHasToggledOnce2(true);
                 setCase2Toggle((prev) => (prev === "off" ? "on" : "off"));
@@ -695,31 +724,31 @@ export default function Home() {
                   setCase2Toggle((prev) => (prev === "off" ? "on" : "off"));
                 }
               }}
-              style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
+              style={{ "--travel-dist": "48cqw", "--travel-dist-y": "104%" } as React.CSSProperties}
+              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case2Toggle === "off"
                   ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
               }`}
             >
-              {/* 1. STATO ATTIVO (ON) - LATO SINISTRO: Dettagli sintetici e minimalisti */}
+              {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute left-[3%] sm:left-[4%] top-0 w-[48%] h-full flex flex-col justify-center px-4 sm:px-6 md:px-10 lg:px-12 space-y-3 sm:space-y-5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3%] md:w-[48%] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-12 space-y-2 sm:space-y-4 md:space-y-5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case2Toggle === "on"
-                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
-                    : "opacity-0 scale-95 -translate-x-12 pointer-events-none"
+                    ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
+                    : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
                 }`}
               >
                 <div>
                   <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
                     X-Bit
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-normal leading-snug mt-1.5 sm:mt-2.5 max-w-xl">
+                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-normal leading-snug mt-1 sm:mt-2.5 max-w-xl">
                     Museum exploration and interactive audio guide.
                   </p>
                 </div>
 
-                <div className="pt-1 sm:pt-2">
+                <div className="pt-0.5 sm:pt-2">
                   <a
                     href="https://www.heraldago.com/xbit"
                     target="_blank"
@@ -733,12 +762,12 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Titolo inciso nel vetro */}
+              {/* 2. STATO SPENTO (OFF): In basso su Mobile, a Destra su Desktop */}
               <div
-                className={`absolute right-[3%] top-0 w-[48%] h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-[3%] md:left-auto md:w-[48%] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case2Toggle === "off"
-                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
-                    : "opacity-0 scale-75 translate-x-12 pointer-events-none"
+                    ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
+                    : "opacity-0 scale-75 translate-y-8 md:translate-y-0 md:translate-x-12 pointer-events-none"
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
@@ -748,18 +777,18 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Inversione Colori) */}
+              {/* 3. IL KNOB DEL TOGGLE: Scorrimento Y su mobile, X su desktop */}
               <div
-                className={`absolute top-[6%] h-[88%] left-[2%] sm:left-[2.5%] w-[47%] rounded-[1000px] overflow-visible ${
+                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[6%] md:h-[88%] md:left-[2%] md:sm:left-[2.5%] md:w-[47%] rounded-[22px] sm:rounded-[36px] md:rounded-[1000px] overflow-visible ${
                   !hasToggledOnce2
-                    ? "translate-x-0"
+                    ? "translate-y-0 md:translate-x-0"
                     : case2Toggle === "on"
                     ? "bubble-knob-in"
                     : "bubble-knob-out"
                 } flex items-center justify-center select-none`}
               >
                 <div
-                  className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
+                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case2Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
                       : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
@@ -800,9 +829,9 @@ export default function Home() {
         {/* --- CARD 4: REAL CASE STUDY 03 TOGGLE PILL (I PUPI SICILIANI) --- */}
         <div
           ref={card4Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[30] will-change-transform"
+          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[30] will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[1000px] border-[12px] sm:border-[20px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case3Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             <div
@@ -814,6 +843,8 @@ export default function Home() {
                   ? "Attiva dettagli del case study I Pupi Siciliani"
                   : "Torna alla copertina del case study I Pupi Siciliani"
               }
+              onTouchStart={handleTouchStart}
+              onTouchEnd={createTouchEndHandler(setCase3Toggle, setHasToggledOnce3)}
               onClick={() => {
                 setHasToggledOnce3(true);
                 setCase3Toggle((prev) => (prev === "off" ? "on" : "off"));
@@ -825,31 +856,31 @@ export default function Home() {
                   setCase3Toggle((prev) => (prev === "off" ? "on" : "off"));
                 }
               }}
-              style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
+              style={{ "--travel-dist": "48cqw", "--travel-dist-y": "104%" } as React.CSSProperties}
+              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case3Toggle === "off"
                   ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
               }`}
             >
-              {/* 1. STATO ATTIVO (ON) - LATO SINISTRO: Dettagli sintetici e minimalisti */}
+              {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute left-[3%] sm:left-[4%] top-0 w-[48%] h-full flex flex-col justify-center px-4 sm:px-6 md:px-10 lg:px-12 space-y-3 sm:space-y-5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3%] md:w-[48%] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-12 space-y-2 sm:space-y-4 md:space-y-5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case3Toggle === "on"
-                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
-                    : "opacity-0 scale-95 -translate-x-12 pointer-events-none"
+                    ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
+                    : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
                 }`}
               >
                 <div>
                   <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
                     I Pupi Siciliani
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-normal leading-snug mt-1.5 sm:mt-2.5 max-w-xl">
+                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-normal leading-snug mt-1 sm:mt-2.5 max-w-xl">
                     Wine retail platform with +187% YoY profit.
                   </p>
                 </div>
 
-                <div className="pt-1 sm:pt-2">
+                <div className="pt-0.5 sm:pt-2">
                   <a
                     href="https://www.heraldago.com/ipupisiciliani"
                     target="_blank"
@@ -863,12 +894,12 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Titolo inciso nel vetro */}
+              {/* 2. STATO SPENTO (OFF): In basso su Mobile, a Destra su Desktop */}
               <div
-                className={`absolute right-[3%] top-0 w-[48%] h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-[3%] md:left-auto md:w-[48%] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case3Toggle === "off"
-                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
-                    : "opacity-0 scale-75 translate-x-12 pointer-events-none"
+                    ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
+                    : "opacity-0 scale-75 translate-y-8 md:translate-y-0 md:translate-x-12 pointer-events-none"
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
@@ -878,18 +909,18 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Inversione Colori) */}
+              {/* 3. IL KNOB DEL TOGGLE: Scorrimento Y su mobile, X su desktop */}
               <div
-                className={`absolute top-[6%] h-[88%] left-[2%] sm:left-[2.5%] w-[47%] rounded-[1000px] overflow-visible ${
+                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[6%] md:h-[88%] md:left-[2%] md:sm:left-[2.5%] md:w-[47%] rounded-[22px] sm:rounded-[36px] md:rounded-[1000px] overflow-visible ${
                   !hasToggledOnce3
-                    ? "translate-x-0"
+                    ? "translate-y-0 md:translate-x-0"
                     : case3Toggle === "on"
                     ? "bubble-knob-in"
                     : "bubble-knob-out"
                 } flex items-center justify-center select-none`}
               >
                 <div
-                  className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
+                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case3Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
                       : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
@@ -929,9 +960,9 @@ export default function Home() {
         {/* --- CARD 5: ABOUT ME INTERACTIVE TOGGLE PILL --- */}
         <div
           ref={card5Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[35] will-change-transform"
+          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[35] will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[1000px] border-[12px] sm:border-[20px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case4Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             <div
@@ -943,6 +974,8 @@ export default function Home() {
                   ? "Attiva dettagli su About Me"
                   : "Torna alla copertina di About Me"
               }
+              onTouchStart={handleTouchStart}
+              onTouchEnd={createTouchEndHandler(setCase4Toggle, setHasToggledOnce4)}
               onClick={() => {
                 setHasToggledOnce4(true);
                 setCase4Toggle((prev) => (prev === "off" ? "on" : "off"));
@@ -954,26 +987,26 @@ export default function Home() {
                   setCase4Toggle((prev) => (prev === "off" ? "on" : "off"));
                 }
               }}
-              style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
+              style={{ "--travel-dist": "48cqw", "--travel-dist-y": "104%" } as React.CSSProperties}
+              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case4Toggle === "off"
                   ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
               }`}
             >
-              {/* 1. STATO ATTIVO (ON) - LATO SINISTRO: Bio essenziale e minimalista */}
+              {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute left-[3%] sm:left-[4%] top-0 w-[48%] h-full flex flex-col justify-center px-4 sm:px-6 md:px-10 lg:px-12 space-y-3 sm:space-y-4 md:space-y-5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3%] md:w-[48%] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-12 space-y-2 sm:space-y-3.5 md:space-y-4 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case4Toggle === "on"
-                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
-                    : "opacity-0 scale-95 -translate-x-12 pointer-events-none"
+                    ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
+                    : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
                 }`}
               >
                 <div>
                   <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
                     Herald Ago
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-normal leading-snug mt-1 sm:mt-2 max-w-xl">
+                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-normal leading-snug mt-0.5 sm:mt-1.5 max-w-xl">
                     Product Designer based in Barcelona
                   </p>
                 </div>
@@ -983,7 +1016,7 @@ export default function Home() {
                 </p>
 
                 {/* Pulsanti di Azione */}
-                <div className="pt-1 sm:pt-2 flex flex-wrap items-center gap-2">
+                <div className="pt-0.5 sm:pt-2 flex flex-wrap items-center gap-2">
                   <a
                     href="/cv-herald-ago.pdf"
                     target="_blank"
@@ -1006,12 +1039,12 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Titolo inciso nel vetro */}
+              {/* 2. STATO SPENTO (OFF): In basso su Mobile, a Destra su Desktop */}
               <div
-                className={`absolute right-[3%] top-0 w-[48%] h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-[3%] md:left-auto md:w-[48%] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case4Toggle === "off"
-                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
-                    : "opacity-0 scale-75 translate-x-12 pointer-events-none"
+                    ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
+                    : "opacity-0 scale-75 translate-y-8 md:translate-y-0 md:translate-x-12 pointer-events-none"
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
@@ -1021,18 +1054,18 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Inversione Colori) */}
+              {/* 3. IL KNOB DEL TOGGLE: Scorrimento Y su mobile, X su desktop */}
               <div
-                className={`absolute top-[6%] h-[88%] left-[2%] sm:left-[2.5%] w-[47%] rounded-[1000px] overflow-visible ${
+                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[6%] md:h-[88%] md:left-[2%] md:sm:left-[2.5%] md:w-[47%] rounded-[22px] sm:rounded-[36px] md:rounded-[1000px] overflow-visible ${
                   !hasToggledOnce4
-                    ? "translate-x-0"
+                    ? "translate-y-0 md:translate-x-0"
                     : case4Toggle === "on"
                     ? "bubble-knob-in"
                     : "bubble-knob-out"
                 } flex items-center justify-center select-none`}
               >
                 <div
-                  className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
+                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-[1000px] overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
                     case4Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
                       : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
@@ -1072,9 +1105,9 @@ export default function Home() {
         {/* --- CARD 6: RECOMMENDATIONS INTERACTIVE TOGGLE PILL --- */}
         <div
           ref={card6Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[40] will-change-transform"
+          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[40] will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[1000px] border-[12px] sm:border-[20px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case5Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             <div
@@ -1086,6 +1119,8 @@ export default function Home() {
                   ? "Attiva raccomandazioni e testimonianze"
                   : "Torna alla copertina delle raccomandazioni"
               }
+              onTouchStart={handleTouchStart}
+              onTouchEnd={createTouchEndHandler(setCase5Toggle, setHasToggledOnce5)}
               onClick={() => {
                 setHasToggledOnce5(true);
                 setCase5Toggle((prev) => (prev === "off" ? "on" : "off"));
@@ -1097,23 +1132,23 @@ export default function Home() {
                   setCase5Toggle((prev) => (prev === "off" ? "on" : "off"));
                 }
               }}
-              style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
+              style={{ "--travel-dist": "48cqw", "--travel-dist-y": "104%" } as React.CSSProperties}
+              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case5Toggle === "off"
                   ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
               }`}
             >
-              {/* 1. STATO ATTIVO (ON) - LATO SINISTRO: Testimonianze Sintetiche */}
+              {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute left-[3.5%] sm:left-[4%] top-0 w-[43%] sm:w-[44%] lg:w-[45%] max-w-[45%] h-full flex flex-col justify-center pl-4 sm:pl-6 md:pl-8 lg:pl-10 pr-2 sm:pr-4 md:pr-5 space-y-2 sm:space-y-2.5 md:space-y-3 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3.5%] md:w-[43%] md:sm:w-[44%] md:lg:w-[45%] md:h-full flex flex-col justify-center px-5 sm:px-7 md:pl-8 md:lg:pl-10 md:pr-2 space-y-2 sm:space-y-2.5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case5Toggle === "on"
-                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
-                    : "opacity-0 scale-95 -translate-x-12 pointer-events-none"
+                    ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
+                    : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-bold text-slate-900 tracking-tight leading-tight">
+                  <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-[2.6rem] font-bold text-slate-900 tracking-tight leading-tight">
                     Kind Words
                   </h2>
                 </div>
@@ -1125,17 +1160,17 @@ export default function Home() {
                     setActiveRecPhoto("antonio");
                   }}
                   onMouseEnter={() => setActiveRecPhoto("antonio")}
-                  className={`p-2.5 sm:p-3 md:p-3.5 rounded-2xl transition-all duration-300 backdrop-blur-md cursor-pointer ${
+                  className={`p-2 sm:p-3 md:p-3.5 rounded-2xl transition-all duration-300 backdrop-blur-md cursor-pointer ${
                     activeRecPhoto === "antonio"
                       ? "bg-white border-2 border-slate-900/20 text-slate-900 shadow-md scale-[1.01]"
                       : "bg-slate-900/[0.05] border border-slate-900/10 hover:bg-slate-900/[0.08] hover:border-slate-900/20 text-slate-800"
                   }`}
                 >
-                  <p className="text-xs sm:text-[13px] md:text-sm leading-relaxed font-normal text-slate-800">
+                  <p className="text-[11px] sm:text-xs md:text-sm leading-relaxed font-normal text-slate-800">
                     &ldquo;Herald has rare proactivity and deep study. The dedication he brings to preparing every detail and the immediate trust he inspires in people will take him very far.&rdquo;
                   </p>
-                  <div className="flex items-center gap-2 mt-1.5 sm:mt-2">
-                    <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-slate-900/20 flex-shrink-0 shadow-xs">
+                  <div className="flex items-center gap-2 mt-1 sm:mt-2">
+                    <div className="relative w-6 h-6 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-slate-900/20 flex-shrink-0 shadow-xs">
                       <Image
                         src="/antonio-avatar.jpg"
                         alt="Antonio"
@@ -1146,8 +1181,8 @@ export default function Home() {
                       />
                     </div>
                     <div>
-                      <p className="text-[11px] sm:text-xs font-semibold text-slate-900">Antonio</p>
-                      <p className="text-[9px] sm:text-[10px] text-slate-600">Founder, I Pupi Siciliani</p>
+                      <p className="text-[10px] sm:text-xs font-semibold text-slate-900">Antonio</p>
+                      <p className="text-[8px] sm:text-[10px] text-slate-600">Founder, I Pupi Siciliani</p>
                     </div>
                   </div>
                 </div>
@@ -1159,17 +1194,17 @@ export default function Home() {
                     setActiveRecPhoto("sebastian");
                   }}
                   onMouseEnter={() => setActiveRecPhoto("sebastian")}
-                  className={`p-2.5 sm:p-3 md:p-3.5 rounded-2xl transition-all duration-300 backdrop-blur-md cursor-pointer ${
+                  className={`p-2 sm:p-3 md:p-3.5 rounded-2xl transition-all duration-300 backdrop-blur-md cursor-pointer ${
                     activeRecPhoto === "sebastian"
                       ? "bg-white border-2 border-slate-900/20 text-slate-900 shadow-md scale-[1.01]"
                       : "bg-slate-900/[0.05] border border-slate-900/10 hover:bg-slate-900/[0.08] hover:border-slate-900/20 text-slate-800"
                   }`}
                 >
-                  <p className="text-xs sm:text-[13px] md:text-sm leading-relaxed font-normal text-slate-800">
+                  <p className="text-[11px] sm:text-xs md:text-sm leading-relaxed font-normal text-slate-800">
                     &ldquo;Herald excelled at cross-stakeholder collaboration, guiding the entire creation process from start to finish with great precision and genuine passion.&rdquo;
                   </p>
-                  <div className="flex items-center gap-2 mt-1.5 sm:mt-2">
-                    <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-slate-900/20 flex-shrink-0 shadow-xs">
+                  <div className="flex items-center gap-2 mt-1 sm:mt-2">
+                    <div className="relative w-6 h-6 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-slate-900/20 flex-shrink-0 shadow-xs">
                       <Image
                         src="/sebastian-avatar.jpg"
                         alt="Sebastian"
@@ -1180,20 +1215,20 @@ export default function Home() {
                       />
                     </div>
                     <div>
-                      <p className="text-[11px] sm:text-xs font-semibold text-slate-900">Sebastian</p>
-                      <p className="text-[9px] sm:text-[10px] text-slate-600">CEO, næmt.nu</p>
+                      <p className="text-[10px] sm:text-xs font-semibold text-slate-900">Sebastian</p>
+                      <p className="text-[8px] sm:text-[10px] text-slate-600">CEO, næmt.nu</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Pulsante Navigazione */}
-                <div className="pt-0.5 sm:pt-1">
+                <div className="pt-0.5">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       navigateToSection(6);
                     }}
-                    className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-1 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] sm:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer"
                   >
                     <span>Next: Contact</span>
                     <span className="text-xs font-bold">↗</span>
@@ -1201,12 +1236,12 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Titolo inciso nel vetro */}
+              {/* 2. STATO SPENTO (OFF): In basso su Mobile, a Destra su Desktop */}
               <div
-                className={`absolute right-[3%] top-0 w-[48%] h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-[3%] md:left-auto md:w-[48%] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case5Toggle === "off"
-                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
-                    : "opacity-0 scale-75 translate-x-12 pointer-events-none"
+                    ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
+                    : "opacity-0 scale-75 translate-y-8 md:translate-y-0 md:translate-x-12 pointer-events-none"
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
@@ -1216,18 +1251,18 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Ceramic Puck con Foto Reali) */}
+              {/* 3. IL KNOB DEL TOGGLE: Scorrimento Y su mobile, X su desktop */}
               <div
-                className={`absolute top-[6%] h-[88%] left-[2%] sm:left-[2.5%] w-[47%] rounded-[1000px] overflow-visible ${
+                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[6%] md:h-[88%] md:left-[2%] md:sm:left-[2.5%] md:w-[47%] rounded-[22px] sm:rounded-[36px] md:rounded-[1000px] overflow-visible ${
                   !hasToggledOnce5
-                    ? "translate-x-0"
+                    ? "translate-y-0 md:translate-x-0"
                     : case5Toggle === "on"
                     ? "bubble-knob-in"
                     : "bubble-knob-out"
                 } flex items-center justify-center select-none`}
               >
                 <div
-                  className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
+                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-[1000px] overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
                     case5Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
                       : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
@@ -1291,9 +1326,9 @@ export default function Home() {
         {/* --- CARD 7: CONTACT INTERACTIVE TOGGLE PILL --- */}
         <div
           ref={card7Ref}
-          className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[45] will-change-transform"
+          className="absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[45] will-change-transform"
         >
-          <section className={`relative w-full h-full rounded-[1000px] border-[12px] sm:border-[20px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+          <section className={`relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
             case6Toggle === "off" ? "bg-transparent" : "bg-white"
           }`}>
             <div
@@ -1305,6 +1340,8 @@ export default function Home() {
                   ? "Attiva canali di contatto"
                   : "Torna alla copertina dei contatti"
               }
+              onTouchStart={handleTouchStart}
+              onTouchEnd={createTouchEndHandler(setCase6Toggle, setHasToggledOnce6)}
               onClick={() => {
                 setHasToggledOnce6(true);
                 setCase6Toggle((prev) => (prev === "off" ? "on" : "off"));
@@ -1316,26 +1353,26 @@ export default function Home() {
                   setCase6Toggle((prev) => (prev === "off" ? "on" : "off"));
                 }
               }}
-              style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
+              style={{ "--travel-dist": "48cqw", "--travel-dist-y": "104%" } as React.CSSProperties}
+              className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case6Toggle === "off"
                   ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
               }`}
             >
-              {/* 1. STATO ATTIVO (ON) - LATO SINISTRO: Canali di Contatto Diretti + Form */}
+              {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute left-[3%] sm:left-[4%] top-0 w-[48%] h-full flex flex-col justify-center px-3 sm:px-6 md:px-10 lg:px-12 space-y-2.5 sm:space-y-3.5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3%] md:w-[48%] md:h-full flex flex-col justify-center px-5 sm:px-7 md:px-10 lg:px-12 space-y-2 sm:space-y-3 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case6Toggle === "on"
-                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
-                    : "opacity-0 scale-95 -translate-x-12 pointer-events-none"
+                    ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
+                    : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
+                  <h2 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
                     Let&apos;s Connect
                   </h2>
-                  <p className="text-xs sm:text-sm md:text-base text-slate-700 font-normal leading-snug mt-1">
+                  <p className="text-[11px] sm:text-xs md:text-base text-slate-700 font-normal leading-snug mt-0.5 sm:mt-1">
                     Open for product design opportunities.
                   </p>
                 </div>
@@ -1343,12 +1380,12 @@ export default function Home() {
                 {/* Bottoni Rapidi: Email, LinkedIn, Resume */}
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className="flex flex-wrap items-center gap-2 pt-0.5"
+                  className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-0.5"
                 >
                   <button
                     type="button"
                     onClick={handleCopyEmail}
-                    className="px-4 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold shadow-sm transition-all cursor-pointer"
+                    className="px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] sm:text-sm font-semibold shadow-sm transition-all cursor-pointer"
                   >
                     {copiedEmail ? "Copied!" : "heraldago1@gmail.com"}
                   </button>
@@ -1356,7 +1393,7 @@ export default function Home() {
                     href="https://www.linkedin.com/in/heraldago/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-1.5 sm:py-2 rounded-full bg-slate-900/10 hover:bg-slate-900/20 active:scale-95 text-slate-900 text-xs sm:text-sm font-semibold border border-slate-900/15 backdrop-blur-md transition-all cursor-pointer"
+                    className="px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full bg-slate-900/10 hover:bg-slate-900/20 active:scale-95 text-slate-900 text-[11px] sm:text-sm font-semibold border border-slate-900/15 backdrop-blur-md transition-all cursor-pointer"
                   >
                     LinkedIn
                   </a>
@@ -1364,26 +1401,26 @@ export default function Home() {
                     href="/cv-herald-ago.pdf"
                     target="_blank"
                     download
-                    className="px-4 py-1.5 sm:py-2 rounded-full bg-slate-900/10 hover:bg-slate-900/20 active:scale-95 text-slate-900 text-xs sm:text-sm font-semibold border border-slate-900/15 backdrop-blur-md transition-all cursor-pointer"
+                    className="px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full bg-slate-900/10 hover:bg-slate-900/20 active:scale-95 text-slate-900 text-[11px] sm:text-sm font-semibold border border-slate-900/15 backdrop-blur-md transition-all cursor-pointer"
                   >
                     Resume PDF
                   </a>
                 </div>
 
-                {/* Form di contatto sul canvas sinistro */}
+                {/* Form di contatto sul canvas */}
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className="w-full pt-1 select-text"
+                  className="w-full pt-0.5 select-text"
                 >
                   {contactSubmitted ? (
-                    <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-900/[0.05] border border-slate-900/15 backdrop-blur-md text-center space-y-1.5">
-                      <div className="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center mx-auto text-sm font-bold shadow-md">
+                    <div className="p-3 sm:p-4 rounded-2xl bg-slate-900/[0.05] border border-slate-900/15 backdrop-blur-md text-center space-y-1">
+                      <div className="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center mx-auto text-xs font-bold shadow-md">
                         ✓
                       </div>
-                      <h3 className="text-sm sm:text-base font-bold text-slate-900">
+                      <h3 className="text-xs sm:text-base font-bold text-slate-900">
                         Message sent!
                       </h3>
-                      <p className="text-xs text-slate-700">
+                      <p className="text-[11px] sm:text-xs text-slate-700">
                         Thank you for reaching out. I will reply soon.
                       </p>
                       <button
@@ -1394,21 +1431,21 @@ export default function Home() {
                           setContactEmail("");
                           setContactMessage("");
                         }}
-                        className="px-3.5 py-1 rounded-full bg-slate-900 text-white text-xs font-semibold hover:bg-black transition-colors cursor-pointer"
+                        className="px-3 py-1 rounded-full bg-slate-900 text-white text-[11px] font-semibold hover:bg-black transition-colors cursor-pointer"
                       >
                         Send another
                       </button>
                     </div>
                   ) : (
-                    <form onSubmit={handleContactSubmit} className="space-y-2 w-full">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <form onSubmit={handleContactSubmit} className="space-y-1.5 w-full">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                         <input
                           type="text"
                           required
                           value={contactName}
                           onChange={(e) => setContactName(e.target.value)}
                           placeholder="Your name"
-                          className="w-full px-3.5 py-1.5 sm:py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs sm:text-sm text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30 focus:border-slate-900 focus:bg-white transition-all backdrop-blur-sm"
+                          className="w-full px-3 py-1.5 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30 focus:border-slate-900 focus:bg-white transition-all backdrop-blur-sm"
                         />
                         <input
                           type="email"
@@ -1416,7 +1453,7 @@ export default function Home() {
                           value={contactEmail}
                           onChange={(e) => setContactEmail(e.target.value)}
                           placeholder="Your email"
-                          className="w-full px-3.5 py-1.5 sm:py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs sm:text-sm text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30 focus:border-slate-900 focus:bg-white transition-all backdrop-blur-sm"
+                          className="w-full px-3 py-1.5 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30 focus:border-slate-900 focus:bg-white transition-all backdrop-blur-sm"
                         />
                       </div>
                       <div>
@@ -1426,12 +1463,12 @@ export default function Home() {
                           value={contactMessage}
                           onChange={(e) => setContactMessage(e.target.value)}
                           placeholder="Your message or project idea..."
-                          className="w-full px-3.5 py-1.5 sm:py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs sm:text-sm text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30 focus:border-slate-900 focus:bg-white resize-none transition-all backdrop-blur-sm"
+                          className="w-full px-3 py-1.5 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30 focus:border-slate-900 focus:bg-white resize-none transition-all backdrop-blur-sm"
                         />
                       </div>
                       <button
                         type="submit"
-                        className="w-full sm:w-auto px-6 py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white font-bold text-xs sm:text-sm shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition-all cursor-pointer"
+                        className="w-full sm:w-auto px-5 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white font-bold text-xs sm:text-sm shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition-all cursor-pointer"
                       >
                         Send Message
                       </button>
@@ -1440,12 +1477,12 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 2. STATO SPENTO (OFF) - LATO DESTRO: Titolo inciso nel vetro */}
+              {/* 2. STATO SPENTO (OFF): In basso su Mobile, a Destra su Desktop */}
               <div
-                className={`absolute right-[3%] top-0 w-[48%] h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute bottom-[2.5%] left-0 w-full h-[47%] md:bottom-auto md:top-0 md:right-[3%] md:left-auto md:w-[48%] md:h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case6Toggle === "off"
-                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
-                    : "opacity-0 scale-75 translate-x-12 pointer-events-none"
+                    ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
+                    : "opacity-0 scale-75 translate-y-8 md:translate-y-0 md:translate-x-12 pointer-events-none"
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
@@ -1455,18 +1492,18 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Ceramic Puck Tattile) */}
+              {/* 3. IL KNOB DEL TOGGLE: Scorrimento Y su mobile, X su desktop */}
               <div
-                className={`absolute top-[6%] h-[88%] left-[2%] sm:left-[2.5%] w-[47%] rounded-[1000px] overflow-visible ${
+                className={`absolute top-[2.5%] left-[2.5%] w-[95%] h-[47%] md:top-[6%] md:h-[88%] md:left-[2%] md:sm:left-[2.5%] md:w-[47%] rounded-[22px] sm:rounded-[36px] md:rounded-[1000px] overflow-visible ${
                   !hasToggledOnce6
-                    ? "translate-x-0"
+                    ? "translate-y-0 md:translate-x-0"
                     : case6Toggle === "on"
                     ? "bubble-knob-in"
                     : "bubble-knob-out"
                 } flex items-center justify-center select-none`}
               >
                 <div
-                  className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-3 sm:p-5 md:p-6 transition-all duration-300 ease-out cursor-pointer ${
+                  className={`relative w-full h-full rounded-[20px] sm:rounded-[32px] md:rounded-[1000px] overflow-hidden flex items-center justify-center p-3 sm:p-5 md:p-6 transition-all duration-300 ease-out cursor-pointer ${
                     case6Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
                       : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"

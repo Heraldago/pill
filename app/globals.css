@@ -191,6 +191,66 @@ body {
   will-change: transform, border-radius;
 }
 
+/* ==========================================================================
+   VERTICAL BUBBLE PHYSICS PER MOBILE (< 768px): Scorrimento Tattile Asse Y
+   ========================================================================== */
+
+@keyframes giant-grow-in-v {
+  0% {
+    transform: translateY(0) scale(1, 1);
+  }
+  100% {
+    transform: translateY(calc(var(--travel-dist-y, 104%) * 0.38)) scale(0.85, 1.28);
+  }
+}
+
+@keyframes giant-bounce-in-v {
+  0% {
+    transform: translateY(calc(var(--travel-dist-y, 104%) * 0.38)) scale(0.85, 1.28);
+  }
+  100% {
+    transform: translateY(var(--travel-dist-y, 104%)) scale(1, 1);
+  }
+}
+
+@keyframes giant-grow-out-v {
+  0% {
+    transform: translateY(var(--travel-dist-y, 104%)) scale(1, 1);
+  }
+  100% {
+    transform: translateY(calc(var(--travel-dist-y, 104%) * 0.62)) scale(0.85, 1.28);
+  }
+}
+
+@keyframes giant-bounce-out-v {
+  0% {
+    transform: translateY(calc(var(--travel-dist-y, 104%) * 0.62)) scale(0.85, 1.28);
+  }
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .bubble-knob-in {
+    animation-name: giant-grow-in-v, giant-bounce-in-v;
+    animation-duration: 0.24s, 0.32s;
+    animation-timing-function: cubic-bezier(0.75, 0, 1, 1), cubic-bezier(0, 0, 0.3, 1.45);
+    animation-delay: 0s, 0.24s;
+    animation-fill-mode: forwards;
+    will-change: transform;
+  }
+
+  .bubble-knob-out {
+    animation-name: giant-grow-out-v, giant-bounce-out-v;
+    animation-duration: 0.24s, 0.32s;
+    animation-timing-function: cubic-bezier(0.75, 0, 1, 1), cubic-bezier(0, 0, 0.3, 1.45);
+    animation-delay: 0s, 0.24s;
+    animation-fill-mode: forwards;
+    will-change: transform;
+  }
+}
+
 @keyframes float-gentle-1 {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
