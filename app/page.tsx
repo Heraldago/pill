@@ -1639,26 +1639,26 @@ export default function Home() {
       <div className="block md:hidden relative w-full z-10 px-3 sm:px-4 pt-16 pb-24 space-y-10">
         {/* --- 1. HERO: 3 STACKED TRANSLUCENT GLASS CAPSULES (FIGMA) --- */}
         <section id="mobile-home" className="w-full flex flex-col items-center pt-2">
-          <div className="w-full max-w-[360px] flex flex-col items-center select-none">
+          <div className="w-full max-w-[390px] flex flex-col items-center select-none px-1">
             {/* Capsule 1: Saluto */}
-            <div className="w-full py-6 px-6 rounded-full bg-white/[0.12] backdrop-blur-2xl border border-white/30 shadow-[0_12px_36px_rgba(0,10,30,0.35),inset_0_1px_2px_rgba(255,255,255,0.45)] flex items-center justify-center text-center relative z-30">
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-snug drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
+            <div className="w-full py-8 sm:py-9 px-6 rounded-full bg-white/20 backdrop-blur-2xl border-[1.5px] border-white/50 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-30">
+              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 Hi, I&apos;m Herald :)
               </h1>
             </div>
 
             {/* Capsule 2: Missione */}
-            <div className="w-full py-6 px-6 rounded-full bg-white/[0.12] backdrop-blur-2xl border border-white/30 shadow-[0_12px_36px_rgba(0,10,30,0.35),inset_0_1px_2px_rgba(255,255,255,0.45)] flex items-center justify-center text-center -mt-4 relative z-20">
-              <p className="text-2xl sm:text-3xl font-medium tracking-tight text-white leading-snug drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
-                I <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 via-sky-300 to-cyan-400 drop-shadow-[0_0_20px_rgba(0,212,255,0.4)]">design</span> digital products
+            <div className="w-full py-8 sm:py-9 px-6 rounded-full bg-white/20 backdrop-blur-2xl border-[1.5px] border-white/50 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center -mt-5 sm:-mt-6 relative z-20">
+              <p className="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
+                I <span className="font-extrabold text-[#38bdf8] drop-shadow-[0_0_16px_rgba(56,189,248,0.7)]">design</span> digital products
               </p>
             </div>
 
             {/* Capsule 3: Scopo */}
-            <div className="w-full py-6 px-6 rounded-full bg-white/[0.12] backdrop-blur-2xl border border-white/30 shadow-[0_12px_36px_rgba(0,10,30,0.35),inset_0_1px_2px_rgba(255,255,255,0.45)] flex items-center justify-center text-center -mt-4 relative z-10">
-              <p className="text-xl sm:text-2xl font-normal tracking-tight text-white/95 leading-snug drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
-                that <span className="italic font-serif font-normal text-white">help</span> and{" "}
-                <span className="italic font-serif font-normal text-white">simplify</span> people&apos;s lives.
+            <div className="w-full py-8 sm:py-9 px-6 rounded-full bg-white/20 backdrop-blur-2xl border-[1.5px] border-white/50 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center -mt-5 sm:-mt-6 relative z-10">
+              <p className="text-2xl sm:text-3xl font-medium tracking-tight text-white/95 leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
+                that <span className="italic font-serif text-white">help</span> and{" "}
+                <span className="italic font-serif text-white">simplify</span> people&apos;s lives.
               </p>
             </div>
           </div>
@@ -1686,8 +1686,8 @@ export default function Home() {
                 setMobileToggled1(true);
                 setMobileCase1((prev) => (prev === "off" ? "on" : "off"));
               }}
-              style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full max-w-[360px] h-[180px] sm:h-[190px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_20px_50px_rgba(0,10,30,0.35)] cursor-pointer select-none active:scale-[0.985] ${
+              style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
+              className={`group relative w-full max-w-[390px] h-[210px] sm:h-[220px] rounded-full border-[16px] sm:border-[18px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCase1 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -1695,13 +1695,13 @@ export default function Home() {
               <div
                 className={`relative w-full h-full rounded-full [container-type:inline-size] overflow-hidden transition-all duration-500 ${
                   mobileCase1 === "off"
-                    ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
+                    ? "bg-black/20 backdrop-blur-xl shadow-[inset_0_4px_24px_rgba(0,10,30,0.45),inset_0_1.5px_2px_rgba(255,255,255,0.3)]"
                     : "bg-white shadow-none"
                 }`}
               >
                 {/* 1. STATO ATTIVO (ON): Dettagli case study a sinistra */}
                 <div
-                  className={`absolute top-0 left-[6%] w-[42%] h-full flex flex-col justify-center space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 left-[6%] w-[44%] h-full flex flex-col justify-center space-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCase1 === "on"
                       ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                       : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
@@ -1710,10 +1710,10 @@ export default function Home() {
                   <span className="text-[10px] font-bold text-blue-600 tracking-wider uppercase">
                     Transit Platform
                   </span>
-                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-tight">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight leading-tight">
                     Ungdomskort
                   </h3>
-                  <p className="text-[11px] text-slate-600 line-clamp-2 leading-snug">
+                  <p className="text-xs text-slate-600 line-clamp-2 leading-snug">
                     Redesign of Denmark&apos;s youth transit pass platform.
                   </p>
                   <div className="pt-1">
@@ -1722,7 +1722,7 @@ export default function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] font-semibold shadow-xs transition-all cursor-pointer"
+                      className="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs font-semibold shadow-xs transition-all cursor-pointer"
                     >
                       <span>See case study</span>
                       <span className="text-xs">↗</span>
@@ -1730,25 +1730,22 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* 2. STATO SPENTO (OFF): Cover con numero "1" a destra */}
+                {/* 2. STATO SPENTO (OFF): Cover con solo il numero gigante "1" a destra */}
                 <div
-                  className={`absolute top-0 right-[4%] w-[46%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 right-[4%] w-[46%] h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCase1 === "off"
                       ? "opacity-100 scale-100 translate-x-0"
                       : "opacity-0 scale-75 translate-x-12"
                   }`}
                 >
-                  <span className="text-7xl sm:text-8xl font-black text-white/95 tracking-tighter drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] leading-none">
+                  <span className="text-8xl sm:text-9xl font-black text-white tracking-tighter drop-shadow-[0_4px_20px_rgba(0,0,0,0.4)] leading-none select-none">
                     1
-                  </span>
-                  <span className="text-[11px] font-semibold text-white/80 tracking-wide mt-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
-                    Ungdomskort
                   </span>
                 </div>
 
-                {/* 3. IL KNOB DEL TOGGLE: Scorrimento orizzontale fluido con VantaKnobWaves */}
+                {/* 3. IL KNOB DEL TOGGLE: Grande pomello circolare fluido */}
                 <div
-                  className={`absolute top-[6%] left-[2.5%] w-[47%] h-[88%] rounded-full overflow-visible ${
+                  className={`absolute top-[6%] left-[2.5%] w-[46%] h-[88%] rounded-full overflow-visible ${
                     !mobileToggled1
                       ? "translate-x-0"
                       : mobileCase1 === "on"
@@ -1759,8 +1756,8 @@ export default function Home() {
                   <div
                     className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-3 transition-all duration-300 ease-out cursor-pointer ${
                       mobileCase1 === "off"
-                        ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
-                        : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] active:scale-[0.98]"
+                        ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),0_2px_6px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
+                        : "bg-[#0b2847] border-[4px] sm:border-[6px] border-slate-700/60 shadow-[0_20px_50px_rgba(0,18,36,0.45)] active:scale-[0.98]"
                     }`}
                   >
                     {mobileCase1 === "on" && (
@@ -1775,7 +1772,7 @@ export default function Home() {
                     <div
                       className={`relative z-10 w-full h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
                         mobileCase1 === "off"
-                          ? "opacity-90 contrast-100"
+                          ? "opacity-95 contrast-100"
                           : "opacity-100 brightness-100 drop-shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
                       }`}
                     >
@@ -1784,7 +1781,7 @@ export default function Home() {
                         alt="Ungdomskort Mockup"
                         fill
                         unoptimized
-                        sizes="160px"
+                        sizes="180px"
                         className="object-contain p-1"
                         priority
                       />
@@ -1805,8 +1802,8 @@ export default function Home() {
                 setMobileToggled2(true);
                 setMobileCase2((prev) => (prev === "off" ? "on" : "off"));
               }}
-              style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full max-w-[360px] h-[180px] sm:h-[190px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_20px_50px_rgba(0,10,30,0.35)] cursor-pointer select-none active:scale-[0.985] ${
+              style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
+              className={`group relative w-full max-w-[390px] h-[210px] sm:h-[220px] rounded-full border-[16px] sm:border-[18px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCase2 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -1814,13 +1811,13 @@ export default function Home() {
               <div
                 className={`relative w-full h-full rounded-full [container-type:inline-size] overflow-hidden transition-all duration-500 ${
                   mobileCase2 === "off"
-                    ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
+                    ? "bg-black/20 backdrop-blur-xl shadow-[inset_0_4px_24px_rgba(0,10,30,0.45),inset_0_1.5px_2px_rgba(255,255,255,0.3)]"
                     : "bg-white shadow-none"
                 }`}
               >
                 {/* 1. STATO ATTIVO (ON): Dettagli case study a sinistra */}
                 <div
-                  className={`absolute top-0 left-[6%] w-[42%] h-full flex flex-col justify-center space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 left-[6%] w-[44%] h-full flex flex-col justify-center space-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCase2 === "on"
                       ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                       : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
@@ -1829,10 +1826,10 @@ export default function Home() {
                   <span className="text-[10px] font-bold text-blue-600 tracking-wider uppercase">
                     Museum Exploration
                   </span>
-                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-tight">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight leading-tight">
                     X-Bit
                   </h3>
-                  <p className="text-[11px] text-slate-600 line-clamp-2 leading-snug">
+                  <p className="text-xs text-slate-600 line-clamp-2 leading-snug">
                     Interactive audio guide and cultural heritage exploration platform.
                   </p>
                   <div className="pt-1">
@@ -1841,7 +1838,7 @@ export default function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] font-semibold shadow-xs transition-all cursor-pointer"
+                      className="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs font-semibold shadow-xs transition-all cursor-pointer"
                     >
                       <span>See case study</span>
                       <span className="text-xs">↗</span>
@@ -1849,25 +1846,22 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* 2. STATO SPENTO (OFF): Cover con numero "2" a destra */}
+                {/* 2. STATO SPENTO (OFF): Cover con solo il numero gigante "2" a destra */}
                 <div
-                  className={`absolute top-0 right-[4%] w-[46%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 right-[4%] w-[46%] h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCase2 === "off"
                       ? "opacity-100 scale-100 translate-x-0"
                       : "opacity-0 scale-75 translate-x-12"
                   }`}
                 >
-                  <span className="text-7xl sm:text-8xl font-black text-white/95 tracking-tighter drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] leading-none">
+                  <span className="text-8xl sm:text-9xl font-black text-white tracking-tighter drop-shadow-[0_4px_20px_rgba(0,0,0,0.4)] leading-none select-none">
                     2
-                  </span>
-                  <span className="text-[11px] font-semibold text-white/80 tracking-wide mt-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
-                    X-Bit
                   </span>
                 </div>
 
-                {/* 3. IL KNOB DEL TOGGLE: Scorrimento orizzontale fluido con VantaKnobWaves */}
+                {/* 3. IL KNOB DEL TOGGLE: Grande pomello circolare fluido */}
                 <div
-                  className={`absolute top-[6%] left-[2.5%] w-[47%] h-[88%] rounded-full overflow-visible ${
+                  className={`absolute top-[6%] left-[2.5%] w-[46%] h-[88%] rounded-full overflow-visible ${
                     !mobileToggled2
                       ? "translate-x-0"
                       : mobileCase2 === "on"
@@ -1878,8 +1872,8 @@ export default function Home() {
                   <div
                     className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-3 transition-all duration-300 ease-out cursor-pointer ${
                       mobileCase2 === "off"
-                        ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
-                        : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] active:scale-[0.98]"
+                        ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),0_2px_6px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
+                        : "bg-[#0b2847] border-[4px] sm:border-[6px] border-slate-700/60 shadow-[0_20px_50px_rgba(0,18,36,0.45)] active:scale-[0.98]"
                     }`}
                   >
                     {mobileCase2 === "on" && (
@@ -1894,7 +1888,7 @@ export default function Home() {
                     <div
                       className={`relative z-10 w-full h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
                         mobileCase2 === "off"
-                          ? "opacity-90 contrast-100"
+                          ? "opacity-95 contrast-100"
                           : "opacity-100 brightness-100 drop-shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
                       }`}
                     >
@@ -1903,7 +1897,7 @@ export default function Home() {
                         alt="X-Bit Mockup"
                         fill
                         unoptimized
-                        sizes="160px"
+                        sizes="180px"
                         className="object-contain p-1"
                       />
                     </div>
@@ -1923,8 +1917,8 @@ export default function Home() {
                 setMobileToggled3(true);
                 setMobileCase3((prev) => (prev === "off" ? "on" : "off"));
               }}
-              style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full max-w-[360px] h-[180px] sm:h-[190px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_20px_50px_rgba(0,10,30,0.35)] cursor-pointer select-none active:scale-[0.985] ${
+              style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
+              className={`group relative w-full max-w-[390px] h-[210px] sm:h-[220px] rounded-full border-[16px] sm:border-[18px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCase3 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -1932,13 +1926,13 @@ export default function Home() {
               <div
                 className={`relative w-full h-full rounded-full [container-type:inline-size] overflow-hidden transition-all duration-500 ${
                   mobileCase3 === "off"
-                    ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
+                    ? "bg-black/20 backdrop-blur-xl shadow-[inset_0_4px_24px_rgba(0,10,30,0.45),inset_0_1.5px_2px_rgba(255,255,255,0.3)]"
                     : "bg-white shadow-none"
                 }`}
               >
                 {/* 1. STATO ATTIVO (ON): Dettagli case study a sinistra */}
                 <div
-                  className={`absolute top-0 left-[6%] w-[42%] h-full flex flex-col justify-center space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 left-[6%] w-[44%] h-full flex flex-col justify-center space-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCase3 === "on"
                       ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                       : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
@@ -1947,10 +1941,10 @@ export default function Home() {
                   <span className="text-[10px] font-bold text-blue-600 tracking-wider uppercase">
                     E-Commerce &amp; Wine
                   </span>
-                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-tight">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight leading-tight">
                     I Pupi Siciliani
                   </h3>
-                  <p className="text-[11px] text-slate-600 line-clamp-2 leading-snug">
+                  <p className="text-xs text-slate-600 line-clamp-2 leading-snug">
                     Bespoke digital wine store experience delivering +187% profit growth.
                   </p>
                   <div className="pt-1">
@@ -1959,7 +1953,7 @@ export default function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] font-semibold shadow-xs transition-all cursor-pointer"
+                      className="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs font-semibold shadow-xs transition-all cursor-pointer"
                     >
                       <span>See case study</span>
                       <span className="text-xs">↗</span>
@@ -1967,25 +1961,22 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* 2. STATO SPENTO (OFF): Cover con numero "3" a destra */}
+                {/* 2. STATO SPENTO (OFF): Cover con solo il numero gigante "3" a destra */}
                 <div
-                  className={`absolute top-0 right-[4%] w-[46%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 right-[4%] w-[46%] h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCase3 === "off"
                       ? "opacity-100 scale-100 translate-x-0"
                       : "opacity-0 scale-75 translate-x-12"
                   }`}
                 >
-                  <span className="text-7xl sm:text-8xl font-black text-white/95 tracking-tighter drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] leading-none">
+                  <span className="text-8xl sm:text-9xl font-black text-white tracking-tighter drop-shadow-[0_4px_20px_rgba(0,0,0,0.4)] leading-none select-none">
                     3
-                  </span>
-                  <span className="text-[11px] font-semibold text-white/80 tracking-wide mt-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
-                    I Pupi Siciliani
                   </span>
                 </div>
 
-                {/* 3. IL KNOB DEL TOGGLE: Scorrimento orizzontale fluido con VantaKnobWaves */}
+                {/* 3. IL KNOB DEL TOGGLE: Grande pomello circolare fluido */}
                 <div
-                  className={`absolute top-[6%] left-[2.5%] w-[47%] h-[88%] rounded-full overflow-visible ${
+                  className={`absolute top-[6%] left-[2.5%] w-[46%] h-[88%] rounded-full overflow-visible ${
                     !mobileToggled3
                       ? "translate-x-0"
                       : mobileCase3 === "on"
@@ -1996,8 +1987,8 @@ export default function Home() {
                   <div
                     className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-3 transition-all duration-300 ease-out cursor-pointer ${
                       mobileCase3 === "off"
-                        ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
-                        : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] active:scale-[0.98]"
+                        ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),0_2px_6px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
+                        : "bg-[#0b2847] border-[4px] sm:border-[6px] border-slate-700/60 shadow-[0_20px_50px_rgba(0,18,36,0.45)] active:scale-[0.98]"
                     }`}
                   >
                     {mobileCase3 === "on" && (
@@ -2012,7 +2003,7 @@ export default function Home() {
                     <div
                       className={`relative z-10 w-full h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
                         mobileCase3 === "off"
-                          ? "opacity-90 contrast-100"
+                          ? "opacity-95 contrast-100"
                           : "opacity-100 brightness-100 drop-shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
                       }`}
                     >
@@ -2021,7 +2012,7 @@ export default function Home() {
                         alt="I Pupi Siciliani Mockup"
                         fill
                         unoptimized
-                        sizes="160px"
+                        sizes="180px"
                         className="object-contain p-1.5"
                       />
                     </div>
@@ -2049,8 +2040,8 @@ export default function Home() {
                 setMobileToggledAbout(true);
                 setMobileCaseAbout((prev) => (prev === "off" ? "on" : "off"));
               }}
-              style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full max-w-[360px] h-[180px] sm:h-[190px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_20px_50px_rgba(0,10,30,0.35)] cursor-pointer select-none active:scale-[0.985] ${
+              style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
+              className={`group relative w-full max-w-[390px] h-[210px] sm:h-[220px] rounded-full border-[16px] sm:border-[18px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCaseAbout === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -2058,20 +2049,20 @@ export default function Home() {
               <div
                 className={`relative w-full h-full rounded-full [container-type:inline-size] overflow-hidden transition-all duration-500 ${
                   mobileCaseAbout === "off"
-                    ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
+                    ? "bg-black/20 backdrop-blur-xl shadow-[inset_0_4px_24px_rgba(0,10,30,0.45),inset_0_1.5px_2px_rgba(255,255,255,0.3)]"
                     : "bg-white shadow-none"
                 }`}
               >
                 {/* 1. STATO ATTIVO (ON): Bio sintetica e link a sinistra */}
                 <div
-                  className={`absolute top-0 left-[6%] w-[42%] h-full flex flex-col justify-center space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 left-[6%] w-[44%] h-full flex flex-col justify-center space-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCaseAbout === "on"
                       ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                       : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
                   }`}
                 >
-                  <h3 className="text-sm font-bold text-slate-900 tracking-tight">Herald Ago · 27 y/o</h3>
-                  <p className="text-[10px] text-slate-600 line-clamp-3 leading-snug">
+                  <h3 className="text-base font-extrabold text-slate-900 tracking-tight">Herald Ago · 27 y/o</h3>
+                  <p className="text-xs text-slate-600 line-clamp-3 leading-snug">
                     Padua, Miami, MSc in Denmark. Living between Italy &amp; Barcelona. Design, AI, sociology &amp; fine wine.
                   </p>
                   <div className="pt-1 flex items-center gap-1.5">
@@ -2080,7 +2071,7 @@ export default function Home() {
                       target="_blank"
                       download
                       onClick={(e) => e.stopPropagation()}
-                      className="px-2.5 py-1 rounded-full bg-slate-900 hover:bg-black text-white text-[10px] font-semibold transition-all shadow-xs"
+                      className="px-3 py-1.5 rounded-full bg-slate-900 hover:bg-black text-white text-xs font-semibold transition-all shadow-xs"
                     >
                       CV PDF
                     </a>
@@ -2090,7 +2081,7 @@ export default function Home() {
                         const el = document.getElementById("mobile-contact");
                         if (el) el.scrollIntoView({ behavior: "smooth" });
                       }}
-                      className="px-2.5 py-1 rounded-full bg-slate-900/10 text-slate-900 text-[10px] font-semibold border border-slate-900/15"
+                      className="px-3 py-1.5 rounded-full bg-slate-900/10 text-slate-900 text-xs font-semibold border border-slate-900/15"
                     >
                       Contact
                     </button>
@@ -2106,10 +2097,10 @@ export default function Home() {
                   }`}
                 >
                   <div className="text-center px-1">
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+                    <h3 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                       Herald Ago
                     </h3>
-                    <p className="text-xs text-white/80 font-medium mt-0.5 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
+                    <p className="text-xs sm:text-sm text-white/80 font-medium mt-1 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
                       Product Designer
                     </p>
                   </div>
@@ -2117,7 +2108,7 @@ export default function Home() {
 
                 {/* 3. IL KNOB DEL TOGGLE: Foto Profilo con VantaKnobWaves */}
                 <div
-                  className={`absolute top-[6%] left-[2.5%] w-[47%] h-[88%] rounded-full overflow-visible ${
+                  className={`absolute top-[6%] left-[2.5%] w-[46%] h-[88%] rounded-full overflow-visible ${
                     !mobileToggledAbout
                       ? "translate-x-0"
                       : mobileCaseAbout === "on"
@@ -2126,10 +2117,10 @@ export default function Home() {
                   } flex items-center justify-center select-none`}
                 >
                   <div
-                    className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-1 transition-all duration-300 ease-out cursor-pointer ${
+                    className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-1.5 transition-all duration-300 ease-out cursor-pointer ${
                       mobileCaseAbout === "off"
-                        ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
-                        : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] active:scale-[0.98]"
+                        ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),0_2px_6px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
+                        : "bg-[#0b2847] border-[4px] sm:border-[6px] border-slate-700/60 shadow-[0_20px_50px_rgba(0,18,36,0.45)] active:scale-[0.98]"
                     }`}
                   >
                     {mobileCaseAbout === "on" && (
@@ -2141,13 +2132,13 @@ export default function Home() {
                         zoom={0.65}
                       />
                     )}
-                    <div className="relative z-10 w-[86%] h-[86%] rounded-full overflow-hidden shadow-inner border border-white/20">
+                    <div className="relative z-10 w-[88%] h-[88%] rounded-full overflow-hidden shadow-inner border border-white/20">
                       <Image
                         src="/profile-pro.jpg"
                         alt="Herald Ago"
                         fill
                         priority
-                        sizes="140px"
+                        sizes="160px"
                         className="object-cover object-[center_top]"
                       />
                     </div>
@@ -2157,6 +2148,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+
 
 
         {/* --- 4. KIND WORDS (RECOMMENDATIONS): HORIZONTAL PILLS --- */}
