@@ -527,7 +527,9 @@ export default function Home() {
           ref={card2Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-20 will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border border-white bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.35)]">
+          <section className={`relative w-full h-full rounded-[1000px] border-[12px] sm:border-[20px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+            case1Toggle === "off" ? "bg-transparent" : "bg-white"
+          }`}>
             {/* Contenitore interattivo del Toggle (Bouncy Bubble Physics) */}
             <div
               role="switch"
@@ -550,9 +552,9 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-400/50 ${
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case1Toggle === "off"
-                  ? "bg-black/25 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_3px_rgba(0,0,0,0.2)]"
+                  ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
               }`}
             >
@@ -599,13 +601,13 @@ export default function Home() {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                     Ungdomskort
                   </h3>
                 </div>
               </div>
 
-              {/* 3. IL KNOB / THUMB DEL TOGGLE (Animazione BUBBLE + Inversione Colori) */}
+              {/* 3. IL KNOB / THUMB DEL TOGGLE (Animazione BUBBLE + Inversione Tattile) */}
               <div
                 className={`absolute top-[6%] h-[88%] left-[2%] sm:left-[2.5%] w-[47%] rounded-[1000px] overflow-visible ${
                   !hasToggledOnce1
@@ -619,16 +621,21 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case1Toggle === "off"
-                      ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-slate-900/90 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_6px_rgba(0,0,0,0.2),_inset_0_1px_1px_rgba(255,255,255,0.2)] hover:scale-[1.015] active:scale-[0.98]"
+                      ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
+                      : "bg-gradient-to-br from-[#0c3156] via-[#0b2847] to-[#071d33] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35),_inset_0_-4px_16px_rgba(0,180,216,0.2)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
-                  {/* Schermo del Device dentro il Knob (opaco quando spento, brillante all'hover e su ON) */}
+                  {/* Bagliore d'acqua marina quando il pomello è acceso */}
+                  {case1Toggle === "on" && (
+                    <div className="absolute inset-0 pointer-events-none opacity-50 bg-[radial-gradient(circle_at_35%_30%,rgba(0,180,216,0.45),transparent_65%)]" />
+                  )}
+
+                  {/* Schermo del Device dentro il Knob */}
                   <div
                     className={`relative w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
                       case1Toggle === "off"
-                        ? "opacity-65 group-hover:opacity-90 contrast-[0.95] group-hover:contrast-100"
-                        : "opacity-100 brightness-100"
+                        ? "opacity-80 group-hover:opacity-100 contrast-100"
+                        : "opacity-100 brightness-100 drop-shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
                     }`}
                   >
                     <Image
@@ -652,7 +659,9 @@ export default function Home() {
           ref={card3Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[25] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border border-white bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.35)]">
+          <section className={`relative w-full h-full rounded-[1000px] border-[12px] sm:border-[20px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+            case2Toggle === "off" ? "bg-transparent" : "bg-white"
+          }`}>
             <div
               role="switch"
               aria-checked={case2Toggle === "on"}
@@ -674,9 +683,9 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-400/50 ${
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case2Toggle === "off"
-                  ? "bg-black/25 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_3px_rgba(0,0,0,0.2)]"
+                  ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
               }`}
             >
@@ -720,7 +729,7 @@ export default function Home() {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                     X-Bit
                   </h3>
                 </div>
@@ -739,10 +748,14 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case2Toggle === "off"
-                      ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-slate-900/90 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_6px_rgba(0,0,0,0.2),_inset_0_1px_1px_rgba(255,255,255,0.2)] hover:scale-[1.015] active:scale-[0.98]"
+                      ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
+                      : "bg-gradient-to-br from-[#0c3156] via-[#0b2847] to-[#071d33] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35),_inset_0_-4px_16px_rgba(0,180,216,0.2)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
+                  {/* Bagliore d'acqua marina quando il pomello è acceso */}
+                  {case2Toggle === "on" && (
+                    <div className="absolute inset-0 pointer-events-none opacity-50 bg-[radial-gradient(circle_at_35%_30%,rgba(0,180,216,0.45),transparent_65%)]" />
+                  )}
                   <div
                     className={`relative w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
                       case2Toggle === "off"
@@ -771,7 +784,9 @@ export default function Home() {
           ref={card4Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[30] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border border-white bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.35)]">
+          <section className={`relative w-full h-full rounded-[1000px] border-[12px] sm:border-[20px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+            case3Toggle === "off" ? "bg-transparent" : "bg-white"
+          }`}>
             <div
               role="switch"
               aria-checked={case3Toggle === "on"}
@@ -793,9 +808,9 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-400/50 ${
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case3Toggle === "off"
-                  ? "bg-black/25 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_3px_rgba(0,0,0,0.2)]"
+                  ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
               }`}
             >
@@ -839,7 +854,7 @@ export default function Home() {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                     I Pupi Siciliani
                   </h3>
                 </div>
@@ -858,10 +873,14 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case3Toggle === "off"
-                      ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-slate-900/90 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_6px_rgba(0,0,0,0.2),_inset_0_1px_1px_rgba(255,255,255,0.2)] hover:scale-[1.015] active:scale-[0.98]"
+                      ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
+                      : "bg-gradient-to-br from-[#0c3156] via-[#0b2847] to-[#071d33] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35),_inset_0_-4px_16px_rgba(0,180,216,0.2)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
+                  {/* Bagliore d'acqua marina quando il pomello è acceso */}
+                  {case3Toggle === "on" && (
+                    <div className="absolute inset-0 pointer-events-none opacity-50 bg-[radial-gradient(circle_at_35%_30%,rgba(0,180,216,0.45),transparent_65%)]" />
+                  )}
                   <div
                     className={`relative w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
                       case3Toggle === "off"
@@ -889,7 +908,9 @@ export default function Home() {
           ref={card5Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[35] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border border-white bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.35)]">
+          <section className={`relative w-full h-full rounded-[1000px] border-[12px] sm:border-[20px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+            case4Toggle === "off" ? "bg-transparent" : "bg-white"
+          }`}>
             <div
               role="switch"
               aria-checked={case4Toggle === "on"}
@@ -911,9 +932,9 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-400/50 ${
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case4Toggle === "off"
-                  ? "bg-black/25 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_3px_rgba(0,0,0,0.2)]"
+                  ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
               }`}
             >
@@ -971,7 +992,7 @@ export default function Home() {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                     About Me
                   </h3>
                 </div>
@@ -990,10 +1011,14 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
                     case4Toggle === "off"
-                      ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-slate-900/90 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_6px_rgba(0,0,0,0.2),_inset_0_1px_1px_rgba(255,255,255,0.2)] hover:scale-[1.015] active:scale-[0.98]"
+                      ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
+                      : "bg-gradient-to-br from-[#0c3156] via-[#0b2847] to-[#071d33] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35),_inset_0_-4px_16px_rgba(0,180,216,0.2)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
+                  {/* Bagliore d'acqua marina quando il pomello è acceso */}
+                  {case4Toggle === "on" && (
+                    <div className="absolute inset-0 pointer-events-none opacity-50 bg-[radial-gradient(circle_at_35%_30%,rgba(0,180,216,0.45),transparent_65%)]" />
+                  )}
                   <div
                     className={`relative w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out rounded-[1000px] overflow-hidden ${
                       case4Toggle === "off"
@@ -1021,7 +1046,9 @@ export default function Home() {
           ref={card6Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[40] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border border-white bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.35)]">
+          <section className={`relative w-full h-full rounded-[1000px] border-[12px] sm:border-[20px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+            case5Toggle === "off" ? "bg-transparent" : "bg-white"
+          }`}>
             <div
               role="switch"
               aria-checked={case5Toggle === "on"}
@@ -1043,9 +1070,9 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-400/50 ${
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case5Toggle === "off"
-                  ? "bg-black/25 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_3px_rgba(0,0,0,0.2)]"
+                  ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
               }`}
             >
@@ -1174,10 +1201,14 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
                     case5Toggle === "off"
-                      ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-slate-900/90 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_6px_rgba(0,0,0,0.2),_inset_0_1px_1px_rgba(255,255,255,0.2)] hover:scale-[1.015] active:scale-[0.98]"
+                      ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
+                      : "bg-gradient-to-br from-[#0c3156] via-[#0b2847] to-[#071d33] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35),_inset_0_-4px_16px_rgba(0,180,216,0.2)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
+                  {/* Bagliore d'acqua marina quando il pomello è acceso */}
+                  {case5Toggle === "on" && (
+                    <div className="absolute inset-0 pointer-events-none opacity-50 bg-[radial-gradient(circle_at_35%_30%,rgba(0,180,216,0.45),transparent_65%)]" />
+                  )}
                   <div
                     className={`relative w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out rounded-[1000px] overflow-hidden ${
                       case5Toggle === "off"
@@ -1229,7 +1260,9 @@ export default function Home() {
           ref={card7Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[45] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border border-white bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.35)]">
+          <section className={`relative w-full h-full rounded-[1000px] border-[12px] sm:border-[20px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
+            case6Toggle === "off" ? "bg-transparent" : "bg-white"
+          }`}>
             <div
               role="switch"
               aria-checked={case6Toggle === "on"}
@@ -1251,9 +1284,9 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-400/50 ${
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
                 case6Toggle === "off"
-                  ? "bg-black/25 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_3px_rgba(0,0,0,0.2)]"
+                  ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
                   : "bg-white shadow-none"
               }`}
             >
@@ -1389,7 +1422,7 @@ export default function Home() {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                     Contact
                   </h3>
                 </div>
@@ -1408,10 +1441,14 @@ export default function Home() {
                 <div
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-3 sm:p-5 md:p-6 transition-all duration-300 ease-out cursor-pointer ${
                     case6Toggle === "off"
-                      ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-slate-900/90 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_6px_rgba(0,0,0,0.2),_inset_0_1px_1px_rgba(255,255,255,0.2)] hover:scale-[1.015] active:scale-[0.98]"
+                      ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
+                      : "bg-gradient-to-br from-[#0c3156] via-[#0b2847] to-[#071d33] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35),_inset_0_-4px_16px_rgba(0,180,216,0.2)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
+                  {/* Bagliore d'acqua marina quando il pomello è acceso */}
+                  {case6Toggle === "on" && (
+                    <div className="absolute inset-0 pointer-events-none opacity-50 bg-[radial-gradient(circle_at_35%_30%,rgba(0,180,216,0.45),transparent_65%)]" />
+                  )}
                   {case6Toggle === "off" ? (
                     /* Copertina Knob quando SPENTO: Visual Contatto Elegante e Muted */
                     <div className="relative w-full h-full flex flex-col items-center justify-center text-center p-4 pointer-events-none select-none opacity-85 group-hover:opacity-100 transition-opacity">
@@ -1434,7 +1471,7 @@ export default function Home() {
                       <span className="text-sm sm:text-lg font-bold text-white tracking-tight">
                         heraldago1@gmail.com
                       </span>
-                      <span className="text-[11px] sm:text-xs text-white/70 font-normal mt-0.5">
+                      <span className="text-[11px] sm:text-xs text-white/80 font-normal mt-0.5">
                         Barcelona, Spain
                       </span>
                     </div>
