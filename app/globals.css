@@ -183,6 +183,26 @@ body {
   will-change: transform, border-radius;
 }
 
+/* Forzatura orizzontale esplicita per Toggle Pills orizzontali (Mobile e Desktop) */
+.bubble-knob-h-in {
+  animation-name: giant-grow-in, giant-bounce-in !important;
+  animation-duration: 0.24s, 0.32s !important;
+  animation-timing-function: cubic-bezier(0.75, 0, 1, 1), cubic-bezier(0, 0, 0.3, 1.45) !important;
+  animation-delay: 0s, 0.24s !important;
+  animation-fill-mode: forwards !important;
+  will-change: transform, border-radius;
+}
+
+.bubble-knob-h-out {
+  animation-name: giant-grow-out, giant-bounce-out !important;
+  animation-duration: 0.24s, 0.32s !important;
+  animation-timing-function: cubic-bezier(0.75, 0, 1, 1), cubic-bezier(0, 0, 0.3, 1.45) !important;
+  animation-delay: 0s, 0.24s !important;
+  animation-fill-mode: forwards !important;
+  will-change: transform, border-radius;
+}
+
+
 /* ==========================================================================
    VERTICAL BUBBLE PHYSICS PER MOBILE (< 768px): Scorrimento Tattile Asse Y
    ========================================================================== */

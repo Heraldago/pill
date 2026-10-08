@@ -53,9 +53,13 @@ export default function Home() {
 
   // Mobile horizontal switch states (Figma layout)
   const [mobileCase1, setMobileCase1] = useState<"off" | "on">("off");
+  const [mobileToggled1, setMobileToggled1] = useState(false);
   const [mobileCase2, setMobileCase2] = useState<"off" | "on">("off");
+  const [mobileToggled2, setMobileToggled2] = useState(false);
   const [mobileCase3, setMobileCase3] = useState<"off" | "on">("off");
+  const [mobileToggled3, setMobileToggled3] = useState(false);
   const [mobileCaseAbout, setMobileCaseAbout] = useState<"off" | "on">("off");
+  const [mobileToggledAbout, setMobileToggledAbout] = useState(false);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -1637,24 +1641,24 @@ export default function Home() {
         <section id="mobile-home" className="w-full flex flex-col items-center pt-2">
           <div className="w-full max-w-[360px] flex flex-col items-center select-none">
             {/* Capsule 1: Saluto */}
-            <div className="w-full py-7 px-6 rounded-full bg-[#12365c]/65 backdrop-blur-2xl border border-white/30 shadow-[0_12px_36px_rgba(0,10,30,0.35),inset_0_1px_2px_rgba(255,255,255,0.4)] flex items-center justify-center text-center relative z-30">
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-snug">
+            <div className="w-full py-6 px-6 rounded-full bg-white/[0.12] backdrop-blur-2xl border border-white/30 shadow-[0_12px_36px_rgba(0,10,30,0.35),inset_0_1px_2px_rgba(255,255,255,0.45)] flex items-center justify-center text-center relative z-30">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-snug drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 Hi, I&apos;m Herald :)
               </h1>
             </div>
 
             {/* Capsule 2: Missione */}
-            <div className="w-full py-7 px-6 rounded-full bg-[#12365c]/65 backdrop-blur-2xl border border-white/30 shadow-[0_12px_36px_rgba(0,10,30,0.35),inset_0_1px_2px_rgba(255,255,255,0.4)] flex items-center justify-center text-center -mt-5 relative z-20">
-              <p className="text-2xl sm:text-3xl font-semibold tracking-tight text-white leading-snug">
-                I <span className="font-extrabold text-[#38bdf8] drop-shadow-[0_0_14px_rgba(56,189,248,0.6)]">design</span> digital products
+            <div className="w-full py-6 px-6 rounded-full bg-white/[0.12] backdrop-blur-2xl border border-white/30 shadow-[0_12px_36px_rgba(0,10,30,0.35),inset_0_1px_2px_rgba(255,255,255,0.45)] flex items-center justify-center text-center -mt-4 relative z-20">
+              <p className="text-2xl sm:text-3xl font-medium tracking-tight text-white leading-snug drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
+                I <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 via-sky-300 to-cyan-400 drop-shadow-[0_0_20px_rgba(0,212,255,0.4)]">design</span> digital products
               </p>
             </div>
 
             {/* Capsule 3: Scopo */}
-            <div className="w-full py-7 px-6 rounded-full bg-[#12365c]/65 backdrop-blur-2xl border border-white/30 shadow-[0_12px_36px_rgba(0,10,30,0.35),inset_0_1px_2px_rgba(255,255,255,0.4)] flex items-center justify-center text-center -mt-5 relative z-10">
-              <p className="text-xl sm:text-2xl font-normal tracking-tight text-white/95 leading-snug">
-                that <span className="italic font-serif text-white">help</span> and{" "}
-                <span className="italic font-serif text-white">simplify</span> people&apos;s lives.
+            <div className="w-full py-6 px-6 rounded-full bg-white/[0.12] backdrop-blur-2xl border border-white/30 shadow-[0_12px_36px_rgba(0,10,30,0.35),inset_0_1px_2px_rgba(255,255,255,0.45)] flex items-center justify-center text-center -mt-4 relative z-10">
+              <p className="text-xl sm:text-2xl font-normal tracking-tight text-white/95 leading-snug drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
+                that <span className="italic font-serif font-normal text-white">help</span> and{" "}
+                <span className="italic font-serif font-normal text-white">simplify</span> people&apos;s lives.
               </p>
             </div>
           </div>
@@ -1677,72 +1681,115 @@ export default function Home() {
             <div
               role="switch"
               aria-checked={mobileCase1 === "on"}
-              onClick={() => setMobileCase1((prev) => (prev === "off" ? "on" : "off"))}
-              className={`group relative w-full max-w-[360px] h-[180px] sm:h-[190px] rounded-full border-[10px] sm:border-[12px] border-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.985] ${
-                mobileCase1 === "off" ? "bg-[#0b2847]" : "bg-white"
+              aria-label={mobileCase1 === "off" ? "Attiva case study Ungdomskort" : "Torna a copertina Ungdomskort"}
+              onClick={() => {
+                setMobileToggled1(true);
+                setMobileCase1((prev) => (prev === "off" ? "on" : "off"));
+              }}
+              style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
+              className={`group relative w-full max-w-[360px] h-[180px] sm:h-[190px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_20px_50px_rgba(0,10,30,0.35)] cursor-pointer select-none active:scale-[0.985] ${
+                mobileCase1 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
-              {/* STATE OFF: Cover con numero "1" a destra */}
+              {/* Pista interna del Toggle (Glass ad OFF, Bianca ad ON) */}
               <div
-                className={`absolute inset-0 flex items-center justify-end pr-10 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`relative w-full h-full rounded-full [container-type:inline-size] overflow-hidden transition-all duration-500 ${
                   mobileCase1 === "off"
-                    ? "opacity-100 scale-100 translate-x-0"
-                    : "opacity-0 scale-75 translate-x-12"
+                    ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
+                    : "bg-white shadow-none"
                 }`}
               >
-                <span className="text-7xl sm:text-8xl font-black text-white/95 tracking-tighter drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
-                  1
-                </span>
-              </div>
-
-              {/* STATE ON: Dettagli case study a sinistra */}
-              <div
-                className={`absolute inset-y-0 left-5 right-[160px] sm:right-[170px] flex flex-col justify-center text-left space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
-                  mobileCase1 === "on"
-                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
-                    : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
-                }`}
-              >
-                <span className="text-[10px] font-bold text-blue-600 tracking-wider uppercase">
-                  Transit Platform
-                </span>
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-tight">
-                  Ungdomskort
-                </h3>
-                <p className="text-[11px] sm:text-xs text-slate-600 line-clamp-2 leading-snug">
-                  Redesign of Denmark&apos;s youth transit pass platform.
-                </p>
-                <div className="pt-1">
-                  <a
-                    href="https://www.heraldago.com/ungdomskort"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] font-semibold shadow-xs transition-all"
-                  >
-                    <span>See case study</span>
-                    <span className="text-xs">↗</span>
-                  </a>
+                {/* 1. STATO ATTIVO (ON): Dettagli case study a sinistra */}
+                <div
+                  className={`absolute top-0 left-[6%] w-[42%] h-full flex flex-col justify-center space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                    mobileCase1 === "on"
+                      ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
+                      : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
+                  }`}
+                >
+                  <span className="text-[10px] font-bold text-blue-600 tracking-wider uppercase">
+                    Transit Platform
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-tight">
+                    Ungdomskort
+                  </h3>
+                  <p className="text-[11px] text-slate-600 line-clamp-2 leading-snug">
+                    Redesign of Denmark&apos;s youth transit pass platform.
+                  </p>
+                  <div className="pt-1">
+                    <a
+                      href="https://www.heraldago.com/ungdomskort"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] font-semibold shadow-xs transition-all cursor-pointer"
+                    >
+                      <span>See case study</span>
+                      <span className="text-xs">↗</span>
+                    </a>
+                  </div>
                 </div>
-              </div>
 
-              {/* IL KNOB CIRCOLARE SCORREVOLE: Left a OFF, Right a ON */}
-              <div
-                className={`absolute top-2 bottom-2 aspect-square rounded-full overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
-                  mobileCase1 === "off"
-                    ? "left-2 bg-white shadow-[0_12px_28px_rgba(0,0,0,0.35),inset_0_1px_2px_rgba(255,255,255,0.9)]"
-                    : "left-[calc(100%-154px)] sm:left-[calc(100%-164px)] bg-[#0b2847] border border-white/30 shadow-[0_16px_36px_rgba(0,18,36,0.45)]"
-                } flex items-center justify-center p-3 select-none`}
-              >
-                <div className="relative w-full h-full">
-                  <Image
-                    src="/ungheromockup.svg"
-                    alt="Ungdomskort Mockup"
-                    fill
-                    unoptimized
-                    sizes="150px"
-                    className="object-contain p-1.5"
-                  />
+                {/* 2. STATO SPENTO (OFF): Cover con numero "1" a destra */}
+                <div
+                  className={`absolute top-0 right-[4%] w-[46%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                    mobileCase1 === "off"
+                      ? "opacity-100 scale-100 translate-x-0"
+                      : "opacity-0 scale-75 translate-x-12"
+                  }`}
+                >
+                  <span className="text-7xl sm:text-8xl font-black text-white/95 tracking-tighter drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] leading-none">
+                    1
+                  </span>
+                  <span className="text-[11px] font-semibold text-white/80 tracking-wide mt-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
+                    Ungdomskort
+                  </span>
+                </div>
+
+                {/* 3. IL KNOB DEL TOGGLE: Scorrimento orizzontale fluido con VantaKnobWaves */}
+                <div
+                  className={`absolute top-[6%] left-[2.5%] w-[47%] h-[88%] rounded-full overflow-visible ${
+                    !mobileToggled1
+                      ? "translate-x-0"
+                      : mobileCase1 === "on"
+                      ? "bubble-knob-h-in"
+                      : "bubble-knob-h-out"
+                  } flex items-center justify-center select-none`}
+                >
+                  <div
+                    className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-3 transition-all duration-300 ease-out cursor-pointer ${
+                      mobileCase1 === "off"
+                        ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
+                        : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] active:scale-[0.98]"
+                    }`}
+                  >
+                    {mobileCase1 === "on" && (
+                      <VantaKnobWaves
+                        color={0x0b2847}
+                        shininess={30.0}
+                        waveHeight={20.0}
+                        waveSpeed={0.75}
+                        zoom={0.65}
+                      />
+                    )}
+                    <div
+                      className={`relative z-10 w-full h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
+                        mobileCase1 === "off"
+                          ? "opacity-90 contrast-100"
+                          : "opacity-100 brightness-100 drop-shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
+                      }`}
+                    >
+                      <Image
+                        src="/ungheromockup.svg"
+                        alt="Ungdomskort Mockup"
+                        fill
+                        unoptimized
+                        sizes="160px"
+                        className="object-contain p-1"
+                        priority
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1753,72 +1800,114 @@ export default function Home() {
             <div
               role="switch"
               aria-checked={mobileCase2 === "on"}
-              onClick={() => setMobileCase2((prev) => (prev === "off" ? "on" : "off"))}
-              className={`group relative w-full max-w-[360px] h-[180px] sm:h-[190px] rounded-full border-[10px] sm:border-[12px] border-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.985] ${
-                mobileCase2 === "off" ? "bg-[#0b2847]" : "bg-white"
+              aria-label={mobileCase2 === "off" ? "Attiva case study X-Bit" : "Torna a copertina X-Bit"}
+              onClick={() => {
+                setMobileToggled2(true);
+                setMobileCase2((prev) => (prev === "off" ? "on" : "off"));
+              }}
+              style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
+              className={`group relative w-full max-w-[360px] h-[180px] sm:h-[190px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_20px_50px_rgba(0,10,30,0.35)] cursor-pointer select-none active:scale-[0.985] ${
+                mobileCase2 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
-              {/* STATE OFF: Cover con numero "2" a destra */}
+              {/* Pista interna del Toggle (Glass ad OFF, Bianca ad ON) */}
               <div
-                className={`absolute inset-0 flex items-center justify-end pr-10 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`relative w-full h-full rounded-full [container-type:inline-size] overflow-hidden transition-all duration-500 ${
                   mobileCase2 === "off"
-                    ? "opacity-100 scale-100 translate-x-0"
-                    : "opacity-0 scale-75 translate-x-12"
+                    ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
+                    : "bg-white shadow-none"
                 }`}
               >
-                <span className="text-7xl sm:text-8xl font-black text-white/95 tracking-tighter drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
-                  2
-                </span>
-              </div>
-
-              {/* STATE ON: Dettagli case study a sinistra */}
-              <div
-                className={`absolute inset-y-0 left-5 right-[160px] sm:right-[170px] flex flex-col justify-center text-left space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
-                  mobileCase2 === "on"
-                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
-                    : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
-                }`}
-              >
-                <span className="text-[10px] font-bold text-blue-600 tracking-wider uppercase">
-                  Museum Exploration
-                </span>
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-tight">
-                  X-Bit
-                </h3>
-                <p className="text-[11px] sm:text-xs text-slate-600 line-clamp-2 leading-snug">
-                  Interactive audio guide and cultural heritage exploration platform.
-                </p>
-                <div className="pt-1">
-                  <a
-                    href="https://www.heraldago.com/xbit"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] font-semibold shadow-xs transition-all"
-                  >
-                    <span>See case study</span>
-                    <span className="text-xs">↗</span>
-                  </a>
+                {/* 1. STATO ATTIVO (ON): Dettagli case study a sinistra */}
+                <div
+                  className={`absolute top-0 left-[6%] w-[42%] h-full flex flex-col justify-center space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                    mobileCase2 === "on"
+                      ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
+                      : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
+                  }`}
+                >
+                  <span className="text-[10px] font-bold text-blue-600 tracking-wider uppercase">
+                    Museum Exploration
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-tight">
+                    X-Bit
+                  </h3>
+                  <p className="text-[11px] text-slate-600 line-clamp-2 leading-snug">
+                    Interactive audio guide and cultural heritage exploration platform.
+                  </p>
+                  <div className="pt-1">
+                    <a
+                      href="https://www.heraldago.com/xbit"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] font-semibold shadow-xs transition-all cursor-pointer"
+                    >
+                      <span>See case study</span>
+                      <span className="text-xs">↗</span>
+                    </a>
+                  </div>
                 </div>
-              </div>
 
-              {/* IL KNOB CIRCOLARE SCORREVOLE: Left a OFF, Right a ON */}
-              <div
-                className={`absolute top-2 bottom-2 aspect-square rounded-full overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
-                  mobileCase2 === "off"
-                    ? "left-2 bg-white shadow-[0_12px_28px_rgba(0,0,0,0.35),inset_0_1px_2px_rgba(255,255,255,0.9)]"
-                    : "left-[calc(100%-154px)] sm:left-[calc(100%-164px)] bg-[#0b2847] border border-white/30 shadow-[0_16px_36px_rgba(0,18,36,0.45)]"
-                } flex items-center justify-center p-3 select-none`}
-              >
-                <div className="relative w-full h-full">
-                  <Image
-                    src="/xbitheromockup.svg"
-                    alt="X-Bit Mockup"
-                    fill
-                    unoptimized
-                    sizes="150px"
-                    className="object-contain p-1.5"
-                  />
+                {/* 2. STATO SPENTO (OFF): Cover con numero "2" a destra */}
+                <div
+                  className={`absolute top-0 right-[4%] w-[46%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                    mobileCase2 === "off"
+                      ? "opacity-100 scale-100 translate-x-0"
+                      : "opacity-0 scale-75 translate-x-12"
+                  }`}
+                >
+                  <span className="text-7xl sm:text-8xl font-black text-white/95 tracking-tighter drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] leading-none">
+                    2
+                  </span>
+                  <span className="text-[11px] font-semibold text-white/80 tracking-wide mt-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
+                    X-Bit
+                  </span>
+                </div>
+
+                {/* 3. IL KNOB DEL TOGGLE: Scorrimento orizzontale fluido con VantaKnobWaves */}
+                <div
+                  className={`absolute top-[6%] left-[2.5%] w-[47%] h-[88%] rounded-full overflow-visible ${
+                    !mobileToggled2
+                      ? "translate-x-0"
+                      : mobileCase2 === "on"
+                      ? "bubble-knob-h-in"
+                      : "bubble-knob-h-out"
+                  } flex items-center justify-center select-none`}
+                >
+                  <div
+                    className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-3 transition-all duration-300 ease-out cursor-pointer ${
+                      mobileCase2 === "off"
+                        ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
+                        : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] active:scale-[0.98]"
+                    }`}
+                  >
+                    {mobileCase2 === "on" && (
+                      <VantaKnobWaves
+                        color={0x0b2847}
+                        shininess={30.0}
+                        waveHeight={20.0}
+                        waveSpeed={0.75}
+                        zoom={0.65}
+                      />
+                    )}
+                    <div
+                      className={`relative z-10 w-full h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
+                        mobileCase2 === "off"
+                          ? "opacity-90 contrast-100"
+                          : "opacity-100 brightness-100 drop-shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
+                      }`}
+                    >
+                      <Image
+                        src="/xbitheromockup.svg"
+                        alt="X-Bit Mockup"
+                        fill
+                        unoptimized
+                        sizes="160px"
+                        className="object-contain p-1"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1829,72 +1918,114 @@ export default function Home() {
             <div
               role="switch"
               aria-checked={mobileCase3 === "on"}
-              onClick={() => setMobileCase3((prev) => (prev === "off" ? "on" : "off"))}
-              className={`group relative w-full max-w-[360px] h-[180px] sm:h-[190px] rounded-full border-[10px] sm:border-[12px] border-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.985] ${
-                mobileCase3 === "off" ? "bg-[#0b2847]" : "bg-white"
+              aria-label={mobileCase3 === "off" ? "Attiva case study I Pupi Siciliani" : "Torna a copertina I Pupi Siciliani"}
+              onClick={() => {
+                setMobileToggled3(true);
+                setMobileCase3((prev) => (prev === "off" ? "on" : "off"));
+              }}
+              style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
+              className={`group relative w-full max-w-[360px] h-[180px] sm:h-[190px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_20px_50px_rgba(0,10,30,0.35)] cursor-pointer select-none active:scale-[0.985] ${
+                mobileCase3 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
-              {/* STATE OFF: Cover con numero "3" a destra */}
+              {/* Pista interna del Toggle (Glass ad OFF, Bianca ad ON) */}
               <div
-                className={`absolute inset-0 flex items-center justify-end pr-10 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`relative w-full h-full rounded-full [container-type:inline-size] overflow-hidden transition-all duration-500 ${
                   mobileCase3 === "off"
-                    ? "opacity-100 scale-100 translate-x-0"
-                    : "opacity-0 scale-75 translate-x-12"
+                    ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
+                    : "bg-white shadow-none"
                 }`}
               >
-                <span className="text-7xl sm:text-8xl font-black text-white/95 tracking-tighter drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
-                  3
-                </span>
-              </div>
-
-              {/* STATE ON: Dettagli case study a sinistra */}
-              <div
-                className={`absolute inset-y-0 left-5 right-[160px] sm:right-[170px] flex flex-col justify-center text-left space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
-                  mobileCase3 === "on"
-                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
-                    : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
-                }`}
-              >
-                <span className="text-[10px] font-bold text-blue-600 tracking-wider uppercase">
-                  E-Commerce &amp; Wine
-                </span>
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-tight">
-                  I Pupi Siciliani
-                </h3>
-                <p className="text-[11px] sm:text-xs text-slate-600 line-clamp-2 leading-snug">
-                  Bespoke digital wine store experience delivering +187% profit growth.
-                </p>
-                <div className="pt-1">
-                  <a
-                    href="https://www.heraldago.com/ipupisiciliani"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] font-semibold shadow-xs transition-all"
-                  >
-                    <span>See case study</span>
-                    <span className="text-xs">↗</span>
-                  </a>
+                {/* 1. STATO ATTIVO (ON): Dettagli case study a sinistra */}
+                <div
+                  className={`absolute top-0 left-[6%] w-[42%] h-full flex flex-col justify-center space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                    mobileCase3 === "on"
+                      ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
+                      : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
+                  }`}
+                >
+                  <span className="text-[10px] font-bold text-blue-600 tracking-wider uppercase">
+                    E-Commerce &amp; Wine
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-tight">
+                    I Pupi Siciliani
+                  </h3>
+                  <p className="text-[11px] text-slate-600 line-clamp-2 leading-snug">
+                    Bespoke digital wine store experience delivering +187% profit growth.
+                  </p>
+                  <div className="pt-1">
+                    <a
+                      href="https://www.heraldago.com/ipupisiciliani"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] font-semibold shadow-xs transition-all cursor-pointer"
+                    >
+                      <span>See case study</span>
+                      <span className="text-xs">↗</span>
+                    </a>
+                  </div>
                 </div>
-              </div>
 
-              {/* IL KNOB CIRCOLARE SCORREVOLE: Left a OFF, Right a ON */}
-              <div
-                className={`absolute top-2 bottom-2 aspect-square rounded-full overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
-                  mobileCase3 === "off"
-                    ? "left-2 bg-white shadow-[0_12px_28px_rgba(0,0,0,0.35),inset_0_1px_2px_rgba(255,255,255,0.9)]"
-                    : "left-[calc(100%-154px)] sm:left-[calc(100%-164px)] bg-[#0b2847] border border-white/30 shadow-[0_16px_36px_rgba(0,18,36,0.45)]"
-                } flex items-center justify-center p-3 select-none`}
-              >
-                <div className="relative w-full h-full">
-                  <Image
-                    src={mobileCase3 === "on" ? "/pupi-mockup-white.svg" : "/pupi-mockup.svg"}
-                    alt="I Pupi Siciliani Mockup"
-                    fill
-                    unoptimized
-                    sizes="150px"
-                    className="object-contain p-2"
-                  />
+                {/* 2. STATO SPENTO (OFF): Cover con numero "3" a destra */}
+                <div
+                  className={`absolute top-0 right-[4%] w-[46%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                    mobileCase3 === "off"
+                      ? "opacity-100 scale-100 translate-x-0"
+                      : "opacity-0 scale-75 translate-x-12"
+                  }`}
+                >
+                  <span className="text-7xl sm:text-8xl font-black text-white/95 tracking-tighter drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] leading-none">
+                    3
+                  </span>
+                  <span className="text-[11px] font-semibold text-white/80 tracking-wide mt-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
+                    I Pupi Siciliani
+                  </span>
+                </div>
+
+                {/* 3. IL KNOB DEL TOGGLE: Scorrimento orizzontale fluido con VantaKnobWaves */}
+                <div
+                  className={`absolute top-[6%] left-[2.5%] w-[47%] h-[88%] rounded-full overflow-visible ${
+                    !mobileToggled3
+                      ? "translate-x-0"
+                      : mobileCase3 === "on"
+                      ? "bubble-knob-h-in"
+                      : "bubble-knob-h-out"
+                  } flex items-center justify-center select-none`}
+                >
+                  <div
+                    className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-3 transition-all duration-300 ease-out cursor-pointer ${
+                      mobileCase3 === "off"
+                        ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
+                        : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] active:scale-[0.98]"
+                    }`}
+                  >
+                    {mobileCase3 === "on" && (
+                      <VantaKnobWaves
+                        color={0x0b2847}
+                        shininess={30.0}
+                        waveHeight={20.0}
+                        waveSpeed={0.75}
+                        zoom={0.65}
+                      />
+                    )}
+                    <div
+                      className={`relative z-10 w-full h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
+                        mobileCase3 === "off"
+                          ? "opacity-90 contrast-100"
+                          : "opacity-100 brightness-100 drop-shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
+                      }`}
+                    >
+                      <Image
+                        src={mobileCase3 === "on" ? "/pupi-mockup-white.svg" : "/pupi-mockup.svg"}
+                        alt="I Pupi Siciliani Mockup"
+                        fill
+                        unoptimized
+                        sizes="160px"
+                        className="object-contain p-1.5"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1913,82 +2044,120 @@ export default function Home() {
             <div
               role="switch"
               aria-checked={mobileCaseAbout === "on"}
-              onClick={() => setMobileCaseAbout((prev) => (prev === "off" ? "on" : "off"))}
-              className={`group relative w-full max-w-[360px] h-[180px] sm:h-[190px] rounded-full border-[10px] sm:border-[12px] border-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.985] ${
-                mobileCaseAbout === "off" ? "bg-[#0b2847]" : "bg-white"
+              aria-label={mobileCaseAbout === "off" ? "Attiva dettagli About" : "Torna a copertina About"}
+              onClick={() => {
+                setMobileToggledAbout(true);
+                setMobileCaseAbout((prev) => (prev === "off" ? "on" : "off"));
+              }}
+              style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
+              className={`group relative w-full max-w-[360px] h-[180px] sm:h-[190px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_20px_50px_rgba(0,10,30,0.35)] cursor-pointer select-none active:scale-[0.985] ${
+                mobileCaseAbout === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
-              {/* STATE OFF: Cover con testo "About" a destra */}
+              {/* Pista interna del Toggle (Glass ad OFF, Bianca ad ON) */}
               <div
-                className={`absolute inset-0 flex items-center justify-end pr-8 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`relative w-full h-full rounded-full [container-type:inline-size] overflow-hidden transition-all duration-500 ${
                   mobileCaseAbout === "off"
-                    ? "opacity-100 scale-100 translate-x-0"
-                    : "opacity-0 scale-75 translate-x-12"
+                    ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
+                    : "bg-white shadow-none"
                 }`}
               >
-                <div className="text-right">
-                  <h3 className="text-3xl font-extrabold text-white tracking-tight">Herald Ago</h3>
-                  <p className="text-xs text-white/70 font-medium">Product Designer</p>
+                {/* 1. STATO ATTIVO (ON): Bio sintetica e link a sinistra */}
+                <div
+                  className={`absolute top-0 left-[6%] w-[42%] h-full flex flex-col justify-center space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                    mobileCaseAbout === "on"
+                      ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
+                      : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
+                  }`}
+                >
+                  <h3 className="text-sm font-bold text-slate-900 tracking-tight">Herald Ago · 27 y/o</h3>
+                  <p className="text-[10px] text-slate-600 line-clamp-3 leading-snug">
+                    Padua, Miami, MSc in Denmark. Living between Italy &amp; Barcelona. Design, AI, sociology &amp; fine wine.
+                  </p>
+                  <div className="pt-1 flex items-center gap-1.5">
+                    <a
+                      href="/cv-herald-ago.pdf"
+                      target="_blank"
+                      download
+                      onClick={(e) => e.stopPropagation()}
+                      className="px-2.5 py-1 rounded-full bg-slate-900 hover:bg-black text-white text-[10px] font-semibold transition-all shadow-xs"
+                    >
+                      CV PDF
+                    </a>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const el = document.getElementById("mobile-contact");
+                        if (el) el.scrollIntoView({ behavior: "smooth" });
+                      }}
+                      className="px-2.5 py-1 rounded-full bg-slate-900/10 text-slate-900 text-[10px] font-semibold border border-slate-900/15"
+                    >
+                      Contact
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              {/* STATE ON: Bio sintetica e link a sinistra */}
-              <div
-                className={`absolute inset-y-0 left-5 right-[160px] sm:right-[170px] flex flex-col justify-center text-left space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
-                  mobileCaseAbout === "on"
-                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
-                    : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
-                }`}
-              >
-                <h3 className="text-sm font-bold text-slate-900 tracking-tight">Herald Ago · 27 y/o</h3>
-                <p className="text-[10px] text-slate-600 line-clamp-3 leading-snug">
-                  Padua, Miami, MSc in Denmark. Now living between Italy &amp; Barcelona. Design, AI, sociology &amp; fine wine.
-                </p>
-                <div className="pt-1 flex items-center gap-1.5">
-                  <a
-                    href="/cv-herald-ago.pdf"
-                    target="_blank"
-                    download
-                    onClick={(e) => e.stopPropagation()}
-                    className="px-2.5 py-1 rounded-full bg-slate-900 hover:bg-black text-white text-[10px] font-semibold transition-all shadow-xs"
-                  >
-                    CV PDF
-                  </a>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      const el = document.getElementById("mobile-contact");
-                      if (el) el.scrollIntoView({ behavior: "smooth" });
-                    }}
-                    className="px-2.5 py-1 rounded-full bg-slate-900/10 text-slate-900 text-[10px] font-semibold border border-slate-900/15"
-                  >
-                    Contact
-                  </button>
+                {/* 2. STATO SPENTO (OFF): Cover con nome a destra */}
+                <div
+                  className={`absolute top-0 right-[4%] w-[46%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                    mobileCaseAbout === "off"
+                      ? "opacity-100 scale-100 translate-x-0"
+                      : "opacity-0 scale-75 translate-x-12"
+                  }`}
+                >
+                  <div className="text-center px-1">
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+                      Herald Ago
+                    </h3>
+                    <p className="text-xs text-white/80 font-medium mt-0.5 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
+                      Product Designer
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              {/* IL KNOB CIRCOLARE CON FOTO PROFILO */}
-              <div
-                className={`absolute top-2 bottom-2 aspect-square rounded-full overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
-                  mobileCaseAbout === "off"
-                    ? "left-2 bg-white shadow-[0_12px_28px_rgba(0,0,0,0.35)]"
-                    : "left-[calc(100%-154px)] sm:left-[calc(100%-164px)] bg-[#0b2847] border border-white/30 shadow-[0_16px_36px_rgba(0,18,36,0.45)]"
-                } flex items-center justify-center p-1 select-none`}
-              >
-                <div className="relative w-full h-full rounded-full overflow-hidden">
-                  <Image
-                    src="/profile-pro.jpg"
-                    alt="Herald Ago"
-                    fill
-                    priority
-                    sizes="150px"
-                    className="object-cover object-[center_top]"
-                  />
+                {/* 3. IL KNOB DEL TOGGLE: Foto Profilo con VantaKnobWaves */}
+                <div
+                  className={`absolute top-[6%] left-[2.5%] w-[47%] h-[88%] rounded-full overflow-visible ${
+                    !mobileToggledAbout
+                      ? "translate-x-0"
+                      : mobileCaseAbout === "on"
+                      ? "bubble-knob-h-in"
+                      : "bubble-knob-h-out"
+                  } flex items-center justify-center select-none`}
+                >
+                  <div
+                    className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-1 transition-all duration-300 ease-out cursor-pointer ${
+                      mobileCaseAbout === "off"
+                        ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
+                        : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] active:scale-[0.98]"
+                    }`}
+                  >
+                    {mobileCaseAbout === "on" && (
+                      <VantaKnobWaves
+                        color={0x0b2847}
+                        shininess={30.0}
+                        waveHeight={20.0}
+                        waveSpeed={0.75}
+                        zoom={0.65}
+                      />
+                    )}
+                    <div className="relative z-10 w-[86%] h-[86%] rounded-full overflow-hidden shadow-inner border border-white/20">
+                      <Image
+                        src="/profile-pro.jpg"
+                        alt="Herald Ago"
+                        fill
+                        priority
+                        sizes="140px"
+                        className="object-cover object-[center_top]"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
 
         {/* --- 4. KIND WORDS (RECOMMENDATIONS): HORIZONTAL PILLS --- */}
         <section className="space-y-4">
