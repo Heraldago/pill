@@ -191,4 +191,44 @@ body {
   will-change: transform, border-radius;
 }
 
+@keyframes float-gentle-1 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+@keyframes float-gentle-2 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(12px) rotate(-2.5deg);
+  }
+}
+
+@keyframes float-gentle-3 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-1.5deg);
+  }
+}
+
+.animate-float-1 {
+  animation: float-gentle-1 4.2s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: float-gentle-2 5.1s ease-in-out infinite;
+}
+
+.animate-float-3 {
+  animation: float-gentle-3 4.6s ease-in-out infinite;
+}
+
+
 
