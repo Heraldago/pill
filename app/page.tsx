@@ -6,6 +6,7 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import VantaWaves from "@/components/VantaWaves";
+import VantaKnobWaves from "@/components/VantaKnobWaves";
 
 const SECTIONS = [
   { id: "hero", label: "Intro" },
@@ -122,12 +123,13 @@ export default function Home() {
         return;
 
       // Impostazione iniziale: Tutte le card dalla 2 alla 7 partono sotto al viewport
-      gsap.set(card2Ref.current, { yPercent: 100 });
-      gsap.set(card3Ref.current, { yPercent: 100 });
-      gsap.set(card4Ref.current, { yPercent: 100 });
-      gsap.set(card5Ref.current, { yPercent: 100 });
-      gsap.set(card6Ref.current, { yPercent: 100 });
-      gsap.set(card7Ref.current, { yPercent: 100 });
+      gsap.set(card1Ref.current, { autoAlpha: 1, scale: 1 });
+      gsap.set(card2Ref.current, { yPercent: 100, autoAlpha: 1, scale: 1 });
+      gsap.set(card3Ref.current, { yPercent: 100, autoAlpha: 1, scale: 1 });
+      gsap.set(card4Ref.current, { yPercent: 100, autoAlpha: 1, scale: 1 });
+      gsap.set(card5Ref.current, { yPercent: 100, autoAlpha: 1, scale: 1 });
+      gsap.set(card6Ref.current, { yPercent: 100, autoAlpha: 1, scale: 1 });
+      gsap.set(card7Ref.current, { yPercent: 100, autoAlpha: 1, scale: 1 });
 
       // Timeline bloccata (pin: true) con scrub elastico 1:1 per lo stack a 7 schede
       const tl = gsap.timeline({
@@ -149,14 +151,14 @@ export default function Home() {
 
       scrollTriggerRef.current = tl.scrollTrigger ?? null;
 
-      // Transizione 1: Card 1 rimpicciolisce/sfoca, Card 2 sale sopra
+      // Transizione 1: Card 1 sfuma e scompare a 0, Card 2 sale sopra
       tl.to(
         card1Ref.current,
         {
-          scale: 0.92,
-          opacity: 0.35,
-          filter: "blur(5px)",
+          autoAlpha: 0,
+          scale: 0.94,
           ease: "power1.inOut",
+          duration: 0.7,
         },
         0
       );
@@ -165,18 +167,19 @@ export default function Home() {
         {
           yPercent: 0,
           ease: "power1.inOut",
+          duration: 1,
         },
         0
       );
 
-      // Transizione 2: Card 2 rimpicciolisce/sfoca, Card 3 sale sopra
+      // Transizione 2: Card 2 sfuma e scompare a 0, Card 3 sale sopra
       tl.to(
         card2Ref.current,
         {
-          scale: 0.92,
-          opacity: 0.35,
-          filter: "blur(5px)",
+          autoAlpha: 0,
+          scale: 0.94,
           ease: "power1.inOut",
+          duration: 0.7,
         },
         1
       );
@@ -185,18 +188,19 @@ export default function Home() {
         {
           yPercent: 0,
           ease: "power1.inOut",
+          duration: 1,
         },
         1
       );
 
-      // Transizione 3: Card 3 rimpicciolisce/sfoca, Card 4 sale sopra
+      // Transizione 3: Card 3 sfuma e scompare a 0, Card 4 sale sopra
       tl.to(
         card3Ref.current,
         {
-          scale: 0.92,
-          opacity: 0.35,
-          filter: "blur(5px)",
+          autoAlpha: 0,
+          scale: 0.94,
           ease: "power1.inOut",
+          duration: 0.7,
         },
         2
       );
@@ -205,18 +209,19 @@ export default function Home() {
         {
           yPercent: 0,
           ease: "power1.inOut",
+          duration: 1,
         },
         2
       );
 
-      // Transizione 4: Card 4 rimpicciolisce/sfoca, Card 5 (About Me) sale sopra
+      // Transizione 4: Card 4 sfuma e scompare a 0, Card 5 (About Me) sale sopra
       tl.to(
         card4Ref.current,
         {
-          scale: 0.92,
-          opacity: 0.35,
-          filter: "blur(5px)",
+          autoAlpha: 0,
+          scale: 0.94,
           ease: "power1.inOut",
+          duration: 0.7,
         },
         3
       );
@@ -225,18 +230,19 @@ export default function Home() {
         {
           yPercent: 0,
           ease: "power1.inOut",
+          duration: 1,
         },
         3
       );
 
-      // Transizione 5: Card 5 rimpicciolisce/sfoca, Card 6 (Recommendations) sale sopra
+      // Transizione 5: Card 5 sfuma e scompare a 0, Card 6 (Recommendations) sale sopra
       tl.to(
         card5Ref.current,
         {
-          scale: 0.92,
-          opacity: 0.35,
-          filter: "blur(5px)",
+          autoAlpha: 0,
+          scale: 0.94,
           ease: "power1.inOut",
+          duration: 0.7,
         },
         4
       );
@@ -245,18 +251,19 @@ export default function Home() {
         {
           yPercent: 0,
           ease: "power1.inOut",
+          duration: 1,
         },
         4
       );
 
-      // Transizione 6: Card 6 rimpicciolisce/sfoca, Card 7 (Contact) sale sopra
+      // Transizione 6: Card 6 sfuma e scompare a 0, Card 7 (Contact) sale sopra
       tl.to(
         card6Ref.current,
         {
-          scale: 0.92,
-          opacity: 0.35,
-          filter: "blur(5px)",
+          autoAlpha: 0,
+          scale: 0.94,
           ease: "power1.inOut",
+          duration: 0.7,
         },
         5
       );
@@ -265,6 +272,7 @@ export default function Home() {
         {
           yPercent: 0,
           ease: "power1.inOut",
+          duration: 1,
         },
         5
       );
@@ -622,17 +630,22 @@ export default function Home() {
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case1Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-gradient-to-br from-[#0c3156] via-[#0b2847] to-[#071d33] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35),_inset_0_-4px_16px_rgba(0,180,216,0.2)] hover:scale-[1.015] active:scale-[0.98]"
+                      : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
-                  {/* Bagliore d'acqua marina quando il pomello è acceso */}
                   {case1Toggle === "on" && (
-                    <div className="absolute inset-0 pointer-events-none opacity-50 bg-[radial-gradient(circle_at_35%_30%,rgba(0,180,216,0.45),transparent_65%)]" />
+                    <VantaKnobWaves
+                      color={0x0b2847}
+                      shininess={30.0}
+                      waveHeight={20.0}
+                      waveSpeed={0.75}
+                      zoom={0.65}
+                    />
                   )}
 
                   {/* Schermo del Device dentro il Knob */}
                   <div
-                    className={`relative w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
+                    className={`relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
                       case1Toggle === "off"
                         ? "opacity-80 group-hover:opacity-100 contrast-100"
                         : "opacity-100 brightness-100 drop-shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
@@ -749,15 +762,20 @@ export default function Home() {
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case2Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-gradient-to-br from-[#0c3156] via-[#0b2847] to-[#071d33] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35),_inset_0_-4px_16px_rgba(0,180,216,0.2)] hover:scale-[1.015] active:scale-[0.98]"
+                      : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
-                  {/* Bagliore d'acqua marina quando il pomello è acceso */}
                   {case2Toggle === "on" && (
-                    <div className="absolute inset-0 pointer-events-none opacity-50 bg-[radial-gradient(circle_at_35%_30%,rgba(0,180,216,0.45),transparent_65%)]" />
+                    <VantaKnobWaves
+                      color={0x0b2847}
+                      shininess={30.0}
+                      waveHeight={20.0}
+                      waveSpeed={0.75}
+                      zoom={0.65}
+                    />
                   )}
                   <div
-                    className={`relative w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
+                    className={`relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
                       case2Toggle === "off"
                         ? "opacity-65 group-hover:opacity-90 contrast-[0.95] group-hover:contrast-100"
                         : "opacity-100 brightness-100"
@@ -874,15 +892,20 @@ export default function Home() {
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case3Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-gradient-to-br from-[#0c3156] via-[#0b2847] to-[#071d33] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35),_inset_0_-4px_16px_rgba(0,180,216,0.2)] hover:scale-[1.015] active:scale-[0.98]"
+                      : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
-                  {/* Bagliore d'acqua marina quando il pomello è acceso */}
                   {case3Toggle === "on" && (
-                    <div className="absolute inset-0 pointer-events-none opacity-50 bg-[radial-gradient(circle_at_35%_30%,rgba(0,180,216,0.45),transparent_65%)]" />
+                    <VantaKnobWaves
+                      color={0x0b2847}
+                      shininess={30.0}
+                      waveHeight={20.0}
+                      waveSpeed={0.75}
+                      zoom={0.65}
+                    />
                   )}
                   <div
-                    className={`relative w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
+                    className={`relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
                       case3Toggle === "off"
                         ? "opacity-65 group-hover:opacity-90 contrast-[0.95] group-hover:contrast-100"
                         : "opacity-100 brightness-100"
@@ -1012,15 +1035,20 @@ export default function Home() {
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
                     case4Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-gradient-to-br from-[#0c3156] via-[#0b2847] to-[#071d33] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35),_inset_0_-4px_16px_rgba(0,180,216,0.2)] hover:scale-[1.015] active:scale-[0.98]"
+                      : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
-                  {/* Bagliore d'acqua marina quando il pomello è acceso */}
                   {case4Toggle === "on" && (
-                    <div className="absolute inset-0 pointer-events-none opacity-50 bg-[radial-gradient(circle_at_35%_30%,rgba(0,180,216,0.45),transparent_65%)]" />
+                    <VantaKnobWaves
+                      color={0x0b2847}
+                      shininess={30.0}
+                      waveHeight={20.0}
+                      waveSpeed={0.75}
+                      zoom={0.65}
+                    />
                   )}
                   <div
-                    className={`relative w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out rounded-[1000px] overflow-hidden ${
+                    className={`relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out rounded-[1000px] overflow-hidden ${
                       case4Toggle === "off"
                         ? "opacity-70 group-hover:opacity-95 contrast-[0.95] group-hover:contrast-100"
                         : "opacity-100 brightness-100"
@@ -1202,15 +1230,20 @@ export default function Home() {
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
                     case5Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-gradient-to-br from-[#0c3156] via-[#0b2847] to-[#071d33] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35),_inset_0_-4px_16px_rgba(0,180,216,0.2)] hover:scale-[1.015] active:scale-[0.98]"
+                      : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
-                  {/* Bagliore d'acqua marina quando il pomello è acceso */}
                   {case5Toggle === "on" && (
-                    <div className="absolute inset-0 pointer-events-none opacity-50 bg-[radial-gradient(circle_at_35%_30%,rgba(0,180,216,0.45),transparent_65%)]" />
+                    <VantaKnobWaves
+                      color={0x0b2847}
+                      shininess={30.0}
+                      waveHeight={20.0}
+                      waveSpeed={0.75}
+                      zoom={0.65}
+                    />
                   )}
                   <div
-                    className={`relative w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out rounded-[1000px] overflow-hidden ${
+                    className={`relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out rounded-[1000px] overflow-hidden ${
                       case5Toggle === "off"
                         ? "opacity-70 group-hover:opacity-95 contrast-[0.95] group-hover:contrast-100"
                         : "opacity-100 brightness-100"
@@ -1442,38 +1475,127 @@ export default function Home() {
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-3 sm:p-5 md:p-6 transition-all duration-300 ease-out cursor-pointer ${
                     case6Toggle === "off"
                       ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-gradient-to-br from-[#0c3156] via-[#0b2847] to-[#071d33] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35),_inset_0_-4px_16px_rgba(0,180,216,0.2)] hover:scale-[1.015] active:scale-[0.98]"
+                      : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
-                  {/* Bagliore d'acqua marina quando il pomello è acceso */}
                   {case6Toggle === "on" && (
-                    <div className="absolute inset-0 pointer-events-none opacity-50 bg-[radial-gradient(circle_at_35%_30%,rgba(0,180,216,0.45),transparent_65%)]" />
+                    <VantaKnobWaves
+                      color={0x0b2847}
+                      shininess={30.0}
+                      waveHeight={20.0}
+                      waveSpeed={0.75}
+                      zoom={0.65}
+                    />
                   )}
                   {case6Toggle === "off" ? (
-                    /* Copertina Knob quando SPENTO: Visual Contatto Elegante e Muted */
-                    <div className="relative w-full h-full flex flex-col items-center justify-center text-center p-4 pointer-events-none select-none opacity-85 group-hover:opacity-100 transition-opacity">
-                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-slate-900/10 text-slate-800 flex items-center justify-center text-xl sm:text-2xl shadow-inner border border-slate-900/15 mb-2 backdrop-blur-sm">
-                        ✉
+                    /* Copertina Knob quando SPENTO: Elegante Card iOS Messaggi / Designer Pass */
+                    <div className="relative z-10 w-full h-full max-w-[340px] sm:max-w-[400px] flex flex-col justify-center items-center p-3 sm:p-5 pointer-events-none select-none transition-transform duration-300 group-hover:scale-[1.02]">
+                      <div className="w-full bg-slate-50/90 border border-slate-200/80 rounded-3xl p-3.5 sm:p-5 shadow-[0_12px_30px_rgba(0,0,0,0.08),_0_2px_4px_rgba(0,0,0,0.04)] space-y-3">
+                        {/* Header: Avatar di Herald + Disponibilità Live */}
+                        <div className="flex items-center justify-between gap-2.5">
+                          <div className="flex items-center gap-2.5">
+                            <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden ring-2 ring-white shadow-xs shrink-0">
+                              <Image
+                                src="/profile-pro.jpg"
+                                alt="Herald Ago"
+                                fill
+                                sizes="44px"
+                                className="object-cover object-[center_top]"
+                              />
+                            </div>
+                            <div className="text-left">
+                              <div className="flex items-center gap-1.5">
+                                <span className="text-xs sm:text-sm font-bold text-slate-900 leading-none">
+                                  Herald Ago
+                                </span>
+                                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                              </div>
+                              <span className="text-[10px] sm:text-[11px] font-medium text-emerald-600 block mt-0.5">
+                                Available for projects
+                              </span>
+                            </div>
+                          </div>
+                          <span className="text-[10px] font-medium text-slate-400 bg-slate-200/60 px-2 py-0.5 rounded-full shrink-0">
+                            Barcelona • CET
+                          </span>
+                        </div>
+
+                        {/* Bolla messaggio stile Apple iMessage */}
+                        <div className="bg-white border border-slate-200/60 rounded-2xl rounded-tl-sm p-3 sm:p-3.5 shadow-2xs text-left">
+                          <p className="text-xs sm:text-sm font-semibold text-slate-900 leading-snug">
+                            “Let’s build something extraordinary together.”
+                          </p>
+                          <p className="text-[11px] sm:text-xs text-slate-500 mt-1 leading-relaxed">
+                            Open for Product Design roles, advisory & collaborations.
+                          </p>
+                        </div>
+
+                        {/* Footer action badge */}
+                        <div className="flex items-center justify-between pt-0.5">
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500 text-white text-[11px] sm:text-xs font-semibold shadow-xs">
+                            <span>✉</span>
+                            <span className="tracking-tight">heraldago1@gmail.com</span>
+                          </div>
+                          <span className="text-[10px] text-slate-400 font-medium">
+                            ⚡ Fast response
+                          </span>
+                        </div>
                       </div>
-                      <span className="text-sm sm:text-lg font-bold text-slate-900 tracking-tight">
-                        heraldago1@gmail.com
-                      </span>
-                      <span className="text-[11px] sm:text-xs text-slate-600 font-normal mt-0.5">
-                        Barcelona, Spain
-                      </span>
                     </div>
                   ) : (
-                    /* Handle Tattile del Knob quando ATTIVO: 100% cliccabile per spegnere */
-                    <div className="relative w-full h-full flex flex-col items-center justify-center text-center p-4 pointer-events-none select-none">
-                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/15 text-white flex items-center justify-center text-xl sm:text-2xl shadow-inner border border-white/25 mb-2 backdrop-blur-sm">
-                        ✉
+                    /* Handle Tattile del Knob quando ATTIVO: Stessa Card iOS in Frosted Glass sopra il Mare 3D */
+                    <div className="relative z-10 w-full h-full max-w-[340px] sm:max-w-[400px] flex flex-col justify-center items-center p-3 sm:p-5 pointer-events-none select-none transition-transform duration-300 group-hover:scale-[1.02]">
+                      <div className="w-full bg-white/15 backdrop-blur-2xl border border-white/30 rounded-3xl p-3.5 sm:p-5 shadow-[0_20px_45px_rgba(0,10,30,0.4),_inset_0_1px_1px_rgba(255,255,255,0.4)] space-y-3">
+                        {/* Header: Avatar di Herald + Disponibilità Live in Frosted Glass */}
+                        <div className="flex items-center justify-between gap-2.5">
+                          <div className="flex items-center gap-2.5">
+                            <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden ring-2 ring-white/40 shadow-xs shrink-0">
+                              <Image
+                                src="/profile-pro.jpg"
+                                alt="Herald Ago"
+                                fill
+                                sizes="44px"
+                                className="object-cover object-[center_top]"
+                              />
+                            </div>
+                            <div className="text-left">
+                              <div className="flex items-center gap-1.5">
+                                <span className="text-xs sm:text-sm font-bold text-white leading-none">
+                                  Herald Ago
+                                </span>
+                                <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse" />
+                              </div>
+                              <span className="text-[10px] sm:text-[11px] font-medium text-cyan-200 block mt-0.5">
+                                Available for projects
+                              </span>
+                            </div>
+                          </div>
+                          <span className="text-[10px] font-medium text-white/70 bg-white/15 px-2 py-0.5 rounded-full shrink-0 border border-white/20">
+                            Barcelona • CET
+                          </span>
+                        </div>
+
+                        {/* Bolla messaggio stile Apple iMessage in Glass */}
+                        <div className="bg-white/10 backdrop-blur-md border border-white/25 rounded-2xl rounded-tl-sm p-3 sm:p-3.5 shadow-inner text-left">
+                          <p className="text-xs sm:text-sm font-semibold text-white leading-snug">
+                            “Let’s build something extraordinary together.”
+                          </p>
+                          <p className="text-[11px] sm:text-xs text-white/80 mt-1 leading-relaxed">
+                            Open for Product Design roles, advisory & collaborations.
+                          </p>
+                        </div>
+
+                        {/* Footer action badge */}
+                        <div className="flex items-center justify-between pt-0.5">
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-slate-900 text-[11px] sm:text-xs font-bold shadow-md">
+                            <span>✉</span>
+                            <span className="tracking-tight">heraldago1@gmail.com</span>
+                          </div>
+                          <span className="text-[10px] text-cyan-200/90 font-medium">
+                            ⚡ Fast response
+                          </span>
+                        </div>
                       </div>
-                      <span className="text-sm sm:text-lg font-bold text-white tracking-tight">
-                        heraldago1@gmail.com
-                      </span>
-                      <span className="text-[11px] sm:text-xs text-white/80 font-normal mt-0.5">
-                        Barcelona, Spain
-                      </span>
                     </div>
                   )}
                 </div>
