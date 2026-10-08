@@ -1006,35 +1006,39 @@ export default function Home() {
                   <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
                     Herald Ago
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-normal leading-snug mt-0.5 sm:mt-1.5 max-w-xl">
-                    Product Designer based in Barcelona
+                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-medium leading-snug mt-0.5 sm:mt-1.5 max-w-xl">
+                    27 y/o · Product Designer · Italy &amp; Barcelona
                   </p>
                 </div>
 
-                <p className="text-xs sm:text-sm md:text-base text-slate-800 leading-relaxed max-w-lg font-normal">
-                  I design digital products that simplify everyday life. MSc in IT - Web Communication Design from the University of Southern Denmark.
-                </p>
+                <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm md:text-base text-slate-800 leading-relaxed max-w-lg font-normal">
+                  <p>
+                    Italian with Albanian roots, born and raised in Padua. After a Bachelor in Communication Science &amp; Technologies, I moved to Miami, then headed to Denmark for an MSc in IT – Web Communication Design. After returning to Italy, I now live between Italy and Barcelona.
+                  </p>
+                  <p className="text-slate-700">
+                    Passionate about design, AI, sociology, books, and travel. Beyond the screen, I love good food, great wine, and spending time with family and friends.
+                  </p>
+                </div>
 
                 {/* Pulsanti di Azione */}
-                <div className="pt-0.5 sm:pt-2 flex flex-wrap items-center gap-2">
+                <div className="pt-0.5 sm:pt-1.5 flex flex-wrap items-center gap-2">
                   <a
                     href="/cv-herald-ago.pdf"
                     target="_blank"
                     download
                     onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] sm:text-xs md:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer"
+                    className="px-4 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold shadow-sm transition-all cursor-pointer"
                   >
-                    <span>Download Resume PDF</span>
-                    <span className="text-xs font-bold">↗</span>
+                    Download Resume PDF
                   </a>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       navigateToSection(6);
                     }}
-                    className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-slate-900/10 hover:bg-slate-900/15 active:scale-95 text-slate-900 text-[11px] sm:text-xs md:text-sm font-medium border border-slate-900/20 transition-all cursor-pointer"
+                    className="px-4 py-1.5 sm:py-2 rounded-full bg-slate-900/10 hover:bg-slate-900/20 active:scale-95 text-slate-900 text-xs sm:text-sm font-semibold border border-slate-900/15 backdrop-blur-md transition-all cursor-pointer"
                   >
-                    <span>Contact me</span>
+                    Contact me
                   </button>
                 </div>
               </div>
