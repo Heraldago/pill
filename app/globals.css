@@ -294,17 +294,17 @@ body {
      Handled by mobile breakpoints (vertical switch card).
    ========================================================================== */
 
-@media (min-width: 768px) and (max-aspect-ratio: 148/100) {
+@media (min-width: 768px) and (max-aspect-ratio: 175/100) {
   .capsule-card-wrapper {
-    padding: clamp(1rem, 2.5vw, 2.5rem) !important;
+    padding: clamp(1rem, 3vw, 2.5rem) !important;
   }
 
   .capsule-card-section {
-    width: min(100%, calc((100dvh - clamp(2rem, 5vw, 5rem)) * 1.65)) !important;
+    width: min(100%, calc((100dvh - clamp(2rem, 6vw, 5rem)) * 1.75)) !important;
     height: auto !important;
     max-width: 100% !important;
     max-height: 100% !important;
-    aspect-ratio: 1.65 / 1 !important;
+    aspect-ratio: 1.75 / 1 !important;
   }
 }
 
