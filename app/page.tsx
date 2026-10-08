@@ -1340,7 +1340,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                {/* Pillole Rapide: Copia Email, LinkedIn, Resume */}
+                {/* Bottoni Rapidi: Email, LinkedIn, Resume */}
                 <div
                   onClick={(e) => e.stopPropagation()}
                   className="flex flex-wrap items-center gap-2 pt-0.5"
@@ -1348,30 +1348,25 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={handleCopyEmail}
-                    className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-full bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-[0_4px_14px_rgba(0,0,0,0.2)] transition-all cursor-pointer"
+                    className="px-4 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold shadow-sm transition-all cursor-pointer"
                   >
-                    <span>heraldago1@gmail.com</span>
-                    <span className="text-[10px] bg-white/20 text-white px-1.5 py-0.5 rounded-full font-medium">
-                      {copiedEmail ? "Copied!" : "Copy"}
-                    </span>
+                    {copiedEmail ? "Copied!" : "heraldago1@gmail.com"}
                   </button>
                   <a
                     href="https://www.linkedin.com/in/heraldago/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 px-3 sm:px-4 py-1.5 rounded-full bg-slate-900/10 hover:bg-slate-900/15 text-slate-900 text-xs font-medium border border-slate-900/20 backdrop-blur-md transition-all cursor-pointer"
+                    className="px-4 py-1.5 sm:py-2 rounded-full bg-slate-900/10 hover:bg-slate-900/20 active:scale-95 text-slate-900 text-xs sm:text-sm font-semibold border border-slate-900/15 backdrop-blur-md transition-all cursor-pointer"
                   >
-                    <span>LinkedIn</span>
-                    <span className="text-[10px]">↗</span>
+                    LinkedIn
                   </a>
                   <a
                     href="/cv-herald-ago.pdf"
                     target="_blank"
                     download
-                    className="inline-flex items-center gap-1 px-3 sm:px-4 py-1.5 rounded-full bg-slate-900/10 hover:bg-slate-900/15 text-slate-900 text-xs font-medium border border-slate-900/20 backdrop-blur-md transition-all cursor-pointer"
+                    className="px-4 py-1.5 sm:py-2 rounded-full bg-slate-900/10 hover:bg-slate-900/20 active:scale-95 text-slate-900 text-xs sm:text-sm font-semibold border border-slate-900/15 backdrop-blur-md transition-all cursor-pointer"
                   >
-                    <span>Resume PDF</span>
-                    <span className="text-[10px]">↗</span>
+                    Resume PDF
                   </a>
                 </div>
 
@@ -1436,10 +1431,9 @@ export default function Home() {
                       </div>
                       <button
                         type="submit"
-                        className="w-full sm:w-auto px-5 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white font-bold text-xs sm:text-sm shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                        className="w-full sm:w-auto px-6 py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white font-bold text-xs sm:text-sm shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition-all cursor-pointer"
                       >
-                        <span>Send Message</span>
-                        <span className="text-xs font-bold">↗</span>
+                        Send Message
                       </button>
                     </form>
                   )}
@@ -1489,87 +1483,82 @@ export default function Home() {
                   )}
                   {/* Contenitore Spaziale delle 3 Icone Fluttuanti (Mail, LinkedIn, Resume) */}
                   <div className="relative z-10 w-full h-full flex items-center justify-center pointer-events-none select-none">
-                    {/* 1. Icona Fluttuante: Mail */}
+                    {/* 1. Icona Fluttuante: Mail (pura, grande, senza frame) */}
                     <div
                       onClick={(e) => {
                         e.stopPropagation();
                         handleCopyEmail();
                       }}
-                      className="animate-float-1 absolute top-[16%] left-[16%] sm:left-[20%] group/mail flex flex-col items-center gap-1.5 cursor-pointer z-20 pointer-events-auto"
+                      title="heraldago1@gmail.com"
+                      className="animate-float-1 absolute top-[16%] left-[16%] sm:left-[20%] cursor-pointer z-20 pointer-events-auto transition-transform duration-300 hover:scale-115 active:scale-90"
                     >
-                      <div className={`w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-2xl sm:rounded-3xl flex items-center justify-center transition-all duration-300 ease-out group-hover/mail:scale-110 active:scale-95 ${
-                        case6Toggle === "off"
-                          ? "bg-white/95 border border-slate-200/90 shadow-[0_14px_30px_rgba(0,10,30,0.1),_0_2px_4px_rgba(0,0,0,0.04)] text-slate-800 group-hover/mail:text-sky-500 group-hover/mail:border-sky-300 group-hover/mail:shadow-[0_18px_36px_rgba(14,165,233,0.22)]"
-                          : "bg-white/15 backdrop-blur-xl border border-white/30 shadow-[0_16px_36px_rgba(0,10,30,0.4),_inset_0_1px_1px_rgba(255,255,255,0.4)] text-white group-hover/mail:bg-white/25 group-hover/mail:shadow-[0_20px_45px_rgba(0,212,255,0.3)]"
-                      }`}>
-                        <svg className="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <rect width="20" height="16" x="2" y="4" rx="3" />
-                          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                        </svg>
-                      </div>
-                      <span className={`text-[10px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full transition-all ${
-                        case6Toggle === "off"
-                          ? "bg-slate-900/5 text-slate-700 group-hover/mail:text-slate-900 border border-slate-900/10 shadow-2xs"
-                          : "bg-white/15 text-white/90 group-hover/mail:text-white border border-white/20 shadow-xs"
-                      }`}>
-                        {copiedEmail ? "Copied!" : "Email"}
-                      </span>
+                      <svg
+                        className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 transition-all duration-300 ${
+                          case6Toggle === "off"
+                            ? "text-slate-800 hover:text-black drop-shadow-[0_10px_22px_rgba(0,0,0,0.18)]"
+                            : "text-white hover:text-sky-200 drop-shadow-[0_10px_30px_rgba(255,255,255,0.5)]"
+                        }`}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <rect width="20" height="16" x="2" y="4" rx="3" />
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                      </svg>
                     </div>
 
-                    {/* 2. Icona Fluttuante: LinkedIn */}
+                    {/* 2. Icona Fluttuante: LinkedIn (pura, grande, senza frame) */}
                     <a
                       href="https://www.linkedin.com/in/heraldago/"
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="animate-float-2 absolute top-[30%] right-[16%] sm:right-[20%] group/li flex flex-col items-center gap-1.5 cursor-pointer z-20 pointer-events-auto"
+                      title="LinkedIn"
+                      className="animate-float-2 absolute top-[36%] right-[16%] sm:right-[20%] cursor-pointer z-20 pointer-events-auto transition-transform duration-300 hover:scale-115 active:scale-90"
                     >
-                      <div className={`w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-2xl sm:rounded-3xl flex items-center justify-center transition-all duration-300 ease-out group-hover/li:scale-110 active:scale-95 ${
-                        case6Toggle === "off"
-                          ? "bg-white/95 border border-slate-200/90 shadow-[0_14px_30px_rgba(0,10,30,0.1),_0_2px_4px_rgba(0,0,0,0.04)] text-[#0077b5] group-hover/li:border-[#0077b5]/50 group-hover/li:shadow-[0_18px_36px_rgba(0,119,181,0.22)]"
-                          : "bg-white/15 backdrop-blur-xl border border-white/30 shadow-[0_16px_36px_rgba(0,10,30,0.4),_inset_0_1px_1px_rgba(255,255,255,0.4)] text-white group-hover/li:bg-white/25 group-hover/li:shadow-[0_20px_45px_rgba(0,212,255,0.3)]"
-                      }`}>
-                        <svg className="w-6 h-6 sm:w-8 sm:h-8 fill-current" viewBox="0 0 24 24">
-                          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-                        </svg>
-                      </div>
-                      <span className={`text-[10px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full transition-all ${
-                        case6Toggle === "off"
-                          ? "bg-slate-900/5 text-slate-700 group-hover/li:text-slate-900 border border-slate-900/10 shadow-2xs"
-                          : "bg-white/15 text-white/90 group-hover/li:text-white border border-white/20 shadow-xs"
-                      }`}>
-                        LinkedIn ↗
-                      </span>
+                      <svg
+                        className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 fill-current transition-all duration-300 ${
+                          case6Toggle === "off"
+                            ? "text-slate-800 hover:text-[#0077b5] drop-shadow-[0_10px_22px_rgba(0,0,0,0.18)]"
+                            : "text-white hover:text-sky-200 drop-shadow-[0_10px_30px_rgba(255,255,255,0.5)]"
+                        }`}
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                      </svg>
                     </a>
 
-                    {/* 3. Icona Fluttuante: Resume */}
+                    {/* 3. Icona Fluttuante: Resume (pura, grande, senza frame) */}
                     <a
                       href="/cv-herald-ago.pdf"
                       target="_blank"
                       download
                       onClick={(e) => e.stopPropagation()}
-                      className="animate-float-3 absolute bottom-[16%] left-[30%] sm:left-[34%] group/cv flex flex-col items-center gap-1.5 cursor-pointer z-20 pointer-events-auto"
+                      title="Resume PDF"
+                      className="animate-float-3 absolute bottom-[16%] left-[26%] sm:left-[30%] cursor-pointer z-20 pointer-events-auto transition-transform duration-300 hover:scale-115 active:scale-90"
                     >
-                      <div className={`w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-2xl sm:rounded-3xl flex items-center justify-center transition-all duration-300 ease-out group-hover/cv:scale-110 active:scale-95 ${
-                        case6Toggle === "off"
-                          ? "bg-white/95 border border-slate-200/90 shadow-[0_14px_30px_rgba(0,10,30,0.1),_0_2px_4px_rgba(0,0,0,0.04)] text-slate-800 group-hover/cv:text-slate-900 group-hover/cv:border-slate-400 group-hover/cv:shadow-[0_18px_36px_rgba(0,0,0,0.18)]"
-                          : "bg-white/15 backdrop-blur-xl border border-white/30 shadow-[0_16px_36px_rgba(0,10,30,0.4),_inset_0_1px_1px_rgba(255,255,255,0.4)] text-white group-hover/cv:bg-white/25 group-hover/cv:shadow-[0_20px_45px_rgba(0,212,255,0.3)]"
-                      }`}>
-                        <svg className="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                          <polyline points="14 2 14 8 20 8" />
-                          <line x1="16" y1="13" x2="8" y2="13" />
-                          <line x1="16" y1="17" x2="8" y2="17" />
-                          <polyline points="10 9 9 9 8 9" />
-                        </svg>
-                      </div>
-                      <span className={`text-[10px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full transition-all ${
-                        case6Toggle === "off"
-                          ? "bg-slate-900/5 text-slate-700 group-hover/cv:text-slate-900 border border-slate-900/10 shadow-2xs"
-                          : "bg-white/15 text-white/90 group-hover/cv:text-white border border-white/20 shadow-xs"
-                      }`}>
-                        Resume ↗
-                      </span>
+                      <svg
+                        className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 transition-all duration-300 ${
+                          case6Toggle === "off"
+                            ? "text-slate-800 hover:text-black drop-shadow-[0_10px_22px_rgba(0,0,0,0.18)]"
+                            : "text-white hover:text-sky-200 drop-shadow-[0_10px_30px_rgba(255,255,255,0.5)]"
+                        }`}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <line x1="16" y1="13" x2="8" y2="13" />
+                        <line x1="16" y1="17" x2="8" y2="17" />
+                        <polyline points="10 9 9 9 8 9" />
+                      </svg>
                     </a>
                   </div>
                 </div>
