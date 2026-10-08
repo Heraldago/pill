@@ -598,17 +598,17 @@ export default function Home() {
             >
               {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3%] md:w-[48%] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-14 space-y-2 sm:space-y-4 md:space-y-5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[8%] md:w-[41%] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-0 space-y-2 sm:space-y-4 md:space-y-5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case1Toggle === "on"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
+                  <h2 className="text-2xl sm:text-3xl md:text-[clamp(1.5rem,3.2cqw,3.5rem)] font-bold text-slate-900 tracking-tight leading-tight">
                     Ungdomskort
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-normal leading-snug mt-1 sm:mt-2.5 max-w-xl">
+                  <p className="text-xs sm:text-sm md:text-base lg:text-lg text-slate-700 font-normal leading-snug mt-1 sm:mt-2 max-w-xl">
                     Denmark&apos;s youth transit pass platform redesign.
                   </p>
                 </div>
@@ -639,7 +639,7 @@ export default function Home() {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+                  <h3 className="text-[clamp(1.5rem,3.8cqw,3.75rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                     Ungdomskort
                   </h3>
                 </div>
@@ -736,17 +736,17 @@ export default function Home() {
             >
               {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3%] md:w-[48%] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-14 space-y-2 sm:space-y-4 md:space-y-5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[8%] md:w-[41%] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-0 space-y-2 sm:space-y-4 md:space-y-5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case2Toggle === "on"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
+                  <h2 className="text-2xl sm:text-3xl md:text-[clamp(1.5rem,3.2cqw,3.5rem)] font-bold text-slate-900 tracking-tight leading-tight">
                     X-Bit
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-normal leading-snug mt-1 sm:mt-2.5 max-w-xl">
+                  <p className="text-xs sm:text-sm md:text-base lg:text-lg text-slate-700 font-normal leading-snug mt-1 sm:mt-2 max-w-xl">
                     Museum exploration and interactive audio guide.
                   </p>
                 </div>
@@ -774,7 +774,7 @@ export default function Home() {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+                  <h3 className="text-[clamp(1.5rem,3.8cqw,3.75rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                     X-Bit
                   </h3>
                 </div>
@@ -868,17 +868,17 @@ export default function Home() {
             >
               {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3%] md:w-[48%] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-12 space-y-2 sm:space-y-4 md:space-y-5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[8%] md:w-[41%] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-0 space-y-2 sm:space-y-4 md:space-y-5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case3Toggle === "on"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
+                  <h2 className="text-2xl sm:text-3xl md:text-[clamp(1.4rem,3cqw,3.2rem)] font-bold text-slate-900 tracking-tight leading-tight">
                     I Pupi Siciliani
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-normal leading-snug mt-1 sm:mt-2.5 max-w-xl">
+                  <p className="text-xs sm:text-sm md:text-base lg:text-lg text-slate-700 font-normal leading-snug mt-1 sm:mt-2 max-w-xl">
                     Wine retail platform with +187% YoY profit.
                   </p>
                 </div>
@@ -906,7 +906,7 @@ export default function Home() {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+                  <h3 className="text-[clamp(1.4rem,3.5cqw,3.5rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                     I Pupi Siciliani
                   </h3>
                 </div>
@@ -999,38 +999,38 @@ export default function Home() {
             >
               {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3%] md:w-[48%] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-12 space-y-2 sm:space-y-3.5 md:space-y-4 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[8%] md:w-[41%] md:h-full flex flex-col justify-center px-6 sm:px-8 md:px-0 py-2 sm:py-4 space-y-1.5 sm:space-y-2 md:space-y-2.5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case4Toggle === "on"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
+                  <h2 className="text-xl sm:text-2xl md:text-2xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight">
                     Herald Ago
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-medium leading-snug mt-0.5 sm:mt-1.5 max-w-xl">
+                  <p className="text-[11px] sm:text-xs md:text-xs lg:text-sm text-slate-600 font-medium leading-snug mt-0.5 max-w-xl">
                     27 y/o · Product Designer · Italy &amp; Barcelona
                   </p>
                 </div>
 
-                <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm md:text-base text-slate-800 leading-relaxed max-w-lg font-normal">
+                <div className="space-y-1 sm:space-y-1.5 text-[11px] sm:text-xs md:text-xs lg:text-sm text-slate-800 leading-relaxed max-w-lg font-normal">
                   <p>
                     Italian with Albanian roots, born and raised in Padua. After a Bachelor in Communication Science &amp; Technologies, I moved to Miami, then headed to Denmark for an MSc in IT – Web Communication Design. After returning to Italy, I now live between Italy and Barcelona.
                   </p>
-                  <p className="text-slate-700">
+                  <p className="text-slate-600">
                     Passionate about design, AI, sociology, books, and travel. Beyond the screen, I love good food, great wine, and spending time with family and friends.
                   </p>
                 </div>
 
                 {/* Pulsanti di Azione */}
-                <div className="pt-0.5 sm:pt-1.5 flex flex-wrap items-center gap-2">
+                <div className="pt-0.5 sm:pt-1 flex flex-wrap items-center gap-1.5 sm:gap-2">
                   <a
                     href="/cv-herald-ago.pdf"
                     target="_blank"
                     download
                     onClick={(e) => e.stopPropagation()}
-                    className="px-4 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold shadow-sm transition-all cursor-pointer"
+                    className="px-3 sm:px-3.5 py-1 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] sm:text-xs font-semibold shadow-sm transition-all cursor-pointer"
                   >
                     Download Resume PDF
                   </a>
@@ -1039,7 +1039,7 @@ export default function Home() {
                       e.stopPropagation();
                       navigateToSection(6);
                     }}
-                    className="px-4 py-1.5 sm:py-2 rounded-full bg-slate-900/10 hover:bg-slate-900/20 active:scale-95 text-slate-900 text-xs sm:text-sm font-semibold border border-slate-900/15 backdrop-blur-md transition-all cursor-pointer"
+                    className="px-3 sm:px-3.5 py-1 rounded-full bg-slate-900/10 hover:bg-slate-900/20 active:scale-95 text-slate-900 text-[11px] sm:text-xs font-semibold border border-slate-900/15 backdrop-blur-md transition-all cursor-pointer"
                   >
                     Contact me
                   </button>
@@ -1148,14 +1148,14 @@ export default function Home() {
             >
               {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3.5%] md:w-[43%] md:sm:w-[44%] md:lg:w-[45%] md:h-full flex flex-col justify-center px-5 sm:px-7 md:pl-8 md:lg:pl-10 md:pr-2 space-y-2 sm:space-y-2.5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[8%] md:w-[41%] md:h-full flex flex-col justify-center px-5 sm:px-7 md:px-0 py-2 sm:py-3 space-y-1.5 sm:space-y-2 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case5Toggle === "on"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
                 }`}
               >
                 <div>
-                  <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-[2.6rem] font-bold text-slate-900 tracking-tight leading-tight">
+                  <h2 className="text-xl sm:text-2xl md:text-[clamp(1.3rem,2.6cqw,2.4rem)] font-bold text-slate-900 tracking-tight leading-tight">
                     Kind Words
                   </h2>
                 </div>
@@ -1252,7 +1252,7 @@ export default function Home() {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+                  <h3 className="text-[clamp(1.35rem,3.4cqw,3.5rem)] font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
                     Recommendations
                   </h3>
                 </div>
@@ -1369,17 +1369,17 @@ export default function Home() {
             >
               {/* 1. STATO ATTIVO (ON): In alto su Mobile, a Sinistra su Desktop */}
               <div
-                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[3%] md:w-[48%] md:h-full flex flex-col justify-center px-5 sm:px-7 md:px-10 lg:px-12 space-y-2 sm:space-y-3 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                className={`absolute top-[2.5%] left-0 w-full h-[47%] md:top-0 md:left-[8%] md:w-[41%] md:h-full flex flex-col justify-center px-5 sm:px-7 md:px-0 space-y-1.5 sm:space-y-2 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   case6Toggle === "on"
                     ? "opacity-100 scale-100 translate-y-0 md:translate-x-0 pointer-events-auto"
                     : "opacity-0 scale-95 -translate-y-8 md:translate-y-0 md:-translate-x-12 pointer-events-none"
                 }`}
               >
                 <div>
-                  <h2 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
+                  <h2 className="text-xl sm:text-2xl md:text-[clamp(1.4rem,2.8cqw,2.6rem)] font-bold text-slate-900 tracking-tight leading-tight">
                     Let&apos;s Connect
                   </h2>
-                  <p className="text-[11px] sm:text-xs md:text-base text-slate-700 font-normal leading-snug mt-0.5 sm:mt-1">
+                  <p className="text-[11px] sm:text-xs md:text-sm text-slate-700 font-normal leading-snug mt-0.5">
                     Open for product design opportunities.
                   </p>
                 </div>
@@ -1493,7 +1493,7 @@ export default function Home() {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-                  <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+                  <h3 className="text-[clamp(1.5rem,3.8cqw,3.75rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                     Contact
                   </h3>
                 </div>
