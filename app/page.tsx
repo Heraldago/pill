@@ -527,7 +527,7 @@ export default function Home() {
           ref={card2Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-20 will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
+          <section className="relative w-full h-full rounded-[1000px] border border-white bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.35)]">
             {/* Contenitore interattivo del Toggle (Bouncy Bubble Physics) */}
             <div
               role="switch"
@@ -550,8 +550,10 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40 ${
-                case1Toggle === "on" ? "bg-white/[0.04]" : "bg-transparent"
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-400/50 ${
+                case1Toggle === "off"
+                  ? "bg-black/25 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_3px_rgba(0,0,0,0.2)]"
+                  : "bg-white shadow-none"
               }`}
             >
               {/* 1. STATO ATTIVO (ON) - LATO SINISTRO: Dettagli sintetici e minimalisti */}
@@ -563,15 +565,15 @@ export default function Home() {
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
+                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
                     Ungdomskort
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-white/80 font-normal leading-snug mt-1.5 sm:mt-2.5 max-w-xl drop-shadow-[0_1px_6px_rgba(0,0,0,0.2)]">
+                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-normal leading-snug mt-1.5 sm:mt-2.5 max-w-xl">
                     Denmark&apos;s youth transit pass platform redesign.
                   </p>
                 </div>
 
-                {/* Pulsante primario in frosted glass bianco */}
+                {/* Pulsante primario scuro a contrasto su pista bianca */}
                 <div className="pt-1 sm:pt-2">
                   <a
                     href="https://www.heraldago.com/ungdomskort"
@@ -580,7 +582,7 @@ export default function Home() {
                     onClick={(e) => {
                       e.stopPropagation(); // Evita che il click sul pulsante richiuda il toggle
                     }}
-                    className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-white/90 hover:bg-white active:scale-95 text-slate-900 text-xs sm:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25),_inset_0_1px_1px_rgba(255,255,255,0.8)] backdrop-blur-md transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer"
                   >
                     <span>See more</span>
                     <span className="text-xs font-bold">↗</span>
@@ -603,7 +605,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. IL KNOB / THUMB DEL TOGGLE (Animazione BUBBLE + Ceramic Puck) */}
+              {/* 3. IL KNOB / THUMB DEL TOGGLE (Animazione BUBBLE + Inversione Colori) */}
               <div
                 className={`absolute top-[6%] h-[88%] left-[2%] sm:left-[2.5%] w-[47%] rounded-[1000px] overflow-visible ${
                   !hasToggledOnce1
@@ -618,7 +620,7 @@ export default function Home() {
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case1Toggle === "off"
                       ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-white/95 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_8px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.015] active:scale-[0.98]"
+                      : "bg-slate-900/90 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_6px_rgba(0,0,0,0.2),_inset_0_1px_1px_rgba(255,255,255,0.2)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
                   {/* Schermo del Device dentro il Knob (opaco quando spento, brillante all'hover e su ON) */}
@@ -650,7 +652,7 @@ export default function Home() {
           ref={card3Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[25] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
+          <section className="relative w-full h-full rounded-[1000px] border border-white bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.35)]">
             <div
               role="switch"
               aria-checked={case2Toggle === "on"}
@@ -672,8 +674,10 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40 ${
-                case2Toggle === "on" ? "bg-white/[0.04]" : "bg-transparent"
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-400/50 ${
+                case2Toggle === "off"
+                  ? "bg-black/25 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_3px_rgba(0,0,0,0.2)]"
+                  : "bg-white shadow-none"
               }`}
             >
               {/* 1. STATO ATTIVO (ON) - LATO SINISTRO: Dettagli sintetici e minimalisti */}
@@ -685,10 +689,10 @@ export default function Home() {
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
+                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
                     X-Bit
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-white/80 font-normal leading-snug mt-1.5 sm:mt-2.5 max-w-xl drop-shadow-[0_1px_6px_rgba(0,0,0,0.2)]">
+                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-normal leading-snug mt-1.5 sm:mt-2.5 max-w-xl">
                     Museum exploration and interactive audio guide.
                   </p>
                 </div>
@@ -699,7 +703,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-white/90 hover:bg-white active:scale-95 text-slate-900 text-xs sm:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25),_inset_0_1px_1px_rgba(255,255,255,0.8)] backdrop-blur-md transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer"
                   >
                     <span>See more</span>
                     <span className="text-xs font-bold">↗</span>
@@ -722,7 +726,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Mockup X-Bit) */}
+              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Inversione Colori) */}
               <div
                 className={`absolute top-[6%] h-[88%] left-[2%] sm:left-[2.5%] w-[47%] rounded-[1000px] overflow-visible ${
                   !hasToggledOnce2
@@ -736,7 +740,7 @@ export default function Home() {
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case2Toggle === "off"
                       ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-white/95 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_8px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.015] active:scale-[0.98]"
+                      : "bg-slate-900/90 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_6px_rgba(0,0,0,0.2),_inset_0_1px_1px_rgba(255,255,255,0.2)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
                   <div
@@ -767,7 +771,7 @@ export default function Home() {
           ref={card4Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[30] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
+          <section className="relative w-full h-full rounded-[1000px] border border-white bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.35)]">
             <div
               role="switch"
               aria-checked={case3Toggle === "on"}
@@ -789,8 +793,10 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40 ${
-                case3Toggle === "on" ? "bg-white/[0.04]" : "bg-transparent"
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-400/50 ${
+                case3Toggle === "off"
+                  ? "bg-black/25 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_3px_rgba(0,0,0,0.2)]"
+                  : "bg-white shadow-none"
               }`}
             >
               {/* 1. STATO ATTIVO (ON) - LATO SINISTRO: Dettagli sintetici e minimalisti */}
@@ -802,10 +808,10 @@ export default function Home() {
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
+                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
                     I Pupi Siciliani
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-white/80 font-normal leading-snug mt-1.5 sm:mt-2.5 max-w-xl drop-shadow-[0_1px_6px_rgba(0,0,0,0.2)]">
+                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-normal leading-snug mt-1.5 sm:mt-2.5 max-w-xl">
                     Wine retail platform with +187% YoY profit.
                   </p>
                 </div>
@@ -816,7 +822,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-white/90 hover:bg-white active:scale-95 text-slate-900 text-xs sm:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25),_inset_0_1px_1px_rgba(255,255,255,0.8)] backdrop-blur-md transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer"
                   >
                     <span>See more</span>
                     <span className="text-xs font-bold">↗</span>
@@ -839,7 +845,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Mockup I Pupi Siciliani) */}
+              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Inversione Colori) */}
               <div
                 className={`absolute top-[6%] h-[88%] left-[2%] sm:left-[2.5%] w-[47%] rounded-[1000px] overflow-visible ${
                   !hasToggledOnce3
@@ -853,7 +859,7 @@ export default function Home() {
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                     case3Toggle === "off"
                       ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-white/95 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_8px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.015] active:scale-[0.98]"
+                      : "bg-slate-900/90 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_6px_rgba(0,0,0,0.2),_inset_0_1px_1px_rgba(255,255,255,0.2)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
                   <div
@@ -883,7 +889,7 @@ export default function Home() {
           ref={card5Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[35] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
+          <section className="relative w-full h-full rounded-[1000px] border border-white bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.35)]">
             <div
               role="switch"
               aria-checked={case4Toggle === "on"}
@@ -905,8 +911,10 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40 ${
-                case4Toggle === "on" ? "bg-white/[0.04]" : "bg-transparent"
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-400/50 ${
+                case4Toggle === "off"
+                  ? "bg-black/25 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_3px_rgba(0,0,0,0.2)]"
+                  : "bg-white shadow-none"
               }`}
             >
               {/* 1. STATO ATTIVO (ON) - LATO SINISTRO: Bio essenziale e minimalista */}
@@ -918,15 +926,15 @@ export default function Home() {
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
+                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
                     Herald Ago
                   </h2>
-                  <p className="text-xs sm:text-base md:text-xl text-white/80 font-normal leading-snug mt-1 sm:mt-2 max-w-xl drop-shadow-[0_1px_6px_rgba(0,0,0,0.2)]">
+                  <p className="text-xs sm:text-base md:text-xl text-slate-700 font-normal leading-snug mt-1 sm:mt-2 max-w-xl">
                     Product Designer based in Barcelona
                   </p>
                 </div>
 
-                <p className="text-xs sm:text-sm md:text-base text-white/90 leading-relaxed max-w-lg font-normal drop-shadow-[0_1px_4px_rgba(0,0,0,0.25)]">
+                <p className="text-xs sm:text-sm md:text-base text-slate-800 leading-relaxed max-w-lg font-normal">
                   I design digital products that simplify everyday life. MSc in IT - Web Communication Design from the University of Southern Denmark.
                 </p>
 
@@ -937,7 +945,7 @@ export default function Home() {
                     target="_blank"
                     download
                     onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white/90 hover:bg-white active:scale-95 text-slate-900 text-[11px] sm:text-xs md:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25),_inset_0_1px_1px_rgba(255,255,255,0.8)] backdrop-blur-md transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] sm:text-xs md:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer"
                   >
                     <span>Download Resume PDF</span>
                     <span className="text-xs font-bold">↗</span>
@@ -947,7 +955,7 @@ export default function Home() {
                       e.stopPropagation();
                       navigateToSection(6);
                     }}
-                    className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/15 hover:bg-white/25 active:scale-95 text-white text-[11px] sm:text-xs md:text-sm font-medium border border-white/30 backdrop-blur-md transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-slate-900/10 hover:bg-slate-900/15 active:scale-95 text-slate-900 text-[11px] sm:text-xs md:text-sm font-medium border border-slate-900/20 transition-all cursor-pointer"
                   >
                     <span>Contact me</span>
                   </button>
@@ -969,7 +977,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Ceramic Puck con Ritratto Reale) */}
+              {/* 3. IL KNOB DEL TOGGLE (Animazione BUBBLE + Inversione Colori) */}
               <div
                 className={`absolute top-[6%] h-[88%] left-[2%] sm:left-[2.5%] w-[47%] rounded-[1000px] overflow-visible ${
                   !hasToggledOnce4
@@ -983,7 +991,7 @@ export default function Home() {
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
                     case4Toggle === "off"
                       ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-white/95 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_8px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.015] active:scale-[0.98]"
+                      : "bg-slate-900/90 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_6px_rgba(0,0,0,0.2),_inset_0_1px_1px_rgba(255,255,255,0.2)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
                   <div
@@ -1013,7 +1021,7 @@ export default function Home() {
           ref={card6Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[40] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
+          <section className="relative w-full h-full rounded-[1000px] border border-white bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.35)]">
             <div
               role="switch"
               aria-checked={case5Toggle === "on"}
@@ -1035,8 +1043,10 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40 ${
-                case5Toggle === "on" ? "bg-white/[0.04]" : "bg-transparent"
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-400/50 ${
+                case5Toggle === "off"
+                  ? "bg-black/25 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_3px_rgba(0,0,0,0.2)]"
+                  : "bg-white shadow-none"
               }`}
             >
               {/* 1. STATO ATTIVO (ON) - LATO SINISTRO: Testimonianze Sintetiche */}
@@ -1048,7 +1058,7 @@ export default function Home() {
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-bold text-white tracking-tight leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-bold text-slate-900 tracking-tight leading-tight">
                     Kind Words
                   </h2>
                 </div>
@@ -1060,17 +1070,17 @@ export default function Home() {
                     setActiveRecPhoto("antonio");
                   }}
                   onMouseEnter={() => setActiveRecPhoto("antonio")}
-                  className={`p-2.5 sm:p-3 md:p-3.5 rounded-2xl transition-all duration-300 backdrop-blur-md text-white cursor-pointer ${
+                  className={`p-2.5 sm:p-3 md:p-3.5 rounded-2xl transition-all duration-300 backdrop-blur-md cursor-pointer ${
                     activeRecPhoto === "antonio"
-                      ? "bg-white/20 border-2 border-white/50 shadow-[0_8px_24px_rgba(0,0,0,0.25)] scale-[1.01]"
-                      : "bg-white/10 border border-white/20 hover:bg-white/15 hover:border-white/30"
+                      ? "bg-white border-2 border-slate-900/20 text-slate-900 shadow-md scale-[1.01]"
+                      : "bg-slate-900/[0.05] border border-slate-900/10 hover:bg-slate-900/[0.08] hover:border-slate-900/20 text-slate-800"
                   }`}
                 >
-                  <p className="text-xs sm:text-[13px] md:text-sm leading-relaxed font-normal text-white/95">
+                  <p className="text-xs sm:text-[13px] md:text-sm leading-relaxed font-normal text-slate-800">
                     &ldquo;Herald has rare proactivity and deep study. The dedication he brings to preparing every detail and the immediate trust he inspires in people will take him very far.&rdquo;
                   </p>
                   <div className="flex items-center gap-2 mt-1.5 sm:mt-2">
-                    <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-white/50 flex-shrink-0 shadow-xs">
+                    <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-slate-900/20 flex-shrink-0 shadow-xs">
                       <Image
                         src="/antonio-avatar.jpg"
                         alt="Antonio"
@@ -1081,8 +1091,8 @@ export default function Home() {
                       />
                     </div>
                     <div>
-                      <p className="text-[11px] sm:text-xs font-semibold text-white">Antonio</p>
-                      <p className="text-[9px] sm:text-[10px] text-white/70">Founder, I Pupi Siciliani</p>
+                      <p className="text-[11px] sm:text-xs font-semibold text-slate-900">Antonio</p>
+                      <p className="text-[9px] sm:text-[10px] text-slate-600">Founder, I Pupi Siciliani</p>
                     </div>
                   </div>
                 </div>
@@ -1094,17 +1104,17 @@ export default function Home() {
                     setActiveRecPhoto("sebastian");
                   }}
                   onMouseEnter={() => setActiveRecPhoto("sebastian")}
-                  className={`p-2.5 sm:p-3 md:p-3.5 rounded-2xl transition-all duration-300 backdrop-blur-md text-white cursor-pointer ${
+                  className={`p-2.5 sm:p-3 md:p-3.5 rounded-2xl transition-all duration-300 backdrop-blur-md cursor-pointer ${
                     activeRecPhoto === "sebastian"
-                      ? "bg-white/20 border-2 border-white/50 shadow-[0_8px_24px_rgba(0,0,0,0.25)] scale-[1.01]"
-                      : "bg-white/10 border border-white/20 hover:bg-white/15 hover:border-white/30"
+                      ? "bg-white border-2 border-slate-900/20 text-slate-900 shadow-md scale-[1.01]"
+                      : "bg-slate-900/[0.05] border border-slate-900/10 hover:bg-slate-900/[0.08] hover:border-slate-900/20 text-slate-800"
                   }`}
                 >
-                  <p className="text-xs sm:text-[13px] md:text-sm leading-relaxed font-normal text-white/95">
+                  <p className="text-xs sm:text-[13px] md:text-sm leading-relaxed font-normal text-slate-800">
                     &ldquo;Herald excelled at cross-stakeholder collaboration, guiding the entire creation process from start to finish with great precision and genuine passion.&rdquo;
                   </p>
                   <div className="flex items-center gap-2 mt-1.5 sm:mt-2">
-                    <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-white/50 flex-shrink-0 shadow-xs">
+                    <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-slate-900/20 flex-shrink-0 shadow-xs">
                       <Image
                         src="/sebastian-avatar.jpg"
                         alt="Sebastian"
@@ -1115,8 +1125,8 @@ export default function Home() {
                       />
                     </div>
                     <div>
-                      <p className="text-[11px] sm:text-xs font-semibold text-white">Sebastian</p>
-                      <p className="text-[9px] sm:text-[10px] text-white/70">CEO, næmt.nu</p>
+                      <p className="text-[11px] sm:text-xs font-semibold text-slate-900">Sebastian</p>
+                      <p className="text-[9px] sm:text-[10px] text-slate-600">CEO, næmt.nu</p>
                     </div>
                   </div>
                 </div>
@@ -1128,7 +1138,7 @@ export default function Home() {
                       e.stopPropagation();
                       navigateToSection(6);
                     }}
-                    className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white/90 hover:bg-white active:scale-95 text-slate-900 text-xs sm:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25),_inset_0_1px_1px_rgba(255,255,255,0.8)] backdrop-blur-md transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer"
                   >
                     <span>Next: Contact</span>
                     <span className="text-xs font-bold">↗</span>
@@ -1165,7 +1175,7 @@ export default function Home() {
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
                     case5Toggle === "off"
                       ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-white/95 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_8px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.015] active:scale-[0.98]"
+                      : "bg-slate-900/90 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_6px_rgba(0,0,0,0.2),_inset_0_1px_1px_rgba(255,255,255,0.2)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
                   <div
@@ -1219,7 +1229,7 @@ export default function Home() {
           ref={card7Ref}
           className="absolute inset-0 w-full h-full flex items-center justify-center p-0 z-[45] will-change-transform"
         >
-          <section className="relative w-full h-full rounded-[1000px] border border-white/30 bg-white/[0.12] backdrop-blur-2xl overflow-hidden shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
+          <section className="relative w-full h-full rounded-[1000px] border border-white bg-white overflow-hidden flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-10 shadow-[0_25px_65px_rgba(0,10,30,0.35)]">
             <div
               role="switch"
               aria-checked={case6Toggle === "on"}
@@ -1241,8 +1251,10 @@ export default function Home() {
                 }
               }}
               style={{ "--travel-dist": "48cqw" } as React.CSSProperties}
-              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-colors duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40 ${
-                case6Toggle === "on" ? "bg-white/[0.04]" : "bg-transparent"
+              className={`group relative w-full h-full rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-400/50 ${
+                case6Toggle === "off"
+                  ? "bg-black/25 backdrop-blur-xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.4),_inset_0_1px_3px_rgba(0,0,0,0.2)]"
+                  : "bg-white shadow-none"
               }`}
             >
               {/* 1. STATO ATTIVO (ON) - LATO SINISTRO: Canali di Contatto Diretti + Form */}
@@ -1254,10 +1266,10 @@ export default function Home() {
                 }`}
               >
                 <div>
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
+                  <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
                     Let&apos;s Connect
                   </h2>
-                  <p className="text-xs sm:text-sm md:text-base text-white/80 font-normal leading-snug mt-1 drop-shadow-[0_1px_6px_rgba(0,0,0,0.2)]">
+                  <p className="text-xs sm:text-sm md:text-base text-slate-700 font-normal leading-snug mt-1">
                     Open for product design opportunities.
                   </p>
                 </div>
@@ -1270,10 +1282,10 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={handleCopyEmail}
-                    className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-full bg-white/90 hover:bg-white text-slate-900 text-xs font-semibold shadow-[0_4px_14px_rgba(0,0,0,0.2)] backdrop-blur-md transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-full bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-[0_4px_14px_rgba(0,0,0,0.2)] transition-all cursor-pointer"
                   >
                     <span>heraldago1@gmail.com</span>
-                    <span className="text-[10px] bg-slate-100 text-slate-800 px-1.5 py-0.5 rounded-full font-medium">
+                    <span className="text-[10px] bg-white/20 text-white px-1.5 py-0.5 rounded-full font-medium">
                       {copiedEmail ? "Copied!" : "Copy"}
                     </span>
                   </button>
@@ -1281,7 +1293,7 @@ export default function Home() {
                     href="https://www.linkedin.com/in/heraldago/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 px-3 sm:px-4 py-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white text-xs font-medium border border-white/30 backdrop-blur-md transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1 px-3 sm:px-4 py-1.5 rounded-full bg-slate-900/10 hover:bg-slate-900/15 text-slate-900 text-xs font-medium border border-slate-900/20 backdrop-blur-md transition-all cursor-pointer"
                   >
                     <span>LinkedIn</span>
                     <span className="text-[10px]">↗</span>
@@ -1290,7 +1302,7 @@ export default function Home() {
                     href="/cv-herald-ago.pdf"
                     target="_blank"
                     download
-                    className="inline-flex items-center gap-1 px-3 sm:px-4 py-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white text-xs font-medium border border-white/30 backdrop-blur-md transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1 px-3 sm:px-4 py-1.5 rounded-full bg-slate-900/10 hover:bg-slate-900/15 text-slate-900 text-xs font-medium border border-slate-900/20 backdrop-blur-md transition-all cursor-pointer"
                   >
                     <span>Resume PDF</span>
                     <span className="text-[10px]">↗</span>
@@ -1303,14 +1315,14 @@ export default function Home() {
                   className="w-full pt-1 select-text"
                 >
                   {contactSubmitted ? (
-                    <div className="p-3.5 sm:p-4 rounded-2xl bg-white/15 border border-white/30 backdrop-blur-md text-center space-y-1.5">
-                      <div className="w-8 h-8 rounded-full bg-white text-slate-900 flex items-center justify-center mx-auto text-sm font-bold shadow-[0_0_12px_rgba(255,255,255,0.6)]">
+                    <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-900/[0.05] border border-slate-900/15 backdrop-blur-md text-center space-y-1.5">
+                      <div className="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center mx-auto text-sm font-bold shadow-md">
                         ✓
                       </div>
-                      <h3 className="text-sm sm:text-base font-bold text-white">
+                      <h3 className="text-sm sm:text-base font-bold text-slate-900">
                         Message sent!
                       </h3>
-                      <p className="text-xs text-white/80">
+                      <p className="text-xs text-slate-700">
                         Thank you for reaching out. I will reply soon.
                       </p>
                       <button
@@ -1321,7 +1333,7 @@ export default function Home() {
                           setContactEmail("");
                           setContactMessage("");
                         }}
-                        className="px-3.5 py-1 rounded-full bg-white/90 text-slate-900 text-xs font-semibold hover:bg-white transition-colors cursor-pointer"
+                        className="px-3.5 py-1 rounded-full bg-slate-900 text-white text-xs font-semibold hover:bg-black transition-colors cursor-pointer"
                       >
                         Send another
                       </button>
@@ -1335,7 +1347,7 @@ export default function Home() {
                           value={contactName}
                           onChange={(e) => setContactName(e.target.value)}
                           placeholder="Your name"
-                          className="w-full px-3.5 py-1.5 sm:py-2 rounded-xl bg-white/10 border border-white/25 text-xs sm:text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/50 focus:bg-white/20 transition-all backdrop-blur-sm"
+                          className="w-full px-3.5 py-1.5 sm:py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs sm:text-sm text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30 focus:border-slate-900 focus:bg-white transition-all backdrop-blur-sm"
                         />
                         <input
                           type="email"
@@ -1343,7 +1355,7 @@ export default function Home() {
                           value={contactEmail}
                           onChange={(e) => setContactEmail(e.target.value)}
                           placeholder="Your email"
-                          className="w-full px-3.5 py-1.5 sm:py-2 rounded-xl bg-white/10 border border-white/25 text-xs sm:text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/50 focus:bg-white/20 transition-all backdrop-blur-sm"
+                          className="w-full px-3.5 py-1.5 sm:py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs sm:text-sm text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30 focus:border-slate-900 focus:bg-white transition-all backdrop-blur-sm"
                         />
                       </div>
                       <div>
@@ -1353,12 +1365,12 @@ export default function Home() {
                           value={contactMessage}
                           onChange={(e) => setContactMessage(e.target.value)}
                           placeholder="Your message or project idea..."
-                          className="w-full px-3.5 py-1.5 sm:py-2 rounded-xl bg-white/10 border border-white/25 text-xs sm:text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/50 focus:bg-white/20 resize-none transition-all backdrop-blur-sm"
+                          className="w-full px-3.5 py-1.5 sm:py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs sm:text-sm text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30 focus:border-slate-900 focus:bg-white resize-none transition-all backdrop-blur-sm"
                         />
                       </div>
                       <button
                         type="submit"
-                        className="w-full sm:w-auto px-5 py-1.5 sm:py-2 rounded-full bg-white/90 hover:bg-white active:scale-95 text-slate-900 font-bold text-xs sm:text-sm shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                        className="w-full sm:w-auto px-5 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white font-bold text-xs sm:text-sm shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer flex items-center justify-center gap-1.5"
                       >
                         <span>Send Message</span>
                         <span className="text-xs font-bold">↗</span>
@@ -1397,7 +1409,7 @@ export default function Home() {
                   className={`relative w-full h-full rounded-[1000px] overflow-hidden flex items-center justify-center p-3 sm:p-5 md:p-6 transition-all duration-300 ease-out cursor-pointer ${
                     case6Toggle === "off"
                       ? "bg-white/95 backdrop-blur-xl border border-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                      : "bg-white/95 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_8px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.015] active:scale-[0.98]"
+                      : "bg-slate-900/90 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.4),_0_2px_6px_rgba(0,0,0,0.2),_inset_0_1px_1px_rgba(255,255,255,0.2)] hover:scale-[1.015] active:scale-[0.98]"
                   }`}
                 >
                   {case6Toggle === "off" ? (
@@ -1416,13 +1428,13 @@ export default function Home() {
                   ) : (
                     /* Handle Tattile del Knob quando ATTIVO: 100% cliccabile per spegnere */
                     <div className="relative w-full h-full flex flex-col items-center justify-center text-center p-4 pointer-events-none select-none">
-                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-slate-900/10 text-slate-800 flex items-center justify-center text-xl sm:text-2xl shadow-inner border border-slate-900/15 mb-2 backdrop-blur-sm">
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/15 text-white flex items-center justify-center text-xl sm:text-2xl shadow-inner border border-white/25 mb-2 backdrop-blur-sm">
                         ✉
                       </div>
-                      <span className="text-sm sm:text-lg font-bold text-slate-900 tracking-tight">
+                      <span className="text-sm sm:text-lg font-bold text-white tracking-tight">
                         heraldago1@gmail.com
                       </span>
-                      <span className="text-[11px] sm:text-xs text-slate-600 font-normal mt-0.5">
+                      <span className="text-[11px] sm:text-xs text-white/70 font-normal mt-0.5">
                         Barcelona, Spain
                       </span>
                     </div>
