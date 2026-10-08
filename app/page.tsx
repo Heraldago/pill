@@ -1623,315 +1623,377 @@ export default function Home() {
     </div>
 
       {/* =========================================================================
-          MOBILE VIEW: STATIC NATURAL SCROLL STACKED CAPSULES (block md:hidden)
-          Based on Figma Frame 7 design with stacked overlapping capsules
+          MOBILE VIEW: STATIC NATURAL SCROLL FULL PILL CAPSULES (block md:hidden)
+          Each section is a full pillola capsule matching the desktop aesthetics
          ========================================================================= */}
-      <div className="block md:hidden relative w-full z-10 px-4 pt-20 pb-28 space-y-12">
-        {/* --- 1. HERO: STACKED OVERLAPPING CAPSULES (Figma Frame 7) --- */}
-        <section id="mobile-home" className="flex flex-col items-center pt-2 pb-4">
-          <div className="w-full flex flex-col items-center">
-            {/* Pillola 1: Saluto */}
-            <div className="w-full py-9 px-6 rounded-full bg-white text-slate-900 border-2 border-white shadow-[0_12px_32px_rgba(0,10,30,0.18)] flex items-center justify-center text-center relative z-30">
-              <h1 className="text-[1.6rem] font-bold tracking-tight text-slate-900 leading-snug">
+      <div className="block md:hidden relative w-full z-10 px-3 sm:px-4 pt-16 pb-28 space-y-12">
+        {/* --- 1. HERO PILLOLA --- */}
+        <section id="mobile-home" className="w-full flex justify-center">
+          <div className="relative w-full max-w-[350px] min-h-[520px] rounded-[1000px] border-[10px] sm:border-[12px] border-white bg-[#07162c] shadow-[0_25px_65px_rgba(0,10,30,0.35)] flex flex-col items-center justify-between p-8 text-center overflow-hidden">
+            {/* Subtle glass reflection highlight */}
+            <div className="absolute inset-0 rounded-[1000px] pointer-events-none border border-white/20 shadow-[inset_0_2px_12px_rgba(255,255,255,0.15)]" />
+            
+            <div className="pt-6">
+              <span className="px-3.5 py-1 rounded-full bg-white/10 text-white/80 text-[11px] font-medium tracking-wide border border-white/15">
                 Hi, I&apos;m Herald :)
+              </span>
+            </div>
+
+            <div className="space-y-3 px-2 z-10">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
+                I <span className="text-[#38bdf8] drop-shadow-[0_0_12px_rgba(56,189,248,0.5)]">design</span> digital products
               </h1>
-            </div>
-
-            {/* Pillola 2: Missione */}
-            <div className="w-full py-9 px-6 rounded-full bg-white text-slate-900 border-2 border-white shadow-[0_12px_32px_rgba(0,10,30,0.18)] flex items-center justify-center text-center -mt-6 relative z-20">
-              <p className="text-[1.6rem] font-medium tracking-tight text-slate-900 leading-snug">
-                I <span className="font-bold text-blue-600">design</span> digital products
+              <p className="text-xl sm:text-2xl font-normal text-white/90 leading-snug">
+                that <span className="italic font-serif font-light text-white">help</span> and{" "}
+                <span className="italic font-serif font-light text-white">simplify</span> people&apos;s lives.
               </p>
             </div>
 
-            {/* Pillola 3: Scopo */}
-            <div className="w-full py-9 px-6 rounded-full bg-white text-slate-900 border-2 border-white shadow-[0_12px_32px_rgba(0,10,30,0.18)] flex items-center justify-center text-center -mt-6 relative z-10">
-              <p className="text-[1.6rem] font-medium tracking-tight text-slate-900 leading-snug">
-                that <span className="italic font-serif font-normal">help</span> and{" "}
-                <span className="italic font-serif font-normal">simplify</span> people&apos;s lives.
-              </p>
+            <div className="pb-6 z-10">
+              <button
+                onClick={() => {
+                  const el = document.getElementById("mobile-work");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/15 hover:bg-white/25 active:scale-95 text-white text-xs font-semibold border border-white/20 transition-all cursor-pointer shadow-xs"
+              >
+                <span>Selected Work</span>
+                <span className="text-xs">↓</span>
+              </button>
             </div>
           </div>
         </section>
 
-        {/* --- 2. WORK: SELECTED CASE STUDIES --- */}
-        <section id="mobile-work" className="space-y-6">
+        {/* --- 2. WORK: SELECTED CASE STUDIES (EACH IS A PILLOLA) --- */}
+        <section id="mobile-work" className="space-y-12">
+          {/* Section pill header */}
           <div className="flex items-center justify-center">
             <span className="px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
               Selected Work
             </span>
           </div>
 
-          {/* Project 1: Ungdomskort */}
-          <div className="w-full rounded-[36px] bg-white border-2 border-white shadow-[0_20px_45px_rgba(0,10,30,0.25)] p-5 space-y-4 overflow-hidden">
-            <div className="relative w-full aspect-[16/10] rounded-[24px] bg-[#0b2847] border border-slate-900/10 overflow-hidden flex items-center justify-center p-4">
-              <div className="relative w-full h-full">
-                <Image
-                  src="/ungheromockup.svg"
-                  alt="Ungdomskort Portal"
-                  fill
-                  unoptimized
-                  sizes="90vw"
-                  className="object-contain p-2"
-                />
+          {/* Project 1: Ungdomskort Pillola */}
+          <div className="w-full flex justify-center">
+            <div className="relative w-full max-w-[350px] min-h-[600px] rounded-[1000px] border-[10px] sm:border-[12px] border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)] p-5 flex flex-col items-center justify-between text-center overflow-hidden">
+              {/* Top Circular Knob */}
+              <div className="relative w-[230px] h-[230px] rounded-full bg-[#0b2847] border border-white/20 shadow-[0_14px_32px_rgba(0,18,36,0.35)] flex items-center justify-center p-4 flex-shrink-0 mt-3">
+                <div className="relative w-full h-full">
+                  <Image
+                    src="/ungheromockup.svg"
+                    alt="Ungdomskort Portal"
+                    fill
+                    unoptimized
+                    sizes="230px"
+                    className="object-contain p-2"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="space-y-2">
-              <span className="text-[11px] font-bold text-blue-600 tracking-wider uppercase">Transit Platform</span>
-              <h3 className="text-2xl font-bold text-slate-900 tracking-tight">Ungdomskort</h3>
-              <p className="text-xs text-slate-700 leading-relaxed font-normal">
-                Denmark&apos;s youth transit pass platform redesign, simplifying digital commuting for nationwide students.
-              </p>
-              <div className="pt-1">
-                <a
-                  href="https://www.heraldago.com/ungdomskort"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs font-semibold shadow-xs transition-all"
-                >
-                  <span>See case study</span>
-                  <span className="text-xs font-bold">↗</span>
-                </a>
+
+              {/* Bottom Content */}
+              <div className="flex flex-col items-center justify-center space-y-2.5 px-3 pb-6 pt-2">
+                <span className="text-[11px] font-bold text-blue-600 tracking-wider uppercase">
+                  Transit Platform
+                </span>
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
+                  Ungdomskort
+                </h3>
+                <p className="text-xs text-slate-700 leading-relaxed font-normal max-w-[250px]">
+                  Denmark&apos;s youth transit pass platform redesign, simplifying digital commuting for nationwide students.
+                </p>
+                <div className="pt-2">
+                  <a
+                    href="https://www.heraldago.com/ungdomskort"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs font-semibold shadow-md transition-all cursor-pointer"
+                  >
+                    <span>See case study</span>
+                    <span className="text-xs font-bold">↗</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Project 2: X-Bit */}
-          <div className="w-full rounded-[36px] bg-white border-2 border-white shadow-[0_20px_45px_rgba(0,10,30,0.25)] p-5 space-y-4 overflow-hidden">
-            <div className="relative w-full aspect-[16/10] rounded-[24px] bg-[#0b2847] border border-slate-900/10 overflow-hidden flex items-center justify-center p-4">
-              <div className="relative w-full h-full">
-                <Image
-                  src="/xbitheromockup.svg"
-                  alt="X-Bit Mobile App"
-                  fill
-                  unoptimized
-                  sizes="90vw"
-                  className="object-contain p-2"
-                />
+          {/* Project 2: X-Bit Pillola */}
+          <div className="w-full flex justify-center">
+            <div className="relative w-full max-w-[350px] min-h-[600px] rounded-[1000px] border-[10px] sm:border-[12px] border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)] p-5 flex flex-col items-center justify-between text-center overflow-hidden">
+              {/* Top Circular Knob */}
+              <div className="relative w-[230px] h-[230px] rounded-full bg-[#0b2847] border border-white/20 shadow-[0_14px_32px_rgba(0,18,36,0.35)] flex items-center justify-center p-4 flex-shrink-0 mt-3">
+                <div className="relative w-full h-full">
+                  <Image
+                    src="/xbitheromockup.svg"
+                    alt="X-Bit Mobile App"
+                    fill
+                    unoptimized
+                    sizes="230px"
+                    className="object-contain p-2"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="space-y-2">
-              <span className="text-[11px] font-bold text-blue-600 tracking-wider uppercase">Audio Guide &amp; Museum</span>
-              <h3 className="text-2xl font-bold text-slate-900 tracking-tight">X-Bit</h3>
-              <p className="text-xs text-slate-700 leading-relaxed font-normal">
-                Interactive audio guide and cultural heritage exploration platform bridging museum exhibits with engaging storytelling.
-              </p>
-              <div className="pt-1">
-                <a
-                  href="https://www.heraldago.com/xbit"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs font-semibold shadow-xs transition-all"
-                >
-                  <span>See case study</span>
-                  <span className="text-xs font-bold">↗</span>
-                </a>
+
+              {/* Bottom Content */}
+              <div className="flex flex-col items-center justify-center space-y-2.5 px-3 pb-6 pt-2">
+                <span className="text-[11px] font-bold text-blue-600 tracking-wider uppercase">
+                  Museum Exploration
+                </span>
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
+                  X-Bit
+                </h3>
+                <p className="text-xs text-slate-700 leading-relaxed font-normal max-w-[250px]">
+                  Interactive audio guide and cultural heritage exploration platform bridging museum exhibits with engaging storytelling.
+                </p>
+                <div className="pt-2">
+                  <a
+                    href="https://www.heraldago.com/xbit"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs font-semibold shadow-md transition-all cursor-pointer"
+                  >
+                    <span>See case study</span>
+                    <span className="text-xs font-bold">↗</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Project 3: I Pupi Siciliani */}
-          <div className="w-full rounded-[36px] bg-white border-2 border-white shadow-[0_20px_45px_rgba(0,10,30,0.25)] p-5 space-y-4 overflow-hidden">
-            <div className="relative w-full aspect-[16/10] rounded-[24px] bg-[#0b2847] border border-slate-900/10 overflow-hidden flex items-center justify-center p-4">
-              <div className="relative w-full h-full">
-                <Image
-                  src="/pupi-mockup-white.svg"
-                  alt="I Pupi Siciliani Wine Store"
-                  fill
-                  unoptimized
-                  sizes="90vw"
-                  className="object-contain p-2"
-                />
+          {/* Project 3: I Pupi Siciliani Pillola */}
+          <div className="w-full flex justify-center">
+            <div className="relative w-full max-w-[350px] min-h-[600px] rounded-[1000px] border-[10px] sm:border-[12px] border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)] p-5 flex flex-col items-center justify-between text-center overflow-hidden">
+              {/* Top Circular Knob */}
+              <div className="relative w-[230px] h-[230px] rounded-full bg-[#0b2847] border border-white/20 shadow-[0_14px_32px_rgba(0,18,36,0.35)] flex items-center justify-center p-4 flex-shrink-0 mt-3">
+                <div className="relative w-full h-full">
+                  <Image
+                    src="/pupi-mockup-white.svg"
+                    alt="I Pupi Siciliani Wine Store"
+                    fill
+                    unoptimized
+                    sizes="230px"
+                    className="object-contain p-2"
+                  />
+                </div>
+              </div>
+
+              {/* Bottom Content */}
+              <div className="flex flex-col items-center justify-center space-y-2.5 px-3 pb-6 pt-2">
+                <span className="text-[11px] font-bold text-blue-600 tracking-wider uppercase">
+                  E-Commerce &amp; Wine
+                </span>
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
+                  I Pupi Siciliani
+                </h3>
+                <p className="text-xs text-slate-700 leading-relaxed font-normal max-w-[250px]">
+                  Bespoke digital wine store experience delivering +187% YoY profit growth through refined UX and identity design.
+                </p>
+                <div className="pt-2">
+                  <a
+                    href="https://www.heraldago.com/ipupisiciliani"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs font-semibold shadow-md transition-all cursor-pointer"
+                  >
+                    <span>See case study</span>
+                    <span className="text-xs font-bold">↗</span>
+                  </a>
+                </div>
               </div>
             </div>
-            <div className="space-y-2">
-              <span className="text-[11px] font-bold text-blue-600 tracking-wider uppercase">E-Commerce &amp; Wine</span>
-              <h3 className="text-2xl font-bold text-slate-900 tracking-tight">I Pupi Siciliani</h3>
-              <p className="text-xs text-slate-700 leading-relaxed font-normal">
-                Bespoke digital wine store experience delivering +187% YoY profit growth through refined UX and identity design.
-              </p>
-              <div className="pt-1">
-                <a
-                  href="https://www.heraldago.com/ipupisiciliani"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs font-semibold shadow-xs transition-all"
-                >
-                  <span>See case study</span>
-                  <span className="text-xs font-bold">↗</span>
-                </a>
+          </div>
+        </section>
+
+        {/* --- 3. ABOUT ME PILLOLA --- */}
+        <section id="mobile-about" className="space-y-6">
+          <div className="flex items-center justify-center">
+            <span className="px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
+              About
+            </span>
+          </div>
+
+          <div className="w-full flex justify-center">
+            <div className="relative w-full max-w-[350px] min-h-[660px] rounded-[1000px] border-[10px] sm:border-[12px] border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)] p-5 flex flex-col items-center justify-between text-center overflow-hidden">
+              {/* Top Circular Knob Photo */}
+              <div className="relative w-[190px] h-[190px] rounded-full overflow-hidden border-4 border-slate-900/10 shadow-[0_14px_32px_rgba(0,18,36,0.25)] flex-shrink-0 mt-3">
+                <Image
+                  src="/profile-pro.jpg"
+                  alt="Herald Ago"
+                  fill
+                  priority
+                  sizes="190px"
+                  className="object-cover object-[center_top]"
+                />
+              </div>
+
+              {/* Bottom Content */}
+              <div className="space-y-3 px-3 pb-6 pt-2">
+                <div>
+                  <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Herald Ago</h2>
+                  <p className="text-xs font-medium text-slate-600">27 y/o · Product Designer · Italy &amp; Barcelona</p>
+                </div>
+
+                <div className="space-y-2 text-xs text-slate-700 leading-relaxed font-normal max-w-[270px] mx-auto">
+                  <p>
+                    Italian with Albanian roots, born and raised in Padua. Bachelor in Communication Science &amp; Tech, moved to Miami, then Denmark for MSc in IT – Web Communication Design. Now living between Italy &amp; Barcelona.
+                  </p>
+                  <p className="text-slate-500">
+                    Passionate about design, AI, sociology, books, travel, good food, and fine wine with family &amp; friends.
+                  </p>
+                </div>
+
+                <div className="pt-2 flex flex-wrap items-center justify-center gap-2">
+                  <a
+                    href="/cv-herald-ago.pdf"
+                    target="_blank"
+                    download
+                    className="px-4 py-2 rounded-full bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-xs transition-all active:scale-95"
+                  >
+                    Download Resume PDF
+                  </a>
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById("mobile-contact");
+                      if (el) el.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="px-4 py-2 rounded-full bg-slate-900/10 hover:bg-slate-900/20 text-slate-900 text-xs font-semibold border border-slate-900/15 transition-all active:scale-95 cursor-pointer"
+                  >
+                    Contact me
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* --- 3. ABOUT ME: PERSONAL BIO & JOURNEY --- */}
-        <section id="mobile-about" className="space-y-4">
-          <div className="w-full rounded-[36px] bg-white border-2 border-white shadow-[0_20px_45px_rgba(0,10,30,0.25)] p-6 space-y-4">
-            <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-slate-900/10 shadow-md mx-auto">
-              <Image
-                src="/profile-pro.jpg"
-                alt="Herald Ago"
-                fill
-                priority
-                sizes="112px"
-                className="object-cover object-[center_top]"
-              />
-            </div>
-
-            <div className="text-center space-y-0.5">
-              <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Herald Ago</h2>
-              <p className="text-xs font-medium text-slate-600">27 y/o · Product Designer · Italy &amp; Barcelona</p>
-            </div>
-
-            <div className="space-y-2 text-xs text-slate-800 leading-relaxed font-normal">
-              <p>
-                Italian with Albanian roots, born and raised in Padua. After a Bachelor in Communication Science &amp; Technologies, I moved to Miami, then headed to Denmark for an MSc in IT – Web Communication Design. After returning to Italy, I now live between Italy and Barcelona.
-              </p>
-              <p className="text-slate-600">
-                Passionate about design, AI, sociology, books, and travel. Beyond the screen, I love good food, great wine, and spending time with family and friends.
-              </p>
-            </div>
-
-            <div className="pt-2 flex flex-wrap items-center justify-center gap-2">
-              <a
-                href="/cv-herald-ago.pdf"
-                target="_blank"
-                download
-                className="px-4 py-2 rounded-full bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-xs transition-all active:scale-95"
-              >
-                Download Resume PDF
-              </a>
-              <button
-                onClick={() => {
-                  const el = document.getElementById("mobile-contact");
-                  if (el) el.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="px-4 py-2 rounded-full bg-slate-900/10 hover:bg-slate-900/20 text-slate-900 text-xs font-semibold border border-slate-900/15 transition-all active:scale-95 cursor-pointer"
-              >
-                Contact me
-              </button>
-            </div>
-          </div>
-        </section>
-
-        {/* --- 4. RECOMMENDATIONS: KIND WORDS --- */}
-        <section className="space-y-4">
+        {/* --- 4. RECOMMENDATIONS PILLOLA --- */}
+        <section className="space-y-6">
           <div className="flex items-center justify-center">
             <span className="px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
               Kind Words
             </span>
           </div>
 
-          {/* Testimonial Antonio */}
-          <div className="w-full rounded-[32px] bg-white border-2 border-white p-5 shadow-lg space-y-3">
-            <p className="text-xs text-slate-800 leading-relaxed font-normal">
-              &ldquo;Herald has rare proactivity and deep study. The dedication he brings to preparing every detail and the immediate trust he inspires in people will take him very far.&rdquo;
-            </p>
-            <div className="flex items-center gap-2.5">
-              <div className="relative w-8 h-8 rounded-full overflow-hidden border border-slate-900/20 flex-shrink-0 shadow-xs">
-                <Image src="/antonio-avatar.jpg" alt="Antonio" fill unoptimized sizes="32px" className="object-cover" />
+          <div className="w-full flex justify-center">
+            <div className="relative w-full max-w-[350px] min-h-[640px] rounded-[1000px] border-[10px] sm:border-[12px] border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)] p-6 flex flex-col items-center justify-between text-center overflow-hidden">
+              {/* Testimonial 1: Antonio */}
+              <div className="space-y-2.5 pt-4 px-2">
+                <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-slate-900/15 shadow-sm mx-auto">
+                  <Image src="/antonio-avatar.jpg" alt="Antonio" fill unoptimized sizes="56px" className="object-cover" />
+                </div>
+                <p className="text-xs text-slate-800 leading-relaxed font-normal max-w-[260px] mx-auto italic">
+                  &ldquo;Herald has rare proactivity and deep study. The dedication he brings to preparing every detail and the immediate trust he inspires will take him very far.&rdquo;
+                </p>
+                <div>
+                  <p className="text-xs font-semibold text-slate-900">Antonio</p>
+                  <p className="text-[10px] text-slate-600">Founder, I Pupi Siciliani</p>
+                </div>
               </div>
-              <div>
-                <p className="text-xs font-semibold text-slate-900">Antonio</p>
-                <p className="text-[10px] text-slate-600">Founder, I Pupi Siciliani</p>
-              </div>
-            </div>
-          </div>
 
-          {/* Testimonial Sebastian */}
-          <div className="w-full rounded-[32px] bg-white border-2 border-white p-5 shadow-lg space-y-3">
-            <p className="text-xs text-slate-800 leading-relaxed font-normal">
-              &ldquo;Herald excelled at cross-stakeholder collaboration, guiding the entire creation process from start to finish with great precision and genuine passion.&rdquo;
-            </p>
-            <div className="flex items-center gap-2.5">
-              <div className="relative w-8 h-8 rounded-full overflow-hidden border border-slate-900/20 flex-shrink-0 shadow-xs">
-                <Image src="/sebastian-avatar.jpg" alt="Sebastian" fill unoptimized sizes="32px" className="object-cover" />
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-slate-900">Sebastian</p>
-                <p className="text-[10px] text-slate-600">CEO, næmt.nu</p>
+              <div className="w-12 h-0.5 bg-slate-900/10 my-2" />
+
+              {/* Testimonial 2: Sebastian */}
+              <div className="space-y-2.5 pb-4 px-2">
+                <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-slate-900/15 shadow-sm mx-auto">
+                  <Image src="/sebastian-avatar.jpg" alt="Sebastian" fill unoptimized sizes="56px" className="object-cover" />
+                </div>
+                <p className="text-xs text-slate-800 leading-relaxed font-normal max-w-[260px] mx-auto italic">
+                  &ldquo;Herald excelled at cross-stakeholder collaboration, guiding the entire creation process from start to finish with great precision and genuine passion.&rdquo;
+                </p>
+                <div>
+                  <p className="text-xs font-semibold text-slate-900">Sebastian</p>
+                  <p className="text-[10px] text-slate-600">CEO, næmt.nu</p>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* --- 5. CONTACT: LET'S CONNECT --- */}
-        <section id="mobile-contact" className="space-y-4">
-          <div className="w-full rounded-[36px] bg-white border-2 border-white shadow-[0_20px_45px_rgba(0,10,30,0.25)] p-6 space-y-4">
-            <div className="space-y-1">
-              <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Let&apos;s Connect</h2>
-              <p className="text-xs text-slate-600">Open for product design opportunities.</p>
-            </div>
+        {/* --- 5. CONTACT PILLOLA --- */}
+        <section id="mobile-contact" className="space-y-6">
+          <div className="flex items-center justify-center">
+            <span className="px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
+              Contact
+            </span>
+          </div>
 
-            {/* Quick action buttons */}
-            <div className="flex flex-wrap items-center gap-1.5 pt-1">
-              <button
-                type="button"
-                onClick={handleCopyEmail}
-                className="px-3.5 py-1.5 rounded-full bg-slate-900 text-white text-xs font-semibold active:scale-95 transition-all shadow-xs cursor-pointer"
-              >
-                {copiedEmail ? "Copied!" : "heraldago1@gmail.com"}
-              </button>
-              <a
-                href="https://www.linkedin.com/in/heraldago/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-3.5 py-1.5 rounded-full bg-slate-900/10 text-slate-900 text-xs font-semibold border border-slate-900/15 active:scale-95 transition-all cursor-pointer"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="/cv-herald-ago.pdf"
-                target="_blank"
-                download
-                className="px-3.5 py-1.5 rounded-full bg-slate-900/10 text-slate-900 text-xs font-semibold border border-slate-900/15 active:scale-95 transition-all cursor-pointer"
-              >
-                Resume PDF
-              </a>
-            </div>
+          <div className="w-full flex justify-center">
+            <div className="relative w-full max-w-[350px] min-h-[660px] rounded-[1000px] border-[10px] sm:border-[12px] border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)] p-6 flex flex-col items-center justify-center text-center overflow-hidden">
+              <div className="w-full space-y-4 px-2">
+                <div className="space-y-1">
+                  <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Let&apos;s Connect</h2>
+                  <p className="text-xs text-slate-600">Open for product design opportunities.</p>
+                </div>
 
-            {/* Contact form */}
-            {contactSubmitted ? (
-              <div className="p-4 rounded-2xl bg-slate-900/[0.05] border border-slate-900/15 text-center space-y-1">
-                <div className="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center mx-auto text-xs font-bold">✓</div>
-                <h3 className="text-sm font-bold text-slate-900">Message sent!</h3>
-                <p className="text-xs text-slate-700">Thank you for reaching out. I will reply soon.</p>
+                {/* Quick action buttons */}
+                <div className="flex flex-wrap items-center justify-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={handleCopyEmail}
+                    className="px-3.5 py-1.5 rounded-full bg-slate-900 text-white text-[11px] font-semibold active:scale-95 transition-all shadow-xs cursor-pointer"
+                  >
+                    {copiedEmail ? "Copied!" : "heraldago1@gmail.com"}
+                  </button>
+                  <a
+                    href="https://www.linkedin.com/in/heraldago/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3.5 py-1.5 rounded-full bg-slate-900/10 text-slate-900 text-[11px] font-semibold border border-slate-900/15 active:scale-95 transition-all cursor-pointer"
+                  >
+                    LinkedIn
+                  </a>
+                  <a
+                    href="/cv-herald-ago.pdf"
+                    target="_blank"
+                    download
+                    className="px-3.5 py-1.5 rounded-full bg-slate-900/10 text-slate-900 text-[11px] font-semibold border border-slate-900/15 active:scale-95 transition-all cursor-pointer"
+                  >
+                    Resume PDF
+                  </a>
+                </div>
+
+                {/* Contact form */}
+                {contactSubmitted ? (
+                  <div className="p-4 rounded-3xl bg-slate-900/[0.05] border border-slate-900/15 text-center space-y-1">
+                    <div className="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center mx-auto text-xs font-bold">✓</div>
+                    <h3 className="text-sm font-bold text-slate-900">Message sent!</h3>
+                    <p className="text-xs text-slate-700">Thank you for reaching out. I will reply soon.</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleContactSubmit} className="space-y-2.5 pt-1 w-full max-w-[270px] mx-auto">
+                    <input
+                      type="text"
+                      required
+                      value={contactName}
+                      onChange={(e) => setContactName(e.target.value)}
+                      placeholder="Your name"
+                      className="w-full px-3.5 py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30"
+                    />
+                    <input
+                      type="email"
+                      required
+                      value={contactEmail}
+                      onChange={(e) => setContactEmail(e.target.value)}
+                      placeholder="Your email"
+                      className="w-full px-3.5 py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30"
+                    />
+                    <textarea
+                      required
+                      rows={3}
+                      value={contactMessage}
+                      onChange={(e) => setContactMessage(e.target.value)}
+                      placeholder="Your message..."
+                      className="w-full px-3.5 py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30 resize-none"
+                    />
+                    <button
+                      type="submit"
+                      className="w-full py-2.5 rounded-full bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-md transition-all cursor-pointer active:scale-95"
+                    >
+                      Send Message
+                    </button>
+                  </form>
+                )}
               </div>
-            ) : (
-              <form onSubmit={handleContactSubmit} className="space-y-2 pt-2">
-                <input
-                  type="text"
-                  required
-                  value={contactName}
-                  onChange={(e) => setContactName(e.target.value)}
-                  placeholder="Your name"
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30"
-                />
-                <input
-                  type="email"
-                  required
-                  value={contactEmail}
-                  onChange={(e) => setContactEmail(e.target.value)}
-                  placeholder="Your email"
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30"
-                />
-                <textarea
-                  required
-                  rows={3}
-                  value={contactMessage}
-                  onChange={(e) => setContactMessage(e.target.value)}
-                  placeholder="Your message..."
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30 resize-none"
-                />
-                <button
-                  type="submit"
-                  className="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-sm transition-all cursor-pointer"
-                >
-                  Send Message
-                </button>
-              </form>
-            )}
+            </div>
           </div>
         </section>
       </div>
