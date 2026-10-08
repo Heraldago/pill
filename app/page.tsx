@@ -133,8 +133,10 @@ export default function Home() {
     gsap.ticker.add(updateTicker);
     gsap.ticker.lagSmoothing(0);
 
-    // 2. Orchestrazione GSAP ScrollTrigger (Card Stacking per tutte le 7 Card)
-    const ctx = gsap.context(() => {
+    // 2. Orchestrazione GSAP ScrollTrigger per Desktop (min-width: 768px)
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 768px)", () => {
       if (
         !pinnedContainerRef.current ||
         !card1Ref.current ||
@@ -304,7 +306,7 @@ export default function Home() {
     });
 
     return () => {
-      ctx.revert();
+      mm.revert();
       gsap.ticker.remove(updateTicker);
       lenis.destroy();
     };
@@ -325,6 +327,13 @@ export default function Home() {
   };
 
   const scrollToSection = (target: "home" | "work" | "about" | "contact") => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      const el = document.getElementById(`mobile-${target}`);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+    }
     if (target === "home") {
       navigateToSection(0);
     } else if (target === "work") {
@@ -446,10 +455,10 @@ export default function Home() {
         }`}
       />
 
-      {/* Floating Pill ScrollSpy Navigation (Posizionato all'angolo opposto al logo, senza slop o font mono) */}
+      {/* Floating Pill ScrollSpy Navigation (Visibile solo da desktop in su) */}
       <aside
         aria-label="Navigazione sezioni"
-        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex flex-col items-center"
+        className="hidden md:flex fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex-col items-center"
       >
         <div className="bg-white/15 backdrop-blur-2xl border border-white/25 shadow-[0_8px_32px_rgba(0,0,0,0.3),_inset_0_1px_1px_rgba(255,255,255,0.3)] px-1.5 py-2.5 rounded-full flex flex-col items-center gap-2">
           {SECTIONS.map((section, idx) => {
@@ -478,8 +487,8 @@ export default function Home() {
         </div>
       </aside>
 
-      {/* Wrapper dedicato per isolare ScrollTrigger pin-spacer dal resto del DOM */}
-      <div className="relative w-full">
+      {/* Wrapper dedicato per isolare ScrollTrigger pin-spacer dal resto del DOM (Desktop Only) */}
+      <div className="hidden md:block relative w-full">
         {/* Contenitore Pinned dello Stack: bloccato a schermo durante lo scrub */}
         <div ref={pinnedContainerRef} className="relative w-full h-[100dvh] overflow-hidden">
         {/* --- CARD 1: HERO PILLOLA (z-10, scala indietro con lo scroll) --- */}
@@ -1612,6 +1621,320 @@ export default function Home() {
         </div>
       </div>
     </div>
+
+      {/* =========================================================================
+          MOBILE VIEW: STATIC NATURAL SCROLL STACKED CAPSULES (block md:hidden)
+          Based on Figma Frame 7 design with stacked overlapping capsules
+         ========================================================================= */}
+      <div className="block md:hidden relative w-full z-10 px-4 pt-20 pb-28 space-y-12">
+        {/* --- 1. HERO: STACKED OVERLAPPING CAPSULES (Figma Frame 7) --- */}
+        <section id="mobile-home" className="flex flex-col items-center pt-2 pb-4">
+          <div className="w-full flex flex-col items-center">
+            {/* Pillola 1: Saluto */}
+            <div className="w-full py-9 px-6 rounded-full bg-white text-slate-900 border-2 border-white shadow-[0_12px_32px_rgba(0,10,30,0.18)] flex items-center justify-center text-center relative z-30">
+              <h1 className="text-[1.6rem] font-bold tracking-tight text-slate-900 leading-snug">
+                Hi, I&apos;m Herald :)
+              </h1>
+            </div>
+
+            {/* Pillola 2: Missione */}
+            <div className="w-full py-9 px-6 rounded-full bg-white text-slate-900 border-2 border-white shadow-[0_12px_32px_rgba(0,10,30,0.18)] flex items-center justify-center text-center -mt-6 relative z-20">
+              <p className="text-[1.6rem] font-medium tracking-tight text-slate-900 leading-snug">
+                I <span className="font-bold text-blue-600">design</span> digital products
+              </p>
+            </div>
+
+            {/* Pillola 3: Scopo */}
+            <div className="w-full py-9 px-6 rounded-full bg-white text-slate-900 border-2 border-white shadow-[0_12px_32px_rgba(0,10,30,0.18)] flex items-center justify-center text-center -mt-6 relative z-10">
+              <p className="text-[1.6rem] font-medium tracking-tight text-slate-900 leading-snug">
+                that <span className="italic font-serif font-normal">help</span> and{" "}
+                <span className="italic font-serif font-normal">simplify</span> people&apos;s lives.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* --- 2. WORK: SELECTED CASE STUDIES --- */}
+        <section id="mobile-work" className="space-y-6">
+          <div className="flex items-center justify-center">
+            <span className="px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
+              Selected Work
+            </span>
+          </div>
+
+          {/* Project 1: Ungdomskort */}
+          <div className="w-full rounded-[36px] bg-white border-2 border-white shadow-[0_20px_45px_rgba(0,10,30,0.25)] p-5 space-y-4 overflow-hidden">
+            <div className="relative w-full aspect-[16/10] rounded-[24px] bg-[#0b2847] border border-slate-900/10 overflow-hidden flex items-center justify-center p-4">
+              <div className="relative w-full h-full">
+                <Image
+                  src="/ungheromockup.svg"
+                  alt="Ungdomskort Portal"
+                  fill
+                  unoptimized
+                  sizes="90vw"
+                  className="object-contain p-2"
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <span className="text-[11px] font-bold text-blue-600 tracking-wider uppercase">Transit Platform</span>
+              <h3 className="text-2xl font-bold text-slate-900 tracking-tight">Ungdomskort</h3>
+              <p className="text-xs text-slate-700 leading-relaxed font-normal">
+                Denmark&apos;s youth transit pass platform redesign, simplifying digital commuting for nationwide students.
+              </p>
+              <div className="pt-1">
+                <a
+                  href="https://www.heraldago.com/ungdomskort"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs font-semibold shadow-xs transition-all"
+                >
+                  <span>See case study</span>
+                  <span className="text-xs font-bold">↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Project 2: X-Bit */}
+          <div className="w-full rounded-[36px] bg-white border-2 border-white shadow-[0_20px_45px_rgba(0,10,30,0.25)] p-5 space-y-4 overflow-hidden">
+            <div className="relative w-full aspect-[16/10] rounded-[24px] bg-[#0b2847] border border-slate-900/10 overflow-hidden flex items-center justify-center p-4">
+              <div className="relative w-full h-full">
+                <Image
+                  src="/xbitheromockup.svg"
+                  alt="X-Bit Mobile App"
+                  fill
+                  unoptimized
+                  sizes="90vw"
+                  className="object-contain p-2"
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <span className="text-[11px] font-bold text-blue-600 tracking-wider uppercase">Audio Guide &amp; Museum</span>
+              <h3 className="text-2xl font-bold text-slate-900 tracking-tight">X-Bit</h3>
+              <p className="text-xs text-slate-700 leading-relaxed font-normal">
+                Interactive audio guide and cultural heritage exploration platform bridging museum exhibits with engaging storytelling.
+              </p>
+              <div className="pt-1">
+                <a
+                  href="https://www.heraldago.com/xbit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs font-semibold shadow-xs transition-all"
+                >
+                  <span>See case study</span>
+                  <span className="text-xs font-bold">↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Project 3: I Pupi Siciliani */}
+          <div className="w-full rounded-[36px] bg-white border-2 border-white shadow-[0_20px_45px_rgba(0,10,30,0.25)] p-5 space-y-4 overflow-hidden">
+            <div className="relative w-full aspect-[16/10] rounded-[24px] bg-[#0b2847] border border-slate-900/10 overflow-hidden flex items-center justify-center p-4">
+              <div className="relative w-full h-full">
+                <Image
+                  src="/pupi-mockup-white.svg"
+                  alt="I Pupi Siciliani Wine Store"
+                  fill
+                  unoptimized
+                  sizes="90vw"
+                  className="object-contain p-2"
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <span className="text-[11px] font-bold text-blue-600 tracking-wider uppercase">E-Commerce &amp; Wine</span>
+              <h3 className="text-2xl font-bold text-slate-900 tracking-tight">I Pupi Siciliani</h3>
+              <p className="text-xs text-slate-700 leading-relaxed font-normal">
+                Bespoke digital wine store experience delivering +187% YoY profit growth through refined UX and identity design.
+              </p>
+              <div className="pt-1">
+                <a
+                  href="https://www.heraldago.com/ipupisiciliani"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs font-semibold shadow-xs transition-all"
+                >
+                  <span>See case study</span>
+                  <span className="text-xs font-bold">↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* --- 3. ABOUT ME: PERSONAL BIO & JOURNEY --- */}
+        <section id="mobile-about" className="space-y-4">
+          <div className="w-full rounded-[36px] bg-white border-2 border-white shadow-[0_20px_45px_rgba(0,10,30,0.25)] p-6 space-y-4">
+            <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-slate-900/10 shadow-md mx-auto">
+              <Image
+                src="/profile-pro.jpg"
+                alt="Herald Ago"
+                fill
+                priority
+                sizes="112px"
+                className="object-cover object-[center_top]"
+              />
+            </div>
+
+            <div className="text-center space-y-0.5">
+              <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Herald Ago</h2>
+              <p className="text-xs font-medium text-slate-600">27 y/o · Product Designer · Italy &amp; Barcelona</p>
+            </div>
+
+            <div className="space-y-2 text-xs text-slate-800 leading-relaxed font-normal">
+              <p>
+                Italian with Albanian roots, born and raised in Padua. After a Bachelor in Communication Science &amp; Technologies, I moved to Miami, then headed to Denmark for an MSc in IT – Web Communication Design. After returning to Italy, I now live between Italy and Barcelona.
+              </p>
+              <p className="text-slate-600">
+                Passionate about design, AI, sociology, books, and travel. Beyond the screen, I love good food, great wine, and spending time with family and friends.
+              </p>
+            </div>
+
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-2">
+              <a
+                href="/cv-herald-ago.pdf"
+                target="_blank"
+                download
+                className="px-4 py-2 rounded-full bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-xs transition-all active:scale-95"
+              >
+                Download Resume PDF
+              </a>
+              <button
+                onClick={() => {
+                  const el = document.getElementById("mobile-contact");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="px-4 py-2 rounded-full bg-slate-900/10 hover:bg-slate-900/20 text-slate-900 text-xs font-semibold border border-slate-900/15 transition-all active:scale-95 cursor-pointer"
+              >
+                Contact me
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* --- 4. RECOMMENDATIONS: KIND WORDS --- */}
+        <section className="space-y-4">
+          <div className="flex items-center justify-center">
+            <span className="px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
+              Kind Words
+            </span>
+          </div>
+
+          {/* Testimonial Antonio */}
+          <div className="w-full rounded-[32px] bg-white border-2 border-white p-5 shadow-lg space-y-3">
+            <p className="text-xs text-slate-800 leading-relaxed font-normal">
+              &ldquo;Herald has rare proactivity and deep study. The dedication he brings to preparing every detail and the immediate trust he inspires in people will take him very far.&rdquo;
+            </p>
+            <div className="flex items-center gap-2.5">
+              <div className="relative w-8 h-8 rounded-full overflow-hidden border border-slate-900/20 flex-shrink-0 shadow-xs">
+                <Image src="/antonio-avatar.jpg" alt="Antonio" fill unoptimized sizes="32px" className="object-cover" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-slate-900">Antonio</p>
+                <p className="text-[10px] text-slate-600">Founder, I Pupi Siciliani</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Testimonial Sebastian */}
+          <div className="w-full rounded-[32px] bg-white border-2 border-white p-5 shadow-lg space-y-3">
+            <p className="text-xs text-slate-800 leading-relaxed font-normal">
+              &ldquo;Herald excelled at cross-stakeholder collaboration, guiding the entire creation process from start to finish with great precision and genuine passion.&rdquo;
+            </p>
+            <div className="flex items-center gap-2.5">
+              <div className="relative w-8 h-8 rounded-full overflow-hidden border border-slate-900/20 flex-shrink-0 shadow-xs">
+                <Image src="/sebastian-avatar.jpg" alt="Sebastian" fill unoptimized sizes="32px" className="object-cover" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-slate-900">Sebastian</p>
+                <p className="text-[10px] text-slate-600">CEO, næmt.nu</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* --- 5. CONTACT: LET'S CONNECT --- */}
+        <section id="mobile-contact" className="space-y-4">
+          <div className="w-full rounded-[36px] bg-white border-2 border-white shadow-[0_20px_45px_rgba(0,10,30,0.25)] p-6 space-y-4">
+            <div className="space-y-1">
+              <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Let&apos;s Connect</h2>
+              <p className="text-xs text-slate-600">Open for product design opportunities.</p>
+            </div>
+
+            {/* Quick action buttons */}
+            <div className="flex flex-wrap items-center gap-1.5 pt-1">
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="px-3.5 py-1.5 rounded-full bg-slate-900 text-white text-xs font-semibold active:scale-95 transition-all shadow-xs cursor-pointer"
+              >
+                {copiedEmail ? "Copied!" : "heraldago1@gmail.com"}
+              </button>
+              <a
+                href="https://www.linkedin.com/in/heraldago/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3.5 py-1.5 rounded-full bg-slate-900/10 text-slate-900 text-xs font-semibold border border-slate-900/15 active:scale-95 transition-all cursor-pointer"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="/cv-herald-ago.pdf"
+                target="_blank"
+                download
+                className="px-3.5 py-1.5 rounded-full bg-slate-900/10 text-slate-900 text-xs font-semibold border border-slate-900/15 active:scale-95 transition-all cursor-pointer"
+              >
+                Resume PDF
+              </a>
+            </div>
+
+            {/* Contact form */}
+            {contactSubmitted ? (
+              <div className="p-4 rounded-2xl bg-slate-900/[0.05] border border-slate-900/15 text-center space-y-1">
+                <div className="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center mx-auto text-xs font-bold">✓</div>
+                <h3 className="text-sm font-bold text-slate-900">Message sent!</h3>
+                <p className="text-xs text-slate-700">Thank you for reaching out. I will reply soon.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleContactSubmit} className="space-y-2 pt-2">
+                <input
+                  type="text"
+                  required
+                  value={contactName}
+                  onChange={(e) => setContactName(e.target.value)}
+                  placeholder="Your name"
+                  className="w-full px-3.5 py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30"
+                />
+                <input
+                  type="email"
+                  required
+                  value={contactEmail}
+                  onChange={(e) => setContactEmail(e.target.value)}
+                  placeholder="Your email"
+                  className="w-full px-3.5 py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30"
+                />
+                <textarea
+                  required
+                  rows={3}
+                  value={contactMessage}
+                  onChange={(e) => setContactMessage(e.target.value)}
+                  placeholder="Your message..."
+                  className="w-full px-3.5 py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30 resize-none"
+                />
+                <button
+                  type="submit"
+                  className="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-sm transition-all cursor-pointer"
+                >
+                  Send Message
+                </button>
+              </form>
+            )}
+          </div>
+        </section>
+      </div>
   </main>
   );
 }
