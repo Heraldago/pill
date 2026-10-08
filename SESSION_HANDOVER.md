@@ -16,6 +16,15 @@
   - Tuned the fill to pure translucent Apple glass (`bg-white/[0.12]`), retaining the crisp perimeter edge (`border border-white/30`), inner reflection highlight (`inset_0_1px_2px_rgba(255,255,255,0.45)`), and depth shadow (`shadow-[0_25px_65px_rgba(0,10,30,0.45)]`).
   - Symmetrically aligned the mobile stacked hero capsules (Capsules 1, 2, 3) to `bg-white/[0.12]` without `backdrop-blur-2xl`, ensuring the moving 3D geometric waves remain crisp and fully visible through the glass on all devices.
 
+### Mobile Architecture Update (Frame 11 Parity)
+- **Zero Overlap & 0 Padding:**
+  - Removed negative margins (`-mt-16 sm:-mt-20`) that caused hero capsules to overlap and clip text.
+  - Set container to `flex flex-col gap-0` so all pills stack directly one below the other with 0 padding between them, matching Figma Frame 11.
+- **Pure White Borders:**
+  - Replaced semi-transparent / dark borders with crisp, bright white borders (`border-2 border-white` on hero capsules, `border-[16px] sm:border-[18px] border-white` on toggle chassis, `border-white` on active knobs). Removed dark perimeter drop shadows that darkened capsule borders.
+- **Removed Header Badges & Subtitles:**
+  - Eliminated all small badge pills and helper subtitles (`Selected Work`, `Tap any pill to toggle cover and case study`, `About`, `Kind Words`, `Contact`), yielding a clean, continuous flow of interactive pills.
+
 ---
 
 ## 2. Technical Stack & Architecture

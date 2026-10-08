@@ -1636,45 +1636,40 @@ export default function Home() {
           MOBILE VIEW: FIGMA DRAFT ARCHITECTURE (block md:hidden)
           3 Stacked Hero Glass Capsules + Horizontal Interactive Pill Switches
          ========================================================================= */}
-      <div className="block md:hidden relative w-full z-10 px-2.5 sm:px-4 pt-14 pb-24 space-y-10">
+      <div className="block md:hidden relative w-full z-10 px-2 sm:px-3 pt-14 pb-24 flex flex-col gap-0">
         {/* --- 1. HERO: 3 STACKED TRANSLUCENT GLASS CAPSULES (FIGMA) --- */}
-        <section id="mobile-home" className="w-full flex flex-col items-center pt-2">
-          <div className="w-full flex flex-col items-center select-none">
+        <section id="mobile-home" className="w-full flex flex-col items-center">
+          <div className="w-full flex flex-col items-center select-none gap-0">
             {/* Capsule 1: Saluto */}
-            <div className="w-full h-[221px] px-6 rounded-full bg-white/[0.12] border-[1.5px] border-white/40 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.45)] flex items-center justify-center text-center relative z-30">
+            <div className="w-full h-[221px] px-6 rounded-full bg-white/[0.12] border-2 border-white shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-30">
               <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 Hi, I&apos;m Herald :)
               </h1>
             </div>
 
             {/* Capsule 2: Missione */}
-            <div className="w-full h-[221px] px-6 rounded-full bg-white/[0.12] border-[1.5px] border-white/40 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.45)] flex items-center justify-center text-center -mt-16 sm:-mt-20 relative z-20">
-              <p className="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
-                I <span className="font-extrabold text-[#38bdf8] drop-shadow-[0_0_16px_rgba(56,189,248,0.7)]">design</span> digital products
+            <div className="w-full h-[221px] px-6 rounded-full bg-white/[0.12] border-2 border-white shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-20">
+              <p className="text-2xl sm:text-3xl font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
+                I <span className="font-extrabold text-[#38bdf8] drop-shadow-[0_0_16px_rgba(56,189,248,0.7)]">design</span> digital
+                <br />
+                products
               </p>
             </div>
 
             {/* Capsule 3: Scopo */}
-            <div className="w-full h-[221px] px-6 rounded-full bg-white/[0.12] border-[1.5px] border-white/40 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.45)] flex items-center justify-center text-center -mt-16 sm:-mt-20 relative z-10">
+            <div className="w-full h-[221px] px-6 rounded-full bg-white/[0.12] border-2 border-white shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-10">
               <p className="text-2xl sm:text-3xl font-medium tracking-tight text-white/95 leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 that <span className="italic font-serif text-white">help</span> and{" "}
-                <span className="italic font-serif text-white">simplify</span> people&apos;s lives.
+                <span className="italic font-serif text-white">simplify</span>
+                <br />
+                people&apos;s lives.
               </p>
             </div>
           </div>
         </section>
 
         {/* --- 2. WORK: HORIZONTAL SWITCH PILLS (FIGMA MOCKUP) --- */}
-        <section id="mobile-work" className="space-y-6">
-          {/* Header pill badge */}
-          <div className="flex flex-col items-center justify-center gap-1.5">
-            <span className="px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
-              Selected Work
-            </span>
-            <span className="text-[10px] text-white/60 tracking-wide">
-              Tap any pill to toggle cover and case study
-            </span>
-          </div>
+        <section id="mobile-work" className="w-full flex flex-col gap-0">
 
           {/* Project 1: Ungdomskort Horizontal Pill Switch */}
           <div className="w-full flex justify-center">
@@ -1757,7 +1752,7 @@ export default function Home() {
                     className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-3 transition-all duration-300 ease-out cursor-pointer ${
                       mobileCase1 === "off"
                         ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),0_2px_6px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
-                        : "bg-[#0b2847] border-[4px] sm:border-[6px] border-slate-700/60 shadow-[0_20px_50px_rgba(0,18,36,0.45)] active:scale-[0.98]"
+                        : "bg-[#0b2847] border-[4px] sm:border-[6px] border-white shadow-[0_20px_50px_rgba(0,18,36,0.45)] active:scale-[0.98]"
                     }`}
                   >
                     {mobileCase1 === "on" && (
@@ -1873,7 +1868,7 @@ export default function Home() {
                     className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-3 transition-all duration-300 ease-out cursor-pointer ${
                       mobileCase2 === "off"
                         ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),0_2px_6px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
-                        : "bg-[#0b2847] border-[4px] sm:border-[6px] border-slate-700/60 shadow-[0_20px_50px_rgba(0,18,36,0.45)] active:scale-[0.98]"
+                        : "bg-[#0b2847] border-[4px] sm:border-[6px] border-white shadow-[0_20px_50px_rgba(0,18,36,0.45)] active:scale-[0.98]"
                     }`}
                   >
                     {mobileCase2 === "on" && (
@@ -1988,7 +1983,7 @@ export default function Home() {
                     className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-3 transition-all duration-300 ease-out cursor-pointer ${
                       mobileCase3 === "off"
                         ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),0_2px_6px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
-                        : "bg-[#0b2847] border-[4px] sm:border-[6px] border-slate-700/60 shadow-[0_20px_50px_rgba(0,18,36,0.45)] active:scale-[0.98]"
+                        : "bg-[#0b2847] border-[4px] sm:border-[6px] border-white shadow-[0_20px_50px_rgba(0,18,36,0.45)] active:scale-[0.98]"
                     }`}
                   >
                     {mobileCase3 === "on" && (
@@ -2024,12 +2019,7 @@ export default function Home() {
         </section>
 
         {/* --- 3. ABOUT ME: HORIZONTAL PILL SWITCH --- */}
-        <section id="mobile-about" className="space-y-4">
-          <div className="flex items-center justify-center">
-            <span className="px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
-              About
-            </span>
-          </div>
+        <section id="mobile-about" className="w-full flex justify-center">
 
           <div className="w-full flex justify-center">
             <div
@@ -2120,7 +2110,7 @@ export default function Home() {
                     className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-1.5 transition-all duration-300 ease-out cursor-pointer ${
                       mobileCaseAbout === "off"
                         ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),0_2px_6px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
-                        : "bg-[#0b2847] border-[4px] sm:border-[6px] border-slate-700/60 shadow-[0_20px_50px_rgba(0,18,36,0.45)] active:scale-[0.98]"
+                        : "bg-[#0b2847] border-[4px] sm:border-[6px] border-white shadow-[0_20px_50px_rgba(0,18,36,0.45)] active:scale-[0.98]"
                     }`}
                   >
                     {mobileCaseAbout === "on" && (
@@ -2149,20 +2139,11 @@ export default function Home() {
           </div>
         </section>
 
-
-
-
         {/* --- 4. KIND WORDS (RECOMMENDATIONS): HORIZONTAL PILLS --- */}
-        <section className="space-y-4">
-          <div className="flex items-center justify-center">
-            <span className="px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
-              Kind Words
-            </span>
-          </div>
-
+        <section className="w-full flex flex-col gap-0">
           {/* Testimonial Antonio */}
           <div className="w-full flex justify-center">
-            <div className="relative w-full max-w-[360px] min-h-[140px] rounded-full border-[10px] sm:border-[12px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-4 flex items-center justify-between overflow-hidden">
+            <div className="relative w-full min-h-[140px] rounded-full border-[14px] sm:border-[16px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-4 sm:p-5 flex items-center justify-between overflow-hidden">
               <div className="pl-3 pr-4 flex-1 space-y-1 text-left">
                 <p className="text-[11px] text-slate-800 leading-snug italic font-normal line-clamp-3">
                   &ldquo;Herald has rare proactivity and deep study. The immediate trust he inspires will take him very far.&rdquo;
@@ -2180,7 +2161,7 @@ export default function Home() {
 
           {/* Testimonial Sebastian */}
           <div className="w-full flex justify-center">
-            <div className="relative w-full max-w-[360px] min-h-[140px] rounded-full border-[10px] sm:border-[12px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-4 flex items-center justify-between overflow-hidden">
+            <div className="relative w-full min-h-[140px] rounded-full border-[14px] sm:border-[16px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-4 sm:p-5 flex items-center justify-between overflow-hidden">
               <div className="pl-3 pr-4 flex-1 space-y-1 text-left">
                 <p className="text-[11px] text-slate-800 leading-snug italic font-normal line-clamp-3">
                   &ldquo;Herald excelled at cross-stakeholder collaboration, guiding the process with great precision and genuine passion.&rdquo;
@@ -2198,15 +2179,9 @@ export default function Home() {
         </section>
 
         {/* --- 5. CONTACT: LET'S CONNECT PILL --- */}
-        <section id="mobile-contact" className="space-y-4">
-          <div className="flex items-center justify-center">
-            <span className="px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
-              Contact
-            </span>
-          </div>
-
+        <section id="mobile-contact" className="w-full flex justify-center">
           <div className="w-full flex justify-center">
-            <div className="relative w-full max-w-[360px] rounded-[48px] border-[10px] sm:border-[12px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-6 flex flex-col items-center justify-center text-center overflow-hidden">
+            <div className="relative w-full rounded-[48px] sm:rounded-full border-[14px] sm:border-[16px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-6 sm:p-8 flex flex-col items-center justify-center text-center overflow-hidden">
               <div className="w-full space-y-3.5">
                 <div className="space-y-0.5">
                   <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Let&apos;s Connect</h2>
