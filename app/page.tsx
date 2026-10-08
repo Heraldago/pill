@@ -1113,14 +1113,16 @@ export default function Home() {
                         : "opacity-100 brightness-100"
                     }`}
                   >
-                    <Image
-                      src="/profile.png"
-                      alt="Herald Ago"
-                      fill
-                      priority
-                      sizes="(max-width: 768px) 85vw, 45vw"
-                      className="object-contain object-bottom"
-                    />
+                    <div className="relative w-[76%] h-[76%] flex items-center justify-center">
+                      <Image
+                        src="/profile.png"
+                        alt="Herald Ago"
+                        fill
+                        priority
+                        sizes="(max-width: 768px) 85vw, 45vw"
+                        className="object-contain object-bottom"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1636,10 +1638,10 @@ export default function Home() {
           MOBILE VIEW: FIGMA DRAFT ARCHITECTURE (block md:hidden)
           3 Stacked Hero Glass Capsules + Horizontal Interactive Pill Switches
          ========================================================================= */}
-      <div className="block md:hidden relative w-full z-10 px-2 sm:px-3 pt-14 pb-24 flex flex-col gap-0">
+      <div className="block md:hidden relative w-full z-10 px-3 sm:px-4 pt-14 pb-24 flex flex-col gap-3 sm:gap-4">
         {/* --- 1. HERO: 3 STACKED TRANSLUCENT GLASS CAPSULES (FIGMA) --- */}
         <section id="mobile-home" className="w-full flex flex-col items-center">
-          <div className="w-full flex flex-col items-center select-none gap-0">
+          <div className="w-full flex flex-col items-center select-none gap-2.5 sm:gap-3">
             {/* Capsule 1: Saluto */}
             <div className="w-full h-[221px] px-6 rounded-full bg-white/[0.12] border-2 border-white shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-30">
               <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
@@ -1669,7 +1671,7 @@ export default function Home() {
         </section>
 
         {/* --- 2. WORK: HORIZONTAL SWITCH PILLS (FIGMA MOCKUP) --- */}
-        <section id="mobile-work" className="w-full flex flex-col gap-0">
+        <section id="mobile-work" className="w-full flex flex-col gap-3 sm:gap-4">
 
           {/* Project 1: Ungdomskort Horizontal Pill Switch */}
           <div className="w-full flex justify-center">
@@ -1682,7 +1684,7 @@ export default function Home() {
                 setMobileCase1((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
-              className={`group relative w-full h-[221px] rounded-full border-[16px] sm:border-[18px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full h-[221px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCase1 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -1798,7 +1800,7 @@ export default function Home() {
                 setMobileCase2((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
-              className={`group relative w-full h-[221px] rounded-full border-[16px] sm:border-[18px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full h-[221px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCase2 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -1913,7 +1915,7 @@ export default function Home() {
                 setMobileCase3((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
-              className={`group relative w-full h-[221px] rounded-full border-[16px] sm:border-[18px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full h-[221px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCase3 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -2031,7 +2033,7 @@ export default function Home() {
                 setMobileCaseAbout((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
-              className={`group relative w-full h-[221px] rounded-full border-[16px] sm:border-[18px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full h-[221px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCaseAbout === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -2122,15 +2124,17 @@ export default function Home() {
                         zoom={0.65}
                       />
                     )}
-                    <div className="relative z-10 w-full h-full rounded-full overflow-hidden">
-                      <Image
-                        src="/profile.png"
-                        alt="Herald Ago"
-                        fill
-                        priority
-                        sizes="160px"
-                        className="object-contain object-bottom"
-                      />
+                    <div className="relative z-10 w-full h-full rounded-full overflow-hidden flex items-center justify-center">
+                      <div className="relative w-[76%] h-[76%] flex items-center justify-center">
+                        <Image
+                          src="/profile.png"
+                          alt="Herald Ago"
+                          fill
+                          priority
+                          sizes="160px"
+                          className="object-contain object-bottom"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -2140,10 +2144,10 @@ export default function Home() {
         </section>
 
         {/* --- 4. KIND WORDS (RECOMMENDATIONS): HORIZONTAL PILLS --- */}
-        <section className="w-full flex flex-col gap-0">
+        <section className="w-full flex flex-col gap-3 sm:gap-4">
           {/* Testimonial Antonio */}
           <div className="w-full flex justify-center">
-            <div className="relative w-full min-h-[140px] rounded-full border-[14px] sm:border-[16px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-4 sm:p-5 flex items-center justify-between overflow-hidden">
+            <div className="relative w-full min-h-[140px] rounded-full border-[10px] sm:border-[12px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-4 sm:p-5 flex items-center justify-between overflow-hidden">
               <div className="pl-3 pr-4 flex-1 space-y-1 text-left">
                 <p className="text-[11px] text-slate-800 leading-snug italic font-normal line-clamp-3">
                   &ldquo;Herald has rare proactivity and deep study. The immediate trust he inspires will take him very far.&rdquo;
@@ -2161,7 +2165,7 @@ export default function Home() {
 
           {/* Testimonial Sebastian */}
           <div className="w-full flex justify-center">
-            <div className="relative w-full min-h-[140px] rounded-full border-[14px] sm:border-[16px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-4 sm:p-5 flex items-center justify-between overflow-hidden">
+            <div className="relative w-full min-h-[140px] rounded-full border-[10px] sm:border-[12px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-4 sm:p-5 flex items-center justify-between overflow-hidden">
               <div className="pl-3 pr-4 flex-1 space-y-1 text-left">
                 <p className="text-[11px] text-slate-800 leading-snug italic font-normal line-clamp-3">
                   &ldquo;Herald excelled at cross-stakeholder collaboration, guiding the process with great precision and genuine passion.&rdquo;
@@ -2181,7 +2185,7 @@ export default function Home() {
         {/* --- 5. CONTACT: LET'S CONNECT PILL --- */}
         <section id="mobile-contact" className="w-full flex justify-center">
           <div className="w-full flex justify-center">
-            <div className="relative w-full rounded-[48px] sm:rounded-full border-[14px] sm:border-[16px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-6 sm:p-8 flex flex-col items-center justify-center text-center overflow-hidden">
+            <div className="relative w-full rounded-[48px] sm:rounded-full border-[10px] sm:border-[12px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-6 sm:p-8 flex flex-col items-center justify-center text-center overflow-hidden">
               <div className="w-full space-y-3.5">
                 <div className="space-y-0.5">
                   <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Let&apos;s Connect</h2>
