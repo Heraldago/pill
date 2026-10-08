@@ -51,6 +51,12 @@ export default function Home() {
   const [case6Toggle, setCase6Toggle] = useState<"off" | "on">("off");
   const [hasToggledOnce6, setHasToggledOnce6] = useState(false);
 
+  // Mobile horizontal switch states (Figma layout)
+  const [mobileCase1, setMobileCase1] = useState<"off" | "on">("off");
+  const [mobileCase2, setMobileCase2] = useState<"off" | "on">("off");
+  const [mobileCase3, setMobileCase3] = useState<"off" | "on">("off");
+  const [mobileCaseAbout, setMobileCaseAbout] = useState<"off" | "on">("off");
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Stato form contatti & copia email
@@ -1623,313 +1629,434 @@ export default function Home() {
     </div>
 
       {/* =========================================================================
-          MOBILE VIEW: STATIC FULL-SCREEN GIANT PILL CAPSULES (block md:hidden)
-          Each section is a giant pillola utilizing the full mobile screen
+          MOBILE VIEW: FIGMA DRAFT ARCHITECTURE (block md:hidden)
+          3 Stacked Hero Glass Capsules + Horizontal Interactive Pill Switches
          ========================================================================= */}
-      <div className="block md:hidden relative w-full z-10 px-2 sm:px-3 pt-14 pb-20 space-y-8">
-        {/* --- 1. HERO GIANT PILLOLA --- */}
-        <section id="mobile-home" className="w-full flex justify-center">
-          <div className="relative w-full min-h-[calc(100dvh-4.5rem)] rounded-[1000px] border-[10px] sm:border-[14px] border-white bg-[#07162c] shadow-[0_25px_65px_rgba(0,10,30,0.35)] flex flex-col items-center justify-between p-6 sm:p-8 text-center overflow-hidden">
-            {/* Subtle glass reflection highlight */}
-            <div className="absolute inset-0 rounded-[1000px] pointer-events-none border border-white/20 shadow-[inset_0_2px_16px_rgba(255,255,255,0.18)]" />
-            
-            <div className="pt-8 sm:pt-10 z-10">
-              <span className="px-4 py-1.5 rounded-full bg-white/10 text-white/90 text-xs font-semibold tracking-wide border border-white/20 shadow-xs">
+      <div className="block md:hidden relative w-full z-10 px-3 sm:px-4 pt-16 pb-24 space-y-10">
+        {/* --- 1. HERO: 3 STACKED TRANSLUCENT GLASS CAPSULES (FIGMA) --- */}
+        <section id="mobile-home" className="w-full flex flex-col items-center pt-2">
+          <div className="w-full max-w-[360px] flex flex-col items-center select-none">
+            {/* Capsule 1: Saluto */}
+            <div className="w-full py-7 px-6 rounded-full bg-[#12365c]/65 backdrop-blur-2xl border border-white/30 shadow-[0_12px_36px_rgba(0,10,30,0.35),inset_0_1px_2px_rgba(255,255,255,0.4)] flex items-center justify-center text-center relative z-30">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-snug">
                 Hi, I&apos;m Herald :)
-              </span>
+              </h1>
             </div>
 
-            <div className="space-y-4 px-3 z-10 my-auto">
-              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
-                I <span className="text-[#38bdf8] drop-shadow-[0_0_16px_rgba(56,189,248,0.6)]">design</span> digital products
-              </h1>
-              <p className="text-2xl sm:text-3xl font-light text-white/95 leading-snug">
+            {/* Capsule 2: Missione */}
+            <div className="w-full py-7 px-6 rounded-full bg-[#12365c]/65 backdrop-blur-2xl border border-white/30 shadow-[0_12px_36px_rgba(0,10,30,0.35),inset_0_1px_2px_rgba(255,255,255,0.4)] flex items-center justify-center text-center -mt-5 relative z-20">
+              <p className="text-2xl sm:text-3xl font-semibold tracking-tight text-white leading-snug">
+                I <span className="font-extrabold text-[#38bdf8] drop-shadow-[0_0_14px_rgba(56,189,248,0.6)]">design</span> digital products
+              </p>
+            </div>
+
+            {/* Capsule 3: Scopo */}
+            <div className="w-full py-7 px-6 rounded-full bg-[#12365c]/65 backdrop-blur-2xl border border-white/30 shadow-[0_12px_36px_rgba(0,10,30,0.35),inset_0_1px_2px_rgba(255,255,255,0.4)] flex items-center justify-center text-center -mt-5 relative z-10">
+              <p className="text-xl sm:text-2xl font-normal tracking-tight text-white/95 leading-snug">
                 that <span className="italic font-serif text-white">help</span> and{" "}
                 <span className="italic font-serif text-white">simplify</span> people&apos;s lives.
               </p>
             </div>
-
-            <div className="pb-8 sm:pb-10 z-10">
-              <button
-                onClick={() => {
-                  const el = document.getElementById("mobile-work");
-                  if (el) el.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/15 hover:bg-white/25 active:scale-95 text-white text-xs font-semibold border border-white/25 transition-all cursor-pointer shadow-xs"
-              >
-                <span>Selected Work</span>
-                <span className="text-xs">↓</span>
-              </button>
-            </div>
           </div>
         </section>
 
-        {/* --- 2. WORK: SELECTED CASE STUDIES (EACH IS A FULL-SCREEN GIANT PILLOLA) --- */}
-        <section id="mobile-work" className="space-y-8">
-          {/* Section pill header */}
-          <div className="flex items-center justify-center">
-            <span className="px-5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
+        {/* --- 2. WORK: HORIZONTAL SWITCH PILLS (FIGMA MOCKUP) --- */}
+        <section id="mobile-work" className="space-y-6">
+          {/* Header pill badge */}
+          <div className="flex flex-col items-center justify-center gap-1.5">
+            <span className="px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
               Selected Work
+            </span>
+            <span className="text-[10px] text-white/60 tracking-wide">
+              Tap any pill to toggle cover and case study
             </span>
           </div>
 
-          {/* Project 1: Ungdomskort Giant Pillola */}
+          {/* Project 1: Ungdomskort Horizontal Pill Switch */}
           <div className="w-full flex justify-center">
-            <div className="relative w-full min-h-[calc(100dvh-4.5rem)] rounded-[1000px] border-[10px] sm:border-[14px] border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)] p-5 flex flex-col items-center justify-between text-center overflow-hidden">
-              {/* Top Circular Knob */}
-              <div className="relative w-[260px] h-[260px] rounded-full bg-[#0b2847] border border-white/20 shadow-[0_16px_36px_rgba(0,18,36,0.35)] flex items-center justify-center p-5 flex-shrink-0 mt-4">
-                <div className="relative w-full h-full">
-                  <Image
-                    src="/ungheromockup.svg"
-                    alt="Ungdomskort Portal"
-                    fill
-                    unoptimized
-                    sizes="260px"
-                    className="object-contain p-2"
-                  />
-                </div>
+            <div
+              role="switch"
+              aria-checked={mobileCase1 === "on"}
+              onClick={() => setMobileCase1((prev) => (prev === "off" ? "on" : "off"))}
+              className={`group relative w-full max-w-[360px] h-[180px] sm:h-[190px] rounded-full border-[10px] sm:border-[12px] border-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.985] ${
+                mobileCase1 === "off" ? "bg-[#0b2847]" : "bg-white"
+              }`}
+            >
+              {/* STATE OFF: Cover con numero "1" a destra */}
+              <div
+                className={`absolute inset-0 flex items-center justify-end pr-10 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  mobileCase1 === "off"
+                    ? "opacity-100 scale-100 translate-x-0"
+                    : "opacity-0 scale-75 translate-x-12"
+                }`}
+              >
+                <span className="text-7xl sm:text-8xl font-black text-white/95 tracking-tighter drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
+                  1
+                </span>
               </div>
 
-              {/* Bottom Content */}
-              <div className="flex flex-col items-center justify-center space-y-3 px-4 pb-8 pt-2">
-                <span className="text-xs font-bold text-blue-600 tracking-wider uppercase">
+              {/* STATE ON: Dettagli case study a sinistra */}
+              <div
+                className={`absolute inset-y-0 left-5 right-[160px] sm:right-[170px] flex flex-col justify-center text-left space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  mobileCase1 === "on"
+                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
+                    : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
+                }`}
+              >
+                <span className="text-[10px] font-bold text-blue-600 tracking-wider uppercase">
                   Transit Platform
                 </span>
-                <h3 className="text-3xl font-bold text-slate-900 tracking-tight">
+                <h3 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-tight">
                   Ungdomskort
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal max-w-[280px]">
-                  Denmark&apos;s youth transit pass platform redesign, simplifying digital commuting for nationwide students.
+                <p className="text-[11px] sm:text-xs text-slate-600 line-clamp-2 leading-snug">
+                  Redesign of Denmark&apos;s youth transit pass platform.
                 </p>
-                <div className="pt-2">
+                <div className="pt-1">
                   <a
                     href="https://www.heraldago.com/ungdomskort"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-7 py-2.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs font-semibold shadow-md transition-all cursor-pointer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] font-semibold shadow-xs transition-all"
                   >
                     <span>See case study</span>
-                    <span className="text-xs font-bold">↗</span>
+                    <span className="text-xs">↗</span>
                   </a>
+                </div>
+              </div>
+
+              {/* IL KNOB CIRCOLARE SCORREVOLE: Left a OFF, Right a ON */}
+              <div
+                className={`absolute top-2 bottom-2 aspect-square rounded-full overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  mobileCase1 === "off"
+                    ? "left-2 bg-white shadow-[0_12px_28px_rgba(0,0,0,0.35),inset_0_1px_2px_rgba(255,255,255,0.9)]"
+                    : "left-[calc(100%-154px)] sm:left-[calc(100%-164px)] bg-[#0b2847] border border-white/30 shadow-[0_16px_36px_rgba(0,18,36,0.45)]"
+                } flex items-center justify-center p-3 select-none`}
+              >
+                <div className="relative w-full h-full">
+                  <Image
+                    src="/ungheromockup.svg"
+                    alt="Ungdomskort Mockup"
+                    fill
+                    unoptimized
+                    sizes="150px"
+                    className="object-contain p-1.5"
+                  />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Project 2: X-Bit Giant Pillola */}
+          {/* Project 2: X-Bit Horizontal Pill Switch */}
           <div className="w-full flex justify-center">
-            <div className="relative w-full min-h-[calc(100dvh-4.5rem)] rounded-[1000px] border-[10px] sm:border-[14px] border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)] p-5 flex flex-col items-center justify-between text-center overflow-hidden">
-              {/* Top Circular Knob */}
-              <div className="relative w-[260px] h-[260px] rounded-full bg-[#0b2847] border border-white/20 shadow-[0_16px_36px_rgba(0,18,36,0.35)] flex items-center justify-center p-5 flex-shrink-0 mt-4">
-                <div className="relative w-full h-full">
-                  <Image
-                    src="/xbitheromockup.svg"
-                    alt="X-Bit Mobile App"
-                    fill
-                    unoptimized
-                    sizes="260px"
-                    className="object-contain p-2"
-                  />
-                </div>
+            <div
+              role="switch"
+              aria-checked={mobileCase2 === "on"}
+              onClick={() => setMobileCase2((prev) => (prev === "off" ? "on" : "off"))}
+              className={`group relative w-full max-w-[360px] h-[180px] sm:h-[190px] rounded-full border-[10px] sm:border-[12px] border-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.985] ${
+                mobileCase2 === "off" ? "bg-[#0b2847]" : "bg-white"
+              }`}
+            >
+              {/* STATE OFF: Cover con numero "2" a destra */}
+              <div
+                className={`absolute inset-0 flex items-center justify-end pr-10 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  mobileCase2 === "off"
+                    ? "opacity-100 scale-100 translate-x-0"
+                    : "opacity-0 scale-75 translate-x-12"
+                }`}
+              >
+                <span className="text-7xl sm:text-8xl font-black text-white/95 tracking-tighter drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
+                  2
+                </span>
               </div>
 
-              {/* Bottom Content */}
-              <div className="flex flex-col items-center justify-center space-y-3 px-4 pb-8 pt-2">
-                <span className="text-xs font-bold text-blue-600 tracking-wider uppercase">
+              {/* STATE ON: Dettagli case study a sinistra */}
+              <div
+                className={`absolute inset-y-0 left-5 right-[160px] sm:right-[170px] flex flex-col justify-center text-left space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  mobileCase2 === "on"
+                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
+                    : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
+                }`}
+              >
+                <span className="text-[10px] font-bold text-blue-600 tracking-wider uppercase">
                   Museum Exploration
                 </span>
-                <h3 className="text-3xl font-bold text-slate-900 tracking-tight">
+                <h3 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-tight">
                   X-Bit
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal max-w-[280px]">
-                  Interactive audio guide and cultural heritage exploration platform bridging museum exhibits with engaging storytelling.
+                <p className="text-[11px] sm:text-xs text-slate-600 line-clamp-2 leading-snug">
+                  Interactive audio guide and cultural heritage exploration platform.
                 </p>
-                <div className="pt-2">
+                <div className="pt-1">
                   <a
                     href="https://www.heraldago.com/xbit"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-7 py-2.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs font-semibold shadow-md transition-all cursor-pointer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] font-semibold shadow-xs transition-all"
                   >
                     <span>See case study</span>
-                    <span className="text-xs font-bold">↗</span>
+                    <span className="text-xs">↗</span>
                   </a>
+                </div>
+              </div>
+
+              {/* IL KNOB CIRCOLARE SCORREVOLE: Left a OFF, Right a ON */}
+              <div
+                className={`absolute top-2 bottom-2 aspect-square rounded-full overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  mobileCase2 === "off"
+                    ? "left-2 bg-white shadow-[0_12px_28px_rgba(0,0,0,0.35),inset_0_1px_2px_rgba(255,255,255,0.9)]"
+                    : "left-[calc(100%-154px)] sm:left-[calc(100%-164px)] bg-[#0b2847] border border-white/30 shadow-[0_16px_36px_rgba(0,18,36,0.45)]"
+                } flex items-center justify-center p-3 select-none`}
+              >
+                <div className="relative w-full h-full">
+                  <Image
+                    src="/xbitheromockup.svg"
+                    alt="X-Bit Mockup"
+                    fill
+                    unoptimized
+                    sizes="150px"
+                    className="object-contain p-1.5"
+                  />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Project 3: I Pupi Siciliani Giant Pillola */}
+          {/* Project 3: I Pupi Siciliani Horizontal Pill Switch */}
           <div className="w-full flex justify-center">
-            <div className="relative w-full min-h-[calc(100dvh-4.5rem)] rounded-[1000px] border-[10px] sm:border-[14px] border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)] p-5 flex flex-col items-center justify-between text-center overflow-hidden">
-              {/* Top Circular Knob */}
-              <div className="relative w-[260px] h-[260px] rounded-full bg-[#0b2847] border border-white/20 shadow-[0_16px_36px_rgba(0,18,36,0.35)] flex items-center justify-center p-5 flex-shrink-0 mt-4">
-                <div className="relative w-full h-full">
-                  <Image
-                    src="/pupi-mockup-white.svg"
-                    alt="I Pupi Siciliani Wine Store"
-                    fill
-                    unoptimized
-                    sizes="260px"
-                    className="object-contain p-2"
-                  />
-                </div>
+            <div
+              role="switch"
+              aria-checked={mobileCase3 === "on"}
+              onClick={() => setMobileCase3((prev) => (prev === "off" ? "on" : "off"))}
+              className={`group relative w-full max-w-[360px] h-[180px] sm:h-[190px] rounded-full border-[10px] sm:border-[12px] border-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.985] ${
+                mobileCase3 === "off" ? "bg-[#0b2847]" : "bg-white"
+              }`}
+            >
+              {/* STATE OFF: Cover con numero "3" a destra */}
+              <div
+                className={`absolute inset-0 flex items-center justify-end pr-10 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  mobileCase3 === "off"
+                    ? "opacity-100 scale-100 translate-x-0"
+                    : "opacity-0 scale-75 translate-x-12"
+                }`}
+              >
+                <span className="text-7xl sm:text-8xl font-black text-white/95 tracking-tighter drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
+                  3
+                </span>
               </div>
 
-              {/* Bottom Content */}
-              <div className="flex flex-col items-center justify-center space-y-3 px-4 pb-8 pt-2">
-                <span className="text-xs font-bold text-blue-600 tracking-wider uppercase">
+              {/* STATE ON: Dettagli case study a sinistra */}
+              <div
+                className={`absolute inset-y-0 left-5 right-[160px] sm:right-[170px] flex flex-col justify-center text-left space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  mobileCase3 === "on"
+                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
+                    : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
+                }`}
+              >
+                <span className="text-[10px] font-bold text-blue-600 tracking-wider uppercase">
                   E-Commerce &amp; Wine
                 </span>
-                <h3 className="text-3xl font-bold text-slate-900 tracking-tight">
+                <h3 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-tight">
                   I Pupi Siciliani
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal max-w-[280px]">
-                  Bespoke digital wine store experience delivering +187% YoY profit growth through refined UX and identity design.
+                <p className="text-[11px] sm:text-xs text-slate-600 line-clamp-2 leading-snug">
+                  Bespoke digital wine store experience delivering +187% profit growth.
                 </p>
-                <div className="pt-2">
+                <div className="pt-1">
                   <a
                     href="https://www.heraldago.com/ipupisiciliani"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-7 py-2.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs font-semibold shadow-md transition-all cursor-pointer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] font-semibold shadow-xs transition-all"
                   >
                     <span>See case study</span>
-                    <span className="text-xs font-bold">↗</span>
+                    <span className="text-xs">↗</span>
                   </a>
+                </div>
+              </div>
+
+              {/* IL KNOB CIRCOLARE SCORREVOLE: Left a OFF, Right a ON */}
+              <div
+                className={`absolute top-2 bottom-2 aspect-square rounded-full overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  mobileCase3 === "off"
+                    ? "left-2 bg-white shadow-[0_12px_28px_rgba(0,0,0,0.35),inset_0_1px_2px_rgba(255,255,255,0.9)]"
+                    : "left-[calc(100%-154px)] sm:left-[calc(100%-164px)] bg-[#0b2847] border border-white/30 shadow-[0_16px_36px_rgba(0,18,36,0.45)]"
+                } flex items-center justify-center p-3 select-none`}
+              >
+                <div className="relative w-full h-full">
+                  <Image
+                    src={mobileCase3 === "on" ? "/pupi-mockup-white.svg" : "/pupi-mockup.svg"}
+                    alt="I Pupi Siciliani Mockup"
+                    fill
+                    unoptimized
+                    sizes="150px"
+                    className="object-contain p-2"
+                  />
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* --- 3. ABOUT ME GIANT PILLOLA --- */}
-        <section id="mobile-about" className="space-y-8">
+        {/* --- 3. ABOUT ME: HORIZONTAL PILL SWITCH --- */}
+        <section id="mobile-about" className="space-y-4">
           <div className="flex items-center justify-center">
-            <span className="px-5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
+            <span className="px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
               About
             </span>
           </div>
 
           <div className="w-full flex justify-center">
-            <div className="relative w-full min-h-[calc(100dvh-4.5rem)] rounded-[1000px] border-[10px] sm:border-[14px] border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)] p-5 flex flex-col items-center justify-between text-center overflow-hidden">
-              {/* Top Circular Knob Photo */}
-              <div className="relative w-[210px] h-[210px] rounded-full overflow-hidden border-4 border-slate-900/10 shadow-[0_16px_36px_rgba(0,18,36,0.25)] flex-shrink-0 mt-4">
-                <Image
-                  src="/profile-pro.jpg"
-                  alt="Herald Ago"
-                  fill
-                  priority
-                  sizes="210px"
-                  className="object-cover object-[center_top]"
-                />
+            <div
+              role="switch"
+              aria-checked={mobileCaseAbout === "on"}
+              onClick={() => setMobileCaseAbout((prev) => (prev === "off" ? "on" : "off"))}
+              className={`group relative w-full max-w-[360px] h-[180px] sm:h-[190px] rounded-full border-[10px] sm:border-[12px] border-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.985] ${
+                mobileCaseAbout === "off" ? "bg-[#0b2847]" : "bg-white"
+              }`}
+            >
+              {/* STATE OFF: Cover con testo "About" a destra */}
+              <div
+                className={`absolute inset-0 flex items-center justify-end pr-8 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  mobileCaseAbout === "off"
+                    ? "opacity-100 scale-100 translate-x-0"
+                    : "opacity-0 scale-75 translate-x-12"
+                }`}
+              >
+                <div className="text-right">
+                  <h3 className="text-3xl font-extrabold text-white tracking-tight">Herald Ago</h3>
+                  <p className="text-xs text-white/70 font-medium">Product Designer</p>
+                </div>
               </div>
 
-              {/* Bottom Content */}
-              <div className="space-y-3 px-4 pb-12 pt-2">
-                <div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Herald Ago</h2>
-                  <p className="text-xs sm:text-sm font-medium text-slate-600">27 y/o · Product Designer · Italy &amp; Barcelona</p>
-                </div>
-
-                <div className="space-y-2 text-xs sm:text-sm text-slate-700 leading-relaxed font-normal max-w-[290px] mx-auto">
-                  <p>
-                    Italian with Albanian roots, born and raised in Padua. Bachelor in Communication Science &amp; Tech, moved to Miami, then Denmark for MSc in IT – Web Communication Design. Now living between Italy &amp; Barcelona.
-                  </p>
-                  <p className="text-slate-500 text-xs">
-                    Passionate about design, AI, sociology, books, travel, good food, and fine wine with family &amp; friends.
-                  </p>
-                </div>
-
-                <div className="pt-2 flex flex-wrap items-center justify-center gap-2">
+              {/* STATE ON: Bio sintetica e link a sinistra */}
+              <div
+                className={`absolute inset-y-0 left-5 right-[160px] sm:right-[170px] flex flex-col justify-center text-left space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  mobileCaseAbout === "on"
+                    ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
+                    : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
+                }`}
+              >
+                <h3 className="text-sm font-bold text-slate-900 tracking-tight">Herald Ago · 27 y/o</h3>
+                <p className="text-[10px] text-slate-600 line-clamp-3 leading-snug">
+                  Padua, Miami, MSc in Denmark. Now living between Italy &amp; Barcelona. Design, AI, sociology &amp; fine wine.
+                </p>
+                <div className="pt-1 flex items-center gap-1.5">
                   <a
                     href="/cv-herald-ago.pdf"
                     target="_blank"
                     download
-                    className="px-5 py-2.5 rounded-full bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-xs transition-all active:scale-95"
+                    onClick={(e) => e.stopPropagation()}
+                    className="px-2.5 py-1 rounded-full bg-slate-900 hover:bg-black text-white text-[10px] font-semibold transition-all shadow-xs"
                   >
-                    Download Resume PDF
+                    CV PDF
                   </a>
                   <button
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       const el = document.getElementById("mobile-contact");
                       if (el) el.scrollIntoView({ behavior: "smooth" });
                     }}
-                    className="px-5 py-2.5 rounded-full bg-slate-900/10 hover:bg-slate-900/20 text-slate-900 text-xs font-semibold border border-slate-900/15 transition-all active:scale-95 cursor-pointer"
+                    className="px-2.5 py-1 rounded-full bg-slate-900/10 text-slate-900 text-[10px] font-semibold border border-slate-900/15"
                   >
-                    Contact me
+                    Contact
                   </button>
+                </div>
+              </div>
+
+              {/* IL KNOB CIRCOLARE CON FOTO PROFILO */}
+              <div
+                className={`absolute top-2 bottom-2 aspect-square rounded-full overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  mobileCaseAbout === "off"
+                    ? "left-2 bg-white shadow-[0_12px_28px_rgba(0,0,0,0.35)]"
+                    : "left-[calc(100%-154px)] sm:left-[calc(100%-164px)] bg-[#0b2847] border border-white/30 shadow-[0_16px_36px_rgba(0,18,36,0.45)]"
+                } flex items-center justify-center p-1 select-none`}
+              >
+                <div className="relative w-full h-full rounded-full overflow-hidden">
+                  <Image
+                    src="/profile-pro.jpg"
+                    alt="Herald Ago"
+                    fill
+                    priority
+                    sizes="150px"
+                    className="object-cover object-[center_top]"
+                  />
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* --- 4. RECOMMENDATIONS GIANT PILLOLA --- */}
-        <section className="space-y-8">
+        {/* --- 4. KIND WORDS (RECOMMENDATIONS): HORIZONTAL PILLS --- */}
+        <section className="space-y-4">
           <div className="flex items-center justify-center">
-            <span className="px-5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
+            <span className="px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
               Kind Words
             </span>
           </div>
 
+          {/* Testimonial Antonio */}
           <div className="w-full flex justify-center">
-            <div className="relative w-full min-h-[calc(100dvh-4.5rem)] rounded-[1000px] border-[10px] sm:border-[14px] border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)] p-6 flex flex-col items-center justify-around text-center overflow-hidden">
-              {/* Testimonial 1: Antonio */}
-              <div className="space-y-3 pt-6 px-3">
-                <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-slate-900/15 shadow-sm mx-auto">
-                  <Image src="/antonio-avatar.jpg" alt="Antonio" fill unoptimized sizes="64px" className="object-cover" />
-                </div>
-                <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-normal max-w-[280px] mx-auto italic">
-                  &ldquo;Herald has rare proactivity and deep study. The dedication he brings to preparing every detail and the immediate trust he inspires will take him very far.&rdquo;
+            <div className="relative w-full max-w-[360px] min-h-[140px] rounded-full border-[10px] sm:border-[12px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-4 flex items-center justify-between overflow-hidden">
+              <div className="pl-3 pr-4 flex-1 space-y-1 text-left">
+                <p className="text-[11px] text-slate-800 leading-snug italic font-normal line-clamp-3">
+                  &ldquo;Herald has rare proactivity and deep study. The immediate trust he inspires will take him very far.&rdquo;
                 </p>
                 <div>
-                  <p className="text-xs sm:text-sm font-semibold text-slate-900">Antonio</p>
-                  <p className="text-[11px] text-slate-600">Founder, I Pupi Siciliani</p>
+                  <p className="text-xs font-bold text-slate-900">Antonio</p>
+                  <p className="text-[10px] text-slate-500">Founder, I Pupi Siciliani</p>
                 </div>
               </div>
+              <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-slate-900/15 shadow-sm flex-shrink-0">
+                <Image src="/antonio-avatar.jpg" alt="Antonio" fill unoptimized sizes="64px" className="object-cover" />
+              </div>
+            </div>
+          </div>
 
-              <div className="w-16 h-0.5 bg-slate-900/10 my-2" />
-
-              {/* Testimonial 2: Sebastian */}
-              <div className="space-y-3 pb-6 px-3">
-                <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-slate-900/15 shadow-sm mx-auto">
-                  <Image src="/sebastian-avatar.jpg" alt="Sebastian" fill unoptimized sizes="64px" className="object-cover" />
-                </div>
-                <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-normal max-w-[280px] mx-auto italic">
-                  &ldquo;Herald excelled at cross-stakeholder collaboration, guiding the entire creation process from start to finish with great precision and genuine passion.&rdquo;
+          {/* Testimonial Sebastian */}
+          <div className="w-full flex justify-center">
+            <div className="relative w-full max-w-[360px] min-h-[140px] rounded-full border-[10px] sm:border-[12px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-4 flex items-center justify-between overflow-hidden">
+              <div className="pl-3 pr-4 flex-1 space-y-1 text-left">
+                <p className="text-[11px] text-slate-800 leading-snug italic font-normal line-clamp-3">
+                  &ldquo;Herald excelled at cross-stakeholder collaboration, guiding the process with great precision and genuine passion.&rdquo;
                 </p>
                 <div>
-                  <p className="text-xs sm:text-sm font-semibold text-slate-900">Sebastian</p>
-                  <p className="text-[11px] text-slate-600">CEO, næmt.nu</p>
+                  <p className="text-xs font-bold text-slate-900">Sebastian</p>
+                  <p className="text-[10px] text-slate-500">CEO, næmt.nu</p>
                 </div>
+              </div>
+              <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-slate-900/15 shadow-sm flex-shrink-0">
+                <Image src="/sebastian-avatar.jpg" alt="Sebastian" fill unoptimized sizes="64px" className="object-cover" />
               </div>
             </div>
           </div>
         </section>
 
-        {/* --- 5. CONTACT GIANT PILLOLA --- */}
-        <section id="mobile-contact" className="space-y-8">
+        {/* --- 5. CONTACT: LET'S CONNECT PILL --- */}
+        <section id="mobile-contact" className="space-y-4">
           <div className="flex items-center justify-center">
-            <span className="px-5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
+            <span className="px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wider uppercase shadow-xs">
               Contact
             </span>
           </div>
 
           <div className="w-full flex justify-center">
-            <div className="relative w-full min-h-[calc(100dvh-4.5rem)] rounded-[1000px] border-[10px] sm:border-[14px] border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)] p-6 flex flex-col items-center justify-center text-center overflow-hidden">
-              <div className="w-full space-y-4 px-3 my-auto">
-                <div className="space-y-1">
-                  <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Let&apos;s Connect</h2>
-                  <p className="text-xs sm:text-sm text-slate-600">Open for product design opportunities.</p>
+            <div className="relative w-full max-w-[360px] rounded-[48px] border-[10px] sm:border-[12px] border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)] p-6 flex flex-col items-center justify-center text-center overflow-hidden">
+              <div className="w-full space-y-3.5">
+                <div className="space-y-0.5">
+                  <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Let&apos;s Connect</h2>
+                  <p className="text-xs text-slate-600">Open for product design opportunities.</p>
                 </div>
 
                 {/* Quick action buttons */}
-                <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
+                <div className="flex flex-wrap items-center justify-center gap-1.5">
                   <button
                     type="button"
                     onClick={handleCopyEmail}
-                    className="px-4 py-2 rounded-full bg-slate-900 text-white text-xs font-semibold active:scale-95 transition-all shadow-xs cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-full bg-slate-900 text-white text-[11px] font-semibold active:scale-95 transition-all shadow-xs cursor-pointer"
                   >
                     {copiedEmail ? "Copied!" : "heraldago1@gmail.com"}
                   </button>
@@ -1937,7 +2064,7 @@ export default function Home() {
                     href="https://www.linkedin.com/in/heraldago/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 rounded-full bg-slate-900/10 text-slate-900 text-xs font-semibold border border-slate-900/15 active:scale-95 transition-all cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-full bg-slate-900/10 text-slate-900 text-[11px] font-semibold border border-slate-900/15 active:scale-95 transition-all cursor-pointer"
                   >
                     LinkedIn
                   </a>
@@ -1945,7 +2072,7 @@ export default function Home() {
                     href="/cv-herald-ago.pdf"
                     target="_blank"
                     download
-                    className="px-4 py-2 rounded-full bg-slate-900/10 text-slate-900 text-xs font-semibold border border-slate-900/15 active:scale-95 transition-all cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-full bg-slate-900/10 text-slate-900 text-[11px] font-semibold border border-slate-900/15 active:scale-95 transition-all cursor-pointer"
                   >
                     Resume PDF
                   </a>
@@ -1953,20 +2080,20 @@ export default function Home() {
 
                 {/* Contact form */}
                 {contactSubmitted ? (
-                  <div className="p-5 rounded-3xl bg-slate-900/[0.05] border border-slate-900/15 text-center space-y-1.5 max-w-[290px] mx-auto">
-                    <div className="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center mx-auto text-sm font-bold">✓</div>
-                    <h3 className="text-base font-bold text-slate-900">Message sent!</h3>
+                  <div className="p-4 rounded-3xl bg-slate-900/[0.05] border border-slate-900/15 text-center space-y-1">
+                    <div className="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center mx-auto text-xs font-bold">✓</div>
+                    <h3 className="text-sm font-bold text-slate-900">Message sent!</h3>
                     <p className="text-xs text-slate-700">Thank you for reaching out. I will reply soon.</p>
                   </div>
                 ) : (
-                  <form onSubmit={handleContactSubmit} className="space-y-2.5 pt-2 w-full max-w-[290px] mx-auto">
+                  <form onSubmit={handleContactSubmit} className="space-y-2 pt-1 w-full max-w-[280px] mx-auto">
                     <input
                       type="text"
                       required
                       value={contactName}
                       onChange={(e) => setContactName(e.target.value)}
                       placeholder="Your name"
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30"
+                      className="w-full px-3.5 py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30"
                     />
                     <input
                       type="email"
@@ -1974,19 +2101,19 @@ export default function Home() {
                       value={contactEmail}
                       onChange={(e) => setContactEmail(e.target.value)}
                       placeholder="Your email"
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30"
+                      className="w-full px-3.5 py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30"
                     />
                     <textarea
                       required
-                      rows={3}
+                      rows={2}
                       value={contactMessage}
                       onChange={(e) => setContactMessage(e.target.value)}
                       placeholder="Your message..."
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30 resize-none"
+                      className="w-full px-3.5 py-2 rounded-xl bg-slate-900/[0.05] border border-slate-900/15 text-xs text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/30 resize-none"
                     />
                     <button
                       type="submit"
-                      className="w-full py-3 rounded-full bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-md transition-all cursor-pointer active:scale-95"
+                      className="w-full py-2.5 rounded-full bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-md transition-all cursor-pointer active:scale-95"
                     >
                       Send Message
                     </button>
