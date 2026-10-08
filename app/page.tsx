@@ -1114,12 +1114,12 @@ export default function Home() {
                     }`}
                   >
                     <Image
-                      src="/profile-pro.jpg"
+                      src="/profile.png"
                       alt="Herald Ago"
                       fill
                       priority
                       sizes="(max-width: 768px) 85vw, 45vw"
-                      className="object-cover object-[center_top]"
+                      className="object-contain object-bottom"
                     />
                   </div>
                 </div>
@@ -2122,14 +2122,14 @@ export default function Home() {
                         zoom={0.65}
                       />
                     )}
-                    <div className="relative z-10 w-[88%] h-[88%] rounded-full overflow-hidden shadow-inner border border-white/20">
+                    <div className="relative z-10 w-full h-full rounded-full overflow-hidden">
                       <Image
-                        src="/profile-pro.jpg"
+                        src="/profile.png"
                         alt="Herald Ago"
                         fill
                         priority
                         sizes="160px"
-                        className="object-cover object-[center_top]"
+                        className="object-contain object-bottom"
                       />
                     </div>
                   </div>
