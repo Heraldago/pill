@@ -1636,26 +1636,26 @@ export default function Home() {
           MOBILE VIEW: FIGMA DRAFT ARCHITECTURE (block md:hidden)
           3 Stacked Hero Glass Capsules + Horizontal Interactive Pill Switches
          ========================================================================= */}
-      <div className="block md:hidden relative w-full z-10 px-3 sm:px-4 pt-16 pb-24 space-y-10">
+      <div className="block md:hidden relative w-full z-10 px-2.5 sm:px-4 pt-14 pb-24 space-y-10">
         {/* --- 1. HERO: 3 STACKED TRANSLUCENT GLASS CAPSULES (FIGMA) --- */}
         <section id="mobile-home" className="w-full flex flex-col items-center pt-2">
-          <div className="w-full max-w-[390px] flex flex-col items-center select-none px-1">
+          <div className="w-full flex flex-col items-center select-none">
             {/* Capsule 1: Saluto */}
-            <div className="w-full py-8 sm:py-9 px-6 rounded-full bg-white/20 backdrop-blur-2xl border-[1.5px] border-white/50 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-30">
+            <div className="w-full h-[221px] px-6 rounded-full bg-white/20 backdrop-blur-2xl border-[1.5px] border-white/50 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-30">
               <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 Hi, I&apos;m Herald :)
               </h1>
             </div>
 
             {/* Capsule 2: Missione */}
-            <div className="w-full py-8 sm:py-9 px-6 rounded-full bg-white/20 backdrop-blur-2xl border-[1.5px] border-white/50 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center -mt-5 sm:-mt-6 relative z-20">
+            <div className="w-full h-[221px] px-6 rounded-full bg-white/20 backdrop-blur-2xl border-[1.5px] border-white/50 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center -mt-16 sm:-mt-20 relative z-20">
               <p className="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 I <span className="font-extrabold text-[#38bdf8] drop-shadow-[0_0_16px_rgba(56,189,248,0.7)]">design</span> digital products
               </p>
             </div>
 
             {/* Capsule 3: Scopo */}
-            <div className="w-full py-8 sm:py-9 px-6 rounded-full bg-white/20 backdrop-blur-2xl border-[1.5px] border-white/50 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center -mt-5 sm:-mt-6 relative z-10">
+            <div className="w-full h-[221px] px-6 rounded-full bg-white/20 backdrop-blur-2xl border-[1.5px] border-white/50 shadow-[0_16px_40px_rgba(0,10,30,0.35),inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center -mt-16 sm:-mt-20 relative z-10">
               <p className="text-2xl sm:text-3xl font-medium tracking-tight text-white/95 leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 that <span className="italic font-serif text-white">help</span> and{" "}
                 <span className="italic font-serif text-white">simplify</span> people&apos;s lives.
@@ -1687,7 +1687,7 @@ export default function Home() {
                 setMobileCase1((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
-              className={`group relative w-full max-w-[390px] h-[210px] sm:h-[220px] rounded-full border-[16px] sm:border-[18px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full h-[221px] rounded-full border-[16px] sm:border-[18px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCase1 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -1803,7 +1803,7 @@ export default function Home() {
                 setMobileCase2((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
-              className={`group relative w-full max-w-[390px] h-[210px] sm:h-[220px] rounded-full border-[16px] sm:border-[18px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full h-[221px] rounded-full border-[16px] sm:border-[18px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCase2 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -1918,7 +1918,7 @@ export default function Home() {
                 setMobileCase3((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
-              className={`group relative w-full max-w-[390px] h-[210px] sm:h-[220px] rounded-full border-[16px] sm:border-[18px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full h-[221px] rounded-full border-[16px] sm:border-[18px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCase3 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -2041,7 +2041,7 @@ export default function Home() {
                 setMobileCaseAbout((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
-              className={`group relative w-full max-w-[390px] h-[210px] sm:h-[220px] rounded-full border-[16px] sm:border-[18px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full h-[221px] rounded-full border-[16px] sm:border-[18px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCaseAbout === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -2148,6 +2148,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+
 
 
 
