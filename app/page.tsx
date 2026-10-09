@@ -1644,19 +1644,19 @@ export default function Home() {
           MOBILE VIEW: FIGMA DRAFT ARCHITECTURE (block md:hidden)
           3 Stacked Hero Glass Capsules + Horizontal Interactive Pill Switches
          ========================================================================= */}
-      <div className="block md:hidden relative w-full z-10 px-0 pt-0 pb-10 flex flex-col gap-0">
+      <div className="block md:hidden relative w-full z-10 px-0 pt-[max(5.5rem,calc(env(safe-area-inset-top)+4.5rem))] pb-[max(5rem,calc(env(safe-area-inset-bottom)+2rem))] flex flex-col gap-0">
         {/* --- 1. HERO: 3 STACKED TRANSLUCENT GLASS CAPSULES (FIGMA) --- */}
         <section id="mobile-home" className="w-full flex flex-col items-center">
           <div className="w-full flex flex-col items-center select-none gap-0">
             {/* Capsule 1: Saluto */}
-            <div className="w-full h-[185px] px-6 rounded-full bg-white/[0.12] border-0 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-30">
+            <div className="w-full aspect-[2/1] px-8 sm:px-10 rounded-full bg-white/[0.12] border-0 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-30">
               <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 Hi, I&apos;m Herald :)
               </h1>
             </div>
 
             {/* Capsule 2: Missione */}
-            <div className="w-full h-[185px] px-6 rounded-full bg-white/[0.12] border-0 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-20">
+            <div className="w-full aspect-[2/1] px-8 sm:px-10 rounded-full bg-white/[0.12] border-0 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-20">
               <p className="text-2xl sm:text-3xl font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 I <span className="font-extrabold text-[#38bdf8] drop-shadow-[0_0_16px_rgba(56,189,248,0.7)]">design</span> digital
                 <br />
@@ -1665,7 +1665,7 @@ export default function Home() {
             </div>
 
             {/* Capsule 3: Scopo */}
-            <div className="w-full h-[185px] px-6 rounded-full bg-white/[0.12] border-0 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-10">
+            <div className="w-full aspect-[2/1] px-8 sm:px-10 rounded-full bg-white/[0.12] border-0 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-10">
               <p className="text-2xl sm:text-3xl font-medium tracking-tight text-white/95 leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 that <span className="italic font-serif text-white">help</span> and{" "}
                 <span className="italic font-serif text-white">simplify</span>
@@ -1690,7 +1690,7 @@ export default function Home() {
                 setMobileCase1((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "calc(100cqw - 100% - 16px)" } as React.CSSProperties}
-              className={`group relative w-full h-[185px] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full aspect-[2/1] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCase1 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -1702,9 +1702,9 @@ export default function Home() {
                     : "bg-white shadow-none"
                 }`}
               >
-                {/* 1. STATO ATTIVO (ON): Dettagli case study a sinistra */}
+                {/* 1. STATO ATTIVO (ON): Dettagli case study a sinistra con abbondante respiro */}
                 <div
-                  className={`absolute top-0 left-[5%] w-[48%] h-full flex flex-col justify-center space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 left-8 sm:left-9 w-[42%] max-w-[165px] h-full flex flex-col justify-center space-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCase1 === "on"
                       ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                       : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
@@ -1735,7 +1735,7 @@ export default function Home() {
 
                 {/* 2. STATO SPENTO (OFF): Cover con solo il numero gigante "1" a destra */}
                 <div
-                  className={`absolute top-0 right-[4%] w-[46%] h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 right-7 sm:right-8 w-[42%] h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCase1 === "off"
                       ? "opacity-100 scale-100 translate-x-0"
                       : "opacity-0 scale-75 translate-x-12"
@@ -1806,7 +1806,7 @@ export default function Home() {
                 setMobileCase2((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "calc(100cqw - 100% - 16px)" } as React.CSSProperties}
-              className={`group relative w-full h-[185px] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full aspect-[2/1] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCase2 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -1818,9 +1818,9 @@ export default function Home() {
                     : "bg-white shadow-none"
                 }`}
               >
-                {/* 1. STATO ATTIVO (ON): Dettagli case study a sinistra */}
+                {/* 1. STATO ATTIVO (ON): Dettagli case study a sinistra con abbondante respiro */}
                 <div
-                  className={`absolute top-0 left-[5%] w-[48%] h-full flex flex-col justify-center space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 left-8 sm:left-9 w-[42%] max-w-[165px] h-full flex flex-col justify-center space-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCase2 === "on"
                       ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                       : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
@@ -1851,7 +1851,7 @@ export default function Home() {
 
                 {/* 2. STATO SPENTO (OFF): Cover con solo il numero gigante "2" a destra */}
                 <div
-                  className={`absolute top-0 right-[4%] w-[46%] h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 right-7 sm:right-8 w-[42%] h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCase2 === "off"
                       ? "opacity-100 scale-100 translate-x-0"
                       : "opacity-0 scale-75 translate-x-12"
@@ -1921,7 +1921,7 @@ export default function Home() {
                 setMobileCase3((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "calc(100cqw - 100% - 16px)" } as React.CSSProperties}
-              className={`group relative w-full h-[185px] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full aspect-[2/1] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCase3 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -1933,9 +1933,9 @@ export default function Home() {
                     : "bg-white shadow-none"
                 }`}
               >
-                {/* 1. STATO ATTIVO (ON): Dettagli case study a sinistra */}
+                {/* 1. STATO ATTIVO (ON): Dettagli case study a sinistra con abbondante respiro */}
                 <div
-                  className={`absolute top-0 left-[5%] w-[48%] h-full flex flex-col justify-center space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 left-8 sm:left-9 w-[42%] max-w-[165px] h-full flex flex-col justify-center space-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCase3 === "on"
                       ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                       : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
@@ -1966,7 +1966,7 @@ export default function Home() {
 
                 {/* 2. STATO SPENTO (OFF): Cover con solo il numero gigante "3" a destra */}
                 <div
-                  className={`absolute top-0 right-[4%] w-[46%] h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 right-7 sm:right-8 w-[42%] h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCase3 === "off"
                       ? "opacity-100 scale-100 translate-x-0"
                       : "opacity-0 scale-75 translate-x-12"
@@ -2039,7 +2039,7 @@ export default function Home() {
                 setMobileCaseAbout((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "calc(100cqw - 100% - 16px)" } as React.CSSProperties}
-              className={`group relative w-full h-[185px] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full aspect-[2/1] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCaseAbout === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -2051,9 +2051,9 @@ export default function Home() {
                     : "bg-white shadow-none"
                 }`}
               >
-                {/* 1. STATO ATTIVO (ON): Bio sintetica e link a sinistra */}
+                {/* 1. STATO ATTIVO (ON): Bio sintetica e link a sinistra con abbondante respiro */}
                 <div
-                  className={`absolute top-0 left-[5%] w-[48%] h-full flex flex-col justify-center space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 left-8 sm:left-9 w-[42%] max-w-[165px] h-full flex flex-col justify-center space-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCaseAbout === "on"
                       ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                       : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
@@ -2088,7 +2088,7 @@ export default function Home() {
 
                 {/* 2. STATO SPENTO (OFF): Cover con nome a destra */}
                 <div
-                  className={`absolute top-0 right-[4%] w-[46%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 right-7 sm:right-8 w-[42%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCaseAbout === "off"
                       ? "opacity-100 scale-100 translate-x-0"
                       : "opacity-0 scale-75 translate-x-12"
@@ -2096,7 +2096,7 @@ export default function Home() {
                 >
                   <div className="text-center px-1">
                     <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] leading-tight">
-                      Herald Ago
+                      Herald<br />Ago
                     </h3>
                     <p className="text-[10px] sm:text-xs text-white/80 font-medium mt-0.5 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
                       Product Designer
@@ -2161,7 +2161,7 @@ export default function Home() {
                 setMobileCaseRec((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "calc(100cqw - 100% - 16px)" } as React.CSSProperties}
-              className={`group relative w-full h-[185px] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full aspect-[2/1] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCaseRec === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -2173,9 +2173,9 @@ export default function Home() {
                     : "bg-white shadow-none"
                 }`}
               >
-                {/* 1. STATO ATTIVO (ON): Testimonianze a sinistra */}
+                {/* 1. STATO ATTIVO (ON): Testimonianze a sinistra con abbondante respiro */}
                 <div
-                  className={`absolute top-0 left-[5%] w-[48%] h-full flex flex-col justify-center space-y-1 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 left-8 sm:left-9 w-[42%] max-w-[165px] h-full flex flex-col justify-center space-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCaseRec === "on"
                       ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                       : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
@@ -2229,7 +2229,7 @@ export default function Home() {
 
                 {/* 2. STATO SPENTO (OFF): Cover con titolo a destra */}
                 <div
-                  className={`absolute top-0 right-[4%] w-[46%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 right-7 sm:right-8 w-[42%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCaseRec === "off"
                       ? "opacity-100 scale-100 translate-x-0"
                       : "opacity-0 scale-75 translate-x-12"
@@ -2320,7 +2320,7 @@ export default function Home() {
                 setMobileCaseContact((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "calc(100cqw - 100% - 16px)" } as React.CSSProperties}
-              className={`group relative w-full h-[185px] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full aspect-[2/1] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCaseContact === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -2334,7 +2334,7 @@ export default function Home() {
               >
                 {/* 1. STATO ATTIVO (ON): Opzioni e canali a sinistra */}
                 <div
-                  className={`absolute top-0 left-[5%] w-[48%] h-full flex flex-col justify-center space-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 left-8 sm:left-9 w-[42%] max-w-[165px] h-full flex flex-col justify-center space-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCaseContact === "on"
                       ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                       : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
@@ -2381,7 +2381,7 @@ export default function Home() {
 
                 {/* 2. STATO SPENTO (OFF): Cover con titolo a destra */}
                 <div
-                  className={`absolute top-0 right-[4%] w-[46%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 right-7 sm:right-8 w-[42%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCaseContact === "off"
                       ? "opacity-100 scale-100 translate-x-0"
                       : "opacity-0 scale-75 translate-x-12"
