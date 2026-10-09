@@ -5,10 +5,29 @@ import Image from "next/image";
 
 interface NavbarProps {
   onNavigate: (target: "home" | "work" | "about" | "contact") => void;
+  activeSectionIndex?: number;
 }
 
-export default function Navbar({ onNavigate }: NavbarProps) {
+const NAV_ITEMS = [
+  { id: "home", label: "Home" },
+  { id: "work", label: "Work & Archive" },
+  { id: "about", label: "About" },
+  { id: "contact", label: "Contact" },
+] as const;
+
+export default function Navbar({ onNavigate, activeSectionIndex = 0 }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [pulsingTab, setPulsingTab] = useState<string | null>(null);
+
+  // Mappa activeSectionIndex -> tab attivo
+  const activeTab: "home" | "work" | "about" | "contact" =
+    activeSectionIndex === 0
+      ? "home"
+      : activeSectionIndex >= 1 && activeSectionIndex <= 3
+      ? "work"
+      : activeSectionIndex >= 4 && activeSectionIndex <= 5
+      ? "about"
+      : "contact";
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -21,6 +40,10 @@ export default function Navbar({ onNavigate }: NavbarProps) {
   }, []);
 
   const handleItemClick = (target: "home" | "work" | "about" | "contact") => {
+    // Effetto click micro-interaction: bagliore e pulsazione tattile
+    setPulsingTab(target);
+    setTimeout(() => setPulsingTab(null), 400);
+
     onNavigate(target);
     setIsMobileMenuOpen(false);
   };
@@ -45,6 +68,40 @@ export default function Navbar({ onNavigate }: NavbarProps) {
           />
         </button>
       </div>
+
+      {/* Floating Center Capsule Navbar (Desktop Only >= 768px) */}
+      <nav
+        aria-label="Navigazione principale"
+        className="hidden md:flex fixed top-5 sm:top-6 left-1/2 -translate-x-1/2 z-50 items-center gap-1 bg-slate-900/40 hover:bg-slate-900/60 backdrop-blur-2xl border border-white/20 p-1.5 rounded-full shadow-[0_8px_32px_rgba(0,10,30,0.35),_inset_0_1px_1.5px_rgba(255,255,255,0.3)] transition-all duration-300"
+      >
+        {NAV_ITEMS.map((item) => {
+          const isActive = activeTab === item.id;
+          const isPulsing = pulsingTab === item.id;
+
+          return (
+            <button
+              key={item.id}
+              onClick={() => handleItemClick(item.id)}
+              aria-current={isActive ? "page" : undefined}
+              className={`relative px-4 sm:px-5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] select-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 active:scale-95 ${
+                isActive
+                  ? "bg-white text-slate-950 font-semibold shadow-[0_2px_12px_rgba(255,255,255,0.35)]"
+                  : "text-white/80 hover:text-white hover:bg-white/10"
+              } ${
+                isPulsing
+                  ? "ring-4 ring-white/60 shadow-[0_0_24px_rgba(255,255,255,0.85)] scale-105"
+                  : ""
+              }`}
+            >
+              <span className="relative z-10">{item.label}</span>
+              {/* Effetto bagliore radiante al click */}
+              {isPulsing && (
+                <span className="absolute inset-0 rounded-full bg-white/40 animate-ping pointer-events-none" />
+              )}
+            </button>
+          );
+        })}
+      </nav>
 
       {/* Burger Menu a specchio col logo (visibile solo su mobile) */}
       <div className="fixed top-[max(1rem,env(safe-area-inset-top))] right-4 md:hidden z-50">
@@ -80,30 +137,19 @@ export default function Navbar({ onNavigate }: NavbarProps) {
               : "opacity-0 scale-95 pointer-events-none"
           }`}
         >
-          <button
-            onClick={() => handleItemClick("home")}
-            className="w-full text-left px-3.5 py-2 rounded-xl bg-white text-slate-900 font-semibold text-xs sm:text-sm shadow-xs transition-colors cursor-pointer"
-          >
-            Home
-          </button>
-          <button
-            onClick={() => handleItemClick("work")}
-            className="w-full text-left px-3.5 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm transition-colors cursor-pointer"
-          >
-            Work &amp; Archive
-          </button>
-          <button
-            onClick={() => handleItemClick("about")}
-            className="w-full text-left px-3.5 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm transition-colors cursor-pointer"
-          >
-            About
-          </button>
-          <button
-            onClick={() => handleItemClick("contact")}
-            className="w-full text-left px-3.5 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 font-medium text-xs sm:text-sm transition-colors cursor-pointer"
-          >
-            Contact
-          </button>
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => handleItemClick(item.id)}
+              className={`w-full text-left px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
+                activeTab === item.id
+                  ? "bg-white text-slate-900 font-semibold shadow-xs"
+                  : "text-white/80 hover:text-white hover:bg-white/10"
+              }`}
+            >
+              {item.label}
+            </button>
+          ))}
         </div>
       </div>
 

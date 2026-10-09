@@ -2,6 +2,7 @@
 
 import { Ref, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import VantaKnobWaves from "@/components/VantaKnobWaves";
 import { CaseStudy } from "@/data/portfolio";
 
@@ -113,10 +114,8 @@ export default function CaseStudyCard({
 
             {/* Pulsante primario scuro */}
             <div className="pt-0.5 sm:pt-2">
-              <a
+              <Link
                 href={caseStudy.link}
-                target="_blank"
-                rel="noopener noreferrer"
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
@@ -124,7 +123,7 @@ export default function CaseStudyCard({
               >
                 <span>See more</span>
                 <span className="text-xs font-bold">↗</span>
-              </a>
+              </Link>
             </div>
           </div>
 

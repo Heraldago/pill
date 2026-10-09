@@ -34,7 +34,10 @@ export default function Home() {
       />
 
       {/* Top Navbar & Mobile Hamburger Menu */}
-      <Navbar onNavigate={scrollToSection} />
+      <Navbar
+        onNavigate={scrollToSection}
+        activeSectionIndex={activeSectionIndex}
+      />
 
       {/* Floating Pill ScrollSpy Navigation (Desktop Only) */}
       <ScrollSpyNav

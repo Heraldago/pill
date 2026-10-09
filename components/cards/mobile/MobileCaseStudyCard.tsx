@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import VantaKnobWaves from "@/components/VantaKnobWaves";
 import { CaseStudy } from "@/data/portfolio";
 
@@ -69,16 +70,14 @@ export default function MobileCaseStudyCard({
               {caseStudy.mobileSubtitle}
             </p>
             <div className="pt-0.5 sm:pt-1">
-              <a
+              <Link
                 href={caseStudy.link}
-                target="_blank"
-                rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold shadow-xs transition-all cursor-pointer"
               >
                 <span>See case study</span>
                 <span className="text-xs sm:text-sm">↗</span>
-              </a>
+              </Link>
             </div>
           </div>
 
