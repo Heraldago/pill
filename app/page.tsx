@@ -512,7 +512,7 @@ export default function Home() {
           ref={card1Ref}
           className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-10 will-change-transform origin-center"
         >
-          <section className="capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border border-white/30 bg-white/[0.12] overflow-hidden flex flex-col justify-between items-center shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1px_2px_rgba(255,255,255,0.45)]">
+          <section className="capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[2px] sm:border-[3px] border-white/25 bg-white/[0.12] overflow-hidden flex flex-col justify-between items-center shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]">
             {/* Header interno alla pillola: Navbar a 4 voci (visibile solo da tablet/iPad in su) */}
             <header className="w-full pt-6 sm:pt-8 md:pt-10 flex justify-center items-center z-10 min-h-[50px]">
               <nav className="hidden md:flex items-center gap-1 bg-white/15 backdrop-blur-xl border border-white/25 p-1.5 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.15),_inset_0_1px_1px_rgba(255,255,255,0.3)] text-xs sm:text-sm">
@@ -585,8 +585,10 @@ export default function Home() {
           ref={card2Ref}
           className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-20 will-change-transform"
         >
-          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
-            case1Toggle === "off" ? "bg-transparent" : "bg-white"
+          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[2px] sm:border-[3px] transition-all duration-500 overflow-hidden flex items-center justify-center p-0 ${
+            case1Toggle === "off"
+              ? "border-white/25 bg-transparent shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
+              : "border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)]"
           }`}>
             {/* Contenitore interattivo del Toggle (Bouncy Bubble Physics: Orizzontale su Desktop, Verticale su Mobile) */}
             <div
@@ -727,8 +729,10 @@ export default function Home() {
           ref={card3Ref}
           className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[25] will-change-transform"
         >
-          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
-            case2Toggle === "off" ? "bg-transparent" : "bg-white"
+          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[2px] sm:border-[3px] transition-all duration-500 overflow-hidden flex items-center justify-center p-0 ${
+            case2Toggle === "off"
+              ? "border-white/25 bg-transparent shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
+              : "border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)]"
           }`}>
             <div
               role="switch"
@@ -859,8 +863,10 @@ export default function Home() {
           ref={card4Ref}
           className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[30] will-change-transform"
         >
-          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
-            case3Toggle === "off" ? "bg-transparent" : "bg-white"
+          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[2px] sm:border-[3px] transition-all duration-500 overflow-hidden flex items-center justify-center p-0 ${
+            case3Toggle === "off"
+              ? "border-white/25 bg-transparent shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
+              : "border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)]"
           }`}>
             <div
               role="switch"
@@ -990,8 +996,10 @@ export default function Home() {
           ref={card5Ref}
           className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[35] will-change-transform"
         >
-          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
-            case4Toggle === "off" ? "bg-transparent" : "bg-white"
+          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[2px] sm:border-[3px] transition-all duration-500 overflow-hidden flex items-center justify-center p-0 ${
+            case4Toggle === "off"
+              ? "border-white/25 bg-transparent shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
+              : "border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)]"
           }`}>
             <div
               role="switch"
@@ -1141,8 +1149,10 @@ export default function Home() {
           ref={card6Ref}
           className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[40] will-change-transform"
         >
-          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
-            case5Toggle === "off" ? "bg-transparent" : "bg-white"
+          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[2px] sm:border-[3px] transition-all duration-500 overflow-hidden flex items-center justify-center p-0 ${
+            case5Toggle === "off"
+              ? "border-white/25 bg-transparent shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
+              : "border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)]"
           }`}>
             <div
               role="switch"
@@ -1280,7 +1290,7 @@ export default function Home() {
               >
                 <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
                   <h3 className="text-[clamp(1.35rem,3.4cqw,3.5rem)] font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
-                    Recommendations
+                    Recommendation
                   </h3>
                 </div>
               </div>
@@ -1362,8 +1372,10 @@ export default function Home() {
           ref={card7Ref}
           className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[45] will-change-transform"
         >
-          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[8px] sm:border-[16px] md:border-[26px] lg:border-[32px] border-white transition-colors duration-500 overflow-hidden flex items-center justify-center p-0 shadow-[0_25px_65px_rgba(0,10,30,0.35)] ${
-            case6Toggle === "off" ? "bg-transparent" : "bg-white"
+          <section className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[2px] sm:border-[3px] transition-all duration-500 overflow-hidden flex items-center justify-center p-0 ${
+            case6Toggle === "off"
+              ? "border-white/25 bg-transparent shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
+              : "border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)]"
           }`}>
             <div
               role="switch"
@@ -1649,14 +1661,14 @@ export default function Home() {
         <section id="mobile-home" className="w-full flex flex-col items-center">
           <div className="w-full flex flex-col items-center select-none gap-0">
             {/* Capsule 1: Saluto */}
-            <div className="w-full aspect-[2/1] px-8 sm:px-10 rounded-full bg-white/[0.12] border-0 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-30">
+            <div className="w-full aspect-[2/1] px-8 sm:px-10 rounded-full bg-white/[0.12] border-[2px] border-white/25 shadow-[0_20px_50px_rgba(0,10,30,0.4),_inset_0_1.5px_2px_rgba(255,255,255,0.45)] flex items-center justify-center text-center relative z-30">
               <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 Hi, I&apos;m Herald :)
               </h1>
             </div>
 
             {/* Capsule 2: Missione */}
-            <div className="w-full aspect-[2/1] px-8 sm:px-10 rounded-full bg-white/[0.12] border-0 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-20">
+            <div className="w-full aspect-[2/1] px-8 sm:px-10 rounded-full bg-white/[0.12] border-[2px] border-white/25 shadow-[0_20px_50px_rgba(0,10,30,0.4),_inset_0_1.5px_2px_rgba(255,255,255,0.45)] flex items-center justify-center text-center relative z-20">
               <p className="text-2xl sm:text-3xl font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 I <span className="font-extrabold text-[#38bdf8] drop-shadow-[0_0_16px_rgba(56,189,248,0.7)]">design</span> digital
                 <br />
@@ -1665,7 +1677,7 @@ export default function Home() {
             </div>
 
             {/* Capsule 3: Scopo */}
-            <div className="w-full aspect-[2/1] px-8 sm:px-10 rounded-full bg-white/[0.12] border-0 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center text-center relative z-10">
+            <div className="w-full aspect-[2/1] px-8 sm:px-10 rounded-full bg-white/[0.12] border-[2px] border-white/25 shadow-[0_20px_50px_rgba(0,10,30,0.4),_inset_0_1.5px_2px_rgba(255,255,255,0.45)] flex items-center justify-center text-center relative z-10">
               <p className="text-2xl sm:text-3xl font-medium tracking-tight text-white/95 leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
                 that <span className="italic font-serif text-white">help</span> and{" "}
                 <span className="italic font-serif text-white">simplify</span>
@@ -1690,8 +1702,10 @@ export default function Home() {
                 setMobileCase1((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "calc(100cqw - 100% - 16px)" } as React.CSSProperties}
-              className={`group relative w-full aspect-[2/1] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
-                mobileCase1 === "off" ? "bg-transparent" : "bg-white"
+              className={`group relative w-full aspect-[2/1] rounded-full border-[2px] transition-all duration-500 overflow-hidden cursor-pointer select-none active:scale-[0.985] ${
+                mobileCase1 === "off"
+                  ? "border-white/25 bg-transparent shadow-[0_20px_50px_rgba(0,10,30,0.4),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
+                  : "border-white bg-white shadow-[0_25px_60px_rgba(0,10,30,0.4)]"
               }`}
             >
               {/* Pista interna del Toggle (Glass ad OFF, Bianca ad ON) */}
@@ -1806,8 +1820,10 @@ export default function Home() {
                 setMobileCase2((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "calc(100cqw - 100% - 16px)" } as React.CSSProperties}
-              className={`group relative w-full aspect-[2/1] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
-                mobileCase2 === "off" ? "bg-transparent" : "bg-white"
+              className={`group relative w-full aspect-[2/1] rounded-full border-[2px] transition-all duration-500 overflow-hidden cursor-pointer select-none active:scale-[0.985] ${
+                mobileCase2 === "off"
+                  ? "border-white/25 bg-transparent shadow-[0_20px_50px_rgba(0,10,30,0.4),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
+                  : "border-white bg-white shadow-[0_25px_60px_rgba(0,10,30,0.4)]"
               }`}
             >
               {/* Pista interna del Toggle (Glass ad OFF, Bianca ad ON) */}
@@ -1921,8 +1937,10 @@ export default function Home() {
                 setMobileCase3((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "calc(100cqw - 100% - 16px)" } as React.CSSProperties}
-              className={`group relative w-full aspect-[2/1] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
-                mobileCase3 === "off" ? "bg-transparent" : "bg-white"
+              className={`group relative w-full aspect-[2/1] rounded-full border-[2px] transition-all duration-500 overflow-hidden cursor-pointer select-none active:scale-[0.985] ${
+                mobileCase3 === "off"
+                  ? "border-white/25 bg-transparent shadow-[0_20px_50px_rgba(0,10,30,0.4),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
+                  : "border-white bg-white shadow-[0_25px_60px_rgba(0,10,30,0.4)]"
               }`}
             >
               {/* Pista interna del Toggle (Glass ad OFF, Bianca ad ON) */}
@@ -2039,8 +2057,10 @@ export default function Home() {
                 setMobileCaseAbout((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "calc(100cqw - 100% - 16px)" } as React.CSSProperties}
-              className={`group relative w-full aspect-[2/1] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
-                mobileCaseAbout === "off" ? "bg-transparent" : "bg-white"
+              className={`group relative w-full aspect-[2/1] rounded-full border-[2px] transition-all duration-500 overflow-hidden cursor-pointer select-none active:scale-[0.985] ${
+                mobileCaseAbout === "off"
+                  ? "border-white/25 bg-transparent shadow-[0_20px_50px_rgba(0,10,30,0.4),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
+                  : "border-white bg-white shadow-[0_25px_60px_rgba(0,10,30,0.4)]"
               }`}
             >
               {/* Pista interna del Toggle (Glass ad OFF, Bianca ad ON) */}
@@ -2088,19 +2108,16 @@ export default function Home() {
 
                 {/* 2. STATO SPENTO (OFF): Cover con nome a destra */}
                 <div
-                  className={`absolute top-0 right-7 sm:right-8 w-[42%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 right-4 sm:right-6 w-[46%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCaseAbout === "off"
                       ? "opacity-100 scale-100 translate-x-0"
                       : "opacity-0 scale-75 translate-x-12"
                   }`}
                 >
                   <div className="text-center px-1">
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] leading-tight">
-                      Herald<br />Ago
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] leading-tight whitespace-nowrap">
+                      About me
                     </h3>
-                    <p className="text-[10px] sm:text-xs text-white/80 font-medium mt-0.5 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
-                      Product Designer
-                    </p>
                   </div>
                 </div>
 
@@ -2161,8 +2178,10 @@ export default function Home() {
                 setMobileCaseRec((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "calc(100cqw - 100% - 16px)" } as React.CSSProperties}
-              className={`group relative w-full aspect-[2/1] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
-                mobileCaseRec === "off" ? "bg-transparent" : "bg-white"
+              className={`group relative w-full aspect-[2/1] rounded-full border-[2px] transition-all duration-500 overflow-hidden cursor-pointer select-none active:scale-[0.985] ${
+                mobileCaseRec === "off"
+                  ? "border-white/25 bg-transparent shadow-[0_20px_50px_rgba(0,10,30,0.4),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
+                  : "border-white bg-white shadow-[0_25px_60px_rgba(0,10,30,0.4)]"
               }`}
             >
               {/* Pista interna del Toggle (Glass ad OFF, Bianca ad ON) */}
@@ -2229,19 +2248,16 @@ export default function Home() {
 
                 {/* 2. STATO SPENTO (OFF): Cover con titolo a destra */}
                 <div
-                  className={`absolute top-0 right-7 sm:right-8 w-[42%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 right-4 sm:right-6 w-[46%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCaseRec === "off"
                       ? "opacity-100 scale-100 translate-x-0"
                       : "opacity-0 scale-75 translate-x-12"
                   }`}
                 >
                   <div className="text-center px-1">
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] leading-tight">
-                      Kind<br />Words
+                    <h3 className="text-sm sm:text-base font-extrabold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] leading-tight whitespace-nowrap">
+                      Recommendation
                     </h3>
-                    <p className="text-[10px] sm:text-xs text-white/80 font-medium mt-0.5 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
-                      Recommendations
-                    </p>
                   </div>
                 </div>
 
@@ -2320,8 +2336,10 @@ export default function Home() {
                 setMobileCaseContact((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "calc(100cqw - 100% - 16px)" } as React.CSSProperties}
-              className={`group relative w-full aspect-[2/1] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
-                mobileCaseContact === "off" ? "bg-transparent" : "bg-white"
+              className={`group relative w-full aspect-[2/1] rounded-full border-[2px] transition-all duration-500 overflow-hidden cursor-pointer select-none active:scale-[0.985] ${
+                mobileCaseContact === "off"
+                  ? "border-white/25 bg-transparent shadow-[0_20px_50px_rgba(0,10,30,0.4),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
+                  : "border-white bg-white shadow-[0_25px_60px_rgba(0,10,30,0.4)]"
               }`}
             >
               {/* Pista interna del Toggle (Glass ad OFF, Bianca ad ON) */}
@@ -2381,19 +2399,16 @@ export default function Home() {
 
                 {/* 2. STATO SPENTO (OFF): Cover con titolo a destra */}
                 <div
-                  className={`absolute top-0 right-7 sm:right-8 w-[42%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+                  className={`absolute top-0 right-4 sm:right-6 w-[46%] h-full flex flex-col items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                     mobileCaseContact === "off"
                       ? "opacity-100 scale-100 translate-x-0"
                       : "opacity-0 scale-75 translate-x-12"
                   }`}
                 >
                   <div className="text-center px-1">
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] leading-tight">
-                      Let&apos;s<br />Connect
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] leading-tight whitespace-nowrap">
+                      Contact
                     </h3>
-                    <p className="text-[10px] sm:text-xs text-white/80 font-medium mt-0.5 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
-                      Say Hello
-                    </p>
                   </div>
                 </div>
 

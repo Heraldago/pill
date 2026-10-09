@@ -304,29 +304,18 @@ body {
 }
 
 /* ==========================================================================
-   RESPONSIVE CAPSULE ARCHITECTURE:
-   - Full-Bleed Desktop (>=768px, Aspect Ratio >= 1.48):
-     The pill occupies 100% of the screen edge-to-edge with 0 padding & margins.
-   - Contained Squarish Desktop (>=768px, Aspect Ratio < 1.48):
-     When the window is resized squarish/narrow, the pill scales down
-     maintaining its faithful horizontal capsule aspect ratio (~1.65 / 1),
-     preventing deformation into an egg and keeping the knob circular and balanced.
-   - Mobile (< 768px):
-     Handled by mobile breakpoints (vertical switch card).
+   EDGE-TO-EDGE CAPSULE ARCHITECTURE:
+   The pill covers the viewport edge-to-edge across all screen size fractions.
    ========================================================================== */
+.capsule-card-wrapper {
+  padding: 0 !important;
+}
 
-@media (min-width: 768px) and (max-aspect-ratio: 175/100) {
-  .capsule-card-wrapper {
-    padding: clamp(1rem, 3vw, 2.5rem) !important;
-  }
-
-  .capsule-card-section {
-    width: min(100%, calc((100dvh - clamp(2rem, 6vw, 5rem)) * 1.75)) !important;
-    height: auto !important;
-    max-width: 100% !important;
-    max-height: 100% !important;
-    aspect-ratio: 1.75 / 1 !important;
-  }
+.capsule-card-section {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
 }
 
 
