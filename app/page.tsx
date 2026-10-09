@@ -1644,7 +1644,7 @@ export default function Home() {
           MOBILE VIEW: FIGMA DRAFT ARCHITECTURE (block md:hidden)
           3 Stacked Hero Glass Capsules + Horizontal Interactive Pill Switches
          ========================================================================= */}
-      <div className="block md:hidden relative w-full z-10 px-3 sm:px-4 pt-[max(3.5rem,calc(env(safe-area-inset-top)+1.5rem))] pb-[max(6rem,calc(env(safe-area-inset-bottom)+3rem))] flex flex-col gap-3 sm:gap-4">
+      <div className="block md:hidden relative w-full z-10 px-0 pt-[max(3.5rem,calc(env(safe-area-inset-top)+1.5rem))] pb-[max(6rem,calc(env(safe-area-inset-bottom)+3rem))] flex flex-col gap-0">
         {/* --- 1. HERO: 3 STACKED TRANSLUCENT GLASS CAPSULES (FIGMA) --- */}
         <section id="mobile-home" className="w-full flex flex-col items-center">
           <div className="w-full flex flex-col items-center select-none gap-0">
@@ -1677,7 +1677,7 @@ export default function Home() {
         </section>
 
         {/* --- 2. WORK: HORIZONTAL SWITCH PILLS (FIGMA MOCKUP) --- */}
-        <section id="mobile-work" className="w-full flex flex-col gap-3 sm:gap-4">
+        <section id="mobile-work" className="w-full flex flex-col gap-0">
 
           {/* Project 1: Ungdomskort Horizontal Pill Switch */}
           <div className="w-full flex justify-center">
@@ -1690,7 +1690,7 @@ export default function Home() {
                 setMobileCase1((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
-              className={`group relative w-full h-[221px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full h-[221px] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCase1 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -1806,7 +1806,7 @@ export default function Home() {
                 setMobileCase2((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
-              className={`group relative w-full h-[221px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full h-[221px] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCase2 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -1921,7 +1921,7 @@ export default function Home() {
                 setMobileCase3((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
-              className={`group relative w-full h-[221px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full h-[221px] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCase3 === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -2039,7 +2039,7 @@ export default function Home() {
                 setMobileCaseAbout((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
-              className={`group relative w-full h-[221px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full h-[221px] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCaseAbout === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -2161,7 +2161,7 @@ export default function Home() {
                 setMobileCaseRec((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
-              className={`group relative w-full h-[221px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full h-[221px] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCaseRec === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
@@ -2320,7 +2320,7 @@ export default function Home() {
                 setMobileCaseContact((prev) => (prev === "off" ? "on" : "off"));
               }}
               style={{ "--travel-dist": "49cqw" } as React.CSSProperties}
-              className={`group relative w-full h-[221px] rounded-full border-[10px] sm:border-[12px] border-white transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
+              className={`group relative w-full h-[221px] rounded-full border-0 transition-colors duration-500 overflow-hidden shadow-[0_25px_60px_rgba(0,10,30,0.4)] cursor-pointer select-none active:scale-[0.985] ${
                 mobileCaseContact === "off" ? "bg-transparent" : "bg-white"
               }`}
             >
