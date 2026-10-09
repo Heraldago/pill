@@ -341,6 +341,10 @@ export default function Home() {
     lenisRef.current.scrollTo(target, { duration: 1.4 });
   };
 
+  if (typeof window !== "undefined") {
+    (window as any).__navigateToSection = navigateToSection;
+  }
+
   const scrollToSection = (target: "home" | "work" | "about" | "contact") => {
     if (typeof window !== "undefined" && window.innerWidth < 768) {
       const el = document.getElementById(`mobile-${target}`);
