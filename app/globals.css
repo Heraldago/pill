@@ -305,13 +305,9 @@ body {
 
 /* ==========================================================================
    RESPONSIVE CAPSULE ARCHITECTURE:
-   - Full-Bleed Desktop (Default for Widescreen / Landscape Desktop):
-     When on desktop/laptop displays (aspect-ratio >= 1.20, standard widescreen/landscape),
-     the capsule occupies 100% full-width edge-to-edge with 0 padding & margins.
-   - Contained Squarish / Portrait Split-Screen (>= 768px, aspect-ratio < 1.20):
-     When the window is resized squarish/split-screen (e.g. side-by-side IDE + browser),
-     the pill maintains its faithful horizontal capsule aspect ratio (~1.65 / 1),
-     preventing vertical egg deformation and maintaining circular knobs.
+   - Desktop (>= 768px):
+     The capsule always maintains its faithful horizontal pill aspect ratio (~1.85 / 1),
+     fitting comfortably in the viewport without vertical egg deformation or oval distortion.
    - Mobile (< 768px):
      Handled by dedicated stacked vertical layout with stadium aspect-ratio [2/1].
    ========================================================================== */
@@ -326,17 +322,22 @@ body {
   max-height: 100%;
 }
 
-@media (min-width: 768px) and (max-aspect-ratio: 120/100) {
+@media (min-width: 768px) {
   .capsule-card-wrapper {
-    padding: clamp(0.75rem, 2vw, 1.5rem) !important;
+    padding: clamp(0.75rem, 2vw, 2rem) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .capsule-card-section {
     width: 100% !important;
-    max-width: min(100%, calc((100dvh - clamp(1.5rem, 4vw, 3rem)) * 1.65)) !important;
     height: auto !important;
-    aspect-ratio: 1.65 / 1 !important;
-    max-height: calc(100dvh - clamp(1.5rem, 4vw, 3rem)) !important;
+    aspect-ratio: 1.85 / 1 !important;
+    max-height: calc(100dvh - clamp(1.5rem, 5vh, 4rem)) !important;
+    max-width: min(100%, calc((100dvh - clamp(1.5rem, 5vh, 4rem)) * 1.85)) !important;
+    margin: auto !important;
+    border-radius: 1000px !important;
   }
 }
 
