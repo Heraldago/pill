@@ -305,13 +305,15 @@ body {
 
 /* ==========================================================================
    RESPONSIVE CAPSULE ARCHITECTURE:
-   - Screen Width 768px to 1580px (or aspect ratio < 1.78):
-     Maintains the canonical aspect ratio of the original full-page pill (~1.78 / 1),
-     detached from the borders with breathing margins, centered in the viewport.
-   - Large Desktop Screens (> 1580px with widescreen ratio):
-     Fills the screen edge-to-edge 100% full-bleed.
+   - Full-Bleed Desktop (Default for Widescreen / Landscape Desktop):
+     When on desktop/laptop displays (aspect-ratio >= 1.20, standard widescreen/landscape),
+     the capsule occupies 100% full-width edge-to-edge with 0 padding & margins.
+   - Contained Squarish / Portrait Split-Screen (>= 768px, aspect-ratio < 1.20):
+     When the window is resized squarish/split-screen (e.g. side-by-side IDE + browser),
+     the pill maintains its faithful horizontal capsule aspect ratio (~1.65 / 1),
+     preventing vertical egg deformation and maintaining circular knobs.
    - Mobile (< 768px):
-     Handled by dedicated stacked full-width vertical layout.
+     Handled by dedicated stacked vertical layout with stadium aspect-ratio [2/1].
    ========================================================================== */
 .capsule-card-wrapper {
   padding: 0;
@@ -324,19 +326,20 @@ body {
   max-height: 100%;
 }
 
-@media (min-width: 768px) and (max-width: 1580px), (min-width: 768px) and (max-aspect-ratio: 178/100) {
+@media (min-width: 768px) and (max-aspect-ratio: 120/100) {
   .capsule-card-wrapper {
-    padding: clamp(1rem, 3vw, 2.5rem) !important;
+    padding: clamp(0.75rem, 2vw, 1.5rem) !important;
   }
 
   .capsule-card-section {
-    width: min(100%, calc((100dvh - clamp(2rem, 6vw, 5rem)) * 1.78)) !important;
+    width: 100% !important;
+    max-width: min(100%, calc((100dvh - clamp(1.5rem, 4vw, 3rem)) * 1.65)) !important;
     height: auto !important;
-    aspect-ratio: 1.78 / 1 !important;
-    max-width: 100% !important;
-    max-height: calc(100dvh - clamp(2rem, 6vw, 5rem)) !important;
+    aspect-ratio: 1.65 / 1 !important;
+    max-height: calc(100dvh - clamp(1.5rem, 4vw, 3rem)) !important;
   }
 }
+
 
 
 
