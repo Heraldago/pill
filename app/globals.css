@@ -303,14 +303,23 @@ body {
   animation: float-gentle-3 4.6s ease-in-out infinite;
 }
 
+/* Reset contenitori superiori */
+html, body, main {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+}
+
 /* ==========================================================================
    RESPONSIVE CAPSULE ARCHITECTURE:
    - Mobile (< 768px):
      Handled by dedicated stacked vertical layout with stadium aspect-ratio [2/1] (MobileView).
-   - Desktop & Tablet (>= 768px):
-     Fluid capsule expansion across full available viewport space (W >= H),
-     guaranteeing perfect semicircles on left/right ends via border-radius: 9999px
-     with uniform outer breathing padding and zero empty top/bottom gaps.
+   - Desktop Fullscreen (min-width: 768px, min-aspect-ratio: 1.45/1):
+     100% Full-bleed edge-to-edge (100vw, 100dvh, 0 margin, 0 padding).
+     Fills the entire screen across 16:9, 16:10 (MacBook), and widescreen displays.
+   - Contained Squarish / Narrow Desktop (min-width: 768px, max-aspect-ratio: 1.45/1):
+     Locks to native 1280 / 710 aspect ratio, centered with symmetric safety margins.
    ========================================================================== */
 .capsule-card-wrapper {
   padding: 0;
@@ -330,20 +339,35 @@ body {
     justify-content: center !important;
     width: 100vw !important;
     height: 100dvh !important;
-    padding: clamp(12px, 2vh, 24px) clamp(16px, 2vw, 32px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
     box-sizing: border-box !important;
+    overflow: hidden !important;
   }
 
-  .capsule-card-section {
-    /* Riempie lo spazio disponibile mantenendo un margine minimo */
-    width: 100% !important;
-    height: 100% !important;
-    max-width: calc(100vw - clamp(24px, 4vw, 48px)) !important;
-    max-height: calc(100dvh - clamp(24px, 4vh, 48px)) !important;
-    
-    /* Garantisce che i lati siano sempre semicerchi perfetti */
-    border-radius: 9999px !important;
-    margin: auto !important;
+  /* STATO A: Schermi orizzontali / Fullscreen (incluso MacBook 16:10) */
+  @media (min-aspect-ratio: 1.45/1), (min-aspect-ratio: 145/100) {
+    .capsule-card-section {
+      width: 100vw !important;
+      height: 100dvh !important;
+      max-width: none !important;
+      max-height: none !important;
+      margin: 0 !important;
+      border-radius: 9999px !important;
+      aspect-ratio: unset !important;
+    }
+  }
+
+  /* STATO B: Schermi squadrati o ridotti oltre la soglia di tolleranza */
+  @media (max-aspect-ratio: 1.45/1), (max-aspect-ratio: 145/100) {
+    .capsule-card-section {
+      aspect-ratio: 1280 / 710 !important;
+      width: min(92vw, calc(92dvh * (1280 / 710))) !important;
+      height: min(92dvh, calc(92vw * (710 / 1280))) !important;
+      border-radius: 9999px !important;
+      margin: auto !important;
+      flex-shrink: 0 !important;
+    }
   }
 }
 
