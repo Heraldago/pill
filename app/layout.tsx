@@ -2,8 +2,6 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const viewport: Viewport = {
-  themeColor: "#091b2e",
-  colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -12,11 +10,6 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Herald | Product Designer",
   description: "Portfolio of Herald - Product Designer",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black-translucent",
-    title: "Herald",
-  },
   icons: {
     icon: "/logo.svg",
     apple: "/logo.svg",
