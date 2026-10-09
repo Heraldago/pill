@@ -67,7 +67,7 @@ export default function HeroCard({ ref, activeSectionIndex, onNavigate }: HeroCa
             <p className="text-sm sm:text-base md:text-lg lg:text-xl font-normal text-cyan-200/90 tracking-tight">
               Hi, I&apos;m Herald :)
             </p>
-            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.8rem] xl:text-[4.2rem] font-medium tracking-[-0.025em] text-white leading-[1.16] sm:leading-[1.12] drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
+            <h1 className="text-2xl sm:text-3xl md:text-[clamp(1.75rem,3.4vw,4.2rem)] font-medium tracking-[-0.025em] text-white leading-[1.16] sm:leading-[1.12] drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
               I <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 via-sky-300 to-cyan-400 font-semibold drop-shadow-[0_0_20px_rgba(0,212,255,0.4)]">design</span> digital
               products that{" "}
               <span className="italic font-serif font-normal text-white">help</span> and{" "}

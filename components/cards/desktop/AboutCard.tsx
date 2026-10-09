@@ -136,8 +136,8 @@ export default function AboutCard({ ref, onContactClick }: AboutCardProps) {
             }`}
           >
             <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-              <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
-                About Me
+              <h3 className="text-[clamp(1.5rem,3.8cqw,3.75rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+                About me
               </h3>
             </div>
           </div>

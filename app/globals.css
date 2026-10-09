@@ -305,11 +305,11 @@ body {
 
 /* ==========================================================================
    RESPONSIVE CAPSULE ARCHITECTURE:
-   - Desktop (>= 768px):
-     The capsule always maintains its faithful horizontal pill aspect ratio (~1.85 / 1),
-     fitting comfortably in the viewport without vertical egg deformation or oval distortion.
    - Mobile (< 768px):
-     Handled by dedicated stacked vertical layout with stadium aspect-ratio [2/1].
+     Handled by dedicated stacked vertical layout with stadium aspect-ratio [2/1] (MobileView).
+   - Desktop & Tablet (>= 768px):
+     Logical "object-fit: contain" capsule geometry with exact 1.8 / 1 ratio.
+     Scales fluidly and symmetrically without ever stretching or ovalizing.
    ========================================================================== */
 .capsule-card-wrapper {
   padding: 0;
@@ -324,20 +324,25 @@ body {
 
 @media (min-width: 768px) {
   .capsule-card-wrapper {
-    padding: clamp(0.75rem, 2vw, 2rem) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding: clamp(12px, 2vw, 24px) !important;
+    box-sizing: border-box !important;
   }
 
   .capsule-card-section {
-    width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 1.85 / 1 !important;
-    max-height: calc(100dvh - clamp(1.5rem, 5vh, 4rem)) !important;
-    max-width: min(100%, calc((100dvh - clamp(1.5rem, 5vh, 4rem)) * 1.85)) !important;
+    /* Contain geometrico: occupa il massimo spazio possibile rispettando il ratio 1.8 / 1 */
+    width: min(calc(100vw - clamp(24px, 4vw, 48px)), calc((100dvh - clamp(24px, 4vh, 48px)) * 1.8)) !important;
+    height: min(calc(100dvh - clamp(24px, 4vh, 48px)), calc((100vw - clamp(24px, 4vw, 48px)) / 1.8)) !important;
+    aspect-ratio: 1.8 / 1 !important;
+    max-width: min(calc(100vw - clamp(24px, 4vw, 48px)), calc((100dvh - clamp(24px, 4vh, 48px)) * 1.8)) !important;
+    max-height: calc(100dvh - clamp(24px, 4vh, 48px)) !important;
+    border-radius: 9999px !important;
     margin: auto !important;
-    border-radius: 1000px !important;
+    flex-shrink: 0 !important;
   }
 }
 
