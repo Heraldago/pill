@@ -69,10 +69,14 @@ export default function Navbar({ onNavigate, activeSectionIndex = 0 }: NavbarPro
         </button>
       </div>
 
-      {/* Floating Center Capsule Navbar (Desktop Only >= 768px) */}
+      {/* Floating Center Capsule Navbar (Desktop Only >= 768px, visibile solo alla prima pillola) */}
       <nav
         aria-label="Navigazione principale"
-        className="hidden md:flex fixed top-5 sm:top-6 left-1/2 -translate-x-1/2 z-50 items-center gap-1 bg-slate-900/40 hover:bg-slate-900/60 backdrop-blur-2xl border border-white/20 p-1.5 rounded-full shadow-[0_8px_32px_rgba(0,10,30,0.35),_inset_0_1px_1.5px_rgba(255,255,255,0.3)] transition-all duration-300"
+        className={`hidden md:flex fixed top-5 sm:top-6 left-1/2 -translate-x-1/2 z-50 items-center gap-1 bg-slate-900/40 hover:bg-slate-900/60 backdrop-blur-2xl border border-white/20 p-1.5 rounded-full shadow-[0_8px_32px_rgba(0,10,30,0.35),_inset_0_1px_1.5px_rgba(255,255,255,0.3)] transition-all duration-300 ease-out ${
+          activeSectionIndex === 0
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 -translate-y-6 pointer-events-none"
+        }`}
       >
         {NAV_ITEMS.map((item) => {
           const isActive = activeTab === item.id;
@@ -130,7 +134,6 @@ export default function Navbar({ onNavigate, activeSectionIndex = 0 }: NavbarPro
 
         {/* Dropdown del menu mobile */}
         <div
-          data-lenis-prevent
           className={`absolute top-12 right-0 w-44 sm:w-48 p-1.5 rounded-2xl bg-slate-900/85 backdrop-blur-2xl border border-white/25 shadow-[0_15px_35px_rgba(0,0,0,0.4),_inset_0_1px_1px_rgba(255,255,255,0.2)] flex flex-col gap-1 z-50 transition-all duration-200 origin-top-right ${
             isMobileMenuOpen
               ? "opacity-100 scale-100 pointer-events-auto"

@@ -84,6 +84,7 @@ export default function RecommendationsCard({ ref, onContactClick }: Recommendat
         >
           {/* 1. STATO ATTIVO (ON): Dettagli a Sinistra */}
           <div
+            onClick={(e) => e.stopPropagation()}
             className={`absolute top-0 left-[5%] w-[44%] h-full flex flex-col justify-center px-4 sm:px-6 md:px-0 py-2 sm:py-3 space-y-1.5 sm:space-y-2 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
               isToggledOn
                 ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
