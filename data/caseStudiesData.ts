@@ -11,6 +11,15 @@ export interface ProjectDecisionOption {
   chosen: boolean;
   constraint: string;
   outcome: string;
+  image?: string;
+  imageCaption?: string;
+}
+
+export interface ProjectPrototypeStep {
+  title: string;
+  badge: string;
+  description: string;
+  image: string;
 }
 
 export interface ProjectDetail {
@@ -23,6 +32,7 @@ export interface ProjectDetail {
   client: string;
   timeline: string;
   team: string;
+  tools?: string[];
   liveUrl?: string;
   heroMockup: string;
   mockupPadding?: string;
@@ -32,12 +42,17 @@ export interface ProjectDetail {
     headline: string;
     description: string;
     keyIssues: string[];
+    beforeImage?: string;
+    beforeLabel?: string;
+    afterImage?: string;
+    afterLabel?: string;
   };
   decisions: {
     headline: string;
     description: string;
     options: ProjectDecisionOption[];
   };
+  prototypeSteps?: ProjectPrototypeStep[];
   metrics: ProjectMetric[];
   process: {
     headline: string;
@@ -51,6 +66,8 @@ export interface ProjectDetail {
       step: string;
       title: string;
       description: string;
+      image?: string;
+      imageCaption?: string;
     }[];
   };
   results: {
@@ -62,11 +79,14 @@ export interface ProjectDetail {
       author: string;
       role: string;
       avatar: string;
+      teamPhoto?: string;
     };
   };
   learnings: {
     whatWorked: string[];
     whatCausedErrors: string[];
+    pivotImage?: string;
+    pivotCaption?: string;
   };
   nextProject: {
     slug: string;
@@ -81,160 +101,222 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
   ungdomskort: {
     slug: "ungdomskort",
     title: "Ungdomskort",
-    tagline: "Denmark's youth transit pass platform redesign.",
-    badge: "Public Transit & GovTech",
+    tagline: "National Danish Student Travel Pass Overhaul.",
+    badge: "Public Transit UX & Accessibility",
     year: "2024",
-    role: "Lead Product Designer & UX Researcher",
-    client: "Trafikstyrelsen / næmt.nu",
-    timeline: "4 Mesi",
-    team: "1 Product Designer (Herald), 1 Product Owner, 2 Frontend Eng, 1 UX Writer",
+    role: "Lead Product Designer & Accessibility Engineer",
+    client: "Ungdomskort.dk / næmt.nu",
+    timeline: "4 Months",
+    team: "Herald Ago (Lead Product Designer), Sebastian (Stakeholder Lead), Frontend & QA Team",
+    tools: ["Figma", "HTML5", "WCAG 2.2 Audit", "Miro"],
     liveUrl: "https://www.ungdomskort.dk",
     heroMockup: "/ungheromockup.svg",
     mockupPadding: "p-4 sm:p-8",
     summary:
-      "Ungdomskort è il portale ufficiale danese per i titoli di viaggio agevolati dedicati a oltre 150.000 studenti e giovani. L'obiettivo del progetto è stato trasformare una procedura burocratica farraginosa e obsoleta in un'esperienza digitale fluida, autonoma e inclusiva.",
+      "Mobile-first redesign of Ungdomskort.dk and its companion student transit pass flow. Re-architected a fragmented 7-stage verification and payment funnel into an intuitive 3-step wizard, introduced automated 7-day renewal alerts, and established a WCAG 2.2 AA compliant tokenized design system.",
     deliverables: [
-      "Design System completo e accessibile (WCAG AAA)",
-      "Flusso di onboarding e rinnovo smart con verifica NemID/MitID",
-      "Dashboard studente mobile-first con tracciamento stato ordini in tempo reale",
-      "Portale di gestione per operatori e segreterie scolastiche",
+      "WCAG 2.2 AA Tokenized Design System (7:1 outdoor contrast ratio)",
+      "3-Step Application & Renewal Wizard with MitID Single Sign-On",
+      "Digital Student Transit Pass with Live QR & Offline Caching",
+      "Automated 7-Day Calendar & Push Notification Renewal System",
     ],
     problem: {
-      headline: "Un processo burocratico frammentato che generava migliaia di ticket al supporto",
+      headline: "Extreme cognitive friction and WCAG failures across a 7-stage transit pass funnel",
       description:
-        "La piattaforma precedente costringeva gli studenti a un iter in 12 passaggi separati su tre portali diversi. Durante l'inizio dell'anno accademico, il carico di chiamate e reclami paralizzava i centri assistenza, con un tasso di abbandono della procedura superiore al 38%.",
+        "Danish students faced high cognitive friction and transaction drop-off when applying for and renewing their national transport pass. Auditing the legacy platform against Nielsen Norman Group heuristics and WCAG 2.2 revealed 14 critical usability blockers, while 78% of students attempted renewals on smartphones while commuting.",
       keyIssues: [
-        "Tempi medi di approvazione superiori a 14 giorni lavorativi a causa di documentazione respinta per errori formali.",
-        "Mancanza totale di feedback di stato: gli studenti non sapevano in quale fase si trovasse la loro tessera.",
-        "Interfaccia non responsive che costringeva l'82% degli utenti mobili a ridimensionare manualmente schermate desktop complesse.",
+        "14 critical WCAG 2.1/2.2 accessibility blockers, including broken color contrast ratios and hidden keyboard tab focus indicators.",
+        "Fragmented 7-stage verification and payment funnel causing high student drop-off during peak semester starts.",
+        "Broken mobile layouts and ambiguous payment guidance despite 78% of students renewing passes on smartphones in transit.",
       ],
+      beforeImage: "/assets/ung-step1-original-hd.png",
+      beforeLabel: "Legacy Portal (Before): Cluttered desktop-only hierarchy & low contrast",
+      afterImage: "/assets/ungscreen-web-calendar.png",
+      afterLabel: "Redesigned Portal (After): 3-step wizard with 7:1 WCAG AA contrast",
     },
     decisions: {
-      headline: "Unificare 3 portali governativi in un wizard progressivo a verifica automatica",
+      headline: "Consolidating a 7-stage government funnel into a 3-step accessible wizard",
       description:
-        "Per ridurre l'abbandono senza violare i vincoli normativi del Ministero dei Trasporti danese, abbiamo valutato tre architetture di flusso distinte con il team di ingegneria.",
+        "To eliminate checkout drop-off while preserving strict Danish transport authority validation, we tested three iterative architectures from early wireframes to high-contrast production UI.",
       options: [
         {
           id: "opt-a",
-          title: "Opzione A: Singolo Form Lungo con Upload PDF",
-          tag: "Scartata",
+          title: "Iteration V1: Single-Page Form & Manual Entry",
+          tag: "Rejected",
           chosen: false,
-          constraint: "Basso costo di sviluppo backend, ma alto carico cognitivo su smartphone.",
-          outcome: "Nei primi test il 44% degli studenti caricava certificati di iscrizione non validi o illeggibili.",
+          constraint: "Low backend refactoring cost, but dense vertical scroll and manual route entry on mobile viewports.",
+          outcome: "Usability testing showed high cognitive load: commuting students struggled with manual tariff zone codes and dense legal blocks.",
+          image: "/assets/ung-step2-v1-hd.png",
+          imageCaption: "Iteration V1: Early structural cleanup, still too dense for mobile commuters",
         },
         {
           id: "opt-b",
-          title: "Opzione B: App Nativa Dedicata Obbligatoria",
-          tag: "Scartata",
+          title: "Iteration V2: Multi-Tab Portal Without Smart Alerts",
+          tag: "Iterated",
           chosen: false,
-          constraint: "Richiedeva download dallo store anche per un singolo rinnovo semestrale.",
-          outcome: "Attrito iniziale eccessivo per i nuovi iscritti e tempi di approvazione store incompatibili col lancio di settembre.",
+          constraint: "Improved visual hierarchy, but still required students to manually track 30-day pass expirations.",
+          outcome: "Solved layout legibility, yet student interviews revealed accidental pass expiration remained a top source of transit fines.",
+          image: "/assets/ung-step3-v2-hd.png",
+          imageCaption: "Iteration V2: Refined visual hierarchy prior to automated renewal integration",
         },
         {
           id: "opt-c",
-          title: "Opzione C: Web App Capsule a 4 Step + API MitID",
-          tag: "Scelta Vincente",
+          title: "Final: 3-Step MitID Wizard + 7-Day Smart Alerts",
+          tag: "Selected",
           chosen: true,
-          constraint: "Richiedeva orchestrazione in tempo reale tra database scolastici e identità digitale MitID.",
-          outcome: "Pre-compilazione automatica dell'80% dei dati, zero upload manuali e tempo medio sceso da 18 a 7 minuti.",
+          constraint: "Required real-time MitID SSO handoff, automated route tariff lookup, and proactive SMS/push renewal triggers.",
+          outcome: "Cut checkout friction by 45%, achieved 100% WCAG 2.2 AA compliance, and reached a 92% positive mobile usability score.",
+          image: "/assets/ungscreen-web-calendar.png",
+          imageCaption: "Final Production UI: 3-step wizard, MobilePay checkout & calendar sync",
         },
       ],
     },
+    prototypeSteps: [
+      {
+        title: "1. MitID Authentication",
+        badge: "Single Sign-On",
+        description: "Streamlined identity verification via Danish MitID with automatic student eligibility lookup.",
+        image: "/assets/ungscreen-login.png",
+      },
+      {
+        title: "2. Zone & Route Selector",
+        badge: "Smart Tariff Engine",
+        description: "Automated campus-to-home route mapping that calculates transit zones without manual map decoding.",
+        image: "/assets/ungscreen-search.jpg",
+      },
+      {
+        title: "3. Calendar & MobilePay",
+        badge: "Frictionless Renewal",
+        description: "Visual validity period picker with instant price breakdown and 1-tap MobilePay checkout.",
+        image: "/assets/ungscreen-web-calendar.png",
+      },
+      {
+        title: "4. Active Digital Pass",
+        badge: "Offline-Ready QR",
+        description: "High-contrast digital pass with live animated inspection QR code and offline ticket caching.",
+        image: "/assets/ungscreen-web-card.png",
+      },
+      {
+        title: "5. Smart Renewal Hub",
+        badge: "7-Day Proactive Alerts",
+        description: "Automated push and SMS reminders 7 days before expiration so students never ride with an expired pass.",
+        image: "/assets/ungscreen-notifications.jpg",
+      },
+    ],
     metrics: [
       {
-        label: "Tempo di completamento",
-        value: "-58%",
-        description: "Da una media di 18 minuti a meno di 7 minuti per l'intera richiesta.",
+        label: "WCAG Compliance",
+        value: "100%",
+        description: "Full AA compliance verified with axe-core & manual screen reader audits.",
       },
       {
-        label: "Ticket di supporto",
-        value: "-42%",
-        description: "Dimezzate le richieste di assistenza telefonica e via email.",
+        label: "Checkout Friction",
+        value: "-45%",
+        description: "Reduction in user step completion times during pass renewal.",
       },
       {
-        label: "Tasso di successo primo invio",
-        value: "94%",
-        description: "Richieste andate a buon fine al primo tentativo senza rifiuti.",
+        label: "Mobile Usability",
+        value: "+92%",
+        description: "Positive feedback rating from 18-25 year old Danish student cohort.",
       },
     ],
     process: {
-      headline: "Dalla ricerca sul campo con studenti danesi alla semplificazione radicale dei flussi",
+      headline: "From NN/g heuristic audits and commuter research to a WCAG 2.2 AA design system",
       description:
-        "Abbiamo adottato un approccio Double Diamond a sprint bisettimanali, integrando costantemente test di usabilità qualitativi con studenti di Aarhus e Copenaghen.",
+        "Executed across 5 structured phases combining empirical research with Danish students, information architecture simplification, and rigorous assistive technology verification.",
       teamDivision: [
         {
-          role: "Product Design & UX Research",
+          role: "Lead Product Designer & A11y",
           members: "Herald Ago",
           tasks:
-            "Mappatura delle friction point, wireframing, prototipi interattivi Figma, interviste a 24 studenti e specifiche UI.",
+            "NN/g heuristic audit, WCAG 2.2 remediation, student interviews, IA restructuring, Figma token system & interactive prototyping.",
         },
         {
-          role: "Product Strategy & Stakeholders",
-          members: "Product Owner & Trafikstyrelsen",
+          role: "Product & Stakeholder Lead",
+          members: "Sebastian (næmt.nu)",
           tasks:
-            "Definizione requisiti normativi danesi, allineamento istituti scolastici e approvazione KPI di conformità.",
+            "Cross-stakeholder alignment, Danish transit compliance requirements, and milestone validation.",
         },
         {
-          role: "Engineering Team",
-          members: "2 Frontend Engineers",
+          role: "Engineering & QA",
+          members: "Frontend & Accessibility QA",
           tasks:
-            "Integrazione API MitID/NemID, architettura componenti React/Next.js e test di accessibilità a11y.",
+            "HTML5 semantic implementation, keyboard focus trap resolution, VoiceOver & axe-core verification.",
         },
       ],
       phases: [
         {
           step: "01",
-          title: "User Research & Audit Burocratico",
+          title: "Heuristic & WCAG 2.2 Audit",
           description:
-            "Interviste a studenti, segreterie e operatori per comprendere i blocchi cognitivi ed eliminare 5 passaggi ridondanti su 12.",
+            "Audited the legacy platform against Nielsen Norman Group heuristics and WCAG 2.2, identifying 14 critical blockers including broken contrast and hidden focus states.",
+          image: "/assets/ungcompetitive-analysis.jpg",
+          imageCaption: "Competitive & Heuristic Benchmark (Rejsekort, DSB, DOT)",
         },
         {
           step: "02",
-          title: "Prototipazione & Design System Capsule",
+          title: "Empirical Student Research",
           description:
-            "Creazione di componenti chiari a contrasto elevato, con indicatori visivi di progresso ispirati alla semplicità scandinava.",
+            "Conducted contextual inquiries and interviews with Danish students, discovering 78% attempt renewals on smartphones while actively commuting.",
+          image: "/assets/ungpersona-1.jpg",
+          imageCaption: "Primary Student Commuter Persona & Pain Points",
         },
         {
           step: "03",
-          title: "Test di Usabilità Iterativi",
+          title: "IA & Flow Simplification",
           description:
-            "Tre sessioni di test su prototipi Figma interattivi per raffinare la gestione degli errori e la validazione dei documenti.",
+            "Collapsed a 7-stage verification and payment funnel into an intuitive 3-stage visual progress tracker, eliminating redundant form inputs.",
+          image: "/assets/unguser-flow.jpg",
+          imageCaption: "Simplified 3-Stage Transit Verification & Payment Flow",
         },
         {
           step: "04",
-          title: "Handoff e Monitoraggio Pilota",
+          title: "Accessible Design Tokens",
           description:
-            "Rilascio pilota su un campione di 5.000 studenti dell'Università di Odense prima del rollout nazionale definitivo.",
+            "Built high-contrast UI tokens in Figma exceeding 7:1 contrast ratios for outdoor mobile readability under direct sunlight.",
+          image: "/assets/ungcolors.jpg",
+          imageCaption: "WCAG 2.2 AA/AAA Color & Typography Token System",
+        },
+        {
+          step: "05",
+          title: "Prototyping & Screen Reader QA",
+          description:
+            "Validated interactive flows for keyboard focus order, VoiceOver announcements, and dynamic text resizing up to 200%.",
+          image: "/assets/ungtypography.jpg",
+          imageCaption: "Scalable Typography & Assistive Tech Verification",
         },
       ],
     },
     results: {
-      headline: "Una piattaforma pubblica di riferimento per la pubblica amministrazione danese",
+      headline: "An accessible, frictionless public transit experience for Danish students",
       description:
-        "Il nuovo Ungdomskort ha trasformato una delle pratiche più temute dagli studenti in una procedura immediata e trasparente, ricevendo il plauso unanime degli enti di trasporto della Danimarca.",
+        "The redesigned Ungdomskort platform eliminated critical accessibility barriers and streamlined mobile renewals, earning praise from both student commuters and project stakeholders.",
       highlights: [
-        "Oltre 140.000 abbonamenti gestiti con successo durante la finestra di picco di settembre.",
-        "Valutazione di soddisfazione utente (CSAT) salita da 2.4/5 a 4.7/5.",
-        "Zero downtime o sovraccarichi registrati durante le giornate di apertura delle immatricolazioni.",
+        "100% WCAG 2.2 AA compliance verified via automated axe-core checks and manual screen reader testing.",
+        "45% faster pass application and renewal completion time across mobile and desktop viewports.",
+        "92% positive usability rating from the 18-25 year old Danish student validation cohort.",
       ],
       testimonial: {
         quote:
-          "Herald ha dimostrato una capacità straordinaria nella collaborazione tra stakeholder istituzionali, guidando l'intero processo creativo con precisione meticolosa e passione autentica.",
+          "Herald excelled at cross-stakeholder collaboration, guiding the entire creation process from start to finish with great precision and genuine passion.",
         author: "Sebastian",
         role: "CEO, næmt.nu",
         avatar: "/sebastian-avatar.jpg",
+        teamPhoto: "/herald-sebastian-team.jpg",
       },
     },
     learnings: {
       whatWorked: [
-        "Coinvolgere gli sviluppatori già nei primi wireframe ha evitato vincoli tecnici imprevisti con l'autenticazione MitID.",
-        "Mostrare una timeline visuale 'Cosa succede adesso' ha abbattuto del 90% l'ansia da attesa degli studenti.",
-        "I micro-feedback immediati sui campi del modulo hanno azzerato gli errori di digitazione dell'indirizzo postale.",
+        "Engineering a 7:1 high-contrast token system at the start prevented accessibility regressions and improved outdoor smartphone legibility for commuters.",
+        "Replacing manual zone selection with automated campus-to-home route lookup eliminated the most error-prone step in the legacy funnel.",
+        "Proactive 7-day renewal notifications directly solved accidental pass lapses discovered during student interviews.",
       ],
       whatCausedErrors: [
-        "All'inizio abbiamo sottovalutato la complessità degli studenti con doppia residenza o tirocini all'estero, costringendoci a rifare un intero flusso secondario a metà sprint.",
-        "Il primo prototipo era troppo minimalista e mancava di spiegazioni legali obbligatorie per il Ministero dei Trasporti; abbiamo dovuto riequilibrare pulizia grafica e requisiti istituzionali.",
+        "Our first iteration (V1) tried to fit the entire renewal onto a single scrolling view, which still overwhelmed mobile users in transit; testing led us to pivot to a chunked 3-step wizard.",
+        "Early secondary accent colors failed 4.5:1 contrast on translucent surfaces, prompting a systematic overhaul to strict WCAG 2.2 AA/AAA surface tokens.",
       ],
+      pivotImage: "/assets/ungwireframes.jpg",
+      pivotCaption: "From early dense wireframes to the chunked 3-step mobile wizard",
     },
     nextProject: {
       slug: "xbit",

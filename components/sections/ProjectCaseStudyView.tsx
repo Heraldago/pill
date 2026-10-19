@@ -11,12 +11,12 @@ import { ProjectDetail } from "@/data/caseStudiesData";
 
 const PROJECT_SECTIONS: ScrollSectionItem[] = [
   { id: "hero", label: "Intro" },
-  { id: "problem", label: "Il Problema" },
-  { id: "decisions", label: "Scelte & Trade-off" },
-  { id: "process", label: "Processo & Team" },
-  { id: "impact", label: "Impatto & KPI" },
-  { id: "learnings", label: "Retrospettiva" },
-  { id: "next", label: "Prossimo Progetto" },
+  { id: "problem", label: "The Problem" },
+  { id: "decisions", label: "Decisions & Flow" },
+  { id: "process", label: "Process & Craft" },
+  { id: "impact", label: "Impact & KPIs" },
+  { id: "learnings", label: "Retrospective" },
+  { id: "next", label: "Next Project" },
 ];
 
 const PROJECT_MOBILE_TARGET_MAP: Record<number, string> = {
@@ -50,17 +50,22 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
   // Desktop pill toggle states ("off" | "on") + hasToggledOnce
   const [problemOn, setProblemOn] = useState(false);
   const [problemToggledOnce, setProblemToggledOnce] = useState(false);
+  const [problemCompareMode, setProblemCompareMode] = useState<"before" | "after">("before");
 
   const [decisionsOn, setDecisionsOn] = useState(false);
   const [decisionsToggledOnce, setDecisionsToggledOnce] = useState(false);
   const [selectedDecisionIdx, setSelectedDecisionIdx] = useState(2); // default to chosen option C
+  const [decisionsViewMode, setDecisionsViewMode] = useState<"tradeoffs" | "prototype">("tradeoffs");
+  const [selectedProtoIdx, setSelectedProtoIdx] = useState(0);
 
   const [processOn, setProcessOn] = useState(false);
   const [processToggledOnce, setProcessToggledOnce] = useState(false);
   const [selectedPhaseIdx, setSelectedPhaseIdx] = useState(0);
+  const [processKnobView, setProcessKnobView] = useState<"artifact" | "deliverables">("artifact");
 
   const [impactOn, setImpactOn] = useState(false);
   const [impactToggledOnce, setImpactToggledOnce] = useState(false);
+  const [showTeamPhoto, setShowTeamPhoto] = useState(false);
 
   const [learningsOn, setLearningsOn] = useState(false);
   const [learningsToggledOnce, setLearningsToggledOnce] = useState(false);
@@ -103,13 +108,15 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
     project.decisions.options[selectedDecisionIdx] ?? project.decisions.options[0];
   const activePhase =
     project.process.phases[selectedPhaseIdx] ?? project.process.phases[0];
+  const activeProtoStep =
+    project.prototypeSteps?.[selectedProtoIdx] ?? project.prototypeSteps?.[0];
 
   return (
     <div
       ref={pinnedContainerRef}
       className="relative min-h-screen md:h-screen w-full overflow-x-hidden md:overflow-hidden text-white font-sans selection:bg-cyan-400 selection:text-slate-900"
     >
-      {/* Sfondo 3D fisso identico alla Home Page */}
+      {/* Fixed 3D background identical to Home Page */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <VantaWaves
           color={0x0b2847}
@@ -120,12 +127,12 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
         />
       </div>
 
-      {/* Top Navigation identica alla Home Page */}
-      {/* 1. Logo Fisso In Alto a Sinistra (Torna alla Home) */}
+      {/* Top Navigation identical to Home Page */}
+      {/* 1. Fixed Top-Left Logo (Back to Home) */}
       <div className="fixed top-4 sm:top-5 md:top-6 left-4 sm:left-6 md:left-8 z-50 pointer-events-auto flex items-center gap-2.5">
         <Link
           href="/"
-          aria-label="Torna alla Home"
+          aria-label="Back to Home"
           className="group relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/[0.08] hover:bg-white/[0.15] border border-white/25 backdrop-blur-xl shadow-[0_8px_24px_rgba(0,10,30,0.4),_inset_0_1px_1px_rgba(255,255,255,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
         >
           <Image
@@ -146,12 +153,12 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
         </Link>
       </div>
 
-      {/* 2. Hamburger Button Mobile In Alto a Destra */}
+      {/* 2. Mobile Top-Right Hamburger Button */}
       <div className="fixed top-4 sm:top-5 right-4 sm:right-6 z-50 md:hidden pointer-events-auto">
         <button
           type="button"
           onClick={() => setMobileMenuOpen((prev) => !prev)}
-          aria-label={mobileMenuOpen ? "Chiudi menu" : "Apri menu"}
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileMenuOpen}
           className="relative flex flex-col items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/[0.08] hover:bg-white/[0.15] border border-white/25 backdrop-blur-xl shadow-[0_8px_24px_rgba(0,10,30,0.4),_inset_0_1px_1px_rgba(255,255,255,0.35)] transition-all duration-300 active:scale-95 cursor-pointer"
         >
@@ -173,7 +180,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
         </button>
       </div>
 
-      {/* 3. Menu Mobile Overlay */}
+      {/* 3. Mobile Menu Overlay */}
       <div
         className={`fixed inset-0 z-40 md:hidden transition-all duration-500 ${
           mobileMenuOpen
@@ -197,61 +204,61 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
             onClick={() => setMobileMenuOpen(false)}
             className="w-full text-left px-4 py-2.5 rounded-2xl text-sm font-semibold text-cyan-300 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
           >
-            ← Torna alla Home
+            ← Back to Home
           </Link>
           <button
             type="button"
             onClick={() => scrollToMobileElement("m-proj-hero")}
             className="w-full text-left px-4 py-2.5 rounded-2xl text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
           >
-            Intro &amp; Ruolo
+            Intro &amp; Role
           </button>
           <button
             type="button"
             onClick={() => scrollToMobileElement("m-proj-problem")}
             className="w-full text-left px-4 py-2.5 rounded-2xl text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
           >
-            01 / Il Problema
+            01 / The Problem
           </button>
           <button
             type="button"
             onClick={() => scrollToMobileElement("m-proj-decisions")}
             className="w-full text-left px-4 py-2.5 rounded-2xl text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
           >
-            02 / Scelte &amp; Trade-off
+            02 / Decisions &amp; Flow
           </button>
           <button
             type="button"
             onClick={() => scrollToMobileElement("m-proj-process")}
             className="w-full text-left px-4 py-2.5 rounded-2xl text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
           >
-            03 / Processo &amp; Team
+            03 / Process &amp; Craft
           </button>
           <button
             type="button"
             onClick={() => scrollToMobileElement("m-proj-impact")}
             className="w-full text-left px-4 py-2.5 rounded-2xl text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
           >
-            04 / Impatto &amp; KPI
+            04 / Impact &amp; KPIs
           </button>
           <button
             type="button"
             onClick={() => scrollToMobileElement("m-proj-learnings")}
             className="w-full text-left px-4 py-2.5 rounded-2xl text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
           >
-            05 / Retrospettiva
+            05 / Retrospective
           </button>
           <Link
             href={`/work/${project.nextProject.slug}`}
             onClick={() => setMobileMenuOpen(false)}
             className="w-full text-left px-4 py-2.5 rounded-2xl text-sm font-semibold text-white bg-white/15 hover:bg-white/25 transition-all cursor-pointer mt-1"
           >
-            Prossimo: {project.nextProject.title} ↗
+            Next: {project.nextProject.title} ↗
           </Link>
         </div>
       </div>
 
-      {/* 4. Pillola Centrale Desktop dentro la Prima Card (identica a Navbar.tsx) */}
+      {/* 4. Desktop Center Pill Nav inside Card 1 */}
       <div
         className={`fixed top-5 md:top-7 left-1/2 -translate-x-1/2 z-50 hidden md:block transition-all duration-500 ${
           activeSectionIndex === 0
@@ -260,7 +267,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
         }`}
       >
         <nav
-          aria-label="Navigazione Case Study"
+          aria-label="Case Study Navigation"
           className="flex items-center gap-1 p-1.5 rounded-full bg-white/[0.08] backdrop-blur-2xl border border-white/25 shadow-[0_12px_32px_rgba(0,10,30,0.35),_inset_0_1px_1px_rgba(255,255,255,0.35)]"
         >
           <button
@@ -275,28 +282,28 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
             onClick={() => navigateToSection(1)}
             className="px-3.5 py-1.5 rounded-full text-xs md:text-sm font-medium text-white/85 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
           >
-            Problema
+            Problem
           </button>
           <button
             type="button"
             onClick={() => navigateToSection(2)}
             className="px-3.5 py-1.5 rounded-full text-xs md:text-sm font-medium text-white/85 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
           >
-            Trade-off
+            Decisions
           </button>
           <button
             type="button"
             onClick={() => navigateToSection(3)}
             className="px-3.5 py-1.5 rounded-full text-xs md:text-sm font-medium text-white/85 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
           >
-            Processo
+            Process
           </button>
           <button
             type="button"
             onClick={() => navigateToSection(4)}
             className="px-3.5 py-1.5 rounded-full text-xs md:text-sm font-medium text-white/85 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
           >
-            Impatto
+            Impact
           </button>
           <button
             type="button"
@@ -314,7 +321,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
         </nav>
       </div>
 
-      {/* ScrollSpyNav in basso a destra con le 7 pillole del progetto */}
+      {/* Bottom-right ScrollSpyNav with 7 project capsules */}
       <ScrollSpyNav
         activeIndex={activeSectionIndex}
         onNavigate={navigateToSection}
@@ -322,10 +329,10 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
       />
 
       {/* ================================================================= */}
-      {/* DESKTOP VIEW (>= 768px): 7 PILLOLE 3D IMPILATE IDENTICHE A HOME   */}
+      {/* DESKTOP VIEW (>= 768px): 7 STACKED 3D CAPSULES                    */}
       {/* ================================================================= */}
       <main className="warp-stage-3d relative z-10 hidden md:block">
-        {/* --- PILLOLA 1 (HERO CAPSULE TRASLUCIDA) --- */}
+        {/* --- PILL 1 (TRANSLUCENT HERO CAPSULE) --- */}
         <div
           ref={card1Ref}
           className="warp-card-node capsule-card-wrapper relative w-full h-[100dvh] shrink-0 flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-10"
@@ -346,8 +353,16 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                     {project.role}
                   </span>
                   <span className="px-3 py-1 rounded-full bg-white/5 border border-white/15 text-white/75">
-                    {project.client}
+                    {project.timeline}
                   </span>
+                  {project.tools?.map((tool) => (
+                    <span
+                      key={tool}
+                      className="px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/15 text-[11px] text-cyan-100/80"
+                    >
+                      {tool}
+                    </span>
+                  ))}
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl md:text-[clamp(2rem,3.6vw,4.2rem)] font-semibold tracking-[-0.025em] text-white leading-[1.1] drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
@@ -361,7 +376,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                   {project.summary}
                 </p>
 
-                {/* Quick KPI + Meta Pills */}
+                {/* Quick KPI + Action Pills */}
                 <div className="flex flex-wrap items-center gap-2.5 pt-1">
                   {project.metrics.map((m, idx) => (
                     <div
@@ -381,7 +396,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                     onClick={() => navigateToSection(1)}
                     className="px-4 py-2 rounded-full bg-white text-slate-950 hover:bg-cyan-50 text-xs font-bold shadow-md transition-all cursor-pointer"
                   >
-                    Esplora le pillole ↓
+                    Explore Case Study ↓
                   </button>
                 </div>
               </div>
@@ -389,13 +404,13 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
 
             <footer className="w-full shrink-0 pb-3 sm:pb-5 md:pb-6 px-8 flex justify-center items-center z-10">
               <span className="text-[11px] text-white/50 tracking-wider uppercase font-medium">
-                Scorri per navigare tra le 7 pillole del progetto
+                Scroll to navigate across the 7 case study capsules
               </span>
             </footer>
           </section>
         </div>
 
-        {/* --- PILLOLA 2 (01 / IL PROBLEMA) --- */}
+        {/* --- PILL 2 (01 / THE PROBLEM & BEFORE/AFTER) --- */}
         <div
           ref={card2Ref}
           className="warp-card-node capsule-card-wrapper relative w-full h-[100dvh] shrink-0 flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-20"
@@ -411,7 +426,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               role="switch"
               aria-checked={problemOn}
               tabIndex={0}
-              aria-label="Attiva dettagli su Il Problema"
+              aria-label="Toggle details for The Problem"
               onClick={() => {
                 setProblemToggledOnce(true);
                 setProblemOn((prev) => !prev);
@@ -435,7 +450,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                   : "bg-white shadow-none"
               }`}
             >
-              {/* STATO ON: Dettagli a Sinistra */}
+              {/* ON STATE: Problem Details on the Left */}
               <div
                 className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[38%] max-w-[38%] my-auto h-fit max-h-[90%] flex flex-col justify-center px-1 sm:px-3 py-1 gap-2 sm:gap-2.5 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   problemOn
@@ -445,7 +460,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               >
                 <div>
                   <span className="text-[10px] sm:text-xs font-bold text-rose-600 tracking-wider uppercase mb-0.5 block">
-                    01 / La Sfida Iniziale
+                    01 / The Initial Challenge
                   </span>
                   <h2 className="text-lg sm:text-xl md:text-[clamp(1.15rem,2cqw,2.1rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
                     {project.problem.headline}
@@ -470,7 +485,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                 </div>
               </div>
 
-              {/* STATO OFF: Titolo a Destra */}
+              {/* OFF STATE: Title on the Right */}
               <div
                 className={`absolute top-0 bottom-0 right-[3%] sm:right-[4%] w-[42%] max-w-[42%] h-full flex flex-col items-center justify-center text-center px-2 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   !problemOn
@@ -480,18 +495,18 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               >
                 <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none space-y-1.5">
                   <span className="px-3 py-0.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-rose-500/20 border border-rose-300/30 text-rose-200">
-                    Capitolo 01
+                    Chapter 01
                   </span>
                   <h3 className="text-center text-[clamp(1.15rem,2.3cqw,2.6rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
-                    Il Problema
+                    The Problem
                   </h3>
                   <p className="text-xs sm:text-sm text-white/70 max-w-xs">
-                    Clicca la pillola per analizzare le criticità iniziali
+                    Click the capsule to inspect usability blockers &amp; legacy vs redesigned UI
                   </p>
                 </div>
               </div>
 
-              {/* KNOB CIRCOLARE */}
+              {/* CIRCULAR KNOB (Hero Mockup when OFF, Interactive Before/After Screen when ON) */}
               <div
                 className={`absolute top-[var(--knob-pad)] bottom-[var(--knob-pad)] left-[var(--knob-pad)] h-[calc(100%-2*var(--knob-pad))] aspect-square w-auto rounded-full overflow-visible ${
                   !problemToggledOnce
@@ -517,23 +532,83 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                       zoom={0.65}
                     />
                   )}
-                  <div className="relative z-10 w-full h-full flex items-center justify-center pointer-events-none">
-                    <Image
-                      src={project.heroMockup}
-                      alt={project.title}
-                      fill
-                      unoptimized
-                      sizes="(max-width: 768px) 85vw, 45vw"
-                      className={`object-contain ${project.mockupPadding ?? "p-4 sm:p-6"}`}
-                    />
-                  </div>
+                  {!problemOn || !project.problem.beforeImage ? (
+                    <div className="relative z-10 w-full h-full flex items-center justify-center pointer-events-none">
+                      <Image
+                        src={project.heroMockup}
+                        alt={project.title}
+                        fill
+                        unoptimized
+                        sizes="(max-width: 768px) 85vw, 45vw"
+                        className={`object-contain ${project.mockupPadding ?? "p-4 sm:p-6"}`}
+                      />
+                    </div>
+                  ) : (
+                    <div className="relative z-10 w-full h-full flex flex-col items-center justify-between py-3 px-4">
+                      {/* Before / After Switcher inside Knob */}
+                      <div
+                        className="flex items-center gap-1 p-1 rounded-full bg-slate-950/80 border border-white/25 backdrop-blur-md shadow-lg z-20"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => setProblemCompareMode("before")}
+                          className={`px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold transition-all cursor-pointer ${
+                            problemCompareMode === "before"
+                              ? "bg-rose-500 text-white shadow-xs"
+                              : "text-white/75 hover:text-white"
+                          }`}
+                        >
+                          Legacy (Before)
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setProblemCompareMode("after")}
+                          className={`px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold transition-all cursor-pointer ${
+                            problemCompareMode === "after"
+                              ? "bg-emerald-500 text-slate-950 shadow-xs"
+                              : "text-white/75 hover:text-white"
+                          }`}
+                        >
+                          Redesign (After)
+                        </button>
+                      </div>
+
+                      {/* Image Container */}
+                      <div className="relative w-[84%] h-[68%] rounded-2xl overflow-hidden border border-white/25 bg-slate-950/60 shadow-2xl">
+                        <Image
+                          src={
+                            problemCompareMode === "before"
+                              ? project.problem.beforeImage
+                              : project.problem.afterImage ?? project.heroMockup
+                          }
+                          alt={
+                            problemCompareMode === "before"
+                              ? project.problem.beforeLabel ?? "Legacy UI"
+                              : project.problem.afterLabel ?? "Redesigned UI"
+                          }
+                          fill
+                          unoptimized
+                          sizes="40vw"
+                          className="object-contain p-1.5"
+                        />
+                      </div>
+
+                      {/* Caption Pill */}
+                      <span className="px-3 py-1 rounded-full bg-slate-950/80 border border-white/20 text-[10px] font-medium text-white/90 text-center max-w-[82%] truncate">
+                        {problemCompareMode === "before"
+                          ? project.problem.beforeLabel
+                          : project.problem.afterLabel}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
           </section>
         </div>
 
-        {/* --- PILLOLA 3 (02 / SCELTE & TRADE-OFF) --- */}
+        {/* --- PILL 3 (02 / DECISIONS, TRADE-OFFS & INTERACTIVE FLOW) --- */}
         <div
           ref={card3Ref}
           className="warp-card-node capsule-card-wrapper relative w-full h-[100dvh] shrink-0 flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-30"
@@ -549,7 +624,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               role="switch"
               aria-checked={decisionsOn}
               tabIndex={0}
-              aria-label="Attiva dettagli su Scelte e Trade-off"
+              aria-label="Toggle details for Decisions and Flow"
               onClick={() => {
                 setDecisionsToggledOnce(true);
                 setDecisionsOn((prev) => !prev);
@@ -573,7 +648,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                   : "bg-white shadow-none"
               }`}
             >
-              {/* STATO ON: Selettore Trade-off a Sinistra */}
+              {/* ON STATE: Trade-off & Interactive Prototype Selector on the Left */}
               <div
                 className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[38%] max-w-[38%] my-auto h-fit max-h-[90%] flex flex-col justify-center px-1 sm:px-3 py-1 gap-2 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   decisionsOn
@@ -581,55 +656,141 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                     : "opacity-0 scale-95 -translate-x-12 pointer-events-none"
                 }`}
               >
-                <div>
-                  <span className="text-[10px] sm:text-xs font-bold text-blue-600 tracking-wider uppercase mb-0.5 block">
-                    02 / Architettura &amp; Trade-off
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <span className="text-[10px] sm:text-xs font-bold text-blue-600 tracking-wider uppercase block">
+                    02 / Architecture &amp; Flow
                   </span>
-                  <h2 className="text-lg sm:text-xl md:text-[clamp(1.1rem,1.9cqw,2rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
-                    {project.decisions.headline}
-                  </h2>
-                  <p className="text-[11px] sm:text-xs text-slate-600 font-normal leading-relaxed mt-1">
-                    {project.decisions.description}
-                  </p>
-                </div>
-
-                {/* Pulsanti opzione interattivi */}
-                <div className="flex flex-col gap-1.5 pt-1">
-                  {project.decisions.options.map((opt, idx) => {
-                    const isSelected = selectedDecisionIdx === idx;
-                    return (
+                  {project.prototypeSteps && project.prototypeSteps.length > 0 && (
+                    <div
+                      className="flex items-center gap-1 p-0.5 rounded-full bg-slate-100 border border-slate-200"
+                      onClick={(e) => e.stopPropagation()}
+                    >
                       <button
-                        key={opt.id}
                         type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedDecisionIdx(idx);
-                        }}
-                        className={`w-full text-left p-2.5 rounded-2xl border transition-all cursor-pointer flex items-center justify-between gap-2 ${
-                          isSelected
-                            ? "bg-slate-900 text-white border-slate-900 shadow-md"
-                            : "bg-slate-100 hover:bg-slate-200/80 text-slate-800 border-slate-200"
+                        onClick={() => setDecisionsViewMode("tradeoffs")}
+                        className={`px-2.5 py-1 rounded-full text-[10px] font-bold transition-all cursor-pointer ${
+                          decisionsViewMode === "tradeoffs"
+                            ? "bg-slate-900 text-white shadow-xs"
+                            : "text-slate-600 hover:text-slate-900"
                         }`}
                       >
-                        <span className="text-xs font-bold truncate">{opt.title}</span>
-                        <span
-                          className={`px-2 py-0.5 rounded-full text-[10px] font-bold shrink-0 ${
-                            opt.chosen
-                              ? "bg-emerald-400/25 text-emerald-300 border border-emerald-400/40"
-                              : isSelected
-                              ? "bg-white/20 text-white"
-                              : "bg-slate-200 text-slate-600"
-                          }`}
-                        >
-                          {opt.tag}
-                        </span>
+                        Iterations (V1-V3)
                       </button>
-                    );
-                  })}
+                      <button
+                        type="button"
+                        onClick={() => setDecisionsViewMode("prototype")}
+                        className={`px-2.5 py-1 rounded-full text-[10px] font-bold transition-all cursor-pointer ${
+                          decisionsViewMode === "prototype"
+                            ? "bg-blue-600 text-white shadow-xs"
+                            : "text-slate-600 hover:text-slate-900"
+                        }`}
+                      >
+                        5-Step Prototype
+                      </button>
+                    </div>
+                  )}
                 </div>
+
+                {decisionsViewMode === "tradeoffs" || !project.prototypeSteps ? (
+                  <>
+                    <div>
+                      <h2 className="text-lg sm:text-xl md:text-[clamp(1.05rem,1.8cqw,1.85rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
+                        {project.decisions.headline}
+                      </h2>
+                      <p className="text-[11px] sm:text-xs text-slate-600 font-normal leading-relaxed mt-1">
+                        {project.decisions.description}
+                      </p>
+                    </div>
+
+                    {/* Interactive Option Buttons */}
+                    <div className="flex flex-col gap-1.5 pt-0.5">
+                      {project.decisions.options.map((opt, idx) => {
+                        const isSelected = selectedDecisionIdx === idx;
+                        return (
+                          <button
+                            key={opt.id}
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedDecisionIdx(idx);
+                            }}
+                            className={`w-full text-left p-2 sm:p-2.5 rounded-2xl border transition-all cursor-pointer flex flex-col gap-1 ${
+                              isSelected
+                                ? "bg-slate-900 text-white border-slate-900 shadow-md"
+                                : "bg-slate-100 hover:bg-slate-200/80 text-slate-800 border-slate-200"
+                            }`}
+                          >
+                            <div className="flex items-center justify-between gap-2 w-full">
+                              <span className="text-xs font-bold truncate">{opt.title}</span>
+                              <span
+                                className={`px-2 py-0.5 rounded-full text-[10px] font-bold shrink-0 ${
+                                  opt.chosen
+                                    ? "bg-emerald-400/25 text-emerald-300 border border-emerald-400/40"
+                                    : isSelected
+                                    ? "bg-white/20 text-white"
+                                    : "bg-slate-200 text-slate-600"
+                                }`}
+                              >
+                                {opt.tag}
+                              </span>
+                            </div>
+                            {isSelected && (
+                              <p className="text-[11px] text-white/85 leading-snug">
+                                {opt.outcome}
+                              </p>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div>
+                      <h2 className="text-lg sm:text-xl md:text-[clamp(1.05rem,1.8cqw,1.85rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
+                        Interactive 5-Step Student Pass Flow
+                      </h2>
+                      <p className="text-[11px] sm:text-xs text-slate-600 font-normal leading-relaxed mt-0.5">
+                        Select any step below to inspect the high-contrast mobile &amp; web screens inside the capsule viewer.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-1.5 pt-0.5">
+                      {project.prototypeSteps.map((step, idx) => {
+                        const isSelected = selectedProtoIdx === idx;
+                        return (
+                          <button
+                            key={step.title}
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedProtoIdx(idx);
+                            }}
+                            className={`w-full text-left p-2 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-2 ${
+                              isSelected
+                                ? "bg-slate-900 text-white border-slate-900 shadow-sm"
+                                : "bg-slate-100 hover:bg-slate-200/80 text-slate-800 border-slate-200"
+                            }`}
+                          >
+                            <span className="text-xs font-bold truncate">{step.title}</span>
+                            <span
+                              className={`px-2 py-0.5 rounded-full text-[10px] font-semibold shrink-0 ${
+                                isSelected
+                                  ? "bg-cyan-400/20 text-cyan-200 border border-cyan-300/30"
+                                  : "bg-slate-200 text-slate-600"
+                              }`}
+                            >
+                              {step.badge}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </>
+                )}
               </div>
 
-              {/* STATO OFF: Titolo a Destra */}
+              {/* OFF STATE: Title on the Right */}
               <div
                 className={`absolute top-0 bottom-0 right-[3%] sm:right-[4%] w-[42%] max-w-[42%] h-full flex flex-col items-center justify-center text-center px-2 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   !decisionsOn
@@ -639,18 +800,18 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               >
                 <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none space-y-1.5">
                   <span className="px-3 py-0.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-cyan-500/20 border border-cyan-300/30 text-cyan-200">
-                    Capitolo 02
+                    Chapter 02
                   </span>
                   <h3 className="text-center text-[clamp(1.15rem,2.3cqw,2.6rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
-                    Scelte &amp; Trade-off
+                    Decisions &amp; Flow
                   </h3>
                   <p className="text-xs sm:text-sm text-white/70 max-w-xs">
-                    Perché abbiamo scartato 2 alternative prima della soluzione finale
+                    Explore V1-V3 design iterations and the 5-step interactive student pass flow
                   </p>
                 </div>
               </div>
 
-              {/* KNOB CIRCOLARE */}
+              {/* CIRCULAR KNOB */}
               <div
                 className={`absolute top-[var(--knob-pad)] bottom-[var(--knob-pad)] left-[var(--knob-pad)] h-[calc(100%-2*var(--knob-pad))] aspect-square w-auto rounded-full overflow-visible ${
                   !decisionsToggledOnce
@@ -679,15 +840,59 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
 
                   {!decisionsOn ? (
                     <div className="relative z-10 flex flex-col items-center justify-center text-center p-4 space-y-2">
-                      <span className="w-14 h-14 rounded-full bg-slate-900 text-cyan-300 flex items-center justify-center text-xl font-extrabold shadow-md">
-                        A/B/C
+                      <span className="w-14 h-14 rounded-full bg-slate-900 text-cyan-300 flex items-center justify-center text-lg font-extrabold shadow-md">
+                        V1-V3
                       </span>
                       <span className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight">
-                        3 Opzioni Valutate
+                        3 Iterations &amp; 5 Screens
                       </span>
                       <span className="text-xs text-slate-500 max-w-[200px]">
-                        1 direzione scelta per massimizzare impatto e fattibilità
+                        From dense single-scroll wireframes to a 3-step MitID wizard
                       </span>
+                    </div>
+                  ) : decisionsViewMode === "prototype" && activeProtoStep ? (
+                    <div className="relative z-10 w-full h-full flex flex-col items-center justify-between py-2 px-3 text-white">
+                      <span className="px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-cyan-400/20 text-cyan-200 border border-cyan-300/35">
+                        {activeProtoStep.title} / {activeProtoStep.badge}
+                      </span>
+                      <div className="relative w-[82%] h-[68%] rounded-2xl overflow-hidden border border-white/25 bg-slate-950/65 shadow-2xl">
+                        <Image
+                          src={activeProtoStep.image}
+                          alt={activeProtoStep.title}
+                          fill
+                          unoptimized
+                          sizes="40vw"
+                          className="object-contain p-1.5"
+                        />
+                      </div>
+                      <p className="text-[10px] sm:text-[11px] text-white/90 text-center max-w-[82%] leading-snug bg-slate-950/75 px-3 py-1 rounded-full border border-white/15 truncate">
+                        {activeProtoStep.description}
+                      </p>
+                    </div>
+                  ) : activeDecision.image ? (
+                    <div className="relative z-10 w-full h-full flex flex-col items-center justify-between py-2 px-3 text-white">
+                      <span
+                        className={`px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                          activeDecision.chosen
+                            ? "bg-emerald-400/20 text-emerald-200 border border-emerald-300/40"
+                            : "bg-rose-400/20 text-rose-200 border border-rose-300/40"
+                        }`}
+                      >
+                        {activeDecision.tag}: {activeDecision.title}
+                      </span>
+                      <div className="relative w-[82%] h-[66%] rounded-2xl overflow-hidden border border-white/25 bg-slate-950/65 shadow-2xl">
+                        <Image
+                          src={activeDecision.image}
+                          alt={activeDecision.title}
+                          fill
+                          unoptimized
+                          sizes="40vw"
+                          className="object-contain p-1.5"
+                        />
+                      </div>
+                      <p className="text-[10px] sm:text-[11px] text-white/90 text-center max-w-[82%] leading-snug bg-slate-950/75 px-3 py-1 rounded-full border border-white/15 truncate">
+                        {activeDecision.imageCaption ?? activeDecision.constraint}
+                      </p>
                     </div>
                   ) : (
                     <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-4 max-w-[85%] space-y-2.5 text-white">
@@ -705,7 +910,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                       </h4>
                       <div className="p-3 rounded-2xl bg-black/30 border border-white/15 text-left space-y-1">
                         <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-300 block">
-                          Vincolo Tecnico / UX
+                          UX / Technical Constraint
                         </span>
                         <p className="text-xs text-white/90 leading-relaxed">
                           {activeDecision.constraint}
@@ -713,7 +918,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                       </div>
                       <div className="p-3 rounded-2xl bg-white/10 border border-white/20 text-left space-y-1">
                         <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-300 block">
-                          Esito nei Test
+                          Validation Outcome
                         </span>
                         <p className="text-xs text-white/95 leading-relaxed">
                           {activeDecision.outcome}
@@ -727,7 +932,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
           </section>
         </div>
 
-        {/* --- PILLOLA 4 (03 / PROCESSO, METODOLOGIA & DELIVERABLES) --- */}
+        {/* --- PILL 4 (03 / PROCESS, CRAFT & DELIVERABLES) --- */}
         <div
           ref={card4Ref}
           className="warp-card-node capsule-card-wrapper relative w-full h-[100dvh] shrink-0 flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-40"
@@ -743,7 +948,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               role="switch"
               aria-checked={processOn}
               tabIndex={0}
-              aria-label="Attiva dettagli su Processo e Team"
+              aria-label="Toggle Process and Craft details"
               onClick={() => {
                 setProcessToggledOnce(true);
                 setProcessOn((prev) => !prev);
@@ -767,7 +972,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                   : "bg-white shadow-none"
               }`}
             >
-              {/* STATO ON: Fasi e Ruoli a Sinistra */}
+              {/* STATE ON: Phases & Team on Left */}
               <div
                 className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[38%] max-w-[38%] my-auto h-fit max-h-[90%] flex flex-col justify-center px-1 sm:px-3 py-1 gap-2 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   processOn
@@ -777,15 +982,15 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               >
                 <div>
                   <span className="text-[10px] sm:text-xs font-bold text-blue-600 tracking-wider uppercase mb-0.5 block">
-                    03 / Metodologia &amp; Team ({project.timeline})
+                    03 / Process &amp; Craft ({project.timeline})
                   </span>
-                  <h2 className="text-lg sm:text-xl md:text-[clamp(1.1rem,1.9cqw,2rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
+                  <h2 className="text-lg sm:text-xl md:text-[clamp(1.1rem,1.85cqw,1.85rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
                     {project.process.headline}
                   </h2>
                 </div>
 
-                {/* Selettore 4 Fasi */}
-                <div className="grid grid-cols-2 gap-1.5 pt-0.5">
+                {/* Phase Selector */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 pt-0.5">
                   {project.process.phases.map((phase, idx) => {
                     const active = selectedPhaseIdx === idx;
                     return (
@@ -795,6 +1000,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                         onClick={(e) => {
                           e.stopPropagation();
                           setSelectedPhaseIdx(idx);
+                          setProcessKnobView("artifact");
                         }}
                         className={`p-2 rounded-xl border text-left transition-all cursor-pointer ${
                           active
@@ -802,10 +1008,10 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                             : "bg-slate-100 hover:bg-slate-200 text-slate-800 border-slate-200"
                         }`}
                       >
-                        <span className="text-[10px] font-mono font-bold text-cyan-500 block">
-                          FASE {phase.step}
+                        <span className="text-[9px] font-mono font-bold text-cyan-500 block">
+                          PHASE {phase.step}
                         </span>
-                        <span className="text-xs font-bold line-clamp-1">
+                        <span className="text-[11px] font-bold line-clamp-1">
                           {phase.title}
                         </span>
                       </button>
@@ -833,7 +1039,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                 </div>
               </div>
 
-              {/* STATO OFF: Titolo a Destra */}
+              {/* STATE OFF: Title on Right */}
               <div
                 className={`absolute top-0 bottom-0 right-[3%] sm:right-[4%] w-[42%] max-w-[42%] h-full flex flex-col items-center justify-center text-center px-2 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   !processOn
@@ -843,18 +1049,18 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               >
                 <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none space-y-1.5">
                   <span className="px-3 py-0.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-sky-500/20 border border-sky-300/30 text-sky-200">
-                    Capitolo 03
+                    Chapter 03
                   </span>
                   <h3 className="text-center text-[clamp(1.15rem,2.3cqw,2.6rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
-                    Processo &amp; Team
+                    Process &amp; Craft
                   </h3>
                   <p className="text-xs sm:text-sm text-white/70 max-w-xs">
-                    Le 4 fasi operative, i deliverables e la divisione dei ruoli
+                    Research artifacts, personas, wireframes, design system, and team roles
                   </p>
                 </div>
               </div>
 
-              {/* KNOB CIRCOLARE */}
+              {/* CIRCULAR KNOB */}
               <div
                 className={`absolute top-[var(--knob-pad)] bottom-[var(--knob-pad)] left-[var(--knob-pad)] h-[calc(100%-2*var(--knob-pad))] aspect-square w-auto rounded-full overflow-visible ${
                   !processToggledOnce
@@ -884,20 +1090,81 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                   {!processOn ? (
                     <div className="relative z-10 flex flex-col items-center justify-center text-center p-4 space-y-2">
                       <span className="w-14 h-14 rounded-full bg-slate-900 text-cyan-300 flex items-center justify-center text-xl font-extrabold shadow-md">
-                        01-04
+                        01-0{project.process.phases.length}
                       </span>
                       <span className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight">
-                        {project.timeline} di Sprint
+                        {project.timeline} Sprint
                       </span>
                       <span className="text-xs text-slate-500 max-w-[200px]">
-                        {project.deliverables.length} Deliverables chiave rilasciati in produzione
+                        {project.deliverables.length} Key deliverables shipped to production
+                      </span>
+                    </div>
+                  ) : activePhase.image && processKnobView === "artifact" ? (
+                    <div className="relative z-10 flex flex-col items-center justify-between w-full h-full py-3 sm:py-5 px-4 text-white">
+                      {/* Switch between Artifact Image and Deliverables List */}
+                      <div
+                        className="flex items-center gap-1 p-1 rounded-full bg-black/45 border border-white/20 backdrop-blur-md z-20"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => setProcessKnobView("artifact")}
+                          className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-cyan-400 text-slate-950 shadow-xs cursor-pointer"
+                        >
+                          Phase {activePhase.step} Artifact
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setProcessKnobView("deliverables")}
+                          className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-white/80 hover:text-white cursor-pointer"
+                        >
+                          Deliverables ({project.deliverables.length})
+                        </button>
+                      </div>
+
+                      <div className="relative w-[82%] h-[62%] rounded-xl overflow-hidden border border-white/25 bg-slate-950/60 shadow-2xl">
+                        <Image
+                          src={activePhase.image}
+                          alt={activePhase.title}
+                          fill
+                          unoptimized
+                          sizes="(max-width: 768px) 80vw, 40vw"
+                          className="object-contain p-1.5"
+                        />
+                      </div>
+
+                      <span className="px-3 py-1 rounded-full bg-black/50 border border-white/15 text-[10px] font-medium text-cyan-200 text-center max-w-[82%] line-clamp-1">
+                        {activePhase.imageCaption || activePhase.title}
                       </span>
                     </div>
                   ) : (
                     <div className="relative z-10 flex flex-col items-center justify-center px-6 py-4 max-w-[85%] space-y-2 text-white">
-                      <span className="px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-cyan-400/20 text-cyan-200 border border-cyan-300/30">
-                        Deliverables Rilasciati
-                      </span>
+                      {activePhase.image && (
+                        <div
+                          className="flex items-center gap-1 p-1 rounded-full bg-black/45 border border-white/20 backdrop-blur-md mb-1"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <button
+                            type="button"
+                            onClick={() => setProcessKnobView("artifact")}
+                            className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-white/80 hover:text-white cursor-pointer"
+                          >
+                            Phase {activePhase.step} Artifact
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setProcessKnobView("deliverables")}
+                            className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-cyan-400 text-slate-950 shadow-xs cursor-pointer"
+                          >
+                            Deliverables ({project.deliverables.length})
+                          </button>
+                        </div>
+                      )}
+                      {!activePhase.image && (
+                        <span className="px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-cyan-400/20 text-cyan-200 border border-cyan-300/30">
+                          Shipped Deliverables
+                        </span>
+                      )}
                       <div className="space-y-1.5 w-full text-left">
                         {project.deliverables.map((deliv, idx) => (
                           <div
@@ -917,7 +1184,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
           </section>
         </div>
 
-        {/* --- PILLOLA 5 (04 / IMPATTO, KPI & TESTIMONIAL) --- */}
+        {/* --- PILL 5 (04 / IMPACT, KPIS & TESTIMONIAL) --- */}
         <div
           ref={card5Ref}
           className="warp-card-node capsule-card-wrapper relative w-full h-[100dvh] shrink-0 flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-50"
@@ -933,7 +1200,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               role="switch"
               aria-checked={impactOn}
               tabIndex={0}
-              aria-label="Attiva dettagli su Impatto e KPI"
+              aria-label="Toggle Impact and KPIs details"
               onClick={() => {
                 setImpactToggledOnce(true);
                 setImpactOn((prev) => !prev);
@@ -957,7 +1224,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                   : "bg-white shadow-none"
               }`}
             >
-              {/* STATO ON: Risultati e Highlights a Sinistra */}
+              {/* STATE ON: Results & Highlights on Left */}
               <div
                 className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[38%] max-w-[38%] my-auto h-fit max-h-[90%] flex flex-col justify-center px-1 sm:px-3 py-1 gap-2 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   impactOn
@@ -967,7 +1234,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               >
                 <div>
                   <span className="text-[10px] sm:text-xs font-bold text-emerald-600 tracking-wider uppercase mb-0.5 block">
-                    04 / Impatto Misurabile
+                    04 / Verified Impact
                   </span>
                   <h2 className="text-lg sm:text-xl md:text-[clamp(1.1rem,1.9cqw,2rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
                     {project.results.headline}
@@ -1005,7 +1272,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                 </div>
               </div>
 
-              {/* STATO OFF: Titolo a Destra */}
+              {/* STATE OFF: Title on Right */}
               <div
                 className={`absolute top-0 bottom-0 right-[3%] sm:right-[4%] w-[42%] max-w-[42%] h-full flex flex-col items-center justify-center text-center px-2 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   !impactOn
@@ -1015,18 +1282,18 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               >
                 <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none space-y-1.5">
                   <span className="px-3 py-0.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-emerald-500/20 border border-emerald-300/30 text-emerald-200">
-                    Capitolo 04
+                    Chapter 04
                   </span>
                   <h3 className="text-center text-[clamp(1.15rem,2.3cqw,2.6rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
-                    Impatto &amp; KPI
+                    Impact &amp; KPIs
                   </h3>
                   <p className="text-xs sm:text-sm text-white/70 max-w-xs">
-                    Metriche di business e feedback degli stakeholder
+                    Measured usability gains and team feedback
                   </p>
                 </div>
               </div>
 
-              {/* KNOB CIRCOLARE */}
+              {/* CIRCULAR KNOB */}
               <div
                 className={`absolute top-[var(--knob-pad)] bottom-[var(--knob-pad)] left-[var(--knob-pad)] h-[calc(100%-2*var(--knob-pad))] aspect-square w-auto rounded-full overflow-visible ${
                   !impactToggledOnce
@@ -1066,27 +1333,76 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                       </span>
                     </div>
                   ) : project.results.testimonial ? (
-                    <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-4 max-w-[85%] space-y-3 text-white">
-                      <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-cyan-300 shadow-lg">
-                        <Image
-                          src={project.results.testimonial.avatar}
-                          alt={project.results.testimonial.author}
-                          fill
-                          unoptimized
-                          className="object-cover"
-                        />
-                      </div>
-                      <p className="text-xs sm:text-sm italic text-white/95 leading-relaxed">
-                        &ldquo;{project.results.testimonial.quote}&rdquo;
-                      </p>
-                      <div>
-                        <span className="text-xs font-bold text-white block">
-                          {project.results.testimonial.author}
-                        </span>
-                        <span className="text-[11px] text-cyan-300">
-                          {project.results.testimonial.role}
-                        </span>
-                      </div>
+                    <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-4 max-w-[88%] space-y-2.5 text-white">
+                      {project.results.testimonial.teamPhoto && (
+                        <div
+                          className="flex items-center gap-1 p-1 rounded-full bg-black/45 border border-white/20 backdrop-blur-md"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <button
+                            type="button"
+                            onClick={() => setShowTeamPhoto(false)}
+                            className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider cursor-pointer transition-all ${
+                              !showTeamPhoto
+                                ? "bg-cyan-400 text-slate-950 shadow-xs"
+                                : "text-white/80 hover:text-white"
+                            }`}
+                          >
+                            Endorsement
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setShowTeamPhoto(true)}
+                            className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider cursor-pointer transition-all ${
+                              showTeamPhoto
+                                ? "bg-cyan-400 text-slate-950 shadow-xs"
+                                : "text-white/80 hover:text-white"
+                            }`}
+                          >
+                            Team Photo
+                          </button>
+                        </div>
+                      )}
+
+                      {showTeamPhoto && project.results.testimonial.teamPhoto ? (
+                        <div className="flex flex-col items-center space-y-2 w-full">
+                          <div className="relative w-44 h-44 sm:w-56 sm:h-56 rounded-2xl overflow-hidden border-2 border-cyan-300 shadow-2xl">
+                            <Image
+                              src={project.results.testimonial.teamPhoto}
+                              alt={`${project.title} Team`}
+                              fill
+                              unoptimized
+                              className="object-cover"
+                            />
+                          </div>
+                          <span className="text-[11px] font-semibold text-cyan-200">
+                            Herald &amp; {project.results.testimonial.author}
+                          </span>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-cyan-300 shadow-lg">
+                            <Image
+                              src={project.results.testimonial.avatar}
+                              alt={project.results.testimonial.author}
+                              fill
+                              unoptimized
+                              className="object-cover"
+                            />
+                          </div>
+                          <p className="text-xs sm:text-sm italic text-white/95 leading-relaxed">
+                            &ldquo;{project.results.testimonial.quote}&rdquo;
+                          </p>
+                          <div>
+                            <span className="text-xs font-bold text-white block">
+                              {project.results.testimonial.author}
+                            </span>
+                            <span className="text-[11px] text-cyan-300">
+                              {project.results.testimonial.role}
+                            </span>
+                          </div>
+                        </>
+                      )}
                     </div>
                   ) : (
                     <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-4 max-w-[85%] space-y-3 text-white">
@@ -1106,7 +1422,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
           </section>
         </div>
 
-        {/* --- PILLOLA 6 (05 / RETROSPETTIVA & LEARNINGS) --- */}
+        {/* --- PILL 6 (05 / RETROSPECTIVE & LEARNINGS) --- */}
         <div
           ref={card6Ref}
           className="warp-card-node capsule-card-wrapper relative w-full h-[100dvh] shrink-0 flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[60]"
@@ -1122,7 +1438,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               role="switch"
               aria-checked={learningsOn}
               tabIndex={0}
-              aria-label="Attiva dettagli su Retrospettiva e Learnings"
+              aria-label="Toggle Retrospective and Learnings details"
               onClick={() => {
                 setLearningsToggledOnce(true);
                 setLearningsOn((prev) => !prev);
@@ -1146,7 +1462,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                   : "bg-white shadow-none"
               }`}
             >
-              {/* STATO ON: Switch Cosa ha funzionato / Errori superati */}
+              {/* STATE ON: What Worked vs Mid-Sprint Pivots */}
               <div
                 className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[38%] max-w-[38%] my-auto h-fit max-h-[90%] flex flex-col justify-center px-1 sm:px-3 py-1 gap-2.5 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   learningsOn
@@ -1156,10 +1472,10 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               >
                 <div>
                   <span className="text-[10px] sm:text-xs font-bold text-amber-600 tracking-wider uppercase mb-0.5 block">
-                    05 / Retrospettiva &amp; Trasparenza
+                    05 / Retrospective &amp; Pivots
                   </span>
                   <h2 className="text-lg sm:text-xl md:text-[clamp(1.1rem,1.9cqw,2rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
-                    Cosa ha funzionato vs Pivot in corsa
+                    What Worked vs Mid-Sprint Pivots
                   </h2>
                 </div>
 
@@ -1177,7 +1493,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                         : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                     }`}
                   >
-                    ✓ Cosa ha funzionato
+                    ✓ What Worked
                   </button>
                   <button
                     type="button"
@@ -1191,7 +1507,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                         : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                     }`}
                   >
-                    ! Errori &amp; Pivot
+                    ! Mistakes &amp; Pivots
                   </button>
                 </div>
 
@@ -1214,7 +1530,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                 </div>
               </div>
 
-              {/* STATO OFF: Titolo a Destra */}
+              {/* STATE OFF: Title on Right */}
               <div
                 className={`absolute top-0 bottom-0 right-[3%] sm:right-[4%] w-[42%] max-w-[42%] h-full flex flex-col items-center justify-center text-center px-2 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   !learningsOn
@@ -1224,18 +1540,18 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               >
                 <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none space-y-1.5">
                   <span className="px-3 py-0.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-amber-500/20 border border-amber-300/30 text-amber-200">
-                    Capitolo 05
+                    Chapter 05
                   </span>
                   <h3 className="text-center text-[clamp(1.15rem,2.3cqw,2.6rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
-                    Retrospettiva
+                    Retrospective
                   </h3>
                   <p className="text-xs sm:text-sm text-white/70 max-w-xs">
-                    Ipotesi validate, errori commessi e lezioni apprese
+                    Validated hypotheses, early mistakes, and key lessons learned
                   </p>
                 </div>
               </div>
 
-              {/* KNOB CIRCOLARE */}
+              {/* CIRCULAR KNOB */}
               <div
                 className={`absolute top-[var(--knob-pad)] bottom-[var(--knob-pad)] left-[var(--knob-pad)] h-[calc(100%-2*var(--knob-pad))] aspect-square w-auto rounded-full overflow-visible ${
                   !learningsToggledOnce
@@ -1268,16 +1584,37 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                         ✓ / !
                       </span>
                       <span className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight">
-                        Dietro le Quinte
+                        Behind the Scenes
                       </span>
                       <span className="text-xs text-slate-500 max-w-[200px]">
-                        Trasparenza su ciò che abbiamo dovuto riprogettare
+                        Candid look at what we had to rethink mid-sprint
+                      </span>
+                    </div>
+                  ) : project.learnings.pivotImage ? (
+                    <div className="relative z-10 flex flex-col items-center justify-between w-full h-full py-4 sm:py-6 px-4 text-white">
+                      <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-400/20 text-amber-200 border border-amber-300/35">
+                        Key Design Pivot
+                      </span>
+
+                      <div className="relative w-[82%] h-[60%] rounded-xl overflow-hidden border border-white/25 bg-slate-950/60 shadow-2xl">
+                        <Image
+                          src={project.learnings.pivotImage}
+                          alt="Wireframes and Design Pivot"
+                          fill
+                          unoptimized
+                          sizes="(max-width: 768px) 80vw, 40vw"
+                          className="object-contain p-1.5"
+                        />
+                      </div>
+
+                      <span className="px-3 py-1 rounded-full bg-black/50 border border-white/15 text-[10px] font-medium text-amber-200 text-center max-w-[82%] line-clamp-1">
+                        {project.learnings.pivotCaption || project.learnings.whatCausedErrors[0]}
                       </span>
                     </div>
                   ) : (
                     <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-4 max-w-[85%] space-y-3 text-white">
                       <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-amber-400/20 text-amber-200 border border-amber-300/35">
-                        Pivot Cruciale di Progetto
+                        Key Project Pivot
                       </span>
                       <p className="text-xs sm:text-sm text-white/95 leading-relaxed">
                         {project.learnings.whatCausedErrors[0]}
@@ -1290,7 +1627,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
           </section>
         </div>
 
-        {/* --- PILLOLA 7 (06 / PROSSIMO PROGETTO & CONTATTI) --- */}
+        {/* --- PILL 7 (06 / NEXT PROJECT & LINKS) --- */}
         <div
           ref={card7Ref}
           className="warp-card-node capsule-card-wrapper relative w-full h-[100dvh] shrink-0 flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[70]"
@@ -1306,7 +1643,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               role="switch"
               aria-checked={nextOn}
               tabIndex={0}
-              aria-label="Attiva dettagli su Prossimo Progetto"
+              aria-label="Toggle Next Project details"
               onClick={() => {
                 setNextToggledOnce(true);
                 setNextOn((prev) => !prev);
@@ -1330,7 +1667,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                   : "bg-white shadow-none"
               }`}
             >
-              {/* STATO ON: CTA Prossimo Progetto + Sito Live + Home */}
+              {/* STATE ON: Next Project CTA + Live Site + Home */}
               <div
                 className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[36%] max-w-[36%] my-auto h-fit max-h-[90%] flex flex-col justify-center px-1 sm:px-3 py-1 gap-3 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   nextOn
@@ -1340,7 +1677,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               >
                 <div>
                   <span className="text-[10px] sm:text-xs font-bold text-blue-600 tracking-wider uppercase mb-0.5 block">
-                    06 / Continua l&apos;esplorazione ({project.nextProject.badge})
+                    06 / Continue Exploring ({project.nextProject.badge})
                   </span>
                   <h2 className="text-xl sm:text-2xl md:text-[clamp(1.35rem,2.4cqw,2.6rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
                     {project.nextProject.title}
@@ -1356,7 +1693,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                     onClick={(e) => e.stopPropagation()}
                     className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-slate-900 hover:bg-black text-white text-xs font-semibold shadow-md transition-all cursor-pointer"
                   >
-                    <span>Apri Case Study</span>
+                    <span>Open Case Study</span>
                     <span>↗</span>
                   </Link>
 
@@ -1365,7 +1702,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                     onClick={(e) => e.stopPropagation()}
                     className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-900 text-xs font-semibold transition-all cursor-pointer"
                   >
-                    <span>← Torna alla Home</span>
+                    <span>← Back to Home</span>
                   </Link>
 
                   {project.liveUrl && (
@@ -1376,13 +1713,13 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                       onClick={(e) => e.stopPropagation()}
                       className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-slate-300 hover:border-slate-900 text-slate-800 text-xs font-semibold transition-all cursor-pointer"
                     >
-                      <span>Sito Live ↗</span>
+                      <span>Live Website ↗</span>
                     </a>
                   )}
                 </div>
               </div>
 
-              {/* STATO OFF: Titolo a Destra */}
+              {/* STATE OFF: Title on Right */}
               <div
                 className={`absolute top-0 bottom-0 right-[3%] sm:right-[4%] w-[42%] max-w-[42%] h-full flex flex-col items-center justify-center text-center px-2 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                   !nextOn
@@ -1392,7 +1729,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               >
                 <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none space-y-1.5">
                   <span className="px-3 py-0.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-cyan-500/20 border border-cyan-300/30 text-cyan-200">
-                    Prossimo Case Study
+                    Next Case Study
                   </span>
                   <h3 className="text-center text-[clamp(1.15rem,2.3cqw,2.6rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                     {project.nextProject.title}
@@ -1403,7 +1740,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                 </div>
               </div>
 
-              {/* KNOB CIRCOLARE CON MOCKUP PROSSIMO PROGETTO */}
+              {/* CIRCULAR KNOB WITH NEXT PROJECT MOCKUP */}
               <div
                 className={`absolute top-[var(--knob-pad)] bottom-[var(--knob-pad)] left-[var(--knob-pad)] h-[calc(100%-2*var(--knob-pad))] aspect-square w-auto rounded-full overflow-visible ${
                   !nextToggledOnce
@@ -1447,12 +1784,12 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
       </main>
 
       {/* ================================================================= */}
-      {/* MOBILE VIEW (< 768px): PILLOLE IMPILATE IDENTICHE A MOBILEVIEW    */}
+      {/* MOBILE VIEW (< 768px): STACKED 2:1 CAPSULES                       */}
       {/* ================================================================= */}
       <div className="md:hidden relative z-10 flex flex-col gap-5 px-3 pt-20 pb-14 max-w-lg mx-auto">
-        {/* 3 Hero Glass Capsules come in MobileView */}
+        {/* 3 Hero Glass Capsules */}
         <div id="m-proj-hero" className="flex flex-col gap-4">
-          {/* Pillola 1: Badge, Anno & Titolo */}
+          {/* Capsule 1: Badge, Year & Title */}
           <div className="relative w-full aspect-[2/1] rounded-full border-[2px] border-white/30 bg-white/[0.10] backdrop-blur-xl shadow-[0_20px_50px_rgba(0,10,30,0.5),_inset_0_1.5px_2px_rgba(255,255,255,0.4)] flex flex-col items-center justify-center px-8 text-center overflow-hidden">
             <span className="px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-cyan-400/20 border border-cyan-300/30 text-cyan-200 mb-1">
               {project.badge} / {project.year}
@@ -1463,7 +1800,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
             <p className="text-xs text-white/80 mt-1 line-clamp-2">{project.tagline}</p>
           </div>
 
-          {/* Pillola 2: Sintesi & Ruolo */}
+          {/* Capsule 2: Summary & Role */}
           <div className="relative w-full aspect-[2/1] rounded-full border-[2px] border-white/30 bg-white/[0.10] backdrop-blur-xl shadow-[0_20px_50px_rgba(0,10,30,0.5),_inset_0_1.5px_2px_rgba(255,255,255,0.4)] flex flex-col items-center justify-center px-7 text-center overflow-hidden">
             <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-300 mb-1">
               {project.role}
@@ -1473,7 +1810,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
             </p>
           </div>
 
-          {/* Pillola 3: KPI Principali */}
+          {/* Capsule 3: Key Metrics */}
           <div className="relative w-full aspect-[2/1] rounded-full border-[2px] border-white/30 bg-white/[0.10] backdrop-blur-xl shadow-[0_20px_50px_rgba(0,10,30,0.5),_inset_0_1.5px_2px_rgba(255,255,255,0.4)] flex items-center justify-around px-6 text-center overflow-hidden">
             {project.metrics.map((m, idx) => (
               <div key={idx} className="flex flex-col items-center">
@@ -1488,7 +1825,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
           </div>
         </div>
 
-        {/* Mobile Switch Pill 1: Il Problema */}
+        {/* Mobile Switch Pill 1: The Problem */}
         <section
           id="m-proj-problem"
           role="switch"
@@ -1509,7 +1846,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               : "border-white bg-white shadow-[0_20px_50px_rgba(0,10,30,0.35)]"
           }`}
         >
-          {/* Stato OFF: testo a destra */}
+          {/* State OFF: text on right */}
           <div
             className={`absolute top-0 bottom-0 right-3 w-[46%] flex flex-col items-center justify-center text-center px-2 transition-all duration-500 ${
               !mProblemOn
@@ -1518,15 +1855,15 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
             }`}
           >
             <span className="text-[10px] font-bold uppercase tracking-wider text-rose-300">
-              01 / Sfida
+              01 / Challenge
             </span>
             <h2 className="text-base font-bold text-white leading-tight mt-0.5">
-              Il Problema
+              The Problem
             </h2>
-            <span className="text-[10px] text-white/70 mt-1">Tocca per aprire</span>
+            <span className="text-[10px] text-white/70 mt-1">Tap to open</span>
           </div>
 
-          {/* Stato ON: testo a sinistra */}
+          {/* State ON: text on left */}
           <div
             className={`absolute top-0 bottom-0 left-4 w-[46%] flex flex-col justify-center pr-2 overflow-y-auto [scrollbar-width:none] py-3 transition-all duration-500 ${
               mProblemOn
@@ -1535,7 +1872,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
             }`}
           >
             <span className="text-[9px] font-bold uppercase tracking-wider text-rose-600">
-              01 / Il Problema
+              01 / The Problem
             </span>
             <h3 className="text-xs font-bold text-slate-900 leading-tight mt-0.5">
               {project.problem.headline}
@@ -1545,7 +1882,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
             </p>
           </div>
 
-          {/* Knob Circolare Mobile */}
+          {/* Mobile Circular Knob */}
           <div
             className={`absolute top-2 bottom-2 left-2 h-[calc(100%-16px)] aspect-square rounded-full ${
               !mProblemOnce
@@ -1571,7 +1908,11 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               )}
               <div className="relative z-10 w-full h-full">
                 <Image
-                  src={project.heroMockup}
+                  src={
+                    mProblemOn && project.problem.beforeImage
+                      ? project.problem.beforeImage
+                      : project.heroMockup
+                  }
                   alt={project.title}
                   fill
                   unoptimized
@@ -1582,7 +1923,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
           </div>
         </section>
 
-        {/* Mobile Switch Pill 2: Scelte & Trade-off */}
+        {/* Mobile Switch Pill 2: Decisions & Flow */}
         <section
           id="m-proj-decisions"
           role="switch"
@@ -1611,12 +1952,12 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
             }`}
           >
             <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-300">
-              02 / Architettura
+              02 / Architecture
             </span>
             <h2 className="text-base font-bold text-white leading-tight mt-0.5">
-              Scelte &amp; Trade-off
+              Decisions &amp; Flow
             </h2>
-            <span className="text-[10px] text-white/70 mt-1">Tocca per aprire</span>
+            <span className="text-[10px] text-white/70 mt-1">Tap to open</span>
           </div>
 
           <div
@@ -1627,7 +1968,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
             }`}
           >
             <span className="text-[9px] font-bold uppercase tracking-wider text-blue-600">
-              Scelta Vincente
+              Winning Direction
             </span>
             <h3 className="text-xs font-bold text-slate-900 leading-tight mt-0.5">
               {project.decisions.options[2]?.title}
@@ -1660,27 +2001,39 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                   zoom={0.65}
                 />
               )}
-              <div className="relative z-10 flex flex-col items-center justify-center px-2">
-                <span
-                  className={`text-xs font-extrabold ${
-                    !mDecisionsOn ? "text-slate-900" : "text-cyan-300"
-                  }`}
-                >
-                  3 Opzioni
-                </span>
-                <span
-                  className={`text-[10px] mt-0.5 leading-tight ${
-                    !mDecisionsOn ? "text-slate-500" : "text-white/90"
-                  }`}
-                >
-                  2 scartate nei test utenti
-                </span>
-              </div>
+              {mDecisionsOn && project.decisions.options[2]?.image ? (
+                <div className="relative z-10 w-full h-full">
+                  <Image
+                    src={project.decisions.options[2].image}
+                    alt={project.decisions.options[2].title}
+                    fill
+                    unoptimized
+                    className="object-contain p-2"
+                  />
+                </div>
+              ) : (
+                <div className="relative z-10 flex flex-col items-center justify-center px-2">
+                  <span
+                    className={`text-xs font-extrabold ${
+                      !mDecisionsOn ? "text-slate-900" : "text-cyan-300"
+                    }`}
+                  >
+                    V1 to V3
+                  </span>
+                  <span
+                    className={`text-[10px] mt-0.5 leading-tight ${
+                      !mDecisionsOn ? "text-slate-500" : "text-white/90"
+                    }`}
+                  >
+                    3 design iterations tested
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </section>
 
-        {/* Mobile Switch Pill 3: Processo & Team */}
+        {/* Mobile Switch Pill 3: Process & Craft */}
         <section
           id="m-proj-process"
           role="switch"
@@ -1709,10 +2062,10 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
             }`}
           >
             <span className="text-[10px] font-bold uppercase tracking-wider text-sky-300">
-              03 / Metodo
+              03 / Method
             </span>
             <h2 className="text-base font-bold text-white leading-tight mt-0.5">
-              Processo &amp; Team
+              Process &amp; Craft
             </h2>
             <span className="text-[10px] text-white/70 mt-1">{project.timeline}</span>
           </div>
@@ -1758,27 +2111,39 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                   zoom={0.65}
                 />
               )}
-              <div className="relative z-10 flex flex-col items-center justify-center px-2">
-                <span
-                  className={`text-xs font-extrabold ${
-                    !mProcessOn ? "text-slate-900" : "text-cyan-300"
-                  }`}
-                >
-                  4 Fasi UX
-                </span>
-                <span
-                  className={`text-[10px] mt-0.5 leading-tight ${
-                    !mProcessOn ? "text-slate-500" : "text-white/90"
-                  }`}
-                >
-                  {project.timeline}
-                </span>
-              </div>
+              {mProcessOn && project.process.phases[0]?.image ? (
+                <div className="relative z-10 w-full h-full">
+                  <Image
+                    src={project.process.phases[0].image}
+                    alt={project.process.phases[0].title}
+                    fill
+                    unoptimized
+                    className="object-contain p-2"
+                  />
+                </div>
+              ) : (
+                <div className="relative z-10 flex flex-col items-center justify-center px-2">
+                  <span
+                    className={`text-xs font-extrabold ${
+                      !mProcessOn ? "text-slate-900" : "text-cyan-300"
+                    }`}
+                  >
+                    {project.process.phases.length} UX Phases
+                  </span>
+                  <span
+                    className={`text-[10px] mt-0.5 leading-tight ${
+                      !mProcessOn ? "text-slate-500" : "text-white/90"
+                    }`}
+                  >
+                    {project.timeline}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </section>
 
-        {/* Mobile Switch Pill 4: Impatto & KPI */}
+        {/* Mobile Switch Pill 4: Impact & KPIs */}
         <section
           id="m-proj-impact"
           role="switch"
@@ -1807,12 +2172,12 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
             }`}
           >
             <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-300">
-              04 / Risultati
+              04 / Results
             </span>
             <h2 className="text-base font-bold text-white leading-tight mt-0.5">
-              Impatto &amp; KPI
+              Impact &amp; KPIs
             </h2>
-            <span className="text-[10px] text-white/70 mt-1">Tocca per i risultati</span>
+            <span className="text-[10px] text-white/70 mt-1">Tap for outcomes</span>
           </div>
 
           <div
@@ -1823,7 +2188,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
             }`}
           >
             <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-600">
-              Risultato Chiave
+              Key Outcome
             </span>
             <h3 className="text-xs font-bold text-slate-900 leading-tight mt-0.5">
               {project.results.highlights[0]}
@@ -1876,7 +2241,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
           </div>
         </section>
 
-        {/* Mobile Switch Pill 5: Retrospettiva */}
+        {/* Mobile Switch Pill 5: Retrospective */}
         <section
           id="m-proj-learnings"
           role="switch"
@@ -1908,9 +2273,9 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               05 / Learnings
             </span>
             <h2 className="text-base font-bold text-white leading-tight mt-0.5">
-              Retrospettiva
+              Retrospective
             </h2>
-            <span className="text-[10px] text-white/70 mt-1">Cosa abbiamo imparato</span>
+            <span className="text-[10px] text-white/70 mt-1">What we learned</span>
           </div>
 
           <div
@@ -1921,7 +2286,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
             }`}
           >
             <span className="text-[9px] font-bold uppercase tracking-wider text-amber-600">
-              Pivot in corsa
+              Mid-Sprint Pivot
             </span>
             <p className="text-[10px] text-slate-700 leading-snug mt-0.5">
               {project.learnings.whatCausedErrors[0]}
@@ -1951,27 +2316,39 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
                   zoom={0.65}
                 />
               )}
-              <div className="relative z-10 flex flex-col items-center justify-center px-2">
-                <span
-                  className={`text-xs font-extrabold ${
-                    !mLearningsOn ? "text-slate-900" : "text-amber-300"
-                  }`}
-                >
-                  ✓ / !
-                </span>
-                <span
-                  className={`text-[10px] mt-0.5 leading-tight ${
-                    !mLearningsOn ? "text-slate-500" : "text-white/90"
-                  }`}
-                >
-                  Dietro le quinte
-                </span>
-              </div>
+              {mLearningsOn && project.learnings.pivotImage ? (
+                <div className="relative z-10 w-full h-full">
+                  <Image
+                    src={project.learnings.pivotImage}
+                    alt="Wireframes and Pivot"
+                    fill
+                    unoptimized
+                    className="object-contain p-2"
+                  />
+                </div>
+              ) : (
+                <div className="relative z-10 flex flex-col items-center justify-center px-2">
+                  <span
+                    className={`text-xs font-extrabold ${
+                      !mLearningsOn ? "text-slate-900" : "text-amber-300"
+                    }`}
+                  >
+                    ✓ / !
+                  </span>
+                  <span
+                    className={`text-[10px] mt-0.5 leading-tight ${
+                      !mLearningsOn ? "text-slate-500" : "text-white/90"
+                    }`}
+                  >
+                    Behind the scenes
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </section>
 
-        {/* Mobile Switch Pill 6: Prossimo Progetto */}
+        {/* Mobile Switch Pill 6: Next Project */}
         <section
           id="m-proj-next"
           role="switch"
@@ -2000,12 +2377,12 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
             }`}
           >
             <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-300">
-              Prossimo
+              Next Case Study
             </span>
             <h2 className="text-base font-bold text-white leading-tight mt-0.5">
               {project.nextProject.title}
             </h2>
-            <span className="text-[10px] text-white/70 mt-1">Tocca per aprire</span>
+            <span className="text-[10px] text-white/70 mt-1">Tap to open</span>
           </div>
 
           <div
@@ -2023,7 +2400,7 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
               onClick={(e) => e.stopPropagation()}
               className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-slate-900 text-white text-[10px] font-bold w-fit"
             >
-              Apri Progetto ↗
+              Open Case Study ↗
             </Link>
             <Link
               href="/"
