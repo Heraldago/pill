@@ -4,7 +4,16 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { SECTIONS } from "@/data/portfolio";
 
-export function usePortfolioScroll() {
+export interface ScrollSectionItem {
+  id: string;
+  label: string;
+}
+
+export function usePortfolioScroll(
+  customSections?: readonly ScrollSectionItem[],
+  customMobileTargetMap?: Record<number, string>
+) {
+  const sections = customSections ?? SECTIONS;
   const pinnedContainerRef = useRef<HTMLDivElement>(null);
   const card1Ref = useRef<HTMLDivElement>(null);
   const card2Ref = useRef<HTMLDivElement>(null);
@@ -22,13 +31,13 @@ export function usePortfolioScroll() {
   const transitionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const navigateToSection = useCallback((index: number, onDone?: () => void) => {
-    const clampedIndex = Math.min(SECTIONS.length - 1, Math.max(0, index));
+    const clampedIndex = Math.min(sections.length - 1, Math.max(0, index));
 
     // Supporto per mobile (< 768px): scroll nativo fluido verso la sezione corrispondente
     if (typeof window !== "undefined" && window.innerWidth < 768) {
       currentStepRef.current = clampedIndex;
       setActiveSectionIndex(clampedIndex);
-      const targetMap: Record<number, string> = {
+      const defaultTargetMap: Record<number, string> = {
         0: "mobile-home",
         1: "mobile-work",
         2: "mobile-work",
@@ -37,6 +46,7 @@ export function usePortfolioScroll() {
         5: "mobile-recommendations",
         6: "mobile-contact",
       };
+      const targetMap = customMobileTargetMap ?? defaultTargetMap;
       const id = targetMap[clampedIndex] || "mobile-home";
       const el = document.getElementById(id);
       if (el) {
@@ -300,7 +310,7 @@ export function usePortfolioScroll() {
 
       const stepDirection = Math.sign(accumulatedDelta);
       const nextIndex = Math.min(
-        SECTIONS.length - 1,
+        sections.length - 1,
         Math.max(0, currentStepRef.current + stepDirection)
       );
 
@@ -318,7 +328,7 @@ export function usePortfolioScroll() {
       lastDirection = stepDirection;
 
       console.log(
-        `[PortfolioScroll:wheel] 1-STEP -> targetIndex=${nextIndex} (${SECTIONS[nextIndex].label})`
+        `[PortfolioScroll:wheel] 1-STEP -> targetIndex=${nextIndex} (${sections[nextIndex]?.label})`
       );
 
       navigateToSection(nextIndex, () => {
@@ -341,7 +351,7 @@ export function usePortfolioScroll() {
       if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") {
         e.preventDefault();
         if (isTransitioningRef.current) return;
-        const nextIndex = Math.min(SECTIONS.length - 1, currentStepRef.current + 1);
+        const nextIndex = Math.min(sections.length - 1, currentStepRef.current + 1);
         if (nextIndex !== currentStepRef.current) {
           navigateToSection(nextIndex);
         }
@@ -357,7 +367,7 @@ export function usePortfolioScroll() {
         navigateToSection(0);
       } else if (e.key === "End") {
         e.preventDefault();
-        navigateToSection(SECTIONS.length - 1);
+        navigateToSection(sections.length - 1);
       }
     };
 
@@ -376,7 +386,7 @@ export function usePortfolioScroll() {
 
       const direction = deltaY > 0 ? 1 : -1;
       const nextIndex = Math.min(
-        SECTIONS.length - 1,
+        sections.length - 1,
         Math.max(0, currentStepRef.current + direction)
       );
       if (nextIndex !== currentStepRef.current) {
@@ -404,7 +414,7 @@ export function usePortfolioScroll() {
         delete (window as any).__navigateToSection;
       }
     };
-  }, [navigateToSection]);
+  }, [navigateToSection, sections]);
 
   return {
     pinnedContainerRef,

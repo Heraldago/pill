@@ -23,7 +23,7 @@ export default function Home() {
   } = usePortfolioScroll();
 
   return (
-    <main className="relative min-h-screen w-[100vw] overflow-x-hidden p-0 m-0 select-none bg-[#091b2e]">
+    <main className="relative min-h-screen w-full overflow-x-clip p-0 m-0 select-none bg-[#091b2e]">
       {/* Sfondo Animato 3D Vanta Waves (fixed z-0 continuo) */}
       <VantaWaves
         color={0x0b2847}

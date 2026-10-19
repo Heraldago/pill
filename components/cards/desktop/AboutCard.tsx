@@ -42,7 +42,7 @@ export default function AboutCard({ ref, onContactClick }: AboutCardProps) {
   return (
     <div
       ref={ref}
-      className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[35] will-change-transform"
+      className="capsule-card-wrapper relative w-full h-[100dvh] shrink-0 flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[35]"
     >
       <section
         className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[2px] sm:border-[3px] transition-all duration-500 overflow-hidden flex items-center justify-center p-0 ${
@@ -84,34 +84,34 @@ export default function AboutCard({ ref, onContactClick }: AboutCardProps) {
           {/* 1. STATO ATTIVO (ON): Dettagli a Sinistra */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className={`absolute top-0 left-[5%] w-[44%] h-full flex flex-col justify-center px-4 sm:px-6 md:px-0 py-2 sm:py-4 space-y-1.5 sm:space-y-2 md:space-y-2.5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+            className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[35%] max-w-[35%] my-auto h-fit max-h-[92%] flex flex-col justify-center px-1 sm:px-3 py-1 gap-2 sm:gap-2.5 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
               isToggledOn
                 ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                 : "opacity-0 scale-95 -translate-x-12 pointer-events-none"
             }`}
           >
             <div>
-              <h2 className="text-xl sm:text-2xl md:text-2xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight">
+              <h2 className="text-xl sm:text-2xl md:text-[clamp(1.35rem,2.5cqw,2.6rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
                 {PROFILE_DATA.name}
               </h2>
-              <p className="text-[11px] sm:text-xs md:text-xs lg:text-sm text-slate-600 font-medium leading-snug mt-0.5 max-w-xl">
-                {PROFILE_DATA.age} · {PROFILE_DATA.role} · {PROFILE_DATA.locations}
+              <p className="text-[10px] sm:text-xs md:text-[13px] text-slate-600 font-medium leading-snug mt-0.5 sm:mt-1 w-full max-w-full break-words">
+                {PROFILE_DATA.age} / {PROFILE_DATA.role} / {PROFILE_DATA.locations}
               </p>
             </div>
 
-            <div className="space-y-1 sm:space-y-1.5 text-[11px] sm:text-xs md:text-xs lg:text-sm text-slate-800 leading-relaxed max-w-lg font-normal">
+            <div className="flex flex-col gap-1 sm:gap-2 card-bio-text text-[11px] sm:text-xs md:text-[13px] text-slate-800 leading-relaxed w-full max-w-full break-words font-normal">
               <p>{PROFILE_DATA.bioParagraph1}</p>
               <p className="text-slate-600">{PROFILE_DATA.bioParagraph2}</p>
             </div>
 
             {/* Pulsanti di Azione */}
-            <div className="pt-0.5 sm:pt-1 flex flex-wrap items-center gap-1.5 sm:gap-2">
+            <div className="pt-0.5 sm:pt-1.5 flex flex-wrap items-center gap-1.5 sm:gap-2.5">
               <a
                 href={PROFILE_DATA.resumePdf}
                 target="_blank"
                 download
                 onClick={(e) => e.stopPropagation()}
-                className="px-3 sm:px-3.5 py-1 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] sm:text-xs font-semibold shadow-sm transition-all cursor-pointer"
+                className="px-3.5 sm:px-4 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[10px] sm:text-xs font-semibold shadow-sm transition-all cursor-pointer"
               >
                 Download Resume PDF
               </a>
@@ -121,23 +121,23 @@ export default function AboutCard({ ref, onContactClick }: AboutCardProps) {
                   e.stopPropagation();
                   onContactClick();
                 }}
-                className="px-3 sm:px-3.5 py-1 rounded-full bg-slate-900/10 hover:bg-slate-900/20 active:scale-95 text-slate-900 text-[11px] sm:text-xs font-semibold border border-slate-900/15 backdrop-blur-md transition-all cursor-pointer"
+                className="px-3.5 sm:px-4 py-1.5 rounded-full bg-slate-900/10 hover:bg-slate-900/20 active:scale-95 text-slate-900 text-[10px] sm:text-xs font-semibold border border-slate-900/15 backdrop-blur-md transition-all cursor-pointer"
               >
                 Contact me
               </button>
             </div>
           </div>
 
-          {/* 2. STATO SPENTO (OFF): Titolo a Destra */}
+          {/* 2. STATO SPENTO (OFF): Titolo centrato tra pallino e bordo destro */}
           <div
-            className={`absolute top-0 right-[4%] w-[44%] h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+            className={`absolute top-0 bottom-0 right-[3%] sm:right-[4%] w-[40%] max-w-[40%] h-full flex flex-col items-center justify-center text-center px-2 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
               !isToggledOn
                 ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                 : "opacity-0 scale-75 translate-x-12 pointer-events-none"
             }`}
           >
-            <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-              <h3 className="text-[clamp(1.5rem,3.8cqw,3.75rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+            <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none">
+              <h3 className="text-center text-[clamp(1.15rem,2.3cqw,2.6rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                 About me
               </h3>
             </div>

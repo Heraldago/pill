@@ -4,6 +4,15 @@ export interface ProjectMetric {
   description: string;
 }
 
+export interface ProjectDecisionOption {
+  id: string;
+  title: string;
+  tag: string;
+  chosen: boolean;
+  constraint: string;
+  outcome: string;
+}
+
 export interface ProjectDetail {
   slug: string;
   title: string;
@@ -23,6 +32,11 @@ export interface ProjectDetail {
     headline: string;
     description: string;
     keyIssues: string[];
+  };
+  decisions: {
+    headline: string;
+    description: string;
+    options: ProjectDecisionOption[];
   };
   metrics: ProjectMetric[];
   process: {
@@ -93,6 +107,37 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
         "Tempi medi di approvazione superiori a 14 giorni lavorativi a causa di documentazione respinta per errori formali.",
         "Mancanza totale di feedback di stato: gli studenti non sapevano in quale fase si trovasse la loro tessera.",
         "Interfaccia non responsive che costringeva l'82% degli utenti mobili a ridimensionare manualmente schermate desktop complesse.",
+      ],
+    },
+    decisions: {
+      headline: "Unificare 3 portali governativi in un wizard progressivo a verifica automatica",
+      description:
+        "Per ridurre l'abbandono senza violare i vincoli normativi del Ministero dei Trasporti danese, abbiamo valutato tre architetture di flusso distinte con il team di ingegneria.",
+      options: [
+        {
+          id: "opt-a",
+          title: "Opzione A: Singolo Form Lungo con Upload PDF",
+          tag: "Scartata",
+          chosen: false,
+          constraint: "Basso costo di sviluppo backend, ma alto carico cognitivo su smartphone.",
+          outcome: "Nei primi test il 44% degli studenti caricava certificati di iscrizione non validi o illeggibili.",
+        },
+        {
+          id: "opt-b",
+          title: "Opzione B: App Nativa Dedicata Obbligatoria",
+          tag: "Scartata",
+          chosen: false,
+          constraint: "Richiedeva download dallo store anche per un singolo rinnovo semestrale.",
+          outcome: "Attrito iniziale eccessivo per i nuovi iscritti e tempi di approvazione store incompatibili col lancio di settembre.",
+        },
+        {
+          id: "opt-c",
+          title: "Opzione C: Web App Capsule a 4 Step + API MitID",
+          tag: "Scelta Vincente",
+          chosen: true,
+          constraint: "Richiedeva orchestrazione in tempo reale tra database scolastici e identità digitale MitID.",
+          outcome: "Pre-compilazione automatica dell'80% dei dati, zero upload manuali e tempo medio sceso da 18 a 7 minuti.",
+        },
       ],
     },
     metrics: [
@@ -231,6 +276,37 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
         "Costi continui di sanificazione e ricarica delle apparecchiature hardware obsolete.",
       ],
     },
+    decisions: {
+      headline: "Bilanciare immersione digitale e attenzione visiva verso l'opera d'arte reale",
+      description:
+        "Il rischio principale di un'app museale è incollare gli occhi del visitatore allo smartphone. Abbiamo testato tre paradigmi di interazione direttamente nelle gallerie.",
+      options: [
+        {
+          id: "opt-a",
+          title: "Opzione A: Scansione Manuale QR Code",
+          tag: "Scartata",
+          chosen: false,
+          constraint: "Scarsa illuminazione nelle sale storiche e code davanti alle targhette.",
+          outcome: "Interrompeva il flusso emotivo della visita e creava assembramenti vicino alle opere.",
+        },
+        {
+          id: "opt-b",
+          title: "Opzione B: Realtà Aumentata 3D Continua",
+          tag: "Scartata",
+          chosen: false,
+          constraint: "Consumo batteria elevato (-35% in 20 minuti) e surriscaldamento del telefono.",
+          outcome: "I visitatori guardavano il quadro attraverso la fotocamera invece di osservare i dettagli dal vivo.",
+        },
+        {
+          id: "opt-c",
+          title: "Opzione C: Beacon BLE + Controlli Tattili Eyes-Free",
+          tag: "Scelta Vincente",
+          chosen: true,
+          constraint: "Calibrazione fine del segnale Bluetooth per evitare sovrapposizioni tra opere adiacenti.",
+          outcome: "Notifica aptica discreta in tasca e player controllabile con il pollice senza distogliere lo sguardo dal dipinto.",
+        },
+      ],
+    },
     metrics: [
       {
         label: "Adozione visitatori",
@@ -357,6 +433,37 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
         "Tasso di rimbalzo del 64% sulla pagina catalogo a causa di filtri confusi e scarsa gerarchia visiva.",
         "Il 71% degli ordini era confinato a sole 4 etichette note, lasciando invenduti i vitigni di nicchia più redditizi.",
         "Esperienza di pagamento su mobile disastrosa con 5 schermate lente che facevano crollare le conversioni.",
+      ],
+    },
+    decisions: {
+      headline: "Sostituire i filtri tecnici da enoteca con una guida sommelier conversazionale",
+      description:
+        "Dovevamo aiutare gli acquirenti occasionali a scegliere vini artigianali da 45-120€ senza alienare i collezionisti esperti.",
+      options: [
+        {
+          id: "opt-a",
+          title: "Opzione A: Mega-Filtro Tecnico (Vitigno, Altitudine, Tannini)",
+          tag: "Scartata",
+          chosen: false,
+          constraint: "Richiedeva conoscenze da sommelier per orientarsi tra oltre 120 etichette.",
+          outcome: "Paralisi decisionale: il 62% degli utenti mobile usciva dopo aver applicato due filtri senza capire la differenza.",
+        },
+        {
+          id: "opt-b",
+          title: "Opzione B: Box Abbonamento Mensile a Sorpresa",
+          tag: "Scartata",
+          chosen: false,
+          constraint: "Impegno economico ricorrente troppo alto per il primo acquisto.",
+          outcome: "Bassa propensione all'iscrizione senza aver prima provato la qualità della cantina.",
+        },
+        {
+          id: "opt-c",
+          title: "Opzione C: Sommelier Quiz in 3 Pillole + Bundle Dinamici",
+          tag: "Scelta Vincente",
+          chosen: true,
+          constraint: "Mappatura manuale di tutte le 120 bottiglie per occasione, piatto e intensità aromatica.",
+          outcome: "Completato dal 60% dei visitatori, ha sbloccato la vendita delle etichette ad alto margine (+34% carrello medio).",
+        },
       ],
     },
     metrics: [

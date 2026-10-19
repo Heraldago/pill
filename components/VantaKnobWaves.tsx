@@ -24,6 +24,7 @@ export default function VantaKnobWaves({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let vantaEffect: any = null;
     let resizeTimer: NodeJS.Timeout | null = null;
+    let resizeObserver: ResizeObserver | null = null;
 
     const initVanta = async () => {
       if (!vantaRef.current) return;
@@ -57,6 +58,15 @@ export default function VantaKnobWaves({
             forceAnimate: true,
           });
 
+          if (typeof ResizeObserver !== "undefined" && vantaRef.current) {
+            resizeObserver = new ResizeObserver(() => {
+              if (vantaEffect && typeof vantaEffect.resize === "function") {
+                vantaEffect.resize();
+              }
+            });
+            resizeObserver.observe(vantaRef.current);
+          }
+
           resizeTimer = setTimeout(() => {
             if (vantaEffect && typeof vantaEffect.resize === "function") {
               vantaEffect.resize();
@@ -72,6 +82,9 @@ export default function VantaKnobWaves({
 
     return () => {
       if (resizeTimer) clearTimeout(resizeTimer);
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
       if (vantaEffect) {
         try {
           if (vantaEffect.renderer) {

@@ -43,7 +43,7 @@ export default function RecommendationsCard({ ref, onContactClick }: Recommendat
   return (
     <div
       ref={ref}
-      className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[40] will-change-transform"
+      className="capsule-card-wrapper relative w-full h-[100dvh] shrink-0 flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-[40]"
     >
       <section
         className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[2px] sm:border-[3px] transition-all duration-500 overflow-hidden flex items-center justify-center p-0 ${
@@ -85,85 +85,87 @@ export default function RecommendationsCard({ ref, onContactClick }: Recommendat
           {/* 1. STATO ATTIVO (ON): Dettagli a Sinistra */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className={`absolute top-0 left-[5%] w-[44%] h-full flex flex-col justify-center px-4 sm:px-6 md:px-0 py-2 sm:py-3 space-y-1.5 sm:space-y-2 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+            className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[35%] max-w-[35%] my-auto h-fit max-h-[92%] flex flex-col justify-center px-1 sm:px-3 py-1 gap-1.5 sm:gap-2.5 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
               isToggledOn
                 ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                 : "opacity-0 scale-95 -translate-x-12 pointer-events-none"
             }`}
           >
             <div>
-              <h2 className="text-xl sm:text-2xl md:text-[clamp(1.3rem,2.6cqw,2.4rem)] font-bold text-slate-900 tracking-tight leading-tight">
+              <h2 className="text-base sm:text-lg md:text-[clamp(1.15rem,2cqw,2rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
                 Kind Words
               </h2>
             </div>
 
             {/* Testimonials List */}
-            {TESTIMONIALS.map((testimonial) => {
-              const isSelected = activeRecPhoto === testimonial.id;
-              return (
-                <div
-                  key={testimonial.id}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setActiveRecPhoto(testimonial.id);
-                  }}
-                  onMouseEnter={() => setActiveRecPhoto(testimonial.id)}
-                  className={`p-2 sm:p-3 md:p-3.5 rounded-2xl transition-all duration-300 backdrop-blur-md cursor-pointer ${
-                    isSelected
-                      ? "bg-white border-2 border-slate-900/20 text-slate-900 shadow-md scale-[1.01]"
-                      : "bg-slate-900/[0.05] border border-slate-900/10 hover:bg-slate-900/[0.08] hover:border-slate-900/20 text-slate-800"
-                  }`}
-                >
-                  <p className="text-[11px] sm:text-xs md:text-sm leading-relaxed font-normal text-slate-800">
-                    &ldquo;{testimonial.fullQuote}&rdquo;
-                  </p>
-                  <div className="flex items-center gap-2 mt-1 sm:mt-2">
-                    <div className="relative w-6 h-6 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-slate-900/20 flex-shrink-0 shadow-xs">
-                      <Image
-                        src={testimonial.avatar}
-                        alt={testimonial.name}
-                        fill
-                        unoptimized
-                        sizes="32px"
-                        className="object-cover object-center"
-                      />
-                    </div>
-                    <div>
-                      <p className="text-[10px] sm:text-xs font-semibold text-slate-900">{testimonial.name}</p>
-                      <p className="text-[8px] sm:text-[10px] text-slate-600">{testimonial.role}</p>
+            <div className="flex flex-col gap-1.5 sm:gap-2 card-rec-list">
+              {TESTIMONIALS.map((testimonial) => {
+                const isSelected = activeRecPhoto === testimonial.id;
+                return (
+                  <div
+                    key={testimonial.id}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveRecPhoto(testimonial.id);
+                    }}
+                    onMouseEnter={() => setActiveRecPhoto(testimonial.id)}
+                    className={`p-1.5 sm:p-2 md:p-2.5 rec-card-item rounded-xl transition-all duration-300 backdrop-blur-md cursor-pointer ${
+                      isSelected
+                        ? "bg-white border-2 border-slate-900/20 text-slate-900 shadow-md scale-[1.01]"
+                        : "bg-slate-900/[0.05] border border-slate-900/10 hover:bg-slate-900/[0.08] hover:border-slate-900/20 text-slate-800"
+                    }`}
+                  >
+                    <p className="text-[10px] sm:text-[11px] md:text-xs leading-snug font-normal text-slate-800 break-words">
+                      &ldquo;{testimonial.shortQuote}&rdquo;
+                    </p>
+                    <div className="flex items-center gap-1.5 mt-1 sm:mt-1.5">
+                      <div className="relative w-5 h-5 sm:w-6 sm:h-6 rounded-full overflow-hidden border border-slate-900/20 flex-shrink-0 shadow-xs">
+                        <Image
+                          src={testimonial.avatar}
+                          alt={testimonial.name}
+                          fill
+                          unoptimized
+                          sizes="24px"
+                          className="object-cover object-center"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-[9px] sm:text-[11px] font-semibold text-slate-900 leading-tight">{testimonial.name}</p>
+                        <p className="text-[8px] sm:text-[9px] text-slate-600 leading-tight">{testimonial.role}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
 
             {/* Pulsante Navigazione */}
-            <div className="pt-0.5">
+            <div className="pt-0.5 sm:pt-1">
               <button
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
                   onContactClick();
                 }}
-                className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-1 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] sm:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[10px] sm:text-xs font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer"
               >
                 <span>Next: Contact</span>
-                <span className="text-xs font-bold">↗</span>
+                <span className="text-[10px] sm:text-xs font-bold">↗</span>
               </button>
             </div>
           </div>
 
-          {/* 2. STATO SPENTO (OFF): Titolo a Destra */}
+          {/* 2. STATO SPENTO (OFF): Titolo centrato tra pallino e bordo destro */}
           <div
-            className={`absolute top-0 right-[4%] w-[44%] h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+            className={`absolute top-0 bottom-0 right-[3%] sm:right-[4%] w-[40%] max-w-[40%] h-full flex flex-col items-center justify-center text-center px-2 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
               !isToggledOn
                 ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                 : "opacity-0 scale-75 translate-x-12 pointer-events-none"
             }`}
           >
-            <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-              <h3 className="text-[clamp(1.35rem,3.4cqw,3.5rem)] font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
-                Recommendation
+            <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none">
+              <h3 className="text-center text-[clamp(1.1rem,2.1cqw,2.4rem)] font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+                Recommendations
               </h3>
             </div>
           </div>

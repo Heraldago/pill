@@ -2,19 +2,29 @@
 
 import { SECTIONS } from "@/data/portfolio";
 
+export interface ScrollSpySection {
+  id: string;
+  label: string;
+}
+
 interface ScrollSpyNavProps {
   activeIndex: number;
   onNavigate: (index: number) => void;
+  sections?: readonly ScrollSpySection[];
 }
 
-export default function ScrollSpyNav({ activeIndex, onNavigate }: ScrollSpyNavProps) {
+export default function ScrollSpyNav({
+  activeIndex,
+  onNavigate,
+  sections = SECTIONS,
+}: ScrollSpyNavProps) {
   return (
     <aside
-      aria-label="Navigazione sezioni"
+      aria-label="Section navigation"
       className="hidden md:flex fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex-col items-center"
     >
       <div className="bg-white/15 backdrop-blur-2xl border border-white/25 shadow-[0_8px_32px_rgba(0,0,0,0.3),_inset_0_1px_1px_rgba(255,255,255,0.3)] px-1.5 py-2.5 rounded-full flex flex-col items-center gap-2">
-        {SECTIONS.map((section, idx) => {
+        {sections.map((section, idx) => {
           const isActive = activeIndex === idx;
           return (
             <div key={section.id} className="relative group flex items-center">

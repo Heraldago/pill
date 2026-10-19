@@ -53,7 +53,7 @@ export default function CaseStudyCard({
   return (
     <div
       ref={ref}
-      className={`capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 ${zIndexClass} will-change-transform`}
+      className={`capsule-card-wrapper relative w-full h-[100dvh] shrink-0 flex items-center justify-center p-2.5 sm:p-4 md:p-0 ${zIndexClass}`}
     >
       <section
         className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[2px] sm:border-[3px] transition-all duration-500 overflow-hidden flex items-center justify-center p-0 ${
@@ -94,32 +94,32 @@ export default function CaseStudyCard({
         >
           {/* 1. STATO ATTIVO (ON): Dettagli a Sinistra */}
           <div
-            className={`absolute top-0 left-[5%] w-[44%] h-full flex flex-col justify-center px-4 sm:px-6 md:px-0 space-y-2 sm:space-y-4 md:space-y-5 overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+            className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[35%] max-w-[35%] my-auto h-fit max-h-[92%] flex flex-col justify-center px-1 sm:px-3 py-1 gap-2 sm:gap-3 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
               isToggledOn
                 ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                 : "opacity-0 scale-95 -translate-x-12 pointer-events-none"
             }`}
           >
             <div>
-              <span className="text-xs sm:text-sm font-bold text-blue-600 tracking-wider uppercase mb-1 block">
+              <span className="text-[10px] sm:text-xs font-bold text-blue-600 tracking-wider uppercase mb-0.5 sm:mb-1 block">
                 {caseStudy.badge}
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-[clamp(1.5rem,3.2cqw,3.5rem)] font-bold text-slate-900 tracking-tight leading-tight">
+              <h2 className="text-xl sm:text-2xl md:text-[clamp(1.35rem,2.5cqw,2.75rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
                 {caseStudy.title}
               </h2>
-              <p className="text-xs sm:text-sm md:text-base lg:text-lg text-slate-700 font-normal leading-snug mt-1 sm:mt-2 max-w-xl">
+              <p className="text-[11px] sm:text-xs md:text-sm lg:text-base card-bio-text text-slate-700 font-normal leading-relaxed mt-1 sm:mt-1.5 w-full max-w-full break-words">
                 {caseStudy.desktopSubtitle}
               </p>
             </div>
 
             {/* Pulsante primario scuro */}
-            <div className="pt-0.5 sm:pt-2">
+            <div className="pt-0.5 sm:pt-1">
               <Link
                 href={caseStudy.link}
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
-                className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-1 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] sm:text-xs font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer"
               >
                 <span>See more</span>
                 <span className="text-xs font-bold">↗</span>
@@ -127,16 +127,16 @@ export default function CaseStudyCard({
             </div>
           </div>
 
-          {/* 2. STATO SPENTO (OFF): Titolo a Destra */}
+          {/* 2. STATO SPENTO (OFF): Titolo centrato tra pallino e bordo destro */}
           <div
-            className={`absolute top-0 right-[4%] w-[44%] h-full flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+            className={`absolute top-0 bottom-0 right-[3%] sm:right-[4%] w-[40%] max-w-[40%] h-full flex flex-col items-center justify-center text-center px-2 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
               !isToggledOn
                 ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                 : "opacity-0 scale-75 translate-x-12 pointer-events-none"
             }`}
           >
-            <div className="flex flex-col items-center justify-center text-center px-4 max-w-lg select-none pointer-events-none">
-              <h3 className="text-[clamp(1.5rem,3.8cqw,3.75rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+            <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none">
+              <h3 className="text-center text-[clamp(1.15rem,2.3cqw,2.6rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                 {caseStudy.title}
               </h3>
             </div>

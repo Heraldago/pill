@@ -22,6 +22,14 @@ interface DesktopCardStackProps {
   onNavigateToIndex: (index: number) => void;
 }
 
+function getCardState(cardIndex: number, activeIndex: number) {
+  const diff = cardIndex - activeIndex;
+  if (diff === 0) return "active";
+  if (diff === -1) return "prev";
+  if (diff === 1) return "next";
+  return diff < -1 ? "far-prev" : "far-next";
+}
+
 export default function DesktopCardStack({
   pinnedContainerRef,
   card1Ref,
@@ -36,56 +44,73 @@ export default function DesktopCardStack({
   onNavigateToIndex,
 }: DesktopCardStackProps) {
   return (
-    <div className="hidden md:block relative w-full">
-      {/* Contenitore Pinned dello Stack: bloccato a schermo durante lo scrub */}
-      <div ref={pinnedContainerRef} className="relative w-full h-[100dvh] overflow-hidden">
+    <div className="hidden md:block fixed inset-0 w-screen h-[100dvh] overflow-hidden">
+      {/* Stage 3D fisso 100% schermo: ogni pillola ruota nel portale 3D una alla volta */}
+      <div
+        ref={pinnedContainerRef}
+        className="warp-stage-3d relative w-full h-[100dvh] overflow-hidden"
+      >
         {/* Card 1: Intro / Hero Capsule */}
-        <HeroCard
-          ref={card1Ref}
-          activeSectionIndex={activeSectionIndex}
-          onNavigate={onNavigate}
-        />
+        <div className="warp-card-node" data-card-state={getCardState(0, activeSectionIndex)}>
+          <HeroCard
+            ref={card1Ref}
+            activeSectionIndex={activeSectionIndex}
+            onNavigate={onNavigate}
+          />
+        </div>
 
         {/* Card 2: Ungdomskort */}
-        <CaseStudyCard
-          ref={card2Ref}
-          caseStudy={CASE_STUDIES[0]}
-          zIndexClass="z-20"
-          imagePadding=""
-          priorityImage
-        />
+        <div className="warp-card-node" data-card-state={getCardState(1, activeSectionIndex)}>
+          <CaseStudyCard
+            ref={card2Ref}
+            caseStudy={CASE_STUDIES[0]}
+            zIndexClass="z-20"
+            imagePadding=""
+            priorityImage
+          />
+        </div>
 
         {/* Card 3: X-Bit */}
-        <CaseStudyCard
-          ref={card3Ref}
-          caseStudy={CASE_STUDIES[1]}
-          zIndexClass="z-[25]"
-          imagePadding="p-2 sm:p-4"
-          priorityImage
-        />
+        <div className="warp-card-node" data-card-state={getCardState(2, activeSectionIndex)}>
+          <CaseStudyCard
+            ref={card3Ref}
+            caseStudy={CASE_STUDIES[1]}
+            zIndexClass="z-[25]"
+            imagePadding="p-2 sm:p-4"
+            priorityImage
+          />
+        </div>
 
         {/* Card 4: I Pupi Siciliani */}
-        <CaseStudyCard
-          ref={card4Ref}
-          caseStudy={CASE_STUDIES[2]}
-          zIndexClass="z-[30]"
-          imagePadding="p-2 sm:p-4"
-        />
+        <div className="warp-card-node" data-card-state={getCardState(3, activeSectionIndex)}>
+          <CaseStudyCard
+            ref={card4Ref}
+            caseStudy={CASE_STUDIES[2]}
+            zIndexClass="z-[30]"
+            imagePadding="p-2 sm:p-4"
+          />
+        </div>
 
         {/* Card 5: About Me */}
-        <AboutCard
-          ref={card5Ref}
-          onContactClick={() => onNavigateToIndex(6)}
-        />
+        <div className="warp-card-node" data-card-state={getCardState(4, activeSectionIndex)}>
+          <AboutCard
+            ref={card5Ref}
+            onContactClick={() => onNavigateToIndex(6)}
+          />
+        </div>
 
         {/* Card 6: Kind Words / Recommendations */}
-        <RecommendationsCard
-          ref={card6Ref}
-          onContactClick={() => onNavigateToIndex(6)}
-        />
+        <div className="warp-card-node" data-card-state={getCardState(5, activeSectionIndex)}>
+          <RecommendationsCard
+            ref={card6Ref}
+            onContactClick={() => onNavigateToIndex(6)}
+          />
+        </div>
 
         {/* Card 7: Contact */}
-        <ContactCard ref={card7Ref} />
+        <div className="warp-card-node" data-card-state={getCardState(6, activeSectionIndex)}>
+          <ContactCard ref={card7Ref} />
+        </div>
       </div>
     </div>
   );

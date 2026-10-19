@@ -12,7 +12,7 @@ export default function HeroCard({ ref }: HeroCardProps) {
   return (
     <div
       ref={ref}
-      className="capsule-card-wrapper absolute inset-0 w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-10 will-change-transform origin-center"
+      className="capsule-card-wrapper relative w-full h-[100dvh] shrink-0 flex items-center justify-center p-2.5 sm:p-4 md:p-0 z-10"
     >
       <section className="capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[2px] sm:border-[3px] border-white/25 bg-white/[0.12] overflow-hidden flex flex-col justify-between items-center shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]">
         {/* Header interno alla pillola: Spazio dedicato alla Navbar globale floating */}
