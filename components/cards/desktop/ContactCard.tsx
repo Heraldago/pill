@@ -70,7 +70,7 @@ export default function ContactCard({ ref }: ContactCardProps) {
         className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[2px] sm:border-[3px] transition-all duration-500 overflow-hidden flex items-center justify-center p-0 ${
           !isToggledOn
             ? "border-white/25 bg-transparent shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
-            : "border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)]"
+            : "border-white bg-white"
         }`}
       >
         <div
@@ -100,7 +100,7 @@ export default function ContactCard({ ref }: ContactCardProps) {
           className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
             !isToggledOn
               ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
-              : "bg-white shadow-none"
+              : "bg-white"
           }`}
         >
           {/* 1. STATO ATTIVO (ON): Dettagli a Sinistra */}
@@ -129,7 +129,7 @@ export default function ContactCard({ ref }: ContactCardProps) {
               <button
                 type="button"
                 onClick={handleCopyEmail}
-                className="px-3 sm:px-3.5 py-1 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[10px] sm:text-xs font-semibold shadow-sm transition-all cursor-pointer"
+                className="px-3 sm:px-3.5 py-1 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[10px] sm:text-xs font-semibold transition-all cursor-pointer"
               >
                 {copiedEmail ? "Copied!" : CONTACT_DATA.email}
               </button>
@@ -158,7 +158,7 @@ export default function ContactCard({ ref }: ContactCardProps) {
             >
               {contactSubmitted ? (
                 <div className="p-3 sm:p-4 rounded-2xl bg-slate-900/[0.05] border border-slate-900/15 backdrop-blur-md text-center space-y-1">
-                  <div className="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center mx-auto text-xs font-bold shadow-md">
+                  <div className="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center mx-auto text-xs font-bold">
                     ✓
                   </div>
                   <h3 className="text-xs sm:text-base font-bold text-slate-900">
@@ -212,7 +212,7 @@ export default function ContactCard({ ref }: ContactCardProps) {
                   </div>
                   <button
                     type="submit"
-                    className="w-full sm:w-auto px-5 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white font-bold text-xs sm:text-sm shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition-all cursor-pointer"
+                    className="w-full sm:w-auto px-5 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white font-bold text-xs sm:text-sm transition-all cursor-pointer"
                   >
                     Send Message
                   </button>
@@ -230,7 +230,7 @@ export default function ContactCard({ ref }: ContactCardProps) {
             }`}
           >
             <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none">
-              <h3 className="text-center text-[clamp(1.15rem,2.3cqw,2.6rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+              <h3 className="text-center text-[clamp(1.15rem,2.3cqw,2.6rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors">
                 Contact
               </h3>
             </div>
@@ -250,7 +250,7 @@ export default function ContactCard({ ref }: ContactCardProps) {
               className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-3 sm:p-5 md:p-6 transition-all duration-300 ease-out cursor-pointer ${
                 !isToggledOn
                   ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                  : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
+                  : "bg-[#0b2847] border border-white/30 hover:scale-[1.015] active:scale-[0.98]"
               }`}
             >
               {isToggledOn && (
@@ -276,8 +276,8 @@ export default function ContactCard({ ref }: ContactCardProps) {
                   <svg
                     className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 transition-all duration-300 ${
                       !isToggledOn
-                        ? "text-slate-800 hover:text-black drop-shadow-[0_10px_22px_rgba(0,0,0,0.18)]"
-                        : "text-white hover:text-sky-200 drop-shadow-[0_10px_30px_rgba(255,255,255,0.5)]"
+                        ? "text-slate-800 hover:text-black"
+                        : "text-white hover:text-sky-200"
                     }`}
                     viewBox="0 0 24 24"
                     fill="none"
@@ -303,8 +303,8 @@ export default function ContactCard({ ref }: ContactCardProps) {
                   <svg
                     className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 fill-current transition-all duration-300 ${
                       !isToggledOn
-                        ? "text-slate-800 hover:text-[#0077b5] drop-shadow-[0_10px_22px_rgba(0,0,0,0.18)]"
-                        : "text-white hover:text-sky-200 drop-shadow-[0_10px_30px_rgba(255,255,255,0.5)]"
+                        ? "text-slate-800 hover:text-[#0077b5]"
+                        : "text-white hover:text-sky-200"
                     }`}
                     viewBox="0 0 24 24"
                   >
@@ -324,8 +324,8 @@ export default function ContactCard({ ref }: ContactCardProps) {
                   <svg
                     className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 transition-all duration-300 ${
                       !isToggledOn
-                        ? "text-slate-800 hover:text-black drop-shadow-[0_10px_22px_rgba(0,0,0,0.18)]"
-                        : "text-white hover:text-sky-200 drop-shadow-[0_10px_30px_rgba(255,255,255,0.5)]"
+                        ? "text-slate-800 hover:text-black"
+                        : "text-white hover:text-sky-200"
                     }`}
                     viewBox="0 0 24 24"
                     fill="none"

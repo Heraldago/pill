@@ -41,7 +41,7 @@ export default function MobileCaseStudyCard({
         className={`group relative w-full aspect-[2/1] rounded-full border-[2px] transition-all duration-500 overflow-hidden cursor-pointer select-none active:scale-[0.985] ${
           !isToggledOn
             ? "border-white/25 bg-transparent shadow-[0_20px_50px_rgba(0,10,30,0.4),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
-            : "border-white bg-white shadow-[0_25px_60px_rgba(0,10,30,0.4)]"
+            : "border-white bg-white"
         }`}
       >
         {/* Pista interna del Toggle (Glass ad OFF, Bianca ad ON) */}
@@ -49,7 +49,7 @@ export default function MobileCaseStudyCard({
           className={`relative w-full h-full rounded-full [container-type:inline-size] overflow-hidden transition-all duration-500 ${
             !isToggledOn
               ? "bg-white/[0.12] shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)]"
-              : "bg-white shadow-none"
+              : "bg-white"
           }`}
         >
           {/* 1. STATO ATTIVO (ON): Dettagli case study a sinistra con abbondante respiro */}
@@ -73,7 +73,7 @@ export default function MobileCaseStudyCard({
               <Link
                 href={caseStudy.link}
                 onClick={(e) => e.stopPropagation()}
-                className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold shadow-xs transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold transition-all cursor-pointer"
               >
                 <span>See case study</span>
                 <span className="text-xs sm:text-sm">↗</span>
@@ -89,7 +89,7 @@ export default function MobileCaseStudyCard({
                 : "opacity-0 scale-75 translate-x-12"
             }`}
           >
-            <span className="text-7xl sm:text-8xl md:text-9xl font-black text-white tracking-tighter drop-shadow-[0_4px_20px_rgba(0,0,0,0.4)] leading-none select-none">
+            <span className="text-7xl sm:text-8xl md:text-9xl font-black text-white tracking-tighter leading-none select-none">
               {caseStudy.number}
             </span>
           </div>
@@ -108,7 +108,7 @@ export default function MobileCaseStudyCard({
               className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-3 transition-all duration-300 ease-out cursor-pointer ${
                 !isToggledOn
                   ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),0_2px_6px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
-                  : "bg-[#0b2847] border-[4px] sm:border-[6px] border-white shadow-[0_20px_50px_rgba(0,18,36,0.45)] active:scale-[0.98]"
+                  : "bg-[#0b2847] border-[4px] sm:border-[6px] border-white active:scale-[0.98]"
               }`}
             >
               {isToggledOn && (
@@ -124,7 +124,7 @@ export default function MobileCaseStudyCard({
                 className={`relative z-10 w-full h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
                   !isToggledOn
                     ? "opacity-95 contrast-100"
-                    : "opacity-100 brightness-100 drop-shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
+                    : "opacity-100 brightness-100"
                 }`}
               >
                 <Image

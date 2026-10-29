@@ -49,7 +49,7 @@ export default function RecommendationsCard({ ref, onContactClick }: Recommendat
         className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[2px] sm:border-[3px] transition-all duration-500 overflow-hidden flex items-center justify-center p-0 ${
           !isToggledOn
             ? "border-white/25 bg-transparent shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
-            : "border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)]"
+            : "border-white bg-white"
         }`}
       >
         <div
@@ -79,7 +79,7 @@ export default function RecommendationsCard({ ref, onContactClick }: Recommendat
           className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
             !isToggledOn
               ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
-              : "bg-white shadow-none"
+              : "bg-white"
           }`}
         >
           {/* 1. STATO ATTIVO (ON): Dettagli a Sinistra */}
@@ -111,7 +111,7 @@ export default function RecommendationsCard({ ref, onContactClick }: Recommendat
                     onMouseEnter={() => setActiveRecPhoto(testimonial.id)}
                     className={`p-1.5 sm:p-2 md:p-2.5 rec-card-item rounded-xl transition-all duration-300 backdrop-blur-md cursor-pointer ${
                       isSelected
-                        ? "bg-white border-2 border-slate-900/20 text-slate-900 shadow-md scale-[1.01]"
+                        ? "bg-white border-2 border-slate-900/20 text-slate-900 scale-[1.01]"
                         : "bg-slate-900/[0.05] border border-slate-900/10 hover:bg-slate-900/[0.08] hover:border-slate-900/20 text-slate-800"
                     }`}
                   >
@@ -119,7 +119,7 @@ export default function RecommendationsCard({ ref, onContactClick }: Recommendat
                       &ldquo;{testimonial.shortQuote}&rdquo;
                     </p>
                     <div className="flex items-center gap-1.5 mt-1 sm:mt-1.5">
-                      <div className="relative w-5 h-5 sm:w-6 sm:h-6 rounded-full overflow-hidden border border-slate-900/20 flex-shrink-0 shadow-xs">
+                      <div className="relative w-5 h-5 sm:w-6 sm:h-6 rounded-full overflow-hidden border border-slate-900/20 flex-shrink-0">
                         <Image
                           src={testimonial.avatar}
                           alt={testimonial.name}
@@ -147,7 +147,7 @@ export default function RecommendationsCard({ ref, onContactClick }: Recommendat
                   e.stopPropagation();
                   onContactClick();
                 }}
-                className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[10px] sm:text-xs font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[10px] sm:text-xs font-semibold transition-all cursor-pointer"
               >
                 <span>Next: Contact</span>
                 <span className="text-[10px] sm:text-xs font-bold">↗</span>
@@ -164,7 +164,7 @@ export default function RecommendationsCard({ ref, onContactClick }: Recommendat
             }`}
           >
             <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none">
-              <h3 className="text-center text-[clamp(1.1rem,2.1cqw,2.4rem)] font-bold tracking-tight text-white/90 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+              <h3 className="text-center text-[clamp(1.1rem,2.1cqw,2.4rem)] font-bold tracking-tight text-white/90 group-hover:text-white transition-colors">
                 Recommendations
               </h3>
             </div>
@@ -184,7 +184,7 @@ export default function RecommendationsCard({ ref, onContactClick }: Recommendat
               className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-2 sm:p-4 transition-all duration-300 ease-out cursor-pointer ${
                 !isToggledOn
                   ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                  : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
+                  : "bg-[#0b2847] border border-white/30 hover:scale-[1.015] active:scale-[0.98]"
               }`}
             >
               {isToggledOn && (

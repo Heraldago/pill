@@ -59,7 +59,7 @@ export default function CaseStudyCard({
         className={`capsule-card-section relative w-full h-full rounded-[32px] sm:rounded-[48px] md:rounded-[1000px] border-[2px] sm:border-[3px] transition-all duration-500 overflow-hidden flex items-center justify-center p-0 ${
           !isToggledOn
             ? "border-white/25 bg-transparent shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
-            : "border-white bg-white shadow-[0_25px_65px_rgba(0,10,30,0.35)]"
+            : "border-white bg-white"
         }`}
       >
         <div
@@ -89,7 +89,7 @@ export default function CaseStudyCard({
           className={`group relative w-full h-full rounded-[26px] sm:rounded-[40px] md:rounded-[1000px] [container-type:inline-size] cursor-pointer select-none overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.988] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${
             !isToggledOn
               ? "bg-black/20 backdrop-blur-md shadow-[inset_0_4px_24px_rgba(0,10,30,0.5),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
-              : "bg-white shadow-none"
+              : "bg-white"
           }`}
         >
           {/* 1. STATO ATTIVO (ON): Dettagli a Sinistra */}
@@ -119,7 +119,7 @@ export default function CaseStudyCard({
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
-                className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-1 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] sm:text-xs font-semibold shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-1 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] sm:text-xs font-semibold transition-all cursor-pointer"
               >
                 <span>See more</span>
                 <span className="text-xs font-bold">↗</span>
@@ -136,7 +136,7 @@ export default function CaseStudyCard({
             }`}
           >
             <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none">
-              <h3 className="text-center text-[clamp(1.15rem,2.3cqw,2.6rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+              <h3 className="text-center text-[clamp(1.15rem,2.3cqw,2.6rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors">
                 {caseStudy.title}
               </h3>
             </div>
@@ -156,7 +156,7 @@ export default function CaseStudyCard({
               className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-2.5 sm:p-5 md:p-7 transition-all duration-300 ease-out cursor-pointer ${
                 !isToggledOn
                   ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),_0_2px_6px_rgba(0,0,0,0.12),_inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.025] hover:shadow-[0_24px_55px_rgba(0,0,0,0.45)] active:scale-[0.98]"
-                  : "bg-[#0b2847] border border-white/30 shadow-[0_20px_50px_rgba(0,18,36,0.45),_0_2px_6px_rgba(0,10,25,0.2),_inset_0_1px_2px_rgba(255,255,255,0.35)] hover:scale-[1.015] active:scale-[0.98]"
+                  : "bg-[#0b2847] border border-white/30 hover:scale-[1.015] active:scale-[0.98]"
               }`}
             >
               {isToggledOn && (
@@ -174,7 +174,7 @@ export default function CaseStudyCard({
                 className={`relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
                   !isToggledOn
                     ? "opacity-75 group-hover:opacity-95 contrast-[0.98] group-hover:contrast-100"
-                    : "opacity-100 brightness-100 drop-shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
+                    : "opacity-100 brightness-100"
                 }`}
               >
                 <Image

@@ -40,7 +40,7 @@ export default function MobileContactCard() {
           className={`group relative w-full aspect-[2/1] rounded-full border-[2px] transition-all duration-500 overflow-hidden cursor-pointer select-none active:scale-[0.985] ${
             !isToggledOn
               ? "border-white/25 bg-transparent shadow-[0_20px_50px_rgba(0,10,30,0.4),_inset_0_1.5px_2px_rgba(255,255,255,0.45)]"
-              : "border-white bg-white shadow-[0_25px_60px_rgba(0,10,30,0.4)]"
+              : "border-white bg-white"
           }`}
         >
           {/* Pista interna del Toggle (Glass ad OFF, Bianca ad ON) */}
@@ -48,7 +48,7 @@ export default function MobileContactCard() {
             className={`relative w-full h-full rounded-full [container-type:inline-size] overflow-hidden transition-all duration-500 ${
               !isToggledOn
                 ? "bg-white/[0.12] shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.7)]"
-                : "bg-white shadow-none"
+                : "bg-white"
             }`}
           >
             {/* 1. STATO ATTIVO (ON): Opzioni e canali a sinistra */}
@@ -72,7 +72,7 @@ export default function MobileContactCard() {
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="w-full py-1.5 sm:py-2 px-2.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold transition-all shadow-xs text-center cursor-pointer"
+                  className="w-full py-1.5 sm:py-2 px-2.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold transition-all text-center cursor-pointer"
                 >
                   {copiedEmail ? "Copied!" : CONTACT_DATA.email}
                 </button>
@@ -107,7 +107,7 @@ export default function MobileContactCard() {
               }`}
             >
               <div className="text-center px-1">
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] leading-tight whitespace-nowrap">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight whitespace-nowrap">
                   Contact
                 </h3>
               </div>
@@ -127,7 +127,7 @@ export default function MobileContactCard() {
                 className={`relative w-full h-full rounded-full overflow-hidden flex items-center justify-center p-3 transition-all duration-300 ease-out cursor-pointer ${
                   !isToggledOn
                     ? "bg-white shadow-[0_16px_40px_rgba(0,0,0,0.35),0_2px_6px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:scale-[1.02] active:scale-[0.98]"
-                    : "bg-[#0b2847] border-[4px] sm:border-[6px] border-white shadow-[0_20px_50px_rgba(0,18,36,0.45)] active:scale-[0.98]"
+                    : "bg-[#0b2847] border-[4px] sm:border-[6px] border-white active:scale-[0.98]"
                 }`}
               >
                 {isToggledOn && (
@@ -143,8 +143,8 @@ export default function MobileContactCard() {
                   <svg
                     className={`w-10 h-10 sm:w-12 sm:h-12 transition-all duration-300 ${
                       !isToggledOn
-                        ? "text-slate-900 drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
-                        : "text-white drop-shadow-[0_6px_20px_rgba(255,255,255,0.6)]"
+                        ? "text-slate-900"
+                        : "text-white"
                     }`}
                     viewBox="0 0 24 24"
                     fill="none"
