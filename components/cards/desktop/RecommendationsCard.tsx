@@ -1,6 +1,6 @@
 "use client";
 
-import { Ref, useRef, useState } from "react";
+import { Ref, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import VantaKnobWaves from "@/components/VantaKnobWaves";
 import { TESTIMONIALS } from "@/data/portfolio";
@@ -8,13 +8,38 @@ import { TESTIMONIALS } from "@/data/portfolio";
 interface RecommendationsCardProps {
   ref?: Ref<HTMLDivElement>;
   onContactClick: () => void;
+  toggleState?: "off" | "on";
+  onToggleChange?: (state: "off" | "on") => void;
 }
 
-export default function RecommendationsCard({ ref, onContactClick }: RecommendationsCardProps) {
-  const [toggleState, setToggleState] = useState<"off" | "on">("off");
+export default function RecommendationsCard({
+  ref,
+  onContactClick,
+  toggleState: controlledToggleState,
+  onToggleChange,
+}: RecommendationsCardProps) {
+  const [internalToggleState, setInternalToggleState] = useState<"off" | "on">("off");
   const [hasToggledOnce, setHasToggledOnce] = useState(false);
   const [activeRecPhoto, setActiveRecPhoto] = useState<"antonio" | "sebastian">("antonio");
   const touchStartYRef = useRef<number | null>(null);
+
+  const toggleState = controlledToggleState !== undefined ? controlledToggleState : internalToggleState;
+
+  useEffect(() => {
+    if (controlledToggleState === "on") {
+      setHasToggledOnce(true);
+    }
+  }, [controlledToggleState]);
+
+  const effectiveHasToggledOnce = hasToggledOnce || toggleState === "on";
+
+  const setEffectiveToggleState = (next: "off" | "on") => {
+    setHasToggledOnce(true);
+    if (controlledToggleState === undefined) {
+      setInternalToggleState(next);
+    }
+    onToggleChange?.(next);
+  };
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartYRef.current = e.touches[0].clientY;
@@ -25,17 +50,14 @@ export default function RecommendationsCard({ ref, onContactClick }: Recommendat
     const deltaY = e.changedTouches[0].clientY - touchStartYRef.current;
     touchStartYRef.current = null;
     if (deltaY > 35) {
-      setHasToggledOnce(true);
-      setToggleState("on");
+      setEffectiveToggleState("on");
     } else if (deltaY < -35) {
-      setHasToggledOnce(true);
-      setToggleState("off");
+      setEffectiveToggleState("off");
     }
   };
 
   const handleToggle = () => {
-    setHasToggledOnce(true);
-    setToggleState((prev) => (prev === "off" ? "on" : "off"));
+    setEffectiveToggleState(toggleState === "off" ? "on" : "off");
   };
 
   const isToggledOn = toggleState === "on";
@@ -173,7 +195,7 @@ export default function RecommendationsCard({ ref, onContactClick }: Recommendat
           {/* 3. IL KNOB DEL TOGGLE: Foto Founder Perfettamente Circolare */}
           <div
             className={`absolute top-[var(--knob-pad)] bottom-[var(--knob-pad)] left-[var(--knob-pad)] h-[calc(100%-2*var(--knob-pad))] aspect-square w-auto rounded-full overflow-visible ${
-              !hasToggledOnce
+              !effectiveHasToggledOnce
                 ? "translate-x-0"
                 : isToggledOn
                 ? "bubble-knob-in"

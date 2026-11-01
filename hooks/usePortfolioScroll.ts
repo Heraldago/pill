@@ -9,11 +9,20 @@ export interface ScrollSectionItem {
   label: string;
 }
 
+export interface UsePortfolioScrollOptions {
+  onHorizontalArrow?: (direction: "left" | "right") => void;
+}
+
 export function usePortfolioScroll(
   customSections?: readonly ScrollSectionItem[],
-  customMobileTargetMap?: Record<number, string>
+  customMobileTargetMap?: Record<number, string>,
+  options?: UsePortfolioScrollOptions
 ) {
   const sections = customSections ?? SECTIONS;
+  const onHorizontalArrowRef = useRef(options?.onHorizontalArrow);
+  useEffect(() => {
+    onHorizontalArrowRef.current = options?.onHorizontalArrow;
+  }, [options?.onHorizontalArrow]);
   const pinnedContainerRef = useRef<HTMLDivElement>(null);
   const card1Ref = useRef<HTMLDivElement>(null);
   const card2Ref = useRef<HTMLDivElement>(null);
@@ -368,6 +377,12 @@ export function usePortfolioScroll(
       } else if (e.key === "End") {
         e.preventDefault();
         navigateToSection(sections.length - 1);
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        onHorizontalArrowRef.current?.("left");
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        onHorizontalArrowRef.current?.("right");
       }
     };
 

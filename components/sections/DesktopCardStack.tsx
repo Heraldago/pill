@@ -20,6 +20,8 @@ interface DesktopCardStackProps {
   activeSectionIndex: number;
   onNavigate: (target: "home" | "work" | "about" | "contact") => void;
   onNavigateToIndex: (index: number) => void;
+  toggleStates: Record<number, "off" | "on">;
+  onToggleChange: (sectionIndex: number, state: "off" | "on") => void;
 }
 
 function getCardState(cardIndex: number, activeIndex: number) {
@@ -42,6 +44,8 @@ export default function DesktopCardStack({
   activeSectionIndex,
   onNavigate,
   onNavigateToIndex,
+  toggleStates,
+  onToggleChange,
 }: DesktopCardStackProps) {
   return (
     <div className="hidden md:block fixed inset-0 w-screen h-[100dvh] overflow-hidden">
@@ -67,6 +71,8 @@ export default function DesktopCardStack({
             zIndexClass="z-20"
             imagePadding=""
             priorityImage
+            toggleState={toggleStates[1] || "off"}
+            onToggleChange={(s) => onToggleChange(1, s)}
           />
         </div>
 
@@ -78,6 +84,8 @@ export default function DesktopCardStack({
             zIndexClass="z-[25]"
             imagePadding="p-2 sm:p-4"
             priorityImage
+            toggleState={toggleStates[2] || "off"}
+            onToggleChange={(s) => onToggleChange(2, s)}
           />
         </div>
 
@@ -88,6 +96,8 @@ export default function DesktopCardStack({
             caseStudy={CASE_STUDIES[2]}
             zIndexClass="z-[30]"
             imagePadding="p-2 sm:p-4"
+            toggleState={toggleStates[3] || "off"}
+            onToggleChange={(s) => onToggleChange(3, s)}
           />
         </div>
 
@@ -96,6 +106,8 @@ export default function DesktopCardStack({
           <AboutCard
             ref={card5Ref}
             onContactClick={() => onNavigateToIndex(6)}
+            toggleState={toggleStates[4] || "off"}
+            onToggleChange={(s) => onToggleChange(4, s)}
           />
         </div>
 
@@ -104,12 +116,18 @@ export default function DesktopCardStack({
           <RecommendationsCard
             ref={card6Ref}
             onContactClick={() => onNavigateToIndex(6)}
+            toggleState={toggleStates[5] || "off"}
+            onToggleChange={(s) => onToggleChange(5, s)}
           />
         </div>
 
         {/* Card 7: Contact */}
         <div className="warp-card-node" data-card-state={getCardState(6, activeSectionIndex)}>
-          <ContactCard ref={card7Ref} />
+          <ContactCard
+            ref={card7Ref}
+            toggleState={toggleStates[6] || "off"}
+            onToggleChange={(s) => onToggleChange(6, s)}
+          />
         </div>
       </div>
     </div>

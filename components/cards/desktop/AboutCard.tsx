@@ -1,6 +1,6 @@
 "use client";
 
-import { Ref, useRef, useState } from "react";
+import { Ref, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import VantaKnobWaves from "@/components/VantaKnobWaves";
 import { PROFILE_DATA } from "@/data/portfolio";
@@ -8,12 +8,37 @@ import { PROFILE_DATA } from "@/data/portfolio";
 interface AboutCardProps {
   ref?: Ref<HTMLDivElement>;
   onContactClick: () => void;
+  toggleState?: "off" | "on";
+  onToggleChange?: (state: "off" | "on") => void;
 }
 
-export default function AboutCard({ ref, onContactClick }: AboutCardProps) {
-  const [toggleState, setToggleState] = useState<"off" | "on">("off");
+export default function AboutCard({
+  ref,
+  onContactClick,
+  toggleState: controlledToggleState,
+  onToggleChange,
+}: AboutCardProps) {
+  const [internalToggleState, setInternalToggleState] = useState<"off" | "on">("off");
   const [hasToggledOnce, setHasToggledOnce] = useState(false);
   const touchStartYRef = useRef<number | null>(null);
+
+  const toggleState = controlledToggleState !== undefined ? controlledToggleState : internalToggleState;
+
+  useEffect(() => {
+    if (controlledToggleState === "on") {
+      setHasToggledOnce(true);
+    }
+  }, [controlledToggleState]);
+
+  const effectiveHasToggledOnce = hasToggledOnce || toggleState === "on";
+
+  const setEffectiveToggleState = (next: "off" | "on") => {
+    setHasToggledOnce(true);
+    if (controlledToggleState === undefined) {
+      setInternalToggleState(next);
+    }
+    onToggleChange?.(next);
+  };
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartYRef.current = e.touches[0].clientY;
@@ -24,17 +49,14 @@ export default function AboutCard({ ref, onContactClick }: AboutCardProps) {
     const deltaY = e.changedTouches[0].clientY - touchStartYRef.current;
     touchStartYRef.current = null;
     if (deltaY > 35) {
-      setHasToggledOnce(true);
-      setToggleState("on");
+      setEffectiveToggleState("on");
     } else if (deltaY < -35) {
-      setHasToggledOnce(true);
-      setToggleState("off");
+      setEffectiveToggleState("off");
     }
   };
 
   const handleToggle = () => {
-    setHasToggledOnce(true);
-    setToggleState((prev) => (prev === "off" ? "on" : "off"));
+    setEffectiveToggleState(toggleState === "off" ? "on" : "off");
   };
 
   const isToggledOn = toggleState === "on";
@@ -146,7 +168,7 @@ export default function AboutCard({ ref, onContactClick }: AboutCardProps) {
           {/* 3. IL KNOB DEL TOGGLE: Foto Profilo Perfettamente Circolare */}
           <div
             className={`absolute top-[var(--knob-pad)] bottom-[var(--knob-pad)] left-[var(--knob-pad)] h-[calc(100%-2*var(--knob-pad))] aspect-square w-auto rounded-full overflow-visible ${
-              !hasToggledOnce
+              !effectiveHasToggledOnce
                 ? "translate-x-0"
                 : isToggledOn
                 ? "bubble-knob-in"

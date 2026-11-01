@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import VantaWaves from "@/components/VantaWaves";
 import VantaKnobWaves from "@/components/VantaKnobWaves";
-import ScrollSpyNav from "@/components/navigation/ScrollSpyNav";
+import KeycapNav from "@/components/navigation/KeycapNav";
 import { usePortfolioScroll, ScrollSectionItem } from "@/hooks/usePortfolioScroll";
 import { ProjectDetail } from "@/data/caseStudiesData";
 
@@ -43,19 +43,6 @@ interface ProjectCaseStudyViewProps {
 }
 
 export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewProps) {
-  const {
-    pinnedContainerRef,
-    card1Ref,
-    card2Ref,
-    card3Ref,
-    card4Ref,
-    card5Ref,
-    card6Ref,
-    card7Ref,
-    activeSectionIndex,
-    navigateToSection,
-  } = usePortfolioScroll(PROJECT_SECTIONS, PROJECT_MOBILE_TARGET_MAP);
-
   // Desktop pill toggle states
   const [problemOn, setProblemOn] = useState(false);
   const [problemToggledOnce, setProblemToggledOnce] = useState(false);
@@ -83,6 +70,69 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
 
   const [nextOn, setNextOn] = useState(false);
   const [nextToggledOnce, setNextToggledOnce] = useState(false);
+
+  const setToggleForSection = (sectionIndex: number, state: boolean) => {
+    switch (sectionIndex) {
+      case 1:
+        setProblemOn(state);
+        setProblemToggledOnce(true);
+        break;
+      case 2:
+        setDecisionsOn(state);
+        setDecisionsToggledOnce(true);
+        break;
+      case 3:
+        setProcessOn(state);
+        setProcessToggledOnce(true);
+        break;
+      case 4:
+        setImpactOn(state);
+        setImpactToggledOnce(true);
+        break;
+      case 5:
+        setLearningsOn(state);
+        setLearningsToggledOnce(true);
+        break;
+      case 6:
+        setNextOn(state);
+        setNextToggledOnce(true);
+        break;
+    }
+  };
+
+  const {
+    pinnedContainerRef,
+    card1Ref,
+    card2Ref,
+    card3Ref,
+    card4Ref,
+    card5Ref,
+    card6Ref,
+    card7Ref,
+    activeSectionIndex,
+    navigateToSection,
+  } = usePortfolioScroll(PROJECT_SECTIONS, PROJECT_MOBILE_TARGET_MAP, {
+    onHorizontalArrow: (direction) => {
+      setToggleForSection(activeSectionIndex, direction === "right");
+    },
+  });
+
+  const currentToggleState: "off" | "on" | null =
+    activeSectionIndex === 0
+      ? null
+      : activeSectionIndex === 1
+      ? (problemOn ? "on" : "off")
+      : activeSectionIndex === 2
+      ? (decisionsOn ? "on" : "off")
+      : activeSectionIndex === 3
+      ? (processOn ? "on" : "off")
+      : activeSectionIndex === 4
+      ? (impactOn ? "on" : "off")
+      : activeSectionIndex === 5
+      ? (learningsOn ? "on" : "off")
+      : activeSectionIndex === 6
+      ? (nextOn ? "on" : "off")
+      : null;
 
   // Mobile pill toggle states
   const [mProblemOn, setMProblemOn] = useState(false);
@@ -357,11 +407,31 @@ export default function ProjectCaseStudyView({ project }: ProjectCaseStudyViewPr
         </nav>
       </div>
 
-      {/* Right-Side ScrollSpy Navigation */}
-      <ScrollSpyNav
-        sections={PROJECT_SECTIONS}
+      {/* Right-Side Arrow Keycap Micro-Dock */}
+      <KeycapNav
         activeIndex={activeSectionIndex}
-        onNavigate={navigateToSection}
+        totalSections={PROJECT_SECTIONS.length}
+        onNavigateNext={() => {
+          if (activeSectionIndex < PROJECT_SECTIONS.length - 1) {
+            navigateToSection(activeSectionIndex + 1);
+          }
+        }}
+        onNavigatePrev={() => {
+          if (activeSectionIndex > 0) {
+            navigateToSection(activeSectionIndex - 1);
+          }
+        }}
+        onToggleOn={() => {
+          if (activeSectionIndex >= 1 && activeSectionIndex <= 6) {
+            setToggleForSection(activeSectionIndex, true);
+          }
+        }}
+        onToggleOff={() => {
+          if (activeSectionIndex >= 1 && activeSectionIndex <= 6) {
+            setToggleForSection(activeSectionIndex, false);
+          }
+        }}
+        currentToggleState={currentToggleState}
       />
 
       {/* =========================================================

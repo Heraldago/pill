@@ -1,17 +1,41 @@
 "use client";
 
-import { Ref, useRef, useState } from "react";
+import { Ref, useEffect, useRef, useState } from "react";
 import VantaKnobWaves from "@/components/VantaKnobWaves";
 import { CONTACT_DATA } from "@/data/portfolio";
 
 interface ContactCardProps {
   ref?: Ref<HTMLDivElement>;
+  toggleState?: "off" | "on";
+  onToggleChange?: (state: "off" | "on") => void;
 }
 
-export default function ContactCard({ ref }: ContactCardProps) {
-  const [toggleState, setToggleState] = useState<"off" | "on">("off");
+export default function ContactCard({
+  ref,
+  toggleState: controlledToggleState,
+  onToggleChange,
+}: ContactCardProps) {
+  const [internalToggleState, setInternalToggleState] = useState<"off" | "on">("off");
   const [hasToggledOnce, setHasToggledOnce] = useState(false);
   const touchStartYRef = useRef<number | null>(null);
+
+  const toggleState = controlledToggleState !== undefined ? controlledToggleState : internalToggleState;
+
+  useEffect(() => {
+    if (controlledToggleState === "on") {
+      setHasToggledOnce(true);
+    }
+  }, [controlledToggleState]);
+
+  const effectiveHasToggledOnce = hasToggledOnce || toggleState === "on";
+
+  const setEffectiveToggleState = (next: "off" | "on") => {
+    setHasToggledOnce(true);
+    if (controlledToggleState === undefined) {
+      setInternalToggleState(next);
+    }
+    onToggleChange?.(next);
+  };
 
   // Form & Clipboard state (isolato localmente, non re-renderizza l'intera pagina!)
   const [contactName, setContactName] = useState("");
@@ -46,17 +70,14 @@ export default function ContactCard({ ref }: ContactCardProps) {
     const deltaY = e.changedTouches[0].clientY - touchStartYRef.current;
     touchStartYRef.current = null;
     if (deltaY > 35) {
-      setHasToggledOnce(true);
-      setToggleState("on");
+      setEffectiveToggleState("on");
     } else if (deltaY < -35) {
-      setHasToggledOnce(true);
-      setToggleState("off");
+      setEffectiveToggleState("off");
     }
   };
 
   const handleToggle = () => {
-    setHasToggledOnce(true);
-    setToggleState((prev) => (prev === "off" ? "on" : "off"));
+    setEffectiveToggleState(toggleState === "off" ? "on" : "off");
   };
 
   const isToggledOn = toggleState === "on";
@@ -239,7 +260,7 @@ export default function ContactCard({ ref }: ContactCardProps) {
           {/* 3. IL KNOB DEL TOGGLE: Icone Fluttuanti Perfettamente Circolare */}
           <div
             className={`absolute top-[var(--knob-pad)] bottom-[var(--knob-pad)] left-[var(--knob-pad)] h-[calc(100%-2*var(--knob-pad))] aspect-square w-auto rounded-full overflow-visible ${
-              !hasToggledOnce
+              !effectiveHasToggledOnce
                 ? "translate-x-0"
                 : isToggledOn
                 ? "bubble-knob-in"
