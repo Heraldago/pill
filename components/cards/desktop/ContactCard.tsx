@@ -251,7 +251,7 @@ export default function ContactCard({
             }`}
           >
             <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none">
-              <h3 className="text-center text-[clamp(1.15rem,2.3cqw,2.6rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors">
+              <h3 className="text-center text-[clamp(1.15rem,2.2cqw,2.5rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors">
                 Contact
               </h3>
             </div>

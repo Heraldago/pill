@@ -60,36 +60,35 @@ export default function MobileCaseStudyCard({
                 : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
             }`}
           >
-            <span className="text-[11px] sm:text-xs md:text-sm font-bold text-blue-600 tracking-wider uppercase">
+            <span className="text-[10px] sm:text-xs md:text-sm font-bold text-blue-600 tracking-wider uppercase">
               {caseStudy.badge}
             </span>
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            <h3 className="text-[clamp(1.05rem,4.2cqw,1.45rem)] font-extrabold text-slate-900 tracking-tight leading-tight">
               {caseStudy.title}
             </h3>
-            <p className="text-xs sm:text-sm md:text-base text-slate-600 line-clamp-2 sm:line-clamp-3 leading-snug">
+            <p className="text-[clamp(0.6875rem,2.6cqw,0.85rem)] text-slate-600 line-clamp-2 sm:line-clamp-3 leading-snug">
               {caseStudy.mobileSubtitle}
             </p>
             <div className="pt-0.5 sm:pt-1">
               <Link
                 href={caseStudy.link}
                 onClick={(e) => e.stopPropagation()}
-                className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold transition-all cursor-pointer"
+                className="inline-flex items-center px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold transition-all cursor-pointer"
               >
-                <span>See case study</span>
-                <span className="text-xs sm:text-sm">↗</span>
+                <span>See more</span>
               </Link>
             </div>
           </div>
 
           {/* 2. STATO SPENTO (OFF): Cover con solo il numero gigante a destra */}
           <div
-            className={`absolute top-0 right-7 sm:right-9 w-[44%] h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+            className={`absolute top-0 right-6 sm:right-9 w-[44%] h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
               !isToggledOn
                 ? "opacity-100 scale-100 translate-x-0"
                 : "opacity-0 scale-75 translate-x-12"
             }`}
           >
-            <span className="text-7xl sm:text-8xl md:text-9xl font-black text-white tracking-tighter leading-none select-none">
+            <span className="text-[clamp(3.5rem,14cqw,6.5rem)] font-black text-white tracking-tighter leading-none select-none">
               {caseStudy.number}
             </span>
           </div>
@@ -121,11 +120,7 @@ export default function MobileCaseStudyCard({
                 />
               )}
               <div
-                className={`relative z-10 w-full h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
-                  !isToggledOn
-                    ? "opacity-95 contrast-100"
-                    : "opacity-100 brightness-100"
-                }`}
+                className="relative z-10 w-full h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out opacity-100"
               >
                 <Image
                   src={displayImage}

@@ -219,11 +219,7 @@ export default function RecommendationsCard({
                 />
               )}
               <div
-                className={`relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out rounded-[1000px] overflow-hidden ${
-                  !isToggledOn
-                    ? "opacity-70 group-hover:opacity-95 contrast-[0.95] group-hover:contrast-100"
-                    : "opacity-100 brightness-100"
-                }`}
+                className="relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out rounded-[1000px] overflow-hidden opacity-100"
               >
                 {/* Foto Antonio */}
                 <div

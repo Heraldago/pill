@@ -123,10 +123,10 @@ export default function CaseStudyCard({
               <span className="text-[10px] sm:text-xs font-bold text-blue-600 tracking-wider uppercase mb-0.5 sm:mb-1 block">
                 {caseStudy.badge}
               </span>
-              <h2 className="text-xl sm:text-2xl md:text-[clamp(1.35rem,2.5cqw,2.75rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
+              <h2 className="card-title-lg text-xl sm:text-2xl md:text-[clamp(1.15rem,2.1cqw,2.4rem)] font-bold text-slate-900 tracking-tight leading-tight">
                 {caseStudy.title}
               </h2>
-              <p className="text-[11px] sm:text-xs md:text-sm lg:text-base card-bio-text text-slate-700 font-normal leading-relaxed mt-1 sm:mt-1.5 w-full max-w-full break-words">
+              <p className="card-bio-text text-[clamp(0.75rem,1.05cqw,0.95rem)] text-slate-700 font-normal leading-relaxed mt-1 sm:mt-1.5 w-full max-w-full break-words">
                 {caseStudy.desktopSubtitle}
               </p>
             </div>
@@ -138,10 +138,9 @@ export default function CaseStudyCard({
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
-                className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-1 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] sm:text-xs font-semibold transition-all cursor-pointer"
+                className="inline-flex items-center px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] sm:text-xs font-semibold transition-all cursor-pointer"
               >
                 <span>See more</span>
-                <span className="text-xs font-bold">↗</span>
               </Link>
             </div>
           </div>
@@ -155,7 +154,7 @@ export default function CaseStudyCard({
             }`}
           >
             <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none">
-              <h3 className="text-center text-[clamp(1.15rem,2.3cqw,2.6rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors">
+              <h3 className="text-center text-[clamp(1.15rem,2.2cqw,2.5rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors">
                 {caseStudy.title}
               </h3>
             </div>
@@ -190,11 +189,7 @@ export default function CaseStudyCard({
 
               {/* Mockup del Device dentro il Knob */}
               <div
-                className={`relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${
-                  !isToggledOn
-                    ? "opacity-75 group-hover:opacity-95 contrast-[0.98] group-hover:contrast-100"
-                    : "opacity-100 brightness-100"
-                }`}
+                className="relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out opacity-100"
               >
                 <Image
                   src={displayImage}

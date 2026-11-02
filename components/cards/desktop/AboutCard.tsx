@@ -159,7 +159,7 @@ export default function AboutCard({
             }`}
           >
             <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none">
-              <h3 className="text-center text-[clamp(1.15rem,2.3cqw,2.6rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors">
+              <h3 className="text-center text-[clamp(1.15rem,2.2cqw,2.5rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors">
                 About me
               </h3>
             </div>
@@ -192,11 +192,7 @@ export default function AboutCard({
                 />
               )}
               <div
-                className={`relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out rounded-[1000px] overflow-hidden ${
-                  !isToggledOn
-                    ? "opacity-70 group-hover:opacity-95 contrast-[0.95] group-hover:contrast-100"
-                    : "opacity-100 brightness-100"
-                }`}
+                className="relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out rounded-[1000px] overflow-hidden opacity-100"
               >
                 <div className="relative w-[87%] h-[87%] flex items-center justify-center">
                   <Image
