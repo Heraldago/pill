@@ -82,7 +82,7 @@ export function usePortfolioScroll(
 
     if (timelineRef.current) {
       const distance = Math.abs(clampedIndex - (timelineRef.current.time() || 0));
-      const duration = Math.min(1.1, Math.max(0.65, 0.65 + (distance - 1) * 0.12));
+      const duration = Math.min(0.8, Math.max(0.48, 0.48 + (distance - 1) * 0.1));
 
       console.log(
         `%c[PortfolioScroll:NAVIGATE] Step: ${prevIndex} -> ${clampedIndex} | duration=${duration.toFixed(2)}s`,
@@ -91,7 +91,7 @@ export function usePortfolioScroll(
 
       timelineRef.current.tweenTo(clampedIndex, {
         duration,
-        ease: "power2.inOut",
+        ease: "power2.out",
         overwrite: true,
         onComplete: () => {
           console.log(`[PortfolioScroll:COMPLETE] Reached Step ${clampedIndex}`);
@@ -106,8 +106,11 @@ export function usePortfolioScroll(
 
       transitionTimeoutRef.current = setTimeout(() => {
         isTransitioningRef.current = false;
+        if (transitionTimeoutRef.current) {
+          transitionTimeoutRef.current = null;
+        }
         onDone?.();
-      }, (duration + 0.15) * 1000);
+      }, (duration + 0.08) * 1000);
     } else {
       console.warn("[PortfolioScroll:WARN] timelineRef is null! Animation skipped.");
       isTransitioningRef.current = false;
@@ -250,11 +253,15 @@ export function usePortfolioScroll(
     };
 
     // 2. Step Wheel Controller: 1 Scroll Gesture = Strictly 1 Card Step
-    // Funziona perfettamente sia per tocchi brevissimi (short flick) che per trascinamenti lunghi (long swipe).
+    // Filtro inerzia con rilevamento picco di accelerazione: impedisce salti multipli involontari
+    // e garantisce scorrimento 1 a 1 fluido e reattivo su scroll ripetuti.
     let isLocked = false;
     let lastDirection = 0;
     let accumulatedDelta = 0;
     let quietTimer: ReturnType<typeof setTimeout> | null = null;
+    let lastStepTime = 0;
+    let lastWheelTime = 0;
+    let prevDeltaY = 0;
     let lastTransitionEndTime = 0;
 
     const handleWheel = (e: WheelEvent) => {
@@ -277,43 +284,69 @@ export function usePortfolioScroll(
       // Intercetta l'evento per impedire lo scroll nativo del browser
       e.preventDefault();
 
-      // Resetta il timer di quiete: 140ms di silenzio senza eventi indicano che
-      // il gesto (o l'inerzia prolungata del trackpad) e terminato.
+      const now = performance.now();
+      const timeSinceLastWheel = now - lastWheelTime;
+      const timeSinceLastStep = now - lastStepTime;
+      lastWheelTime = now;
+
+      // Resetta il timer di quiete: 90ms di silenzio indicano che l'inerzia e terminata
       if (quietTimer) clearTimeout(quietTimer);
       quietTimer = setTimeout(() => {
         isLocked = false;
         accumulatedDelta = 0;
-      }, 140);
+        prevDeltaY = 0;
+      }, 90);
+
+      // Inversione immediata di marcia: sblocca subito
+      if (direction !== lastDirection) {
+        isLocked = false;
+        accumulatedDelta = 0;
+        prevDeltaY = 0;
+      }
+
+      // Se c'e stato un intervallo di silenzio (> 80ms), e una nuova gesture deliberata
+      if (timeSinceLastWheel > 80) {
+        isLocked = false;
+        accumulatedDelta = 0;
+      }
+
+      // Rilevamento acceleration spike:
+      // Durante l'inerzia del trackpad deltaY decresce sempre. Un aumento improvviso
+      // (absDelta > absPrevDelta + 8 e magnitudo >= 18) indica un nuovo tocco fisico intenzionale.
+      const absDelta = Math.abs(deltaY);
+      const absPrevDelta = Math.abs(prevDeltaY);
+      const isAccelerationSpike = absDelta >= 18 && absDelta > absPrevDelta + 8;
+
+      if (isLocked && isAccelerationSpike && timeSinceLastStep > 380) {
+        isLocked = false;
+        accumulatedDelta = 0;
+      }
+
+      prevDeltaY = deltaY;
 
       // 1. Se la transizione GSAP e ancora in corso, assorbi qualsiasi impulso
       if (isTransitioningRef.current) {
         return;
       }
 
-      // 2. Cooldown post-transizione (80ms) per stabilita visiva
-      if (performance.now() - lastTransitionEndTime < 80) {
+      // 2. Cooldown minimo tra step (380ms) per stabilita visiva
+      if (timeSinceLastStep < 380) {
         return;
       }
 
-      // 3. Inversione immediata di marcia: sblocca subito senza attendere il timer di quiete
-      if (isLocked && direction !== lastDirection) {
-        isLocked = false;
-        accumulatedDelta = 0;
-      }
-
-      // 4. Se la card attuale e ancora bloccata dalla gesture precedente nella stessa direzione:
+      // 3. Se e ancora bloccato da inerzia residua in decelerazione:
       if (isLocked) {
         return;
       }
 
-      // 5. Accumula delta
+      // 4. Accumula delta
       if (Math.sign(accumulatedDelta) !== 0 && Math.sign(accumulatedDelta) !== direction) {
         accumulatedDelta = 0;
       }
       accumulatedDelta += deltaY;
 
-      // 6. Soglia di scatto a 8px: sensibilita ideale per scattare sia con flick brevissimi che con swipe lunghi
-      if (Math.abs(accumulatedDelta) < 8) {
+      // 5. Soglia di scatto a 24px: immune alle code di inerzia, reattiva a swipe reali
+      if (Math.abs(accumulatedDelta) < 24) {
         return;
       }
 
@@ -331,10 +364,9 @@ export function usePortfolioScroll(
         return;
       }
 
-      // Blocca rigorosamente: questa gesture ha consumato il suo scatto di 1 pillola.
-      // Non potra avanzare ulteriormente finche non termina l'animazione e la gesture non si ferma.
       isLocked = true;
       lastDirection = stepDirection;
+      lastStepTime = now;
 
       console.log(
         `[PortfolioScroll:wheel] 1-STEP -> targetIndex=${nextIndex} (${sections[nextIndex]?.label})`
@@ -342,6 +374,7 @@ export function usePortfolioScroll(
 
       navigateToSection(nextIndex, () => {
         lastTransitionEndTime = performance.now();
+        // isLocked viene rilasciato dal quietTimer o dal picco di accelerazione del prossimo swipe
       });
     };
 

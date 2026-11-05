@@ -1,9 +1,9 @@
 "use client";
 
-import { Ref, useEffect, useRef, useState } from "react";
+import { Ref, useRef, useState } from "react";
 import Image from "next/image";
 import VantaKnobWaves from "@/components/VantaKnobWaves";
-import { PROFILE_DATA } from "@/data/portfolio";
+import { useLiveContent } from "@/contexts/LiveContentContext";
 
 interface AboutCardProps {
   ref?: Ref<HTMLDivElement>;
@@ -18,19 +18,14 @@ export default function AboutCard({
   toggleState: controlledToggleState,
   onToggleChange,
 }: AboutCardProps) {
+  const { content } = useLiveContent();
+  const PROFILE_DATA = content.profile;
   const [internalToggleState, setInternalToggleState] = useState<"off" | "on">("off");
   const [hasToggledOnce, setHasToggledOnce] = useState(false);
   const touchStartYRef = useRef<number | null>(null);
 
   const toggleState = controlledToggleState !== undefined ? controlledToggleState : internalToggleState;
-
-  useEffect(() => {
-    if (controlledToggleState === "on") {
-      setHasToggledOnce(true);
-    }
-  }, [controlledToggleState]);
-
-  const effectiveHasToggledOnce = hasToggledOnce || toggleState === "on";
+  const effectiveHasToggledOnce = hasToggledOnce || toggleState === "on" || controlledToggleState === "on";
 
   const setEffectiveToggleState = (next: "off" | "on") => {
     setHasToggledOnce(true);
@@ -106,36 +101,36 @@ export default function AboutCard({
           {/* 1. STATO ATTIVO (ON): Dettagli a Sinistra */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[35%] max-w-[35%] my-auto h-fit max-h-[92%] flex flex-col justify-center px-1 sm:px-3 py-1 gap-2 sm:gap-2.5 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+            className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[36%] max-w-[36%] my-auto h-fit max-h-[92%] flex flex-col justify-center px-1 sm:px-3 py-1 gap-3 sm:gap-4 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
               isToggledOn
                 ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                 : "opacity-0 scale-95 -translate-x-12 pointer-events-none"
             }`}
           >
             <div>
-              <h2 className="text-xl sm:text-2xl md:text-[clamp(1.35rem,2.5cqw,2.6rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-[clamp(1.75rem,2.8cqw,3.2rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
                 {PROFILE_DATA.name}
               </h2>
-              <p className="text-[10px] sm:text-xs md:text-[13px] text-slate-600 font-medium leading-snug mt-0.5 sm:mt-1 w-full max-w-full break-words">
+              <p className="text-xs sm:text-sm md:text-base text-slate-600 font-medium leading-snug mt-1 sm:mt-1.5 w-full max-w-full break-words">
                 {PROFILE_DATA.age} / {PROFILE_DATA.role} / {PROFILE_DATA.locations}
               </p>
             </div>
 
-            <div className="flex flex-col gap-1 sm:gap-2 card-bio-text text-[11px] sm:text-xs md:text-[13px] text-slate-800 leading-relaxed w-full max-w-full break-words font-normal">
+            <div className="flex flex-col gap-2 card-bio-text text-xs sm:text-sm md:text-[clamp(0.95rem,1.25cqw,1.15rem)] text-slate-800 leading-relaxed w-full max-w-full break-words font-normal">
               <p>{PROFILE_DATA.bioParagraph1}</p>
               <p className="text-slate-600">{PROFILE_DATA.bioParagraph2}</p>
             </div>
 
             {/* Pulsanti di Azione */}
-            <div className="pt-0.5 sm:pt-1.5 flex flex-wrap items-center gap-1.5 sm:gap-2.5">
+            <div className="pt-1 sm:pt-2 flex flex-wrap items-center gap-2 sm:gap-3">
               <a
                 href={PROFILE_DATA.resumePdf}
                 target="_blank"
                 download
                 onClick={(e) => e.stopPropagation()}
-                className="px-3.5 sm:px-4 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[10px] sm:text-xs font-semibold transition-all cursor-pointer"
+                className="px-4 sm:px-5 py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-sm"
               >
-                Download Resume PDF
+                Resume
               </a>
               <button
                 type="button"
@@ -143,7 +138,7 @@ export default function AboutCard({
                   e.stopPropagation();
                   onContactClick();
                 }}
-                className="px-3.5 sm:px-4 py-1.5 rounded-full bg-slate-900/10 hover:bg-slate-900/20 active:scale-95 text-slate-900 text-[10px] sm:text-xs font-semibold border border-slate-900/15 backdrop-blur-md transition-all cursor-pointer"
+                className="px-4 sm:px-5 py-2 rounded-full bg-slate-900/10 hover:bg-slate-900/20 active:scale-95 text-slate-900 text-xs sm:text-sm font-semibold border border-slate-900/15 backdrop-blur-md transition-all cursor-pointer"
               >
                 Contact me
               </button>
@@ -159,7 +154,7 @@ export default function AboutCard({
             }`}
           >
             <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none">
-              <h3 className="text-center text-[clamp(1.15rem,2.2cqw,2.5rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors">
+              <h3 className="text-center text-[clamp(1.75rem,3.4cqw,4.2rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors">
                 About me
               </h3>
             </div>

@@ -3,12 +3,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import VantaKnobWaves from "@/components/VantaKnobWaves";
-import { TESTIMONIALS } from "@/data/portfolio";
+import { useLiveContent } from "@/contexts/LiveContentContext";
 
 export default function MobileRecommendationsCard() {
+  const { content } = useLiveContent();
+  const TESTIMONIALS = content.testimonials;
   const [toggleState, setToggleState] = useState<"off" | "on">("off");
   const [hasToggledOnce, setHasToggledOnce] = useState(false);
-  const [activeRec, setActiveRec] = useState<"antonio" | "sebastian">("antonio");
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleToggle = () => {
     setHasToggledOnce(true);
@@ -16,9 +18,17 @@ export default function MobileRecommendationsCard() {
   };
 
   const isToggledOn = toggleState === "on";
+  const currentTestimonial = TESTIMONIALS[currentIndex] || TESTIMONIALS[0];
 
-  const antonioTestimonial = TESTIMONIALS.find((t) => t.id === "antonio")!;
-  const sebastianTestimonial = TESTIMONIALS.find((t) => t.id === "sebastian")!;
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev === 0 ? TESTIMONIALS.length - 1 : prev - 1));
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev === TESTIMONIALS.length - 1 ? 0 : prev + 1));
+  };
 
   return (
     <section id="mobile-recommendations" className="w-full flex justify-center">
@@ -47,64 +57,65 @@ export default function MobileRecommendationsCard() {
                 : "bg-white"
             }`}
           >
-            {/* 1. STATO ATTIVO (ON): Testimonianze a sinistra con abbondante respiro */}
+            {/* 1. STATO ATTIVO (ON): Testimonianza Singola a sinistra con frecce */}
             <div
-              className={`absolute top-0 left-[6%] sm:left-[7%] w-[46%] sm:w-[45%] h-full flex flex-col justify-center space-y-1.5 sm:space-y-2.5 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+              className={`absolute top-0 left-[6%] sm:left-[7%] w-[46%] sm:w-[45%] h-full flex flex-col justify-center space-y-1 sm:space-y-2 transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
                 isToggledOn
                   ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                   : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
               }`}
             >
-              <div className="flex items-center gap-1.5 sm:gap-2 pb-0.5" onClick={(e) => e.stopPropagation()}>
-                <button
-                  type="button"
-                  onClick={() => setActiveRec("antonio")}
-                  className={`px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                    activeRec === "antonio"
-                      ? "bg-slate-900 text-white"
-                      : "bg-slate-900/10 text-slate-700 hover:bg-slate-900/15"
-                  }`}
-                >
-                  Antonio
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveRec("sebastian")}
-                  className={`px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                    activeRec === "sebastian"
-                      ? "bg-slate-900 text-white"
-                      : "bg-slate-900/10 text-slate-700 hover:bg-slate-900/15"
-                  }`}
-                >
-                  Sebastian
-                </button>
-              </div>
-
-              {activeRec === "antonio" ? (
+              {currentTestimonial && (
                 <div className="space-y-1">
-                  <p className="text-xs sm:text-sm md:text-base text-slate-800 italic line-clamp-2 sm:line-clamp-3 leading-snug">
-                    &ldquo;{antonioTestimonial.shortQuote}&rdquo;
+                  <p className="text-[11px] sm:text-xs md:text-sm text-slate-800 italic line-clamp-3 leading-snug">
+                    &ldquo;{currentTestimonial.shortQuote || currentTestimonial.fullQuote}&rdquo;
                   </p>
-                  <p className="text-[11px] sm:text-xs md:text-sm font-bold text-slate-900">
-                    {antonioTestimonial.name} ·{" "}
-                    <span className="font-normal text-slate-500 text-[10px] sm:text-xs">
-                      {antonioTestimonial.role}
-                    </span>
-                  </p>
-                </div>
-              ) : (
-                <div className="space-y-1">
-                  <p className="text-xs sm:text-sm md:text-base text-slate-800 italic line-clamp-2 sm:line-clamp-3 leading-snug">
-                    &ldquo;{sebastianTestimonial.shortQuote}&rdquo;
-                  </p>
-                  <p className="text-[11px] sm:text-xs md:text-sm font-bold text-slate-900">
-                    {sebastianTestimonial.name} ·{" "}
-                    <span className="font-normal text-slate-500 text-[10px] sm:text-xs">
-                      {sebastianTestimonial.role}
-                    </span>
-                  </p>
+                  <div>
+                    <p className="text-[11px] sm:text-xs font-bold text-slate-900 leading-tight">
+                      {currentTestimonial.name}
+                    </p>
+                    <p className="text-[9px] sm:text-[10px] text-slate-500 leading-tight">
+                      {currentTestimonial.role}
+                    </p>
+                  </div>
                 </div>
               )}
+
+              {/* Frecce Carosello + Dots */}
+              <div
+                className="flex items-center justify-between pt-0.5"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center gap-1">
+                  {TESTIMONIALS.map((t, idx) => (
+                    <span
+                      key={t.id}
+                      className={`h-1 rounded-full transition-all ${
+                        currentIndex === idx ? "w-3 bg-slate-900" : "w-1 bg-slate-300"
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-1">
+                  <button
+                    type="button"
+                    onClick={handlePrev}
+                    aria-label="Precedente"
+                    className="w-6 h-6 rounded-full bg-slate-900/10 hover:bg-slate-900 hover:text-white text-slate-900 flex items-center justify-center font-bold text-xs transition-all active:scale-90"
+                  >
+                    ←
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    aria-label="Successivo"
+                    className="w-6 h-6 rounded-full bg-slate-900/10 hover:bg-slate-900 hover:text-white text-slate-900 flex items-center justify-center font-bold text-xs transition-all active:scale-90"
+                  >
+                    →
+                  </button>
+                </div>
+              </div>
             </div>
 
             {/* 2. STATO SPENTO (OFF): Cover con titolo a destra */}
@@ -149,34 +160,23 @@ export default function MobileRecommendationsCard() {
                   />
                 )}
                 <div className="relative z-10 w-full h-full rounded-full overflow-hidden flex items-center justify-center">
-                  <div
-                    className={`absolute inset-0 transition-opacity duration-500 ease-out rounded-full overflow-hidden ${
-                      activeRec === "antonio" ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
-                    }`}
-                  >
-                    <Image
-                      src={antonioTestimonial.photo}
-                      alt={antonioTestimonial.photoAlt}
-                      fill
-                      unoptimized
-                      sizes="160px"
-                      className={`object-cover ${antonioTestimonial.photoPosition || "object-[center_32%]"}`}
-                    />
-                  </div>
-                  <div
-                    className={`absolute inset-0 transition-opacity duration-500 ease-out rounded-full overflow-hidden ${
-                      activeRec === "sebastian" ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
-                    }`}
-                  >
-                    <Image
-                      src={sebastianTestimonial.photo}
-                      alt={sebastianTestimonial.photoAlt}
-                      fill
-                      unoptimized
-                      sizes="160px"
-                      className={`object-cover ${sebastianTestimonial.photoPosition || "object-[52%_48%]"}`}
-                    />
-                  </div>
+                  {TESTIMONIALS.map((t, idx) => (
+                    <div
+                      key={t.id}
+                      className={`absolute inset-0 transition-opacity duration-500 ease-out rounded-full overflow-hidden ${
+                        currentIndex === idx ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
+                      }`}
+                    >
+                      <Image
+                        src={t.photo}
+                        alt={t.photoAlt || t.name}
+                        fill
+                        unoptimized
+                        sizes="160px"
+                        className={`object-cover ${t.photoPosition || "object-center"}`}
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

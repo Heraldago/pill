@@ -1,7 +1,7 @@
 "use client";
 
 import { Ref } from "react";
-import { CASE_STUDIES } from "@/data/portfolio";
+import { useLiveContent } from "@/contexts/LiveContentContext";
 import HeroCard from "@/components/cards/desktop/HeroCard";
 import CaseStudyCard from "@/components/cards/desktop/CaseStudyCard";
 import AboutCard from "@/components/cards/desktop/AboutCard";
@@ -47,6 +47,9 @@ export default function DesktopCardStack({
   toggleStates,
   onToggleChange,
 }: DesktopCardStackProps) {
+  const { content } = useLiveContent();
+  const studies = content.caseStudies;
+
   return (
     <div className="hidden md:block fixed inset-0 w-screen h-[100dvh] overflow-hidden">
       {/* Stage 3D fisso 100% schermo: ogni pillola ruota nel portale 3D una alla volta */}
@@ -63,43 +66,49 @@ export default function DesktopCardStack({
           />
         </div>
 
-        {/* Card 2: Ungdomskort */}
-        <div className="warp-card-node" data-card-state={getCardState(1, activeSectionIndex)}>
-          <CaseStudyCard
-            ref={card2Ref}
-            caseStudy={CASE_STUDIES[0]}
-            zIndexClass="z-20"
-            imagePadding=""
-            priorityImage
-            toggleState={toggleStates[1] || "off"}
-            onToggleChange={(s) => onToggleChange(1, s)}
-          />
-        </div>
+        {/* Card 2: Progetto 1 */}
+        {studies[0] && (
+          <div className="warp-card-node" data-card-state={getCardState(1, activeSectionIndex)}>
+            <CaseStudyCard
+              ref={card2Ref}
+              caseStudy={studies[0]}
+              zIndexClass="z-20"
+              imagePadding=""
+              priorityImage
+              toggleState={toggleStates[1] || "off"}
+              onToggleChange={(s) => onToggleChange(1, s)}
+            />
+          </div>
+        )}
 
-        {/* Card 3: X-Bit */}
-        <div className="warp-card-node" data-card-state={getCardState(2, activeSectionIndex)}>
-          <CaseStudyCard
-            ref={card3Ref}
-            caseStudy={CASE_STUDIES[1]}
-            zIndexClass="z-[25]"
-            imagePadding="p-2 sm:p-4"
-            priorityImage
-            toggleState={toggleStates[2] || "off"}
-            onToggleChange={(s) => onToggleChange(2, s)}
-          />
-        </div>
+        {/* Card 3: Progetto 2 */}
+        {studies[1] && (
+          <div className="warp-card-node" data-card-state={getCardState(2, activeSectionIndex)}>
+            <CaseStudyCard
+              ref={card3Ref}
+              caseStudy={studies[1]}
+              zIndexClass="z-[25]"
+              imagePadding="p-2 sm:p-4"
+              priorityImage
+              toggleState={toggleStates[2] || "off"}
+              onToggleChange={(s) => onToggleChange(2, s)}
+            />
+          </div>
+        )}
 
-        {/* Card 4: I Pupi Siciliani */}
-        <div className="warp-card-node" data-card-state={getCardState(3, activeSectionIndex)}>
-          <CaseStudyCard
-            ref={card4Ref}
-            caseStudy={CASE_STUDIES[2]}
-            zIndexClass="z-[30]"
-            imagePadding="p-2 sm:p-4"
-            toggleState={toggleStates[3] || "off"}
-            onToggleChange={(s) => onToggleChange(3, s)}
-          />
-        </div>
+        {/* Card 4: Progetto 3 */}
+        {studies[2] && (
+          <div className="warp-card-node" data-card-state={getCardState(3, activeSectionIndex)}>
+            <CaseStudyCard
+              ref={card4Ref}
+              caseStudy={studies[2]}
+              zIndexClass="z-[30]"
+              imagePadding="p-2 sm:p-4"
+              toggleState={toggleStates[3] || "off"}
+              onToggleChange={(s) => onToggleChange(3, s)}
+            />
+          </div>
+        )}
 
         {/* Card 5: About Me */}
         <div className="warp-card-node" data-card-state={getCardState(4, activeSectionIndex)}>

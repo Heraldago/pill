@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import VantaKnobWaves from "@/components/VantaKnobWaves";
-import { CONTACT_DATA } from "@/data/portfolio";
+import { useLiveContent } from "@/contexts/LiveContentContext";
 
 export default function MobileContactCard() {
+  const { content } = useLiveContent();
+  const CONTACT_DATA = content.contact;
   const [toggleState, setToggleState] = useState<"off" | "on">("off");
   const [hasToggledOnce, setHasToggledOnce] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
@@ -68,33 +70,26 @@ export default function MobileContactCard() {
                 </p>
               </div>
 
-              <div className="flex flex-col gap-1 sm:gap-1.5 pt-0.5" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center gap-1.5 sm:gap-2 pt-0.5" onClick={(e) => e.stopPropagation()}>
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="w-full py-1.5 sm:py-2 px-2.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold transition-all text-center cursor-pointer"
+                  className="flex-1 py-1.5 sm:py-2 px-2.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold transition-all text-center cursor-pointer truncate"
                 >
                   {copiedEmail ? "Copied!" : CONTACT_DATA.email}
                 </button>
-
-                <div className="flex items-center gap-1.5 sm:gap-2">
-                  <a
-                    href={CONTACT_DATA.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 py-1.5 sm:py-2 px-2 rounded-full bg-slate-900/10 text-slate-900 text-xs sm:text-sm font-semibold border border-slate-900/15 text-center active:scale-95 transition-all"
-                  >
-                    LinkedIn ↗
-                  </a>
-                  <a
-                    href={CONTACT_DATA.resumePdf}
-                    target="_blank"
-                    download
-                    className="flex-1 py-1.5 sm:py-2 px-2 rounded-full bg-slate-900/10 text-slate-900 text-xs sm:text-sm font-semibold border border-slate-900/15 text-center active:scale-95 transition-all"
-                  >
-                    Resume ↗
-                  </a>
-                </div>
+                <a
+                  href={CONTACT_DATA.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="LinkedIn"
+                  aria-label="LinkedIn"
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-900/10 hover:bg-[#0077b5] hover:text-white active:scale-95 text-slate-900 border border-slate-900/15 transition-all flex items-center justify-center shrink-0 cursor-pointer"
+                >
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                  </svg>
+                </a>
               </div>
             </div>
 

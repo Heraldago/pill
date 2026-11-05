@@ -3,9 +3,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import VantaKnobWaves from "@/components/VantaKnobWaves";
-import { PROFILE_DATA } from "@/data/portfolio";
+import { useLiveContent } from "@/contexts/LiveContentContext";
 
 export default function MobileAboutCard() {
+  const { content } = useLiveContent();
+  const PROFILE_DATA = content.profile;
   const [toggleState, setToggleState] = useState<"off" | "on">("off");
   const [hasToggledOnce, setHasToggledOnce] = useState(false);
 
@@ -65,7 +67,7 @@ export default function MobileAboutCard() {
                   onClick={(e) => e.stopPropagation()}
                   className="px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-slate-900 hover:bg-black text-white text-xs sm:text-sm font-semibold transition-all"
                 >
-                  CV PDF
+                  Resume
                 </a>
                 <button
                   type="button"

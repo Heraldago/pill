@@ -60,13 +60,10 @@ export default function MobileCaseStudyCard({
                 : "opacity-0 scale-90 -translate-x-10 pointer-events-none"
             }`}
           >
-            <span className="text-[10px] sm:text-xs md:text-sm font-bold text-blue-600 tracking-wider uppercase">
-              {caseStudy.badge}
-            </span>
-            <h3 className="text-[clamp(1.05rem,4.2cqw,1.45rem)] font-extrabold text-slate-900 tracking-tight leading-tight">
+            <h3 className="text-[clamp(1.15rem,4.4cqw,1.55rem)] font-extrabold text-slate-900 tracking-tight leading-tight">
               {caseStudy.title}
             </h3>
-            <p className="text-[clamp(0.6875rem,2.6cqw,0.85rem)] text-slate-600 line-clamp-2 sm:line-clamp-3 leading-snug">
+            <p className="text-[clamp(0.75rem,2.8cqw,0.9rem)] text-slate-700 line-clamp-2 sm:line-clamp-3 leading-snug">
               {caseStudy.mobileSubtitle}
             </p>
             <div className="pt-0.5 sm:pt-1">

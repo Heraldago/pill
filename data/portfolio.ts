@@ -12,7 +12,7 @@ export interface CaseStudy {
 }
 
 export interface Testimonial {
-  id: "antonio" | "sebastian";
+  id: string;
   name: string;
   role: string;
   fullQuote: string;
@@ -26,7 +26,7 @@ export interface Testimonial {
 export const SECTIONS = [
   { id: "hero", label: "Intro" },
   { id: "case-1", label: "Ungdomskort" },
-  { id: "case-2", label: "X-Bit" },
+  { id: "case-2", label: "Xbit" },
   { id: "case-3", label: "I Pupi Siciliani" },
   { id: "about", label: "About Me" },
   { id: "recommendations", label: "Recommendations" },
@@ -37,10 +37,10 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     id: "ungdomskort",
     number: "1",
-    badge: "Transit Platform",
+    badge: "Transit Redesign",
     title: "Ungdomskort",
-    desktopSubtitle: "Denmark's youth transit pass platform redesign.",
-    mobileSubtitle: "Redesign of Denmark's youth transit pass platform.",
+    desktopSubtitle: "Website redesign and mobile app design for Denmark's national student transport service.",
+    mobileSubtitle: "Website and mobile app redesign for Denmark's national student transport service.",
     link: "/work/ungdomskort",
     imageOff: "/ungheromockup.svg",
     imageAlt: "Ungdomskort Hero Mockup",
@@ -48,21 +48,21 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     id: "xbit",
     number: "2",
-    badge: "Museum Exploration",
-    title: "X-Bit",
-    desktopSubtitle: "Museum exploration and interactive audio guide.",
-    mobileSubtitle: "Interactive audio guide and cultural heritage exploration platform.",
+    badge: "Google UX Certificate",
+    title: "Xbit",
+    desktopSubtitle: "End-to-end design of a public art museum app.",
+    mobileSubtitle: "End-to-end design of a public art museum app.",
     link: "/work/xbit",
     imageOff: "/xbitheromockup.svg",
-    imageAlt: "X-Bit Museum App Mockup",
+    imageAlt: "Xbit Museum App Mockup",
   },
   {
     id: "pupisiciliani",
     number: "3",
-    badge: "E-Commerce & Wine",
-    title: "I Pupi Siciliani",
-    desktopSubtitle: "Wine retail platform with +187% YoY profit.",
-    mobileSubtitle: "Bespoke digital wine store experience delivering +187% profit growth.",
+    badge: "Wine E-Commerce",
+    title: "I Pupi Siciliani Specialities",
+    desktopSubtitle: "E-commerce for a well-known Italian restaurant in Denmark.",
+    mobileSubtitle: "E-commerce for a well-known Italian restaurant in Denmark.",
     link: "/work/pupisiciliani",
     imageOff: "/pupi-mockup.svg",
     imageOn: "/pupi-mockup-white.svg",
@@ -71,6 +71,28 @@ export const CASE_STUDIES: CaseStudy[] = [
 ];
 
 export const TESTIMONIALS: Testimonial[] = [
+  {
+    id: "bertrand",
+    name: "Bertrand Amaraggi",
+    role: "Co-founder, GoCoCo",
+    fullQuote: "Herald bridges product design, tech, and business needs with ease. A sharp profile who automates workflows and delivers value from day one.",
+    shortQuote: "Herald bridges product design, tech, and business needs with ease. A sharp profile who delivers value from day one.",
+    avatar: "/bertrand-amaraggi.jpg",
+    photo: "/bertrand-amaraggi.jpg",
+    photoAlt: "Bertrand Amaraggi, Co-founder GoCoCo",
+    photoPosition: "object-[58%_20%]",
+  },
+  {
+    id: "matthieu",
+    name: "Matthieu Lepelley",
+    role: "COO, Carolus Invest",
+    fullQuote: "Herald deeply understands user flows, seeing each screen as part of a complete journey. His UI work is clean, thoughtful, and built for conversion.",
+    shortQuote: "Herald deeply understands user flows, seeing each screen as part of a complete journey. UI built for conversion.",
+    avatar: "/matthieu-lepelley.jpg",
+    photo: "/matthieu-lepelley.jpg",
+    photoAlt: "Matthieu Lepelley, COO Carolus Invest",
+    photoPosition: "object-[center_20%]",
+  },
   {
     id: "antonio",
     name: "Antonio",
@@ -99,9 +121,9 @@ export const PROFILE_DATA = {
   name: "Herald Ago",
   age: "27 y/o",
   role: "Product Designer",
-  locations: "Italy & Barcelona",
+  locations: "Italy",
   bioParagraph1:
-    "Italian with Albanian roots, born and raised in Padua. After a Bachelor in Communication Science & Technologies, I moved to Miami, then headed to Denmark for an MSc in IT – Web Communication Design. After returning to Italy, I now live between Italy and Barcelona.",
+    "Italian with Albanian roots, born and raised in Padua. After earning my bachelor’s in Communication at UniFe, I moved to Miami Beach to manage South Pointe Café. I then flew to Denmark to complete an MSc in IT – Web Design at SDU, before living and working on projects across Europe.",
   bioParagraph2:
     "Passionate about design, AI, sociology, books, and travel. Beyond the screen, I love good food, great wine, and spending time with family and friends.",
   shortBio:

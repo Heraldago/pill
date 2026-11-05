@@ -1,37 +1,31 @@
 "use client";
 
-import { Ref, useEffect, useRef, useState } from "react";
+import { Ref, useRef, useState } from "react";
 import Image from "next/image";
 import VantaKnobWaves from "@/components/VantaKnobWaves";
-import { TESTIMONIALS } from "@/data/portfolio";
+import { useLiveContent } from "@/contexts/LiveContentContext";
 
 interface RecommendationsCardProps {
   ref?: Ref<HTMLDivElement>;
-  onContactClick: () => void;
+  onContactClick?: () => void;
   toggleState?: "off" | "on";
   onToggleChange?: (state: "off" | "on") => void;
 }
 
 export default function RecommendationsCard({
   ref,
-  onContactClick,
   toggleState: controlledToggleState,
   onToggleChange,
 }: RecommendationsCardProps) {
+  const { content } = useLiveContent();
+  const TESTIMONIALS = content.testimonials;
   const [internalToggleState, setInternalToggleState] = useState<"off" | "on">("off");
   const [hasToggledOnce, setHasToggledOnce] = useState(false);
-  const [activeRecPhoto, setActiveRecPhoto] = useState<"antonio" | "sebastian">("antonio");
+  const [currentIndex, setCurrentIndex] = useState(0);
   const touchStartYRef = useRef<number | null>(null);
 
   const toggleState = controlledToggleState !== undefined ? controlledToggleState : internalToggleState;
-
-  useEffect(() => {
-    if (controlledToggleState === "on") {
-      setHasToggledOnce(true);
-    }
-  }, [controlledToggleState]);
-
-  const effectiveHasToggledOnce = hasToggledOnce || toggleState === "on";
+  const effectiveHasToggledOnce = hasToggledOnce || toggleState === "on" || controlledToggleState === "on";
 
   const setEffectiveToggleState = (next: "off" | "on") => {
     setHasToggledOnce(true);
@@ -61,6 +55,18 @@ export default function RecommendationsCard({
   };
 
   const isToggledOn = toggleState === "on";
+  const currentTestimonial = TESTIMONIALS[currentIndex] || TESTIMONIALS[0];
+  const activeRecPhoto = currentTestimonial?.id;
+
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev === 0 ? TESTIMONIALS.length - 1 : prev - 1));
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev === TESTIMONIALS.length - 1 ? 0 : prev + 1));
+  };
 
   return (
     <div
@@ -77,14 +83,12 @@ export default function RecommendationsCard({
         <div
           role="switch"
           aria-checked={isToggledOn}
-          tabIndex={0}
           aria-label={
             !isToggledOn
-              ? "Attiva raccomandazioni e testimonianze"
-              : "Torna alla copertina delle raccomandazioni"
+              ? "Attiva raccomandazioni Kind Words"
+              : "Torna a copertina Kind Words"
           }
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
+          tabIndex={0}
           onClick={handleToggle}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
@@ -92,6 +96,8 @@ export default function RecommendationsCard({
               handleToggle();
             }
           }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
           style={
             {
               "--knob-pad": "clamp(8px, 1.6cqw, 18px)",
@@ -104,76 +110,92 @@ export default function RecommendationsCard({
               : "bg-white"
           }`}
         >
-          {/* 1. STATO ATTIVO (ON): Dettagli a Sinistra */}
+          {/* 1. STATO ATTIVO (ON): Testimonianza Singola a Sinistra (blocco compatto che non collide con il knob) */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[35%] max-w-[35%] my-auto h-fit max-h-[92%] flex flex-col justify-center px-1 sm:px-3 py-1 gap-1.5 sm:gap-2.5 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+            className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[31%] max-w-[32%] my-auto h-fit max-h-[92%] flex flex-col justify-center px-1 sm:px-2 py-1 gap-3 sm:gap-3.5 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
               isToggledOn
                 ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                 : "opacity-0 scale-95 -translate-x-12 pointer-events-none"
             }`}
           >
-            <div>
-              <h2 className="text-base sm:text-lg md:text-[clamp(1.15rem,2cqw,2rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
+            {/* Header con Titolo e Contatore in font naturale */}
+            <div className="flex items-center justify-between w-full">
+              <h2 className="text-2xl sm:text-3xl md:text-[clamp(1.75rem,2.8cqw,3.2rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
                 Kind Words
               </h2>
+              <span className="text-xs sm:text-sm font-medium text-slate-400">
+                {currentIndex + 1} / {TESTIMONIALS.length}
+              </span>
             </div>
 
-            {/* Testimonials List */}
-            <div className="flex flex-col gap-1.5 sm:gap-2 card-rec-list">
-              {TESTIMONIALS.map((testimonial) => {
-                const isSelected = activeRecPhoto === testimonial.id;
-                return (
-                  <div
-                    key={testimonial.id}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveRecPhoto(testimonial.id);
-                    }}
-                    onMouseEnter={() => setActiveRecPhoto(testimonial.id)}
-                    className={`p-1.5 sm:p-2 md:p-2.5 rec-card-item rounded-xl transition-all duration-300 backdrop-blur-md cursor-pointer ${
-                      isSelected
-                        ? "bg-white border-2 border-slate-900/20 text-slate-900 scale-[1.01]"
-                        : "bg-slate-900/[0.05] border border-slate-900/10 hover:bg-slate-900/[0.08] hover:border-slate-900/20 text-slate-800"
-                    }`}
-                  >
-                    <p className="text-[10px] sm:text-[11px] md:text-xs leading-snug font-normal text-slate-800 break-words">
-                      &ldquo;{testimonial.shortQuote}&rdquo;
-                    </p>
-                    <div className="flex items-center gap-1.5 mt-1 sm:mt-1.5">
-                      <div className="relative w-5 h-5 sm:w-6 sm:h-6 rounded-full overflow-hidden border border-slate-900/20 flex-shrink-0">
-                        <Image
-                          src={testimonial.avatar}
-                          alt={testimonial.name}
-                          fill
-                          unoptimized
-                          sizes="24px"
-                          className="object-cover object-center"
-                        />
-                      </div>
-                      <div>
-                        <p className="text-[9px] sm:text-[11px] font-semibold text-slate-900 leading-tight">{testimonial.name}</p>
-                        <p className="text-[8px] sm:text-[9px] text-slate-600 leading-tight">{testimonial.role}</p>
-                      </div>
+            {/* Testimonial Singola con Card compatta ed elegante */}
+            {currentTestimonial && (
+              <div className="relative p-3.5 sm:p-4.5 md:p-5 rounded-2xl bg-slate-900/[0.04] border border-slate-900/10 shadow-sm backdrop-blur-md flex flex-col justify-between gap-3 min-h-[160px]">
+                <p className="text-xs sm:text-sm md:text-[clamp(0.88rem,1.15cqw,1.02rem)] leading-relaxed font-normal text-slate-800 break-words">
+                  &ldquo;{currentTestimonial.fullQuote}&rdquo;
+                </p>
+
+                <div className="flex items-center justify-between pt-2 border-t border-slate-900/10">
+                  <div className="flex items-center gap-2.5 min-w-0 pr-2">
+                    <div className="relative w-8 h-8 rounded-full overflow-hidden border border-slate-900/20 shrink-0">
+                      <Image
+                        src={currentTestimonial.avatar}
+                        alt={currentTestimonial.name}
+                        fill
+                        unoptimized
+                        sizes="32px"
+                        className="object-cover object-center"
+                      />
+                    </div>
+                    <div className="truncate">
+                      <p className="text-xs sm:text-sm font-bold text-slate-900 leading-tight truncate">
+                        {currentTestimonial.name}
+                      </p>
+                      <p className="text-[11px] sm:text-xs text-slate-600 leading-tight truncate">
+                        {currentTestimonial.role}
+                      </p>
                     </div>
                   </div>
-                );
-              })}
-            </div>
 
-            {/* Pulsante Navigazione */}
-            <div className="pt-0.5 sm:pt-1">
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onContactClick();
-                }}
-                className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[10px] sm:text-xs font-semibold transition-all cursor-pointer"
-              >
-                <span>Next: Contact</span>
-                <span className="text-[10px] sm:text-xs font-bold">↗</span>
-              </button>
+                  {/* Frecce Sinistra e Destra */}
+                  <div className="flex items-center gap-1 shrink-0">
+                    <button
+                      type="button"
+                      onClick={handlePrev}
+                      aria-label="Testimonianza precedente"
+                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-900/10 hover:bg-slate-900 hover:text-white text-slate-900 flex items-center justify-center font-bold text-xs sm:text-sm transition-all cursor-pointer active:scale-90"
+                    >
+                      ←
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleNext}
+                      aria-label="Testimonianza successiva"
+                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-900/10 hover:bg-slate-900 hover:text-white text-slate-900 flex items-center justify-center font-bold text-xs sm:text-sm transition-all cursor-pointer active:scale-90"
+                    >
+                      →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Dots di navigazione (Contact button completamente rimosso) */}
+            <div className="flex items-center gap-1.5 pt-0.5">
+              {TESTIMONIALS.map((t, idx) => (
+                <button
+                  key={t.id}
+                  type="button"
+                  onClick={() => setCurrentIndex(idx)}
+                  aria-label={`Vai a testimonial ${idx + 1}`}
+                  className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                    currentIndex === idx
+                      ? "w-5 bg-slate-900"
+                      : "w-1.5 bg-slate-300 hover:bg-slate-500"
+                  }`}
+                />
+              ))}
             </div>
           </div>
 
@@ -186,7 +208,7 @@ export default function RecommendationsCard({
             }`}
           >
             <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none">
-              <h3 className="text-center text-[clamp(1.1rem,2.1cqw,2.4rem)] font-bold tracking-tight text-white/90 group-hover:text-white transition-colors">
+              <h3 className="text-center text-[clamp(1.75rem,3.4cqw,4.2rem)] font-bold tracking-tight text-white/90 group-hover:text-white transition-colors">
                 Recommendations
               </h3>
             </div>
@@ -221,38 +243,24 @@ export default function RecommendationsCard({
               <div
                 className="relative z-10 w-full h-full min-h-full flex items-center justify-center pointer-events-none transition-all duration-500 ease-out rounded-[1000px] overflow-hidden opacity-100"
               >
-                {/* Foto Antonio */}
-                <div
-                  className={`absolute inset-0 transition-opacity duration-500 ease-out ${
-                    activeRecPhoto === "antonio" ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
-                  }`}
-                >
-                  <Image
-                    src="/antonio-founder.jpg"
-                    alt="Antonio, Founder I Pupi Siciliani"
-                    fill
-                    priority
-                    unoptimized
-                    sizes="(max-width: 768px) 85vw, 45vw"
-                    className="object-cover object-[center_32%]"
-                  />
-                </div>
-
-                {/* Foto Herald & Sebastian */}
-                <div
-                  className={`absolute inset-0 transition-opacity duration-500 ease-out ${
-                    activeRecPhoto === "sebastian" ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
-                  }`}
-                >
-                  <Image
-                    src="/herald-sebastian-team.jpg"
-                    alt="Herald with Sebastian, CEO næmt.nu"
-                    fill
-                    unoptimized
-                    sizes="(max-width: 768px) 85vw, 45vw"
-                    className="object-cover object-[52%_48%]"
-                  />
-                </div>
+                {TESTIMONIALS.map((t) => (
+                  <div
+                    key={t.id}
+                    className={`absolute inset-0 transition-opacity duration-500 ease-out ${
+                      activeRecPhoto === t.id ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
+                    }`}
+                  >
+                    <Image
+                      src={t.photo}
+                      alt={t.photoAlt || t.name}
+                      fill
+                      priority
+                      unoptimized
+                      sizes="(max-width: 768px) 85vw, 45vw"
+                      className={`object-cover ${t.photoPosition || "object-center"}`}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>

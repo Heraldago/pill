@@ -1,6 +1,6 @@
 "use client";
 
-import { Ref, useEffect, useRef, useState } from "react";
+import { Ref, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import VantaKnobWaves from "@/components/VantaKnobWaves";
@@ -30,14 +30,7 @@ export default function CaseStudyCard({
   const touchStartYRef = useRef<number | null>(null);
 
   const toggleState = controlledToggleState !== undefined ? controlledToggleState : internalToggleState;
-
-  useEffect(() => {
-    if (controlledToggleState === "on") {
-      setHasToggledOnce(true);
-    }
-  }, [controlledToggleState]);
-
-  const effectiveHasToggledOnce = hasToggledOnce || toggleState === "on";
+  const effectiveHasToggledOnce = hasToggledOnce || toggleState === "on" || controlledToggleState === "on";
 
   const setEffectiveToggleState = (next: "off" | "on") => {
     setHasToggledOnce(true);
@@ -113,32 +106,29 @@ export default function CaseStudyCard({
         >
           {/* 1. STATO ATTIVO (ON): Dettagli a Sinistra */}
           <div
-            className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[35%] max-w-[35%] my-auto h-fit max-h-[92%] flex flex-col justify-center px-1 sm:px-3 py-1 gap-2 sm:gap-3 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+            className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[36%] max-w-[36%] my-auto h-fit max-h-[92%] flex flex-col justify-center px-1 sm:px-3 py-1 gap-3 sm:gap-4 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
               isToggledOn
                 ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                 : "opacity-0 scale-95 -translate-x-12 pointer-events-none"
             }`}
           >
             <div>
-              <span className="text-[10px] sm:text-xs font-bold text-blue-600 tracking-wider uppercase mb-0.5 sm:mb-1 block">
-                {caseStudy.badge}
-              </span>
-              <h2 className="card-title-lg text-xl sm:text-2xl md:text-[clamp(1.15rem,2.1cqw,2.4rem)] font-bold text-slate-900 tracking-tight leading-tight">
+              <h2 className="card-title-lg text-2xl sm:text-3xl md:text-[clamp(1.75rem,2.8cqw,3.2rem)] font-bold text-slate-900 tracking-tight leading-tight">
                 {caseStudy.title}
               </h2>
-              <p className="card-bio-text text-[clamp(0.75rem,1.05cqw,0.95rem)] text-slate-700 font-normal leading-relaxed mt-1 sm:mt-1.5 w-full max-w-full break-words">
+              <p className="card-bio-text text-sm sm:text-base md:text-[clamp(1rem,1.35cqw,1.25rem)] text-slate-700 font-normal leading-relaxed mt-2 sm:mt-3 w-full max-w-full break-words">
                 {caseStudy.desktopSubtitle}
               </p>
             </div>
 
             {/* Pulsante primario scuro */}
-            <div className="pt-0.5 sm:pt-1">
+            <div className="pt-1 sm:pt-2">
               <Link
                 href={caseStudy.link}
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
-                className="inline-flex items-center px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[11px] sm:text-xs font-semibold transition-all cursor-pointer"
+                className="inline-flex items-center px-5 sm:px-6 py-2 sm:py-2.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-sm"
               >
                 <span>See more</span>
               </Link>
@@ -154,7 +144,7 @@ export default function CaseStudyCard({
             }`}
           >
             <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none">
-              <h3 className="text-center text-[clamp(1.15rem,2.2cqw,2.5rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors">
+              <h3 className="text-center text-[clamp(1.75rem,3.4cqw,4.2rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors">
                 {caseStudy.title}
               </h3>
             </div>

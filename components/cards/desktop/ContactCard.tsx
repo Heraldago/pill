@@ -1,8 +1,8 @@
 "use client";
 
-import { Ref, useEffect, useRef, useState } from "react";
+import { Ref, useRef, useState } from "react";
 import VantaKnobWaves from "@/components/VantaKnobWaves";
-import { CONTACT_DATA } from "@/data/portfolio";
+import { useLiveContent } from "@/contexts/LiveContentContext";
 
 interface ContactCardProps {
   ref?: Ref<HTMLDivElement>;
@@ -15,19 +15,14 @@ export default function ContactCard({
   toggleState: controlledToggleState,
   onToggleChange,
 }: ContactCardProps) {
+  const { content } = useLiveContent();
+  const CONTACT_DATA = content.contact;
   const [internalToggleState, setInternalToggleState] = useState<"off" | "on">("off");
   const [hasToggledOnce, setHasToggledOnce] = useState(false);
   const touchStartYRef = useRef<number | null>(null);
 
   const toggleState = controlledToggleState !== undefined ? controlledToggleState : internalToggleState;
-
-  useEffect(() => {
-    if (controlledToggleState === "on") {
-      setHasToggledOnce(true);
-    }
-  }, [controlledToggleState]);
-
-  const effectiveHasToggledOnce = hasToggledOnce || toggleState === "on";
+  const effectiveHasToggledOnce = hasToggledOnce || toggleState === "on" || controlledToggleState === "on";
 
   const setEffectiveToggleState = (next: "off" | "on") => {
     setHasToggledOnce(true);
@@ -127,30 +122,30 @@ export default function ContactCard({
           {/* 1. STATO ATTIVO (ON): Dettagli a Sinistra */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[35%] max-w-[35%] my-auto h-fit max-h-[92%] flex flex-col justify-center px-1 sm:px-3 py-1 gap-1.5 sm:gap-2.5 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+            className={`absolute top-0 bottom-0 left-[5%] sm:left-[6%] md:left-[7%] w-[36%] max-w-[36%] my-auto h-fit max-h-[92%] flex flex-col justify-center px-1 sm:px-3 py-1 gap-2.5 sm:gap-3.5 card-on-container overflow-y-auto [scrollbar-width:none] transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
               isToggledOn
                 ? "opacity-100 scale-100 translate-x-0 pointer-events-auto"
                 : "opacity-0 scale-95 -translate-x-12 pointer-events-none"
             }`}
           >
             <div>
-              <h2 className="text-xl sm:text-2xl md:text-[clamp(1.35rem,2.5cqw,2.6rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-[clamp(1.75rem,2.8cqw,3.2rem)] card-title-lg font-bold text-slate-900 tracking-tight leading-tight">
                 Let&apos;s Connect
               </h2>
-              <p className="text-[10px] sm:text-xs text-slate-700 font-normal leading-snug mt-0.5">
+              <p className="text-xs sm:text-sm md:text-base text-slate-700 font-normal leading-snug mt-1">
                 Open for product design opportunities.
               </p>
             </div>
 
-            {/* Bottoni Rapidi: Email, LinkedIn, Resume */}
+            {/* Bottoni Rapidi: Email e LinkedIn Icon */}
             <div
               onClick={(e) => e.stopPropagation()}
-              className="flex flex-wrap items-center gap-1.5 pt-0.5"
+              className="flex items-center gap-2 pt-1"
             >
               <button
                 type="button"
                 onClick={handleCopyEmail}
-                className="px-3 sm:px-3.5 py-1 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-[10px] sm:text-xs font-semibold transition-all cursor-pointer"
+                className="px-3.5 sm:px-4 py-1.5 rounded-full bg-slate-900 hover:bg-black active:scale-95 text-white text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-sm"
               >
                 {copiedEmail ? "Copied!" : CONTACT_DATA.email}
               </button>
@@ -158,17 +153,13 @@ export default function ContactCard({
                 href={CONTACT_DATA.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3 sm:px-3.5 py-1 rounded-full bg-slate-900/10 hover:bg-slate-900/20 active:scale-95 text-slate-900 text-[10px] sm:text-xs font-semibold border border-slate-900/15 backdrop-blur-md transition-all cursor-pointer"
+                title="LinkedIn"
+                aria-label="LinkedIn"
+                className="w-8 h-8 rounded-full bg-slate-900/10 hover:bg-[#0077b5] hover:text-white active:scale-95 text-slate-900 border border-slate-900/15 backdrop-blur-md transition-all cursor-pointer flex items-center justify-center shrink-0"
               >
-                LinkedIn
-              </a>
-              <a
-                href={CONTACT_DATA.resumePdf}
-                target="_blank"
-                download
-                className="px-3 sm:px-3.5 py-1 rounded-full bg-slate-900/10 hover:bg-slate-900/20 active:scale-95 text-slate-900 text-[10px] sm:text-xs font-semibold border border-slate-900/15 backdrop-blur-md transition-all cursor-pointer"
-              >
-                Resume PDF
+                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                </svg>
               </a>
             </div>
 
@@ -251,7 +242,7 @@ export default function ContactCard({
             }`}
           >
             <div className="flex flex-col items-center justify-center text-center max-w-full select-none pointer-events-none">
-              <h3 className="text-center text-[clamp(1.15rem,2.2cqw,2.5rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors">
+              <h3 className="text-center text-[clamp(1.75rem,3.4cqw,4.2rem)] font-bold tracking-tight text-white/95 group-hover:text-white transition-colors">
                 Contact
               </h3>
             </div>
@@ -292,7 +283,7 @@ export default function ContactCard({
                     handleCopyEmail();
                   }}
                   title="heraldago1@gmail.com"
-                  className="animate-float-1 absolute top-[16%] left-[16%] sm:left-[20%] cursor-pointer z-20 pointer-events-auto transition-transform duration-300 hover:scale-115 active:scale-90"
+                  className="animate-float-1 absolute top-[28%] left-[22%] sm:left-[26%] cursor-pointer z-20 pointer-events-auto transition-transform duration-300 hover:scale-115 active:scale-90"
                 >
                   <svg
                     className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 transition-all duration-300 ${
@@ -319,7 +310,7 @@ export default function ContactCard({
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
                   title="LinkedIn"
-                  className="animate-float-2 absolute top-[36%] right-[16%] sm:right-[20%] cursor-pointer z-20 pointer-events-auto transition-transform duration-300 hover:scale-115 active:scale-90"
+                  className="animate-float-2 absolute bottom-[28%] right-[22%] sm:right-[26%] cursor-pointer z-20 pointer-events-auto transition-transform duration-300 hover:scale-115 active:scale-90"
                 >
                   <svg
                     className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 fill-current transition-all duration-300 ${
@@ -330,36 +321,6 @@ export default function ContactCard({
                     viewBox="0 0 24 24"
                   >
                     <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
-                  </svg>
-                </a>
-
-                {/* 3. Icona Fluttuante: Resume */}
-                <a
-                  href={CONTACT_DATA.resumePdf}
-                  target="_blank"
-                  download
-                  onClick={(e) => e.stopPropagation()}
-                  title="Resume PDF"
-                  className="animate-float-3 absolute bottom-[16%] left-[26%] sm:left-[30%] cursor-pointer z-20 pointer-events-auto transition-transform duration-300 hover:scale-115 active:scale-90"
-                >
-                  <svg
-                    className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 transition-all duration-300 ${
-                      !isToggledOn
-                        ? "text-slate-800 hover:text-black"
-                        : "text-white hover:text-sky-200"
-                    }`}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                    <polyline points="14 2 14 8 20 8" />
-                    <line x1="16" y1="13" x2="8" y2="13" />
-                    <line x1="16" y1="17" x2="8" y2="17" />
-                    <polyline points="10 9 9 9 8 9" />
                   </svg>
                 </a>
               </div>

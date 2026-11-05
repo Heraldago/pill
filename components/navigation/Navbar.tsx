@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 interface NavbarProps {
@@ -10,14 +10,14 @@ interface NavbarProps {
 
 const NAV_ITEMS = [
   { id: "home", label: "Home" },
-  { id: "work", label: "Work & Archive" },
+  { id: "work", label: "Work" },
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
 ] as const;
 
 export default function Navbar({ onNavigate, activeSectionIndex = 0 }: NavbarProps) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [pulsingTab, setPulsingTab] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Mappa activeSectionIndex -> tab attivo
   const activeTab: "home" | "work" | "about" | "contact" =
@@ -29,23 +29,37 @@ export default function Navbar({ onNavigate, activeSectionIndex = 0 }: NavbarPro
       ? "about"
       : "contact";
 
+  const currentLabel =
+    NAV_ITEMS.find((item) => item.id === activeTab)?.label || "Home";
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setIsMobileMenuOpen(false);
+        setIsOpen(false);
       }
     };
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const handleItemClick = (target: "home" | "work" | "about" | "contact") => {
-    // Effetto click micro-interaction: bagliore e pulsazione tattile
-    setPulsingTab(target);
-    setTimeout(() => setPulsingTab(null), 400);
-
     onNavigate(target);
-    setIsMobileMenuOpen(false);
+    setIsOpen(false);
   };
 
   return (
@@ -69,100 +83,57 @@ export default function Navbar({ onNavigate, activeSectionIndex = 0 }: NavbarPro
         </button>
       </div>
 
-      {/* Floating Center Capsule Navbar (Desktop Only >= 768px, visibile solo alla prima pillola) */}
-      <nav
-        aria-label="Navigazione principale"
-        className={`hidden md:flex fixed top-5 sm:top-6 left-1/2 -translate-x-1/2 z-50 items-center gap-1 bg-slate-900/40 hover:bg-slate-900/60 backdrop-blur-2xl border border-white/20 p-1.5 rounded-full transition-all duration-300 ease-out ${
-          activeSectionIndex === 0
-            ? "opacity-100 translate-y-0 pointer-events-auto"
-            : "opacity-0 -translate-y-6 pointer-events-none"
-        }`}
+      {/* Top-Right Vertical Expandable Glass Capsule Navbar */}
+      <div
+        ref={containerRef}
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+        className="fixed top-[max(1rem,env(safe-area-inset-top))] right-4 md:top-6 md:right-8 z-50"
       >
-        {NAV_ITEMS.map((item) => {
-          const isActive = activeTab === item.id;
-          const isPulsing = pulsingTab === item.id;
-
-          return (
-            <button
-              key={item.id}
-              onClick={() => handleItemClick(item.id)}
-              aria-current={isActive ? "page" : undefined}
-              className={`relative px-4 sm:px-5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] select-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 active:scale-95 ${
-                isActive
-                  ? "bg-white text-slate-950 font-semibold"
-                  : "text-white/80 hover:text-white hover:bg-white/10"
-              } ${
-                isPulsing
-                  ? "ring-4 ring-white/60 scale-105"
-                  : ""
-              }`}
-            >
-              <span className="relative z-10">{item.label}</span>
-              {/* Effetto bagliore radiante al click */}
-              {isPulsing && (
-                <span className="absolute inset-0 rounded-full bg-white/40 animate-ping pointer-events-none" />
-              )}
-            </button>
-          );
-        })}
-      </nav>
-
-      {/* Burger Menu a specchio col logo (visibile solo su mobile) */}
-      <div className="fixed top-[max(1rem,env(safe-area-inset-top))] right-4 md:hidden z-50">
-        <button
-          onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-          className="w-10 h-10 rounded-full flex flex-col items-center justify-center gap-[4.5px] bg-white/15 backdrop-blur-xl border border-white/30 hover:bg-white/25 active:scale-95 transition-all cursor-pointer group focus:outline-none"
-          aria-label={isMobileMenuOpen ? "Chiudi menu" : "Apri menu"}
-          aria-expanded={isMobileMenuOpen}
-        >
-          <span
-            className={`h-[2.5px] w-4.5 rounded-full bg-white transition-all duration-300 origin-center ${
-              isMobileMenuOpen ? "rotate-45 translate-y-[7px]" : ""
-            }`}
-          />
-          <span
-            className={`h-[2.5px] w-4.5 rounded-full bg-white transition-all duration-300 ${
-              isMobileMenuOpen ? "opacity-0 scale-x-0" : ""
-            }`}
-          />
-          <span
-            className={`h-[2.5px] w-4.5 rounded-full bg-white transition-all duration-300 origin-center ${
-              isMobileMenuOpen ? "-rotate-45 -translate-y-[7px]" : ""
-            }`}
-          />
-        </button>
-
-        {/* Dropdown del menu mobile */}
-        <div
-          className={`absolute top-12 right-0 w-44 sm:w-48 p-1.5 rounded-2xl bg-slate-900/85 backdrop-blur-2xl border border-white/25 flex flex-col gap-1 z-50 transition-all duration-200 origin-top-right ${
-            isMobileMenuOpen
-              ? "opacity-100 scale-100 pointer-events-auto"
-              : "opacity-0 scale-95 pointer-events-none"
-          }`}
-        >
-          {NAV_ITEMS.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleItemClick(item.id)}
-              className={`w-full text-left px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
-                activeTab === item.id
-                  ? "bg-white text-slate-900 font-semibold"
-                  : "text-white/80 hover:text-white hover:bg-white/10"
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
+        {!isOpen ? (
+          /* Pill compatto da chiuso (mostra la sezione attiva) - Effetto vetro speculare pillola */
+          <button
+            onClick={() => setIsOpen(true)}
+            aria-expanded={false}
+            aria-label={`Menu di navigazione. Sezione corrente: ${currentLabel}`}
+            className="p-4 rounded-full bg-white/[0.12] hover:bg-white/[0.18] backdrop-blur-2xl border-[1.5px] border-white/25 text-white text-xs sm:text-sm font-medium shadow-[0_20px_50px_rgba(0,10,30,0.45),_inset_0_1.5px_2px_rgba(255,255,255,0.45)] transition-all select-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 active:scale-95 min-w-[88px] text-center flex items-center justify-center leading-none"
+          >
+            {currentLabel}
+          </button>
+        ) : (
+          /* Capsule verticale espansa (Home, Work, About, Contact) - Effetto vetro speculare pillola */
+          <nav
+            aria-label="Navigazione principale"
+            className="px-4 pt-6 pb-6 rounded-full bg-white/[0.12] hover:bg-white/[0.16] backdrop-blur-2xl border-[1.5px] border-white/25 shadow-[0_25px_65px_rgba(0,10,30,0.45),_inset_0_1.5px_2px_rgba(255,255,255,0.45)] flex flex-col items-center gap-3 min-w-[96px] animate-in fade-in zoom-in-95 duration-200"
+          >
+            {NAV_ITEMS.map((item) => {
+              const isActive = activeTab === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleItemClick(item.id)}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`w-full text-center px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all select-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 active:scale-95 leading-none ${
+                    isActive
+                      ? "bg-white/25 text-white font-semibold shadow-[0_4px_16px_rgba(0,10,30,0.3),_inset_0_1px_1.5px_rgba(255,255,255,0.6)] border border-white/35"
+                      : "text-white/80 hover:text-white hover:bg-white/15 hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.25)] border border-transparent"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
+          </nav>
+        )}
       </div>
 
-      {/* Backdrop per chiudere il menu toccando fuori */}
-      <div
-        onClick={() => setIsMobileMenuOpen(false)}
-        className={`fixed inset-0 z-[48] bg-black/30 backdrop-blur-[2px] md:hidden transition-opacity duration-200 ${
-          isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
-      />
+      {/* Backdrop invisibile solo su mobile per touch dismiss */}
+      {isOpen && (
+        <div
+          onClick={() => setIsOpen(false)}
+          className="fixed inset-0 z-[48] md:hidden bg-transparent"
+        />
+      )}
     </>
   );
 }

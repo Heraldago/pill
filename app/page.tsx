@@ -1,14 +1,17 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import VantaWaves from "@/components/VantaWaves";
 import Navbar from "@/components/navigation/Navbar";
 import KeycapNav from "@/components/navigation/KeycapNav";
 import DesktopCardStack from "@/components/sections/DesktopCardStack";
 import MobileView from "@/components/sections/MobileView";
 import { usePortfolioScroll } from "@/hooks/usePortfolioScroll";
+import { LiveContentProvider, useLiveContent } from "@/contexts/LiveContentContext";
 
-export default function Home() {
+function HomeContent() {
+  const { content } = useLiveContent();
+
   const [toggleStates, setToggleStates] = useState<Record<number, "off" | "on">>({
     1: "off",
     2: "off",
@@ -26,7 +29,6 @@ export default function Home() {
 
   const handleHorizontalArrow = useCallback(
     (direction: "left" | "right") => {
-      // Hero (0) doesn't have a toggle. Sections 1-6 have toggles.
       const curr = activeSectionIndexRef.current;
       if (curr >= 1 && curr <= 6) {
         const nextState = direction === "right" ? "on" : "off";
@@ -52,20 +54,23 @@ export default function Home() {
     onHorizontalArrow: handleHorizontalArrow,
   });
 
-  activeSectionIndexRef.current = activeSectionIndex;
+  useEffect(() => {
+    activeSectionIndexRef.current = activeSectionIndex;
+  }, [activeSectionIndex]);
 
-  const currentToggleState = activeSectionIndex >= 1 && activeSectionIndex <= 6
-    ? toggleStates[activeSectionIndex] || "off"
-    : null;
+  const currentToggleState =
+    activeSectionIndex >= 1 && activeSectionIndex <= 6
+      ? toggleStates[activeSectionIndex] || "off"
+      : null;
 
   return (
     <main className="relative min-h-screen w-full overflow-x-clip p-0 m-0 select-none bg-[#091b2e]">
-      {/* Sfondo Animato 3D Vanta Waves (fixed z-0 continuo) */}
+      {/* Sfondo Animato 3D Vanta Waves (fixed z-0 continuo) con parametri live */}
       <VantaWaves
         color={0x0b2847}
         shininess={30.0}
-        waveHeight={20.0}
-        waveSpeed={0.75}
+        waveHeight={content.theme?.vantaWaveHeight ?? 20.0}
+        waveSpeed={content.theme?.vantaSpeed ?? 0.75}
         zoom={0.65}
       />
 
@@ -114,5 +119,13 @@ export default function Home() {
       {/* Mobile Stacked Flow (< 768px) */}
       <MobileView />
     </main>
+  );
+}
+
+export default function Home() {
+  return (
+    <LiveContentProvider>
+      <HomeContent />
+    </LiveContentProvider>
   );
 }
